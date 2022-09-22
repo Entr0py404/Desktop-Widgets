@@ -1,16 +1,29 @@
 ﻿Public Class Form_DesktopObjects
+
     'Form_DesktopObjects - Load
     Private Sub Form_DesktopObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
+
         If Directory.Exists(Application.StartupPath & "\Objects\") Then
             LoadDesktopObjects(Application.StartupPath & "\Objects\", ListView_Objects, ImageList_Objects)
         End If
+
+        For Each display In Screen.AllScreens
+            ComboBox_Display.Items.Add(display.DeviceName.Replace("\\.\", ""))
+        Next
+
+        ComboBox_Display.SelectedIndex = 0
     End Sub
     'ListView_Objects - ItemActivate
     Private Sub ListView_NatureObjects_ItemActivate(sender As Object, e As EventArgs) Handles ListView_Objects.ItemActivate
         Dim DesktopObject = New Form_DesktopObject
         DesktopObject.ObjectImage = New Bitmap(ListView_Objects.SelectedItems(0).Name)
         DesktopObject.PixelBox1.Image = DesktopObject.ObjectImage
-        DesktopObject.Show()
+        DesktopObject.Name = "DesktopObject"
+        Form_Menu.IDCounter_DesktopObject += 1
+        Form_Menu.FormList_DesktopObject.Add(Form_Menu.IDCounter_DesktopObject.ToString, DesktopObject)
+        DesktopObject.UniqueSessionID = Form_Menu.IDCounter_DesktopObject.ToString
+        Form_Menu.FormList_DesktopObject(Form_Menu.IDCounter_DesktopObject.ToString).Show() 'DesktopObject.Show()
     End Sub
     'TrackBar_ObjectScale - ValueChanged
     Private Sub TrackBar_ObjectScale_ValueChanged(sender As Object, e As EventArgs) Handles TrackBar_ObjectScale.ValueChanged
@@ -30,23 +43,13 @@
             Next
         End If
     End Sub
-    'CloseAllWindowsbyName
-    Private Sub CloseAllWindowsByName(WindowName As String)
-        Dim FormOpenCount As Integer = 0
-        Dim lista As FormCollection = Application.OpenForms
-        For Each a As Form In lista
-            If a.Name = WindowName Then
-                FormOpenCount += 1
-            End If
-        Next
-
-        For i = 0 To FormOpenCount - 1
-            My.Application.OpenForms.Item(WindowName).Close()
-        Next
-    End Sub
     'Button_AllDesktopObjects - Click
     Private Sub Button_AllDesktopObjects_Click(sender As Object, e As EventArgs) Handles Button_AllDesktopObjects.Click
-        CloseAllWindowsByName("Form_DesktopObject")
+        Dim FormListArray As Array = Form_Menu.FormList_DesktopObject.Keys.ToArray
+        For Each item As String In FormListArray
+            Form_Menu.FormList_DesktopObject(item).Close()
+        Next
+        Form_Menu.FormList_DesktopObject.Clear()
     End Sub
     'ReloadToolStripMenuItem - Click
     Private Sub ReloadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReloadToolStripMenuItem.Click

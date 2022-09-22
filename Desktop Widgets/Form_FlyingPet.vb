@@ -32,23 +32,30 @@ Public Class Form_FlyingPet
     Public HasAnimation_IdlingAlt As Boolean = False
     Public HasAnimation_Walking As Boolean = False
 
-    'Dim Incoming As String
+    Dim Display As Screen
+    Dim Rand As New Random
+    Dim FormLoadLock As Boolean = True
 
     'Form_FlyingPet_Load
     Private Sub Form_FlyingPet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Me.Width = PixelBox_Pet.Width
         'Me.Height = PixelBox_Pet.Height + PixelBox_Emote.Height
+        For Each Display In Screen.AllScreens
+            DisplayToolStripComboBox.Items.Add(Display.DeviceName.Replace("\\.\", ""))
+        Next
+        DisplayToolStripComboBox.SelectedIndex = Form_Pets.ComboBox_Display.SelectedIndex
 
-        'ScalePet(1)
         FollowCursorToolStripMenuItem.Checked = Form_Pets.CheckBox_FollowCursor.Checked
         Me.TopMost = Form_Pets.CheckBox_TopMost.Checked
         AlwaysOnTopToolStripMenuItem.Checked = Form_Pets.CheckBox_TopMost.Checked
 
-        ToolStripComboBox1.SelectedIndex = Form_Pets.TrackBar_ObjectScale.Value - 1
+        ScaleToolStripComboBox.SelectedIndex = Form_Pets.TrackBar_ObjectScale.Value - 1
 
-        Me.Location = New Point(GenerateRandomNumber(Me.Width, Screen.PrimaryScreen.WorkingArea.Right - Me.Width * 2), GenerateRandomNumber(Me.Height, Screen.PrimaryScreen.WorkingArea.Bottom - Me.Height * 2))
+        'Me.Location = New Point(GenerateRandomNumber(Me.Width, Display.WorkingArea.Right - Me.Width), GenerateRandomNumber(Me.Height, Display.WorkingArea.Bottom - Me.Height))
 
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
+
+        FormLoadLock = False
     End Sub
     'ScalePet()
     Public Sub ScalePet(val As Integer)
@@ -158,8 +165,8 @@ Public Class Form_FlyingPet
             If Dragging = False Then
                 If FollowCursor = False Then
                     If MoveLeft = True Then
-                        If Me.Location.Y = Screen.PrimaryScreen.WorkingArea.Bottom - Me.Height Then
-                            Me.Location = New Point(Me.Location.X - 1, Screen.PrimaryScreen.WorkingArea.Bottom - Me.Height)
+                        If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
+                            Me.Location = New Point(Me.Location.X - 1, Display.WorkingArea.Bottom - Me.Height)
 
                             If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
                                 PixelBox_Pet.Image = Animation_Walking_Left
@@ -168,8 +175,8 @@ Public Class Form_FlyingPet
 
                         End If
                     Else
-                        If Me.Location.Y = Screen.PrimaryScreen.WorkingArea.Bottom - Me.Height Then
-                            Me.Location = New Point(Me.Location.X + 1, Screen.PrimaryScreen.WorkingArea.Bottom - Me.Height)
+                        If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
+                            Me.Location = New Point(Me.Location.X + 1, Display.WorkingArea.Bottom - Me.Height)
 
                             If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
                                 PixelBox_Pet.Image = Animation_Walking_Right
@@ -180,17 +187,17 @@ Public Class Form_FlyingPet
                     End If
                 Else
 
-                    If Me.Location.Y = Screen.PrimaryScreen.WorkingArea.Bottom - Me.Height Then
+                    If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
                         If Me.Location.X > MousePosition.X + 6 Then
                             MoveLeft = False
-                            Me.Location = New Point(Me.Location.X - 1, Screen.PrimaryScreen.WorkingArea.Bottom - Me.Height)
+                            Me.Location = New Point(Me.Location.X - 1, Display.WorkingArea.Bottom - Me.Height)
                             If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
                                 PixelBox_Pet.Image = Animation_Walking_Left
                                 Console.WriteLine("Animation_Walking_Left")
                             End If
                         ElseIf Me.Location.X < MousePosition.X - Me.Width - 6 Then
                             MoveLeft = True
-                            Me.Location = New Point(Me.Location.X + 1, Screen.PrimaryScreen.WorkingArea.Bottom - Me.Height)
+                            Me.Location = New Point(Me.Location.X + 1, Display.WorkingArea.Bottom - Me.Height)
                             If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
                                 PixelBox_Pet.Image = Animation_Walking_Right
                                 Console.WriteLine("Animation_Walking_Right")
@@ -236,48 +243,48 @@ Public Class Form_FlyingPet
     'Timer_TurningDecision - Tick
     Private Sub Timer_TurningDecision_Tick(sender As Object, e As EventArgs) Handles Timer_TurningDecision.Tick
         'Left & Right
-        If GenerateRandomNumber(0, 100) >= 50 Then
+        If Rand.Next(0, 100) >= 50 Then
             MoveLeft = True
         Else
             MoveLeft = False
         End If
         'Up & Down
-        If GenerateRandomNumber(0, 100) >= 50 Then
+        If Rand.Next(0, 100) >= 50 Then
             MoveUp = True
         Else
             MoveUp = False
         End If
     End Sub
     'Screen Warping & Edge Turn Around
-    Private Sub Form1_LocationChanged(sender As Object, e As EventArgs) Handles Me.LocationChanged
-        If Dragging = False Then
+    Private Sub Form1_LocationChanged(sender As Object, e As EventArgs) Handles MyBase.LocationChanged
+        If Dragging = False And FormLoadLock = False Then
 
             'OVER RIGHT
-            If Me.Location.X > Screen.PrimaryScreen.WorkingArea.Width - Me.Width / 2 Then
-                If GenerateRandomNumber(0, 100) > 60 Then
+            If Me.Location.X > Display.WorkingArea.Right - Me.Width / 2 Then
+                If Rand.Next(0, 100) > 60 Then
                     MoveLeft = True
                     Me.Location = New Point(Location.X - 1, Location.Y)
                 Else
-                    Me.Location = New Point(Screen.PrimaryScreen.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y)
+                    Me.Location = New Point(Display.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y)
                 End If
                 Console.WriteLine("OVER RIGHT")
             End If
             'OVER LEFT
-            If Me.Location.X < -Me.Width / 2 Then
-                If GenerateRandomNumber(0, 100) > 60 Then
+            If Me.Location.X < Display.WorkingArea.Left - Me.Width / 2 Then
+                If Rand.Next(0, 100) > 60 Then
                     MoveLeft = False
                     Me.Location = New Point(Location.X + 1, Location.Y)
                 Else
-                    Me.Location = New Point(Screen.PrimaryScreen.WorkingArea.Width - CInt(Me.Width / 2), Me.Location.Y)
+                    Me.Location = New Point(Display.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y)
                 End If
                 Console.WriteLine("OVER LEFT")
             End If
 
             'OVER DOWN No Wrap
-            If Me.Location.Y > Screen.PrimaryScreen.WorkingArea.Height - Me.Height Then
+            If Me.Location.Y > Display.WorkingArea.Height - Me.Height Then
 
                 If HasAnimation_Walking = True Or HasAnimation_Idling = True Then
-                    If GenerateRandomNumber(0, 100) >= 80 Then
+                    If Rand.Next(0, 100) >= 80 Then
                         MoveUp = True
                         Me.Location = New Point(Location.X, Location.Y - 1)
                     Else
@@ -286,7 +293,7 @@ Public Class Form_FlyingPet
                         Timer_ChangeModesDecision.Enabled = True
                         Timer_Flying.Enabled = False
 
-                        Me.Location = New Point(Me.Location.X, Screen.PrimaryScreen.WorkingArea.Bottom - Me.Height)
+                        Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
 
                         If HasAnimation_Idling = True Then
                             Timer_IdleDecision.Enabled = True
@@ -367,10 +374,10 @@ Public Class Form_FlyingPet
     End Sub
     'Timer_IdleDecision - Tick
     Private Sub Timer_IdleDecision_Tick(sender As Object, e As EventArgs) Handles Timer_IdleDecision.Tick
-        If GenerateRandomNumber(0, 100) >= 65 Then
+        If Rand.Next(0, 100) >= 65 Then
             Timer_Walking.Stop()
 
-            If GenerateRandomNumber(0, 100) >= 70 Then
+            If Rand.Next(0, 100) >= 70 Then
                 If MoveLeft = True Then
                     If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
                         PixelBox_Pet.Image = Animation_Idling_Left
@@ -401,16 +408,16 @@ Public Class Form_FlyingPet
                 Timer_Walking.Start()
             End If
         End If
-        Timer_IdleDecision.Interval = GenerateRandomNumber(2500, 3500)
+        Timer_IdleDecision.Interval = Rand.Next(2500, 3500)
     End Sub
     'PoopToolStripMenuItem - Click
     Private Sub PoopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PoopToolStripMenuItem.Click
         Dim Poop As New Form_GroundPoop
         Poop.Show()
         If MoveLeft = True Then
-            Poop.Location = New Point(Me.Location.X + Me.Width, Screen.PrimaryScreen.WorkingArea.Bottom - Poop.Height)
+            Poop.Location = New Point(Me.Location.X + Me.Width, Display.WorkingArea.Bottom - Poop.Height)
         Else
-            Poop.Location = New Point(Me.Location.X, Screen.PrimaryScreen.WorkingArea.Bottom - Poop.Height)
+            Poop.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Poop.Height)
         End If
     End Sub
     'FollowCursorToolStripMenuItem - CheckedChanged
@@ -437,13 +444,13 @@ Public Class Form_FlyingPet
         Me.Close()
     End Sub
     'GenerateRandomNumber
-    Function GenerateRandomNumber(Min As Integer, Max As Integer) As Integer
-        Static Random_Number As New Random()
-        Return Random_Number.Next(Min, Max)
-    End Function
+    'Function GenerateRandomNumber(Min As Integer, Max As Integer) As Integer
+    'Static Random_Number As New Random()
+    'Return Random_Number.Next(Min, Max)
+    'End Function
     'Timer_ChangeModesDecision - Tick
     Private Sub Timer_ChangeModesDecision_Tick(sender As Object, e As EventArgs) Handles Timer_ChangeModesDecision.Tick
-        If GenerateRandomNumber(0, 100) >= 40 Then
+        If Rand.Next(0, 100) >= 40 Then
             Flying_Mode = True
             Ground_Mode = False
             Timer_ChangeModesDecision.Enabled = False
@@ -455,20 +462,21 @@ Public Class Form_FlyingPet
         End If
         Console.WriteLine("Timer_ChangeModesDecision_Tick")
     End Sub
-    'ToolStripComboBox1 - SelectedIndexChanged
-    Private Sub ToolStripComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripComboBox1.SelectedIndexChanged
-        If ToolStripComboBox1.SelectedIndex = 0 Then
-            ScalePet(1)
-        ElseIf ToolStripComboBox1.SelectedIndex = 1 Then
-            ScalePet(2)
-        ElseIf ToolStripComboBox1.SelectedIndex = 2 Then
-            ScalePet(3)
-        ElseIf ToolStripComboBox1.SelectedIndex = 3 Then
-            ScalePet(4)
+    'ScaleToolStripComboBox - SelectedIndexChanged
+    Private Sub ScaleToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ScaleToolStripComboBox.SelectedIndexChanged
+        If Not ScaleToolStripComboBox.SelectedIndex = -1 Then
+            ScalePet(ScaleToolStripComboBox.SelectedIndex + 1)
         End If
     End Sub
     'AlwaysOnTopToolStripMenuItem - Click
     Private Sub AlwaysOnTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlwaysOnTopToolStripMenuItem.Click
         Me.TopMost = AlwaysOnTopToolStripMenuItem.Checked
+    End Sub
+    'DisplayToolStripComboBox - SelectedIndexChanged
+    Private Sub DisplayToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayToolStripComboBox.SelectedIndexChanged
+        If Not DisplayToolStripComboBox.SelectedIndex = -1 Then
+            Display = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
+            Me.Location = New Point(Rand.Next(Display.WorkingArea.Left, Display.WorkingArea.Right - Me.Width), Rand.Next(Display.WorkingArea.Top, Display.WorkingArea.Bottom - Me.Height))
+        End If
     End Sub
 End Class

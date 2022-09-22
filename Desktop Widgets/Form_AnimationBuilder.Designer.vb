@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form_PetBuilder
+Partial Class Form_AnimationBuilder
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class Form_PetBuilder
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_PetBuilder))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_AnimationBuilder))
         Me.Button_Save = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ListBox_Images = New System.Windows.Forms.ListBox()
@@ -42,9 +42,11 @@ Partial Class Form_PetBuilder
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ComboBox_Animation = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.RadioButton_TypeNature = New System.Windows.Forms.RadioButton()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.RadioButton_PetTypeFlying = New System.Windows.Forms.RadioButton()
-        Me.RadioButton_PetTypeGround = New System.Windows.Forms.RadioButton()
+        Me.RadioButton_TypeObject = New System.Windows.Forms.RadioButton()
+        Me.RadioButton_TypeFlyingPet = New System.Windows.Forms.RadioButton()
+        Me.RadioButton_TypeGroundPet = New System.Windows.Forms.RadioButton()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
@@ -105,6 +107,7 @@ Partial Class Form_PetBuilder
         '
         Me.ListBox_Images.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.ListBox_Images.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.ListBox_Images.ContextMenuStrip = Me.ContextMenuStrip1
         Me.ListBox_Images.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ListBox_Images.FormattingEnabled = True
         Me.ListBox_Images.HorizontalScrollbar = True
@@ -235,7 +238,7 @@ Partial Class Form_PetBuilder
         'RadioButton_FacingRight
         '
         Me.RadioButton_FacingRight.Checked = True
-        Me.RadioButton_FacingRight.Location = New System.Drawing.Point(152, 8)
+        Me.RadioButton_FacingRight.Location = New System.Drawing.Point(144, 8)
         Me.RadioButton_FacingRight.Name = "RadioButton_FacingRight"
         Me.RadioButton_FacingRight.Size = New System.Drawing.Size(56, 24)
         Me.RadioButton_FacingRight.TabIndex = 84
@@ -260,20 +263,32 @@ Partial Class Form_PetBuilder
         Me.ComboBox_Animation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ComboBox_Animation.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ComboBox_Animation.FormattingEnabled = True
-        Me.ComboBox_Animation.Location = New System.Drawing.Point(8, 32)
+        Me.ComboBox_Animation.Location = New System.Drawing.Point(80, 8)
         Me.ComboBox_Animation.Name = "ComboBox_Animation"
         Me.ComboBox_Animation.Size = New System.Drawing.Size(112, 21)
         Me.ComboBox_Animation.TabIndex = 87
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.RadioButton_TypeNature)
         Me.Panel3.Controls.Add(Me.Label6)
-        Me.Panel3.Controls.Add(Me.RadioButton_PetTypeFlying)
-        Me.Panel3.Controls.Add(Me.RadioButton_PetTypeGround)
+        Me.Panel3.Controls.Add(Me.RadioButton_TypeObject)
+        Me.Panel3.Controls.Add(Me.RadioButton_TypeFlyingPet)
+        Me.Panel3.Controls.Add(Me.RadioButton_TypeGroundPet)
         Me.Panel3.Location = New System.Drawing.Point(48, 232)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(216, 40)
+        Me.Panel3.Size = New System.Drawing.Size(392, 40)
         Me.Panel3.TabIndex = 88
+        '
+        'RadioButton_TypeNature
+        '
+        Me.RadioButton_TypeNature.AutoSize = True
+        Me.RadioButton_TypeNature.Location = New System.Drawing.Point(312, 8)
+        Me.RadioButton_TypeNature.Name = "RadioButton_TypeNature"
+        Me.RadioButton_TypeNature.Size = New System.Drawing.Size(57, 17)
+        Me.RadioButton_TypeNature.TabIndex = 102
+        Me.RadioButton_TypeNature.Text = "Nature"
+        Me.RadioButton_TypeNature.UseVisualStyleBackColor = True
         '
         'Label6
         '
@@ -282,28 +297,40 @@ Partial Class Form_PetBuilder
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(64, 21)
         Me.Label6.TabIndex = 87
-        Me.Label6.Text = "Pet Type:"
+        Me.Label6.Text = "Type:"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'RadioButton_PetTypeFlying
+        'RadioButton_TypeObject
         '
-        Me.RadioButton_PetTypeFlying.Location = New System.Drawing.Point(152, 8)
-        Me.RadioButton_PetTypeFlying.Name = "RadioButton_PetTypeFlying"
-        Me.RadioButton_PetTypeFlying.Size = New System.Drawing.Size(56, 24)
-        Me.RadioButton_PetTypeFlying.TabIndex = 86
-        Me.RadioButton_PetTypeFlying.Text = "Flying"
-        Me.RadioButton_PetTypeFlying.UseVisualStyleBackColor = True
+        Me.RadioButton_TypeObject.AutoSize = True
+        Me.RadioButton_TypeObject.Location = New System.Drawing.Point(248, 8)
+        Me.RadioButton_TypeObject.Name = "RadioButton_TypeObject"
+        Me.RadioButton_TypeObject.Size = New System.Drawing.Size(56, 17)
+        Me.RadioButton_TypeObject.TabIndex = 101
+        Me.RadioButton_TypeObject.Text = "Object"
+        Me.RadioButton_TypeObject.UseVisualStyleBackColor = True
         '
-        'RadioButton_PetTypeGround
+        'RadioButton_TypeFlyingPet
         '
-        Me.RadioButton_PetTypeGround.Checked = True
-        Me.RadioButton_PetTypeGround.Location = New System.Drawing.Point(80, 8)
-        Me.RadioButton_PetTypeGround.Name = "RadioButton_PetTypeGround"
-        Me.RadioButton_PetTypeGround.Size = New System.Drawing.Size(64, 24)
-        Me.RadioButton_PetTypeGround.TabIndex = 85
-        Me.RadioButton_PetTypeGround.TabStop = True
-        Me.RadioButton_PetTypeGround.Text = "Ground"
-        Me.RadioButton_PetTypeGround.UseVisualStyleBackColor = True
+        Me.RadioButton_TypeFlyingPet.AutoSize = True
+        Me.RadioButton_TypeFlyingPet.Location = New System.Drawing.Point(168, 8)
+        Me.RadioButton_TypeFlyingPet.Name = "RadioButton_TypeFlyingPet"
+        Me.RadioButton_TypeFlyingPet.Size = New System.Drawing.Size(70, 17)
+        Me.RadioButton_TypeFlyingPet.TabIndex = 86
+        Me.RadioButton_TypeFlyingPet.Text = "Flying pet"
+        Me.RadioButton_TypeFlyingPet.UseVisualStyleBackColor = True
+        '
+        'RadioButton_TypeGroundPet
+        '
+        Me.RadioButton_TypeGroundPet.AutoSize = True
+        Me.RadioButton_TypeGroundPet.Checked = True
+        Me.RadioButton_TypeGroundPet.Location = New System.Drawing.Point(80, 8)
+        Me.RadioButton_TypeGroundPet.Name = "RadioButton_TypeGroundPet"
+        Me.RadioButton_TypeGroundPet.Size = New System.Drawing.Size(78, 17)
+        Me.RadioButton_TypeGroundPet.TabIndex = 85
+        Me.RadioButton_TypeGroundPet.TabStop = True
+        Me.RadioButton_TypeGroundPet.Text = "Ground pet"
+        Me.RadioButton_TypeGroundPet.UseVisualStyleBackColor = True
         '
         'Label7
         '
@@ -395,9 +422,9 @@ Partial Class Form_PetBuilder
         Me.Button_SetDelay.FlatAppearance.BorderSize = 0
         Me.Button_SetDelay.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_SetDelay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_SetDelay.Location = New System.Drawing.Point(128, 32)
+        Me.Button_SetDelay.Location = New System.Drawing.Point(456, 16)
         Me.Button_SetDelay.Name = "Button_SetDelay"
-        Me.Button_SetDelay.Size = New System.Drawing.Size(40, 32)
+        Me.Button_SetDelay.Size = New System.Drawing.Size(88, 32)
         Me.Button_SetDelay.TabIndex = 93
         Me.Button_SetDelay.Text = "Set Delay"
         Me.Button_SetDelay.UseVisualStyleBackColor = False
@@ -460,10 +487,9 @@ Partial Class Form_PetBuilder
         '
         Me.Panel7.Controls.Add(Me.Label4)
         Me.Panel7.Controls.Add(Me.ComboBox_Animation)
-        Me.Panel7.Controls.Add(Me.Button_SetDelay)
-        Me.Panel7.Location = New System.Drawing.Point(264, 232)
+        Me.Panel7.Location = New System.Drawing.Point(264, 272)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(176, 80)
+        Me.Panel7.Size = New System.Drawing.Size(200, 40)
         Me.Panel7.TabIndex = 99
         '
         'Panel8
@@ -478,23 +504,28 @@ Partial Class Form_PetBuilder
         '
         'ContextMenuStrip1
         '
+        Me.ContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClearToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(102, 26)
+        Me.ContextMenuStrip1.ShowImageMargin = False
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(156, 50)
         '
         'ClearToolStripMenuItem
         '
+        Me.ClearToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
-        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(101, 22)
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(155, 24)
         Me.ClearToolStripMenuItem.Text = "Clear"
         '
-        'Form2
+        'Form_AnimationBuilder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(552, 569)
         Me.Controls.Add(Me.Panel8)
+        Me.Controls.Add(Me.Button_SetDelay)
         Me.Controls.Add(Me.Panel7)
         Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.Panel5)
@@ -508,14 +539,15 @@ Partial Class Form_PetBuilder
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.MaximizeBox = False
-        Me.Name = "Form2"
+        Me.Name = "Form_AnimationBuilder"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Pet Builder"
+        Me.Text = "Animation Builder"
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         CType(Me.PixelBox_Left, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown_Delay, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
         CType(Me.PixelBox_Right, System.ComponentModel.ISupportInitialize).EndInit()
@@ -546,8 +578,8 @@ Partial Class Form_PetBuilder
     Friend WithEvents ComboBox_Animation As ComboBox
     Private WithEvents Label5 As Label
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents RadioButton_PetTypeFlying As RadioButton
-    Friend WithEvents RadioButton_PetTypeGround As RadioButton
+    Friend WithEvents RadioButton_TypeFlyingPet As RadioButton
+    Friend WithEvents RadioButton_TypeGroundPet As RadioButton
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Panel4 As Panel
@@ -567,4 +599,6 @@ Partial Class Form_PetBuilder
     Friend WithEvents Panel8 As Panel
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents ClearToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RadioButton_TypeNature As RadioButton
+    Friend WithEvents RadioButton_TypeObject As RadioButton
 End Class

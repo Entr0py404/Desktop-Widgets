@@ -1,10 +1,11 @@
 ﻿Imports AnimatedGif
 
-Public Class Form_PetBuilder
+Public Class Form_AnimationBuilder
     ReadOnly SupportedIamgeFormats() As String = {".png", ".bmp", ".jpeg", ".jpg", ".tiff", ".tif"}
 
     'Form2 - Load
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
         NumericUpDown_Delay.Controls.RemoveAt(0)
     End Sub
     'Panel1 - DragDrop
@@ -54,6 +55,7 @@ Public Class Form_PetBuilder
         Dim MyMemoryStream2 As New MemoryStream
         Dim MyAnimatedGif1 As New AnimatedGifCreator(MyMemoryStream1, CInt(NumericUpDown_Delay.Value), 0)
         Dim MyAnimatedGif2 As New AnimatedGifCreator(MyMemoryStream2, CInt(NumericUpDown_Delay.Value), 0)
+
         'Using gif = AnimatedGif.AnimatedGif.Create("mygif.gif", 33)
         For Each item As String In ListBox_Images.Items
             'gif.AddFrame(Image.FromFile(item), delay:=-1, quality:=GifQuality.Bit8)
@@ -62,8 +64,10 @@ Public Class Form_PetBuilder
             Dim tempImage As Image
             tempImage = Image.FromFile(item)
             tempImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
+
             MyAnimatedGif2.AddFrame(tempImage, delay:=-1, quality:=GifQuality.Bit8)
         Next
+
         'End Using
         If RadioButton_FacingRight.Checked Then
             PixelBox_Left.Image = Image.FromStream(MyMemoryStream2)
@@ -72,6 +76,7 @@ Public Class Form_PetBuilder
             PixelBox_Left.Image = Image.FromStream(MyMemoryStream1)
             PixelBox_Right.Image = Image.FromStream(MyMemoryStream2)
         End If
+
         'PixelBox1.Image = Image.FromFile("mygif.gif")
     End Sub
     'NumericUpDown_Delay - ValueChanged
@@ -86,23 +91,43 @@ Public Class Form_PetBuilder
             CreateAnimatedGifs()
         End If
     End Sub
-    'RadioButton_PetTypeGround - CheckedChanged
-    Private Sub RadioButton_PetTypeGround_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton_PetTypeGround.CheckedChanged
-        ComboBox_Animation.Items.Clear()
-        If RadioButton_PetTypeGround.Checked Then
+    'RadioButton_TypeGroundPet - CheckedChanged
+    Private Sub RadioButton_PetTypeGround_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton_TypeGroundPet.CheckedChanged
+        If RadioButton_TypeGroundPet.Checked Then
+            ComboBox_Animation.Items.Clear()
+            ComboBox_Animation.Enabled = True
             ComboBox_Animation.Items.Add("Walking")
             ComboBox_Animation.Items.Add("Idling")
             ComboBox_Animation.Items.Add("Idling Alt")
             ComboBox_Animation.Items.Add("Dragging")
             ComboBox_Animation.Items.Add("Falling")
-        Else
+            ComboBox_Animation.SelectedIndex = 0
+        End If
+    End Sub
+    'RadioButton_TypeFlyingPet - CheckedChanged
+    Private Sub RadioButton_TypeFlyingPet_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton_TypeFlyingPet.CheckedChanged
+        If RadioButton_TypeFlyingPet.Checked Then
+            ComboBox_Animation.Items.Clear()
+            ComboBox_Animation.Enabled = True
             ComboBox_Animation.Items.Add("Flying")
             ComboBox_Animation.Items.Add("Walking")
             ComboBox_Animation.Items.Add("Idling")
             ComboBox_Animation.Items.Add("Idling Alt")
             ComboBox_Animation.Items.Add("Dragging")
+            ComboBox_Animation.SelectedIndex = 0
         End If
-        ComboBox_Animation.SelectedIndex = 0
+    End Sub
+    'RadioButton_TypeObject - CheckedChanged
+    Private Sub RadioButton_TypeObject_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton_TypeObject.CheckedChanged
+        If RadioButton_TypeObject.Checked Then
+            ComboBox_Animation.Enabled = False
+        End If
+    End Sub
+    'RadioButton_TypeNature - CheckedChanged
+    Private Sub RadioButton_TypeNature_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton_TypeNature.CheckedChanged
+        If RadioButton_TypeNature.Checked Then
+            ComboBox_Animation.Enabled = False
+        End If
     End Sub
     'RadioButton_FacingLeft - CheckedChanged
     Private Sub RadioButton_FacingLeft_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton_FacingLeft.CheckedChanged
@@ -129,7 +154,7 @@ Public Class Form_PetBuilder
     'Button_Save - Click
     Private Sub Button_Save_Click(sender As Object, e As EventArgs) Handles Button_Save.Click
         If PixelBox_Left.Image IsNot Nothing And ListBox_Images.Items.Count > 0 And TextBox_Name.Text.Length > 0 Then
-            If RadioButton_PetTypeGround.Checked Then
+            If RadioButton_TypeGroundPet.Checked Then
                 'Create Dir if needed
                 If Not Directory.Exists(Application.StartupPath & "\Pets\Ground\" & TextBox_Name.Text) Then
                     Directory.CreateDirectory(Application.StartupPath & "\Pets\Ground\" & TextBox_Name.Text)
@@ -139,7 +164,7 @@ Public Class Form_PetBuilder
                 PixelBox_Right.Image.Save(Application.StartupPath & "\Pets\Ground\" & TextBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif", Imaging.ImageFormat.Gif)
                 Console.WriteLine(Application.StartupPath & "\Pets\Ground\" & TextBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Left.gif")
                 Console.WriteLine(Application.StartupPath & "\Pets\Ground\" & TextBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif")
-            Else
+            ElseIf RadioButton_TypeFlyingPet.Checked Then
                 'Create Dir if needed
                 If Not Directory.Exists(Application.StartupPath & "\Pets\Flying\" & TextBox_Name.Text) Then
                     Directory.CreateDirectory(Application.StartupPath & "\Pets\Flying\" & TextBox_Name.Text)
@@ -149,9 +174,46 @@ Public Class Form_PetBuilder
                 PixelBox_Right.Image.Save(Application.StartupPath & "\Pets\Flying\" & TextBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif", Imaging.ImageFormat.Gif)
                 Console.WriteLine(Application.StartupPath & "\Pets\Flying\" & TextBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Left.gif")
                 Console.WriteLine(Application.StartupPath & "\Pets\Flying\" & TextBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif")
+            ElseIf RadioButton_TypeObject.Checked Then
+
+                If RadioButton_FacingRight.Checked Then
+                    'PixelBox_Right.Image.Save(Application.StartupPath & "\Objects\" & TextBox_Name.Text & ".gif", Imaging.ImageFormat.Gif)
+                    savegif1(Application.StartupPath & "\Objects\" & TextBox_Name.Text & ".gif")
+                Else
+                    'PixelBox_Left.Image.Save(Application.StartupPath & "\Objects\" & TextBox_Name.Text & ".gif", Imaging.ImageFormat.Gif)
+                    savegif2(Application.StartupPath & "\Objects\" & TextBox_Name.Text & ".gif")
+                End If
+
+            ElseIf RadioButton_TypeNature.Checked Then
+
+                If RadioButton_FacingRight.Checked Then
+                    PixelBox_Right.Image.Save(Application.StartupPath & "\Nature\" & TextBox_Name.Text & ".gif", Imaging.ImageFormat.Gif)
+                Else
+                    PixelBox_Left.Image.Save(Application.StartupPath & "\Nature\" & TextBox_Name.Text & ".gif", Imaging.ImageFormat.Gif)
+                End If
+
             End If
             'Clear for Next
             ClearAllUIObjects()
         End If
+    End Sub
+
+    Private Sub savegif1(filePath As String)
+        Using gif = AnimatedGif.AnimatedGif.Create(filePath, CInt(NumericUpDown_Delay.Value), 0)
+            For Each item As String In ListBox_Images.Items
+                gif.AddFrame(Image.FromFile(item), delay:=-1, quality:=GifQuality.Bit8)
+            Next
+        End Using
+    End Sub
+
+    Private Sub savegif2(filePath As String)
+        Using gif = AnimatedGif.AnimatedGif.Create(filePath, CInt(NumericUpDown_Delay.Value), 0)
+            For Each item As String In ListBox_Images.Items
+                Dim tempImage As Image
+                tempImage = Image.FromFile(item)
+                tempImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
+                gif.AddFrame(tempImage, delay:=-1, quality:=GifQuality.Bit8)
+            Next
+        End Using
     End Sub
 End Class

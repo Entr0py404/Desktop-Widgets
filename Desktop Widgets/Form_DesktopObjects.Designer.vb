@@ -35,6 +35,8 @@ Partial Class Form_DesktopObjects
         Me.TrackBar_ObjectScale = New System.Windows.Forms.TrackBar()
         Me.CheckBox_SnapToBar = New System.Windows.Forms.CheckBox()
         Me.Button_AllDesktopObjects = New System.Windows.Forms.Button()
+        Me.ComboBox_Display = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox3.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.TrackBar_ObjectScale, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -47,7 +49,7 @@ Partial Class Form_DesktopObjects
         Me.GroupBox3.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.GroupBox3.Location = New System.Drawing.Point(8, 104)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(400, 344)
+        Me.GroupBox3.Size = New System.Drawing.Size(488, 344)
         Me.GroupBox3.TabIndex = 51
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Objects"
@@ -67,7 +69,7 @@ Partial Class Form_DesktopObjects
         Me.ListView_Objects.Location = New System.Drawing.Point(3, 18)
         Me.ListView_Objects.MultiSelect = False
         Me.ListView_Objects.Name = "ListView_Objects"
-        Me.ListView_Objects.Size = New System.Drawing.Size(394, 323)
+        Me.ListView_Objects.Size = New System.Drawing.Size(482, 323)
         Me.ListView_Objects.SmallImageList = Me.ImageList_Objects
         Me.ListView_Objects.TabIndex = 35
         Me.ListView_Objects.UseCompatibleStateImageBehavior = False
@@ -78,13 +80,14 @@ Partial Class Form_DesktopObjects
         Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReloadToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(126, 28)
+        Me.ContextMenuStrip1.ShowImageMargin = False
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(101, 28)
         '
         'ReloadToolStripMenuItem
         '
         Me.ReloadToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ReloadToolStripMenuItem.Name = "ReloadToolStripMenuItem"
-        Me.ReloadToolStripMenuItem.Size = New System.Drawing.Size(125, 24)
+        Me.ReloadToolStripMenuItem.Size = New System.Drawing.Size(100, 24)
         Me.ReloadToolStripMenuItem.Text = "Reload"
         '
         'ImageList_Objects
@@ -101,7 +104,7 @@ Partial Class Form_DesktopObjects
         Me.CheckBox_TopMost.Location = New System.Drawing.Point(0, 72)
         Me.CheckBox_TopMost.Name = "CheckBox_TopMost"
         Me.CheckBox_TopMost.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.CheckBox_TopMost.Size = New System.Drawing.Size(144, 24)
+        Me.CheckBox_TopMost.Size = New System.Drawing.Size(128, 24)
         Me.CheckBox_TopMost.TabIndex = 55
         Me.CheckBox_TopMost.Text = "Always On Top"
         Me.CheckBox_TopMost.UseVisualStyleBackColor = True
@@ -109,9 +112,9 @@ Partial Class Form_DesktopObjects
         'Label_Scale
         '
         Me.Label_Scale.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_Scale.Location = New System.Drawing.Point(352, 16)
+        Me.Label_Scale.Location = New System.Drawing.Point(448, 16)
         Me.Label_Scale.Name = "Label_Scale"
-        Me.Label_Scale.Size = New System.Drawing.Size(56, 40)
+        Me.Label_Scale.Size = New System.Drawing.Size(48, 40)
         Me.Label_Scale.TabIndex = 54
         Me.Label_Scale.Text = "1x"
         Me.Label_Scale.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -121,7 +124,7 @@ Partial Class Form_DesktopObjects
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.Location = New System.Drawing.Point(8, 16)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(64, 48)
+        Me.Label9.Size = New System.Drawing.Size(64, 40)
         Me.Label9.TabIndex = 53
         Me.Label9.Text = "Scale"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -129,10 +132,9 @@ Partial Class Form_DesktopObjects
         'TrackBar_ObjectScale
         '
         Me.TrackBar_ObjectScale.Location = New System.Drawing.Point(72, 16)
-        Me.TrackBar_ObjectScale.Maximum = 4
         Me.TrackBar_ObjectScale.Minimum = 1
         Me.TrackBar_ObjectScale.Name = "TrackBar_ObjectScale"
-        Me.TrackBar_ObjectScale.Size = New System.Drawing.Size(280, 45)
+        Me.TrackBar_ObjectScale.Size = New System.Drawing.Size(376, 45)
         Me.TrackBar_ObjectScale.TabIndex = 52
         Me.TrackBar_ObjectScale.TickStyle = System.Windows.Forms.TickStyle.Both
         Me.TrackBar_ObjectScale.Value = 1
@@ -142,10 +144,10 @@ Partial Class Form_DesktopObjects
         Me.CheckBox_SnapToBar.Checked = True
         Me.CheckBox_SnapToBar.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox_SnapToBar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.CheckBox_SnapToBar.Location = New System.Drawing.Point(152, 72)
+        Me.CheckBox_SnapToBar.Location = New System.Drawing.Point(136, 72)
         Me.CheckBox_SnapToBar.Name = "CheckBox_SnapToBar"
         Me.CheckBox_SnapToBar.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.CheckBox_SnapToBar.Size = New System.Drawing.Size(144, 24)
+        Me.CheckBox_SnapToBar.Size = New System.Drawing.Size(120, 24)
         Me.CheckBox_SnapToBar.TabIndex = 56
         Me.CheckBox_SnapToBar.Text = "Snap To Bar"
         Me.CheckBox_SnapToBar.UseVisualStyleBackColor = True
@@ -164,12 +166,36 @@ Partial Class Form_DesktopObjects
         Me.Button_AllDesktopObjects.Text = "Close All Desktop Objects"
         Me.Button_AllDesktopObjects.UseVisualStyleBackColor = False
         '
+        'ComboBox_Display
+        '
+        Me.ComboBox_Display.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ComboBox_Display.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox_Display.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox_Display.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ComboBox_Display.FormattingEnabled = True
+        Me.ComboBox_Display.Location = New System.Drawing.Point(336, 72)
+        Me.ComboBox_Display.Name = "ComboBox_Display"
+        Me.ComboBox_Display.Size = New System.Drawing.Size(104, 21)
+        Me.ComboBox_Display.TabIndex = 58
+        '
+        'Label1
+        '
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(264, 72)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(64, 21)
+        Me.Label1.TabIndex = 59
+        Me.Label1.Text = "Display"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'Form_DesktopObjects
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(417, 498)
+        Me.ClientSize = New System.Drawing.Size(505, 497)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.ComboBox_Display)
         Me.Controls.Add(Me.Button_AllDesktopObjects)
         Me.Controls.Add(Me.CheckBox_SnapToBar)
         Me.Controls.Add(Me.CheckBox_TopMost)
@@ -203,4 +229,6 @@ Partial Class Form_DesktopObjects
     Friend WithEvents Button_AllDesktopObjects As Button
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents ReloadToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ComboBox_Display As ComboBox
+    Private WithEvents Label1 As Label
 End Class

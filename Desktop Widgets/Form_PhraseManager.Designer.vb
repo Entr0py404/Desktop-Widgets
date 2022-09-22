@@ -32,12 +32,14 @@ Partial Class Form_PhraseManager
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RectangleShape2 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(32, 16)
+        Me.Label9.Location = New System.Drawing.Point(32, 56)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(64, 21)
         Me.Label9.TabIndex = 69
@@ -51,7 +53,7 @@ Partial Class Form_PhraseManager
         Me.ComboBox_Topic.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ComboBox_Topic.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ComboBox_Topic.FormattingEnabled = True
-        Me.ComboBox_Topic.Location = New System.Drawing.Point(96, 16)
+        Me.ComboBox_Topic.Location = New System.Drawing.Point(96, 56)
         Me.ComboBox_Topic.Name = "ComboBox_Topic"
         Me.ComboBox_Topic.Size = New System.Drawing.Size(128, 21)
         Me.ComboBox_Topic.TabIndex = 68
@@ -59,7 +61,7 @@ Partial Class Form_PhraseManager
         'Label1
         '
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(8, 48)
+        Me.Label1.Location = New System.Drawing.Point(8, 96)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(88, 24)
         Me.Label1.TabIndex = 70
@@ -71,7 +73,7 @@ Partial Class Form_PhraseManager
         Me.TextBox_NewPhrase.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.TextBox_NewPhrase.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox_NewPhrase.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.TextBox_NewPhrase.Location = New System.Drawing.Point(104, 56)
+        Me.TextBox_NewPhrase.Location = New System.Drawing.Point(104, 104)
         Me.TextBox_NewPhrase.Name = "TextBox_NewPhrase"
         Me.TextBox_NewPhrase.Size = New System.Drawing.Size(200, 13)
         Me.TextBox_NewPhrase.TabIndex = 71
@@ -82,8 +84,9 @@ Partial Class Form_PhraseManager
         Me.ListBox_Phrases.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.ListBox_Phrases.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ListBox_Phrases.FormattingEnabled = True
-        Me.ListBox_Phrases.Location = New System.Drawing.Point(16, 96)
+        Me.ListBox_Phrases.Location = New System.Drawing.Point(16, 136)
         Me.ListBox_Phrases.Name = "ListBox_Phrases"
+        Me.ListBox_Phrases.ScrollAlwaysVisible = True
         Me.ListBox_Phrases.Size = New System.Drawing.Size(288, 208)
         Me.ListBox_Phrases.TabIndex = 72
         '
@@ -94,7 +97,7 @@ Partial Class Form_PhraseManager
         Me.Button_Save.FlatAppearance.BorderSize = 0
         Me.Button_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_Save.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_Save.Location = New System.Drawing.Point(192, 320)
+        Me.Button_Save.Location = New System.Drawing.Point(192, 360)
         Me.Button_Save.Name = "Button_Save"
         Me.Button_Save.Size = New System.Drawing.Size(120, 32)
         Me.Button_Save.TabIndex = 73
@@ -107,7 +110,7 @@ Partial Class Form_PhraseManager
         Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
         Me.ShapeContainer1.Name = "ShapeContainer1"
         Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.RectangleShape2, Me.RectangleShape1})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(320, 361)
+        Me.ShapeContainer1.Size = New System.Drawing.Size(321, 402)
         Me.ShapeContainer1.TabIndex = 74
         Me.ShapeContainer1.TabStop = False
         '
@@ -119,7 +122,7 @@ Partial Class Form_PhraseManager
         Me.RectangleShape2.CornerRadius = 3
         Me.RectangleShape2.FillColor = System.Drawing.Color.WhiteSmoke
         Me.RectangleShape2.FillGradientColor = System.Drawing.Color.WhiteSmoke
-        Me.RectangleShape2.Location = New System.Drawing.Point(8, 88)
+        Me.RectangleShape2.Location = New System.Drawing.Point(10, 129)
         Me.RectangleShape2.Name = "RectangleShape2"
         Me.RectangleShape2.SelectionColor = System.Drawing.Color.Transparent
         Me.RectangleShape2.Size = New System.Drawing.Size(304, 224)
@@ -132,17 +135,41 @@ Partial Class Form_PhraseManager
         Me.RectangleShape1.CornerRadius = 3
         Me.RectangleShape1.FillColor = System.Drawing.Color.WhiteSmoke
         Me.RectangleShape1.FillGradientColor = System.Drawing.Color.WhiteSmoke
-        Me.RectangleShape1.Location = New System.Drawing.Point(96, 48)
+        Me.RectangleShape1.Location = New System.Drawing.Point(96, 96)
         Me.RectangleShape1.Name = "RectangleShape1"
         Me.RectangleShape1.SelectionColor = System.Drawing.Color.Transparent
         Me.RectangleShape1.Size = New System.Drawing.Size(216, 24)
         '
-        'Form_Phrases
+        'ComboBox1
+        '
+        Me.ComboBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox1.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(96, 16)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(128, 21)
+        Me.ComboBox1.TabIndex = 75
+        '
+        'Label2
+        '
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(32, 16)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(64, 21)
+        Me.Label2.TabIndex = 76
+        Me.Label2.Text = "Topic"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Form_PhraseManager
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(320, 361)
+        Me.ClientSize = New System.Drawing.Size(321, 402)
+        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TextBox_NewPhrase)
         Me.Controls.Add(Me.ComboBox_Topic)
         Me.Controls.Add(Me.Button_Save)
@@ -154,7 +181,7 @@ Partial Class Form_PhraseManager
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
-        Me.Name = "Form_Phrases"
+        Me.Name = "Form_PhraseManager"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Phrases"
         Me.ResumeLayout(False)
@@ -171,4 +198,6 @@ Partial Class Form_PhraseManager
     Friend WithEvents ShapeContainer1 As ShapeContainer
     Friend WithEvents RectangleShape1 As RectangleShape
     Friend WithEvents RectangleShape2 As RectangleShape
+    Friend WithEvents ComboBox1 As ComboBox
+    Private WithEvents Label2 As Label
 End Class

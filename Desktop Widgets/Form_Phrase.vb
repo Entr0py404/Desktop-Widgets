@@ -3,6 +3,7 @@
 
     'Form1 - Load
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Opacity = 0
         Label_Phrase.Font = Form_Gdev.FontDialog1.Font
     End Sub
     'Label_Phrase - TextChanged
@@ -13,6 +14,6 @@
     Private Sub Timer_AutoHide_Tick(sender As Object, e As EventArgs) Handles Timer_AutoHide.Tick
         Timer_AutoHide.Stop()
         Label_Phrase.Text = ""
-        Me.Visible = False
+        Me.Opacity = 0 'Me.Visible = False
     End Sub
 End Class

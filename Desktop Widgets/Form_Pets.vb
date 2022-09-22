@@ -1,8 +1,6 @@
 ﻿'Imports MadMilkman.Ini
 'Imports System.Speech.Synthesis
 Public Class Form_Pets
-    'Dim myForm As Form_GroundPet
-    'Dim myForm2 As Form_GroundPet
     'Dim TTS As SpeechSynthesizer = New SpeechSynthesizer
 
     'Form_Pets - Load
@@ -20,6 +18,17 @@ Public Class Form_Pets
 
         LoadPets("Pets\Ground", ListView_GroundPets, ImageList_GroundPets)
         LoadPets("Pets\Flying", ListView_FlyingPets, ImageList_FlyingPets)
+
+        'ComboBox_Display.Items.Add("ALL")
+        For Each displays In Screen.AllScreens
+            ComboBox_Display.Items.Add(displays.DeviceName.Replace("\\.\", ""))
+        Next
+
+        If ComboBox_Display.Items.Count >= 2 Then
+            ComboBox_Display.Items.Add("ALL")
+        End If
+
+        ComboBox_Display.SelectedIndex = 0
     End Sub
     'LoadPets()
     Private Sub LoadPets(path As String, pets_ListView As ListView, Pets_ImageList As ImageList)
@@ -94,17 +103,20 @@ Public Class Form_Pets
         End If
 
         'Dragging
-        If File.Exists(PetPath & "\Dragging.gif") Then
-            Form_GroundPetNew.Animation_Dragging = New Bitmap(PetPath & "\Dragging.gif")
-        Else
-            Form_GroundPetNew.Animation_Dragging = New Bitmap(PetPath & "\Walking Right.gif") 'Fallback Animation
+        If File.Exists(PetPath & "\Dragging Left.gif") Then
+            Form_GroundPetNew.Animation_Dragging_Left = New Bitmap(PetPath & "\Dragging Left.gif")
+        End If
+        If File.Exists(PetPath & "\Dragging Right.gif") Then
+            Form_GroundPetNew.Animation_Dragging_Right = New Bitmap(PetPath & "\Dragging Right.gif")
         End If
 
+
         'Falling
-        If File.Exists(PetPath & "\Falling.gif") Then
-            Form_GroundPetNew.Animation_Falling = New Bitmap(PetPath & "\Falling.gif")
-        Else
-            Form_GroundPetNew.Animation_Falling = New Bitmap(PetPath & "\Walking Right.gif") 'Fallback Animation
+        If File.Exists(PetPath & "\Falling Left.gif") Then
+            Form_GroundPetNew.Animation_Falling_Left = New Bitmap(PetPath & "\Falling Left.gif")
+        End If
+        If File.Exists(PetPath & "\Falling Right.gif") Then
+            Form_GroundPetNew.Animation_Falling_Right = New Bitmap(PetPath & "\Falling Right.gif")
         End If
 
         Form_GroundPetNew.Show()
@@ -112,7 +124,6 @@ Public Class Form_Pets
     'ListView_FlyingPets - ItemActivate
     Private Sub ListView_FlyingPets_ItemActivate(sender As Object, e As EventArgs) Handles ListView_FlyingPets.ItemActivate
         Dim Form_FlyingPetNew = New Form_FlyingPet
-
 
         'Flying
         Dim PetPath As String = "Pets\Flying\" & ListView_FlyingPets.SelectedItems.Item(0).Text
@@ -224,5 +235,18 @@ Public Class Form_Pets
     Private Sub ResetToolStripMenuItemBackGroundColors()
         GroundPetsToolStripMenuItem.BackColor = Color.FromArgb(28, 30, 34)
         FlyingPetsTextToolStripMenuItem.BackColor = Color.FromArgb(28, 30, 34)
+    End Sub
+    'DisplaySettingsChanged
+    Public Sub DisplaySettingsChanged(ByVal sender As Object, ByVal e As EventArgs)
+        If Not ComboBox_Display.Items.Count = Screen.AllScreens.Count Then
+            ComboBox_Display.Items.Clear()
+            For Each Displays In Screen.AllScreens
+                ComboBox_Display.Items.Add(Displays.DeviceName.Replace("\\.\", ""))
+            Next
+
+            If ComboBox_Display.Items.Count >= 2 Then
+                ComboBox_Display.Items.Add("ALL")
+            End If
+        End If
     End Sub
 End Class

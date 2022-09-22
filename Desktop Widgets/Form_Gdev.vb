@@ -2,7 +2,11 @@
 
     'Form_GDev - Load
     Private Sub Form_GDev_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        For Each display In Screen.AllScreens
+            ComboBox_Display.Items.Add(display.DeviceName.Replace("\\.\", ""))
+        Next
 
+        ComboBox_Display.SelectedIndex = 0
     End Sub
     'Button_Spawn - Click
     Private Sub Button_Spawn_Click(sender As Object, e As EventArgs) Handles Button_Spawn.Click

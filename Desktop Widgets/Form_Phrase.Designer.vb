@@ -46,20 +46,22 @@ Partial Class Form_Phrase
         '
         Me.Timer_AutoHide.Interval = 5000
         '
-        'Form1
+        'Form_Phrase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.AutoValidate = System.Windows.Forms.AutoValidate.Disable
         Me.BackColor = System.Drawing.SystemColors.Info
+        Me.CausesValidation = False
         Me.ClientSize = New System.Drawing.Size(174, 29)
         Me.Controls.Add(Me.Label_Phrase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "Form1"
+        Me.Name = "Form_Phrase"
         Me.Opacity = 0.85R
         Me.ShowInTaskbar = False
         Me.TransparencyKey = System.Drawing.Color.Fuchsia

@@ -43,7 +43,7 @@ Partial Class Form_Menu
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button_Phrases = New System.Windows.Forms.Button()
-        Me.Button_PetBuilder = New System.Windows.Forms.Button()
+        Me.Button_AnimationBuilder = New System.Windows.Forms.Button()
         Me.PixelBox1 = New Desktop_Widgets.PixelBox()
         Me.ContextMenuStrip_Main.SuspendLayout()
         CType(Me.PixelBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -239,19 +239,19 @@ Partial Class Form_Menu
         Me.Button_Phrases.Text = "Phrases"
         Me.Button_Phrases.UseVisualStyleBackColor = False
         '
-        'Button_PetBuilder
+        'Button_AnimationBuilder
         '
-        Me.Button_PetBuilder.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Button_PetBuilder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Button_PetBuilder.FlatAppearance.BorderSize = 0
-        Me.Button_PetBuilder.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button_PetBuilder.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_PetBuilder.Location = New System.Drawing.Point(272, 216)
-        Me.Button_PetBuilder.Name = "Button_PetBuilder"
-        Me.Button_PetBuilder.Size = New System.Drawing.Size(144, 32)
-        Me.Button_PetBuilder.TabIndex = 72
-        Me.Button_PetBuilder.Text = "Pet Builder"
-        Me.Button_PetBuilder.UseVisualStyleBackColor = False
+        Me.Button_AnimationBuilder.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Button_AnimationBuilder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Button_AnimationBuilder.FlatAppearance.BorderSize = 0
+        Me.Button_AnimationBuilder.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button_AnimationBuilder.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button_AnimationBuilder.Location = New System.Drawing.Point(272, 216)
+        Me.Button_AnimationBuilder.Name = "Button_AnimationBuilder"
+        Me.Button_AnimationBuilder.Size = New System.Drawing.Size(144, 32)
+        Me.Button_AnimationBuilder.TabIndex = 72
+        Me.Button_AnimationBuilder.Text = "Animation Builder"
+        Me.Button_AnimationBuilder.UseVisualStyleBackColor = False
         '
         'PixelBox1
         '
@@ -269,7 +269,7 @@ Partial Class Form_Menu
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(425, 314)
-        Me.Controls.Add(Me.Button_PetBuilder)
+        Me.Controls.Add(Me.Button_AnimationBuilder)
         Me.Controls.Add(Me.Button_Phrases)
         Me.Controls.Add(Me.Button_CloseSelected)
         Me.Controls.Add(Me.Label9)
@@ -312,6 +312,6 @@ Partial Class Form_Menu
     Friend WithEvents GDevCharacterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Button_Phrases As Button
     Friend WithEvents PixelBox1 As PixelBox
-    Friend WithEvents Button_PetBuilder As Button
+    Friend WithEvents Button_AnimationBuilder As Button
     Friend WithEvents PetBuilderToolStripMenuItem As ToolStripMenuItem
 End Class

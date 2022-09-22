@@ -40,6 +40,7 @@ Partial Class Form_GDevCharacter
         Me.FollowCursorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ScaleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
+        Me.SpeechFontToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TTSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnabledToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GenderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -53,7 +54,6 @@ Partial Class Form_GDevCharacter
         Me.Timer_TurningDecision = New System.Windows.Forms.Timer(Me.components)
         Me.Timer_IdleDecision = New System.Windows.Forms.Timer(Me.components)
         Me.Timer_Speak = New System.Windows.Forms.Timer(Me.components)
-        Me.SpeechFontToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PixelBox_Pet = New Desktop_Widgets.PixelBox()
         Me.PixelBox_Emote = New Desktop_Widgets.PixelBox()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -186,10 +186,18 @@ Partial Class Form_GDevCharacter
         '
         Me.ToolStripComboBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.ToolStripComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ToolStripComboBox1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStripComboBox1.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ToolStripComboBox1.Items.AddRange(New Object() {"1x", "2x", "3x", "4x"})
+        Me.ToolStripComboBox1.Items.AddRange(New Object() {"1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x"})
         Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
-        Me.ToolStripComboBox1.Size = New System.Drawing.Size(121, 23)
+        Me.ToolStripComboBox1.Size = New System.Drawing.Size(121, 28)
+        '
+        'SpeechFontToolStripMenuItem
+        '
+        Me.SpeechFontToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.SpeechFontToolStripMenuItem.Name = "SpeechFontToolStripMenuItem"
+        Me.SpeechFontToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
+        Me.SpeechFontToolStripMenuItem.Text = "Speech Font"
         '
         'TTSToolStripMenuItem
         '
@@ -279,13 +287,6 @@ Partial Class Form_GDevCharacter
         Me.Timer_Speak.Enabled = True
         Me.Timer_Speak.Interval = 5000
         '
-        'SpeechFontToolStripMenuItem
-        '
-        Me.SpeechFontToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.SpeechFontToolStripMenuItem.Name = "SpeechFontToolStripMenuItem"
-        Me.SpeechFontToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
-        Me.SpeechFontToolStripMenuItem.Text = "Speech Font"
-        '
         'PixelBox_Pet
         '
         Me.PixelBox_Pet.BackColor = System.Drawing.Color.Fuchsia
@@ -316,7 +317,7 @@ Partial Class Form_GDevCharacter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.Purple
+        Me.BackColor = System.Drawing.Color.Fuchsia
         Me.ClientSize = New System.Drawing.Size(156, 146)
         Me.ContextMenuStrip = Me.ContextMenuStrip1
         Me.Controls.Add(Me.PixelBox_Pet)

@@ -1,13 +1,48 @@
 ﻿Public Class Form_Nature
     Dim randNum As New Random
+    Dim MYDisplay As Display
     'Form_Nature - Load
     Private Sub Form_Nature_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
+        ContextMenuStrip2.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
+
+        For Each Display As Display In Display.GetDisplays()
+            If Display.IsGDIPrimary Then
+                ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
+                ComboBox_Display.SelectedIndex = ComboBox_Display.Items.Count - 1
+                Console.WriteLine(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
+            Else
+                ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName)
+                Console.WriteLine(Display.ToPathDisplayTarget.FriendlyName)
+            End If
+        Next
+        Console.WriteLine()
+        'For Each target In PathDisplayTarget.GetDisplayTargets()
+        'ComboBox_Display.Items.Add(target.FriendlyName & " - " & target.ToDisplayDevice.DisplayName.Replace("\\.\", ""))
+        'Next
+        'ComboBox_Display.SelectedIndex = 0
+
+        For Each display In Screen.AllScreens
+            'ComboBox_Display.Items.Add(display.DeviceName.Replace("\\.\", ""))
+            Console.WriteLine(display.DeviceName.Replace("\\.\", ""))
+        Next
+
+        Console.WriteLine()
+        'For Each target In PathDisplayTarget.GetDisplayTargets()
+        'Console.WriteLine(target.FriendlyName & " - " & target.ToDisplayDevice.DisplayName.Replace("\\.\", ""))
+        'Next
+
         Dim dir As New DirectoryInfo(Application.StartupPath & "\Nature")
         Dim directories As DirectoryInfo() = dir.GetDirectories().ToArray()
         ComboBox_Theme.Items.AddRange(directories)
         If ComboBox_Theme.Items.Count > 0 Then
             ComboBox_Theme.SelectedIndex = 0
         End If
+
+        If ComboBox_Theme.Items.Count > 0 Then
+            ComboBox_Theme.Items.Add("All")
+        End If
+
         Button_Randomize.PerformClick()
     End Sub
     'Button_Randomize - Click
@@ -27,103 +62,62 @@
     End Sub
     'Button_Generate - Click
     Private Sub Button_Generate_Click(sender As Object, e As EventArgs) Handles Button_Generate.Click
-        Dim FilesToCheck As New ArrayList()
-
         Dim NatureObjectPath As String = Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString
-
         'Main Grass
-        If File.Exists(NatureObjectPath & "\Grass.png") Then
-            Dim NatureObject = New Form_NatureObject
-            NatureObject.ObjectImage = New Bitmap(NatureObjectPath & "\Grass.png")
-            NatureObject.PixelBox1.BackgroundImage = NatureObject.ObjectImage
-            NatureObject.isMainGrass = True
-            'NatureObject.Show()
-        ElseIf File.Exists(NatureObjectPath & "\Grass.gif") Then
-            Dim NatureObject = New Form_NatureObject
-            NatureObject.ObjectImage = New Bitmap(NatureObjectPath & "\Grass.gif")
-            NatureObject.PixelBox1.BackgroundImage = NatureObject.ObjectImage
-            NatureObject.isMainGrass = True
-            'NatureObject.Show()
-        End If
+        'If File.Exists(NatureObjectPath & "\Grass.png") Then
+        'Dim NatureObject = New Form_NatureObject
+        'NatureObject.ObjectImage = New Bitmap(NatureObjectPath & "\Grass.png")
+        'NatureObject.PixelBox1.BackgroundImage = NatureObject.ObjectImage
+        'NatureObject.isMainGrass = True
+        'NatureObject.Show()
+        'ElseIf File.Exists(NatureObjectPath & "\Grass.gif") Then
+        'Dim NatureObject = New Form_NatureObject
+        'NatureObject.ObjectImage = New Bitmap(NatureObjectPath & "\Grass.gif")
+        'NatureObject.PixelBox1.BackgroundImage = NatureObject.ObjectImage
+        'NatureObject.isMainGrass = True
+        'NatureObject.Show()
+        'End If
 
         'Flowers
-        FilesToCheck.Clear()
-        FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\Flowers", "*.png", SearchOption.TopDirectoryOnly))
-        FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\Flowers", "*.gif", SearchOption.TopDirectoryOnly))
-        For i = 1 To randNum.Next(CInt(NumericUpDown_Flowers_Min.Value), CInt(NumericUpDown_Flowers_Max.Value))
-            Dim NatureObject = New Form_NatureObject
-            NatureObject.ObjectImage = New Bitmap(FilesToCheck.Item(randNum.Next(0, FilesToCheck.Count)).ToString)
-            NatureObject.PixelBox1.Image = NatureObject.ObjectImage
-            NatureObject.Show()
-        Next
-        'Console.WriteLine(randNum.Next(CInt(NumericUpDown_Flowers_Min.Value), CInt(NumericUpDown_Flowers_Max.Value)))
-
+        GenerateNature("Flowers", CInt(NumericUpDown_Flowers_Min.Value), CInt(NumericUpDown_Flowers_Max.Value))
         'Bushes
-        FilesToCheck.Clear()
-        FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\Bushes", "*.png", SearchOption.TopDirectoryOnly))
-        FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\Bushes", "*.gif", SearchOption.TopDirectoryOnly))
-        For i = 1 To randNum.Next(CInt(NumericUpDown_Bushes_Min.Value), CInt(NumericUpDown_Bushes_Max.Value))
-            Dim NatureObject = New Form_NatureObject
-            NatureObject.ObjectImage = New Bitmap(FilesToCheck.Item(randNum.Next(0, FilesToCheck.Count)).ToString)
-            NatureObject.PixelBox1.Image = NatureObject.ObjectImage
-            NatureObject.Show()
-        Next
-        'Console.WriteLine(randNum.Next(CInt(NumericUpDown_Bushes_Min.Value), CInt(NumericUpDown_Bushes_Max.Value)))
-
+        GenerateNature("Bushes", CInt(NumericUpDown_Bushes_Min.Value), CInt(NumericUpDown_Bushes_Max.Value))
         'Trees
-        FilesToCheck.Clear()
-        FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\Trees", "*.png", SearchOption.TopDirectoryOnly))
-        FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\Trees", "*.gif", SearchOption.TopDirectoryOnly))
-        For i = 1 To randNum.Next(CInt(NumericUpDown_Trees_Min.Value), CInt(NumericUpDown_Trees_Max.Value))
-            Dim NatureObject = New Form_NatureObject
-            NatureObject.ObjectImage = New Bitmap(FilesToCheck.Item(randNum.Next(0, FilesToCheck.Count)).ToString)
-            NatureObject.PixelBox1.Image = NatureObject.ObjectImage
-            NatureObject.Show()
-        Next
-        'Console.WriteLine(randNum.Next(CInt(NumericUpDown_Trees_Min.Value), CInt(NumericUpDown_Trees_Max.Value)))
-
+        GenerateNature("Trees", CInt(NumericUpDown_Trees_Min.Value), CInt(NumericUpDown_Trees_Max.Value))
         'Rocks
-        FilesToCheck.Clear()
-        FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\Rocks", "*.png", SearchOption.TopDirectoryOnly))
-        FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\Rocks", "*.gif", SearchOption.TopDirectoryOnly))
-        For i = 1 To randNum.Next(CInt(NumericUpDown_Rocks_Min.Value), CInt(NumericUpDown_Rocks_Max.Value))
-            Dim NatureObject = New Form_NatureObject
-            NatureObject.ObjectImage = New Bitmap(FilesToCheck.Item(randNum.Next(0, FilesToCheck.Count)).ToString)
-            NatureObject.PixelBox1.Image = NatureObject.ObjectImage
-            NatureObject.Show()
-        Next
-        'Console.WriteLine(randNum.Next(CInt(NumericUpDown_Rocks_Min.Value), CInt(NumericUpDown_Rocks_Max.Value)))
-
+        GenerateNature("Rocks", CInt(NumericUpDown_Rocks_Min.Value), CInt(NumericUpDown_Rocks_Max.Value))
         'Grass
-        FilesToCheck.Clear()
-        FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\Grass", "*.png", SearchOption.TopDirectoryOnly))
-        FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\Grass", "*.gif", SearchOption.TopDirectoryOnly))
-        For i = 1 To randNum.Next(CInt(NumericUpDown_Grass_Min.Value), CInt(NumericUpDown_Grass_Max.Value))
-            Dim NatureObject = New Form_NatureObject
-            NatureObject.ObjectImage = New Bitmap(FilesToCheck.Item(randNum.Next(0, FilesToCheck.Count)).ToString)
-            NatureObject.PixelBox1.Image = NatureObject.ObjectImage
-            NatureObject.Show()
-        Next
-        'Console.WriteLine(randNum.Next(CInt(NumericUpDown_Grass_Min.Value), CInt(NumericUpDown_Grass_Max.Value)))
-
+        GenerateNature("Grass", CInt(NumericUpDown_Grass_Min.Value), CInt(NumericUpDown_Grass_Max.Value))
 
         Button_Generate.Enabled = False
     End Sub
+    'GenerateNature()
+    Private Sub GenerateNature(NatureFolder As String, randMin As Integer, randMax As Integer)
+        If Directory.Exists(Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString & "\" & NatureFolder) Then
+            Dim FilesToCheck As New ArrayList()
+            Dim NatureObjectPath As String = Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString
+            FilesToCheck.Clear()
+            FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\" & NatureFolder, "*.png", SearchOption.TopDirectoryOnly))
+            FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\" & NatureFolder, "*.gif", SearchOption.TopDirectoryOnly))
+            For i = 1 To randNum.Next(randMin, randMax)
+                Dim NatureObject = New Form_NatureObject
+                NatureObject.ObjectImage = New Bitmap(FilesToCheck.Item(randNum.Next(0, FilesToCheck.Count)).ToString)
+                NatureObject.PixelBox1.Image = NatureObject.ObjectImage
+                NatureObject.Name = "NatureObject"
+                Form_Menu.IDCounter_NatureObject += 1
+                Form_Menu.FormList_NatureObject.Add(Form_Menu.IDCounter_NatureObject.ToString, NatureObject)
+                NatureObject.UniqueSessionID = Form_Menu.IDCounter_NatureObject.ToString
+                Form_Menu.FormList_NatureObject(Form_Menu.IDCounter_NatureObject.ToString).Show() 'NatureObject.Show()
+            Next
+        End If
+    End Sub
     'Button_CloseAll - Click
     Private Sub Button_CloseAll_Click(sender As Object, e As EventArgs) Handles Button_CloseAll.Click
-
-        Console.WriteLine(TrackBar_ObjectScale.Value)
-        Dim FormOpenCount As Integer = 0
-        Dim lista As FormCollection = Application.OpenForms
-        For Each a As Form In lista
-            If a.Name = "Form_NatureObject" Then
-                FormOpenCount += 1
-            End If
+        Dim FormListArray As Array = Form_Menu.FormList_NatureObject.Keys.ToArray
+        For Each item As String In FormListArray
+            Form_Menu.FormList_NatureObject(item).Close()
         Next
-
-        For i = 0 To FormOpenCount - 1
-            My.Application.OpenForms.Item("Form_NatureObject").Close()
-        Next
+        Form_Menu.FormList_NatureObject.Clear()
 
         Button_Generate.Enabled = True
     End Sub
@@ -134,7 +128,13 @@
     'ComboBox_Theme - SelectedIndexChanged
     Private Sub ComboBox_Theme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_Theme.SelectedIndexChanged
         If Not ComboBox_Theme.SelectedIndex = -1 Then
-            LoadNatureObjects(Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString, ListView_NatureObjects, ImageList_NatureObjects)
+            If Not ComboBox_Theme.SelectedItem.ToString = "All" Then
+                LoadNatureObjects(Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString, ListView_NatureObjects, ImageList_NatureObjects)
+                Button_Generate.Enabled = True
+            Else
+                LoadNatureObjects(Application.StartupPath & "\Nature\", ListView_NatureObjects, ImageList_NatureObjects)
+                Button_Generate.Enabled = False
+            End If
         End If
     End Sub
     'LoadNatureObjects()
@@ -153,11 +153,15 @@
     End Sub
     'ListView_NatureObjects - ItemActivate
     Private Sub ListView_NatureObjects_ItemActivate(sender As Object, e As EventArgs) Handles ListView_NatureObjects.ItemActivate
-        Dim NatureObject = New Form_NatureObject
+        Dim NatureObject As New Form_NatureObject
         NatureObject.ObjectImage = New Bitmap(ListView_NatureObjects.SelectedItems(0).Name)
         NatureObject.PixelBox1.Image = NatureObject.ObjectImage
-        NatureObject.Show()
-        Console.WriteLine(ListView_NatureObjects.SelectedItems(0).Name)
+        NatureObject.Name = "NatureObject"
+        NatureObject.MYScreen = MYDisplay.GetScreen().AllScreens(ComboBox_Display.SelectedIndex)
+        Form_Menu.IDCounter_NatureObject += 1
+        Form_Menu.FormList_NatureObject.Add(Form_Menu.IDCounter_NatureObject.ToString, NatureObject)
+        NatureObject.UniqueSessionID = Form_Menu.IDCounter_NatureObject.ToString
+        Form_Menu.FormList_NatureObject(Form_Menu.IDCounter_NatureObject.ToString).Show() 'NatureObject.Show()
     End Sub
     'ReloadToolStripMenuItem - Click
     Private Sub ReloadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReloadToolStripMenuItem.Click

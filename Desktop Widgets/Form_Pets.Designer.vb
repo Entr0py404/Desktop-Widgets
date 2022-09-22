@@ -48,6 +48,8 @@ Partial Class Form_Pets
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage_GroundPets = New System.Windows.Forms.TabPage()
         Me.TabPage_FlyingPets = New System.Windows.Forms.TabPage()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.ComboBox_Display = New System.Windows.Forms.ComboBox()
         Me.GroupBox3.SuspendLayout()
         Me.ContextMenuStrip_GroundPets.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -63,7 +65,7 @@ Partial Class Form_Pets
         '
         Me.CheckBox_FollowCursor.AutoSize = True
         Me.CheckBox_FollowCursor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.CheckBox_FollowCursor.Location = New System.Drawing.Point(8, 104)
+        Me.CheckBox_FollowCursor.Location = New System.Drawing.Point(36, 102)
         Me.CheckBox_FollowCursor.Name = "CheckBox_FollowCursor"
         Me.CheckBox_FollowCursor.Size = New System.Drawing.Size(102, 17)
         Me.CheckBox_FollowCursor.TabIndex = 3
@@ -76,7 +78,7 @@ Partial Class Form_Pets
         Me.CheckBox_TopMost.Checked = True
         Me.CheckBox_TopMost.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox_TopMost.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.CheckBox_TopMost.Location = New System.Drawing.Point(120, 104)
+        Me.CheckBox_TopMost.Location = New System.Drawing.Point(156, 102)
         Me.CheckBox_TopMost.Name = "CheckBox_TopMost"
         Me.CheckBox_TopMost.Size = New System.Drawing.Size(111, 17)
         Me.CheckBox_TopMost.TabIndex = 4
@@ -91,7 +93,7 @@ Partial Class Form_Pets
         Me.GroupBox3.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.GroupBox3.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(386, 320)
+        Me.GroupBox3.Size = New System.Drawing.Size(466, 320)
         Me.GroupBox3.TabIndex = 19
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Ground Pets"
@@ -111,7 +113,7 @@ Partial Class Form_Pets
         Me.ListView_GroundPets.Location = New System.Drawing.Point(3, 18)
         Me.ListView_GroundPets.MultiSelect = False
         Me.ListView_GroundPets.Name = "ListView_GroundPets"
-        Me.ListView_GroundPets.Size = New System.Drawing.Size(380, 299)
+        Me.ListView_GroundPets.Size = New System.Drawing.Size(460, 299)
         Me.ListView_GroundPets.SmallImageList = Me.ImageList_GroundPets
         Me.ListView_GroundPets.TabIndex = 35
         Me.ListView_GroundPets.UseCompatibleStateImageBehavior = False
@@ -146,7 +148,7 @@ Partial Class Form_Pets
         Me.GroupBox4.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.GroupBox4.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(386, 320)
+        Me.GroupBox4.Size = New System.Drawing.Size(466, 320)
         Me.GroupBox4.TabIndex = 20
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Flying Pets"
@@ -166,7 +168,7 @@ Partial Class Form_Pets
         Me.ListView_FlyingPets.Location = New System.Drawing.Point(3, 18)
         Me.ListView_FlyingPets.MultiSelect = False
         Me.ListView_FlyingPets.Name = "ListView_FlyingPets"
-        Me.ListView_FlyingPets.Size = New System.Drawing.Size(380, 299)
+        Me.ListView_FlyingPets.Size = New System.Drawing.Size(460, 299)
         Me.ListView_FlyingPets.SmallImageList = Me.ImageList_FlyingPets
         Me.ListView_FlyingPets.TabIndex = 34
         Me.ListView_FlyingPets.UseCompatibleStateImageBehavior = False
@@ -196,7 +198,7 @@ Partial Class Form_Pets
         'Label_Scale
         '
         Me.Label_Scale.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_Scale.Location = New System.Drawing.Point(344, 48)
+        Me.Label_Scale.Location = New System.Drawing.Point(408, 48)
         Me.Label_Scale.Name = "Label_Scale"
         Me.Label_Scale.Size = New System.Drawing.Size(56, 40)
         Me.Label_Scale.TabIndex = 52
@@ -208,7 +210,7 @@ Partial Class Form_Pets
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.Location = New System.Drawing.Point(8, 48)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(64, 48)
+        Me.Label9.Size = New System.Drawing.Size(64, 40)
         Me.Label9.TabIndex = 51
         Me.Label9.Text = "Scale"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -216,10 +218,9 @@ Partial Class Form_Pets
         'TrackBar_ObjectScale
         '
         Me.TrackBar_ObjectScale.Location = New System.Drawing.Point(72, 48)
-        Me.TrackBar_ObjectScale.Maximum = 4
         Me.TrackBar_ObjectScale.Minimum = 1
         Me.TrackBar_ObjectScale.Name = "TrackBar_ObjectScale"
-        Me.TrackBar_ObjectScale.Size = New System.Drawing.Size(272, 45)
+        Me.TrackBar_ObjectScale.Size = New System.Drawing.Size(336, 45)
         Me.TrackBar_ObjectScale.TabIndex = 50
         Me.TrackBar_ObjectScale.TickStyle = System.Windows.Forms.TickStyle.Both
         Me.TrackBar_ObjectScale.Value = 1
@@ -231,7 +232,7 @@ Partial Class Form_Pets
         Me.Button_CloseSelected.FlatAppearance.BorderSize = 0
         Me.Button_CloseSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_CloseSelected.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_CloseSelected.Location = New System.Drawing.Point(240, 472)
+        Me.Button_CloseSelected.Location = New System.Drawing.Point(216, 472)
         Me.Button_CloseSelected.Name = "Button_CloseSelected"
         Me.Button_CloseSelected.Size = New System.Drawing.Size(88, 32)
         Me.Button_CloseSelected.TabIndex = 71
@@ -258,7 +259,7 @@ Partial Class Form_Pets
         Me.ComboBox1.Items.AddRange(New Object() {"All Pets", "Ground Pets", "Flying Pets"})
         Me.ComboBox1.Location = New System.Drawing.Point(80, 472)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(144, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(128, 21)
         Me.ComboBox1.TabIndex = 69
         '
         'MenuStrip1
@@ -269,7 +270,7 @@ Partial Class Form_Pets
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GroundPetsToolStripMenuItem, Me.FlyingPetsTextToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(400, 29)
+        Me.MenuStrip1.Size = New System.Drawing.Size(481, 29)
         Me.MenuStrip1.TabIndex = 119
         '
         'GroundPetsToolStripMenuItem
@@ -294,7 +295,7 @@ Partial Class Form_Pets
         Me.TabControl1.Location = New System.Drawing.Point(0, 112)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(400, 352)
+        Me.TabControl1.Size = New System.Drawing.Size(480, 352)
         Me.TabControl1.TabIndex = 120
         '
         'TabPage_GroundPets
@@ -304,7 +305,7 @@ Partial Class Form_Pets
         Me.TabPage_GroundPets.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_GroundPets.Name = "TabPage_GroundPets"
         Me.TabPage_GroundPets.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage_GroundPets.Size = New System.Drawing.Size(392, 326)
+        Me.TabPage_GroundPets.Size = New System.Drawing.Size(472, 326)
         Me.TabPage_GroundPets.TabIndex = 0
         Me.TabPage_GroundPets.Text = "Ground Pets"
         '
@@ -315,16 +316,40 @@ Partial Class Form_Pets
         Me.TabPage_FlyingPets.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_FlyingPets.Name = "TabPage_FlyingPets"
         Me.TabPage_FlyingPets.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage_FlyingPets.Size = New System.Drawing.Size(392, 326)
+        Me.TabPage_FlyingPets.Size = New System.Drawing.Size(472, 326)
         Me.TabPage_FlyingPets.TabIndex = 1
         Me.TabPage_FlyingPets.Text = "Flying Pets"
+        '
+        'Label2
+        '
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(284, 102)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(64, 21)
+        Me.Label2.TabIndex = 122
+        Me.Label2.Text = "Display"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'ComboBox_Display
+        '
+        Me.ComboBox_Display.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ComboBox_Display.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox_Display.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox_Display.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ComboBox_Display.FormattingEnabled = True
+        Me.ComboBox_Display.Location = New System.Drawing.Point(356, 102)
+        Me.ComboBox_Display.Name = "ComboBox_Display"
+        Me.ComboBox_Display.Size = New System.Drawing.Size(104, 21)
+        Me.ComboBox_Display.TabIndex = 121
         '
         'Form_Pets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(400, 513)
+        Me.ClientSize = New System.Drawing.Size(481, 513)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.ComboBox_Display)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.Button_CloseSelected)
         Me.Controls.Add(Me.Label1)
@@ -380,4 +405,6 @@ Partial Class Form_Pets
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage_GroundPets As TabPage
     Friend WithEvents TabPage_FlyingPets As TabPage
+    Private WithEvents Label2 As Label
+    Friend WithEvents ComboBox_Display As ComboBox
 End Class

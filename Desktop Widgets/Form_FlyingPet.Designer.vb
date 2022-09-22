@@ -31,8 +31,10 @@ Partial Class Form_FlyingPet
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FollowCursorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.ScaleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
+        Me.ScaleToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.PoopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -66,9 +68,9 @@ Partial Class Form_FlyingPet
         '
         Me.ContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AlwaysOnTopToolStripMenuItem, Me.FollowCursorToolStripMenuItem, Me.ScaleToolStripMenuItem, Me.PoopToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AlwaysOnTopToolStripMenuItem, Me.FollowCursorToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.ScaleToolStripMenuItem, Me.PoopToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(173, 130)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(173, 154)
         '
         'AlwaysOnTopToolStripMenuItem
         '
@@ -86,22 +88,40 @@ Partial Class Form_FlyingPet
         Me.FollowCursorToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
         Me.FollowCursorToolStripMenuItem.Text = "Follow cursor"
         '
+        'DisplayToolStripMenuItem
+        '
+        Me.DisplayToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DisplayToolStripComboBox})
+        Me.DisplayToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.DisplayToolStripMenuItem.Name = "DisplayToolStripMenuItem"
+        Me.DisplayToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
+        Me.DisplayToolStripMenuItem.Text = "Display"
+        '
+        'DisplayToolStripComboBox
+        '
+        Me.DisplayToolStripComboBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.DisplayToolStripComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.DisplayToolStripComboBox.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DisplayToolStripComboBox.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.DisplayToolStripComboBox.Name = "DisplayToolStripComboBox"
+        Me.DisplayToolStripComboBox.Size = New System.Drawing.Size(121, 28)
+        '
         'ScaleToolStripMenuItem
         '
-        Me.ScaleToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripComboBox1})
+        Me.ScaleToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ScaleToolStripComboBox})
         Me.ScaleToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ScaleToolStripMenuItem.Name = "ScaleToolStripMenuItem"
         Me.ScaleToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
         Me.ScaleToolStripMenuItem.Text = "Scale"
         '
-        'ToolStripComboBox1
+        'ScaleToolStripComboBox
         '
-        Me.ToolStripComboBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ToolStripComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ToolStripComboBox1.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ToolStripComboBox1.Items.AddRange(New Object() {"1x", "2x", "3x", "4x"})
-        Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
-        Me.ToolStripComboBox1.Size = New System.Drawing.Size(121, 23)
+        Me.ScaleToolStripComboBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ScaleToolStripComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ScaleToolStripComboBox.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ScaleToolStripComboBox.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ScaleToolStripComboBox.Items.AddRange(New Object() {"1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x"})
+        Me.ScaleToolStripComboBox.Name = "ScaleToolStripComboBox"
+        Me.ScaleToolStripComboBox.Size = New System.Drawing.Size(121, 28)
         '
         'PoopToolStripMenuItem
         '
@@ -128,6 +148,7 @@ Partial Class Form_FlyingPet
         '
         'PixelBox_Pet
         '
+        Me.PixelBox_Pet.BackColor = System.Drawing.Color.MediumPurple
         Me.PixelBox_Pet.ContextMenuStrip = Me.ContextMenuStrip1
         Me.PixelBox_Pet.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PixelBox_Pet.Location = New System.Drawing.Point(0, 38)
@@ -139,11 +160,12 @@ Partial Class Form_FlyingPet
         '
         'PixelBox_Emote
         '
+        Me.PixelBox_Emote.BackColor = System.Drawing.Color.Thistle
         Me.PixelBox_Emote.Dock = System.Windows.Forms.DockStyle.Top
         Me.PixelBox_Emote.Location = New System.Drawing.Point(0, 0)
         Me.PixelBox_Emote.Name = "PixelBox_Emote"
         Me.PixelBox_Emote.Size = New System.Drawing.Size(76, 38)
-        Me.PixelBox_Emote.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PixelBox_Emote.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PixelBox_Emote.TabIndex = 3
         Me.PixelBox_Emote.TabStop = False
         '
@@ -185,6 +207,8 @@ Partial Class Form_FlyingPet
     Friend WithEvents PixelBox_Pet As PixelBox
     Friend WithEvents PixelBox_Emote As PixelBox
     Friend WithEvents ScaleToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripComboBox1 As ToolStripComboBox
+    Friend WithEvents ScaleToolStripComboBox As ToolStripComboBox
     Friend WithEvents AlwaysOnTopToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DisplayToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DisplayToolStripComboBox As ToolStripComboBox
 End Class

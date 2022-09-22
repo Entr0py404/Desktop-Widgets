@@ -41,6 +41,8 @@ Partial Class Form_Gdev
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Button_SpeechFont = New System.Windows.Forms.Button()
         Me.FontDialog1 = New System.Windows.Forms.FontDialog()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ComboBox_Display = New System.Windows.Forms.ComboBox()
         CType(Me.TrackBar_ObjectScale, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TrackBar_TSSVolume, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown_Flowers_Min, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,7 +51,7 @@ Partial Class Form_Gdev
         'Label_Scale
         '
         Me.Label_Scale.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_Scale.Location = New System.Drawing.Point(352, 16)
+        Me.Label_Scale.Location = New System.Drawing.Point(392, 16)
         Me.Label_Scale.Name = "Label_Scale"
         Me.Label_Scale.Size = New System.Drawing.Size(48, 40)
         Me.Label_Scale.TabIndex = 57
@@ -59,20 +61,19 @@ Partial Class Form_Gdev
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(16, 16)
+        Me.Label9.Location = New System.Drawing.Point(8, 16)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(64, 48)
+        Me.Label9.Size = New System.Drawing.Size(56, 40)
         Me.Label9.TabIndex = 56
         Me.Label9.Text = "Scale"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TrackBar_ObjectScale
         '
-        Me.TrackBar_ObjectScale.Location = New System.Drawing.Point(80, 16)
-        Me.TrackBar_ObjectScale.Maximum = 4
+        Me.TrackBar_ObjectScale.Location = New System.Drawing.Point(64, 16)
         Me.TrackBar_ObjectScale.Minimum = 1
         Me.TrackBar_ObjectScale.Name = "TrackBar_ObjectScale"
-        Me.TrackBar_ObjectScale.Size = New System.Drawing.Size(272, 45)
+        Me.TrackBar_ObjectScale.Size = New System.Drawing.Size(328, 45)
         Me.TrackBar_ObjectScale.TabIndex = 55
         Me.TrackBar_ObjectScale.TickStyle = System.Windows.Forms.TickStyle.Both
         Me.TrackBar_ObjectScale.Value = 1
@@ -83,7 +84,7 @@ Partial Class Form_Gdev
         Me.CheckBox_TopMost.Checked = True
         Me.CheckBox_TopMost.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox_TopMost.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.CheckBox_TopMost.Location = New System.Drawing.Point(160, 72)
+        Me.CheckBox_TopMost.Location = New System.Drawing.Point(144, 72)
         Me.CheckBox_TopMost.Name = "CheckBox_TopMost"
         Me.CheckBox_TopMost.Size = New System.Drawing.Size(111, 17)
         Me.CheckBox_TopMost.TabIndex = 54
@@ -94,7 +95,7 @@ Partial Class Form_Gdev
         '
         Me.CheckBox_FollowCursor.AutoSize = True
         Me.CheckBox_FollowCursor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.CheckBox_FollowCursor.Location = New System.Drawing.Point(48, 72)
+        Me.CheckBox_FollowCursor.Location = New System.Drawing.Point(32, 72)
         Me.CheckBox_FollowCursor.Name = "CheckBox_FollowCursor"
         Me.CheckBox_FollowCursor.Size = New System.Drawing.Size(102, 17)
         Me.CheckBox_FollowCursor.TabIndex = 53
@@ -108,7 +109,7 @@ Partial Class Form_Gdev
         Me.Button_Spawn.FlatAppearance.BorderSize = 0
         Me.Button_Spawn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_Spawn.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_Spawn.Location = New System.Drawing.Point(280, 232)
+        Me.Button_Spawn.Location = New System.Drawing.Point(296, 232)
         Me.Button_Spawn.Name = "Button_Spawn"
         Me.Button_Spawn.Size = New System.Drawing.Size(120, 32)
         Me.Button_Spawn.TabIndex = 58
@@ -122,7 +123,7 @@ Partial Class Form_Gdev
         Me.Button_Close.FlatAppearance.BorderSize = 0
         Me.Button_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_Close.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_Close.Location = New System.Drawing.Point(16, 232)
+        Me.Button_Close.Location = New System.Drawing.Point(32, 232)
         Me.Button_Close.Name = "Button_Close"
         Me.Button_Close.Size = New System.Drawing.Size(120, 32)
         Me.Button_Close.TabIndex = 59
@@ -135,7 +136,7 @@ Partial Class Form_Gdev
         Me.CheckBox_TTS.Checked = True
         Me.CheckBox_TTS.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox_TTS.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.CheckBox_TTS.Location = New System.Drawing.Point(48, 104)
+        Me.CheckBox_TTS.Location = New System.Drawing.Point(32, 104)
         Me.CheckBox_TTS.Name = "CheckBox_TTS"
         Me.CheckBox_TTS.Size = New System.Drawing.Size(50, 17)
         Me.CheckBox_TTS.TabIndex = 60
@@ -145,7 +146,7 @@ Partial Class Form_Gdev
         'RadioButton_TTSMale
         '
         Me.RadioButton_TTSMale.AutoSize = True
-        Me.RadioButton_TTSMale.Location = New System.Drawing.Point(176, 104)
+        Me.RadioButton_TTSMale.Location = New System.Drawing.Point(160, 104)
         Me.RadioButton_TTSMale.Name = "RadioButton_TTSMale"
         Me.RadioButton_TTSMale.Size = New System.Drawing.Size(48, 17)
         Me.RadioButton_TTSMale.TabIndex = 61
@@ -156,7 +157,7 @@ Partial Class Form_Gdev
         '
         Me.RadioButton_TTSFemale.AutoSize = True
         Me.RadioButton_TTSFemale.Checked = True
-        Me.RadioButton_TTSFemale.Location = New System.Drawing.Point(104, 104)
+        Me.RadioButton_TTSFemale.Location = New System.Drawing.Point(88, 104)
         Me.RadioButton_TTSFemale.Name = "RadioButton_TTSFemale"
         Me.RadioButton_TTSFemale.Size = New System.Drawing.Size(59, 17)
         Me.RadioButton_TTSFemale.TabIndex = 62
@@ -167,7 +168,7 @@ Partial Class Form_Gdev
         'Label_TSSVolume
         '
         Me.Label_TSSVolume.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_TSSVolume.Location = New System.Drawing.Point(360, 136)
+        Me.Label_TSSVolume.Location = New System.Drawing.Point(392, 136)
         Me.Label_TSSVolume.Name = "Label_TSSVolume"
         Me.Label_TSSVolume.Size = New System.Drawing.Size(48, 40)
         Me.Label_TSSVolume.TabIndex = 65
@@ -177,19 +178,19 @@ Partial Class Form_Gdev
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(16, 136)
+        Me.Label2.Location = New System.Drawing.Point(8, 136)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(104, 48)
+        Me.Label2.Size = New System.Drawing.Size(96, 48)
         Me.Label2.TabIndex = 64
         Me.Label2.Text = "TSS Volume"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TrackBar_TSSVolume
         '
-        Me.TrackBar_TSSVolume.Location = New System.Drawing.Point(120, 136)
+        Me.TrackBar_TSSVolume.Location = New System.Drawing.Point(104, 136)
         Me.TrackBar_TSSVolume.Maximum = 100
         Me.TrackBar_TSSVolume.Name = "TrackBar_TSSVolume"
-        Me.TrackBar_TSSVolume.Size = New System.Drawing.Size(240, 45)
+        Me.TrackBar_TSSVolume.Size = New System.Drawing.Size(288, 45)
         Me.TrackBar_TSSVolume.TabIndex = 63
         Me.TrackBar_TSSVolume.TickFrequency = 10
         Me.TrackBar_TSSVolume.TickStyle = System.Windows.Forms.TickStyle.Both
@@ -201,7 +202,7 @@ Partial Class Form_Gdev
         Me.CheckBox1.Checked = True
         Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.CheckBox1.Location = New System.Drawing.Point(48, 192)
+        Me.CheckBox1.Location = New System.Drawing.Point(32, 192)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(193, 17)
         Me.CheckBox1.TabIndex = 66
@@ -213,7 +214,7 @@ Partial Class Form_Gdev
         Me.NumericUpDown_Flowers_Min.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_Flowers_Min.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.NumericUpDown_Flowers_Min.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.NumericUpDown_Flowers_Min.Location = New System.Drawing.Point(248, 192)
+        Me.NumericUpDown_Flowers_Min.Location = New System.Drawing.Point(232, 192)
         Me.NumericUpDown_Flowers_Min.Name = "NumericUpDown_Flowers_Min"
         Me.NumericUpDown_Flowers_Min.Size = New System.Drawing.Size(56, 20)
         Me.NumericUpDown_Flowers_Min.TabIndex = 67
@@ -222,7 +223,7 @@ Partial Class Form_Gdev
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(304, 192)
+        Me.Label3.Location = New System.Drawing.Point(288, 192)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(80, 24)
         Me.Label3.TabIndex = 69
@@ -236,7 +237,7 @@ Partial Class Form_Gdev
         Me.Button_SpeechFont.FlatAppearance.BorderSize = 0
         Me.Button_SpeechFont.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_SpeechFont.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_SpeechFont.Location = New System.Drawing.Point(152, 232)
+        Me.Button_SpeechFont.Location = New System.Drawing.Point(168, 232)
         Me.Button_SpeechFont.Name = "Button_SpeechFont"
         Me.Button_SpeechFont.Size = New System.Drawing.Size(120, 32)
         Me.Button_SpeechFont.TabIndex = 70
@@ -247,17 +248,42 @@ Partial Class Form_Gdev
         '
         Me.FontDialog1.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         '
+        'Label1
+        '
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(264, 72)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(64, 21)
+        Me.Label1.TabIndex = 72
+        Me.Label1.Text = "Display"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'ComboBox_Display
+        '
+        Me.ComboBox_Display.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ComboBox_Display.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox_Display.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox_Display.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ComboBox_Display.FormattingEnabled = True
+        Me.ComboBox_Display.Location = New System.Drawing.Point(336, 72)
+        Me.ComboBox_Display.Name = "ComboBox_Display"
+        Me.ComboBox_Display.Size = New System.Drawing.Size(104, 21)
+        Me.ComboBox_Display.TabIndex = 71
+        '
         'Form_Gdev
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(409, 274)
+        Me.ClientSize = New System.Drawing.Size(449, 274)
+        Me.Controls.Add(Me.Label_Scale)
+        Me.Controls.Add(Me.Label_TSSVolume)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.ComboBox_Display)
         Me.Controls.Add(Me.Button_SpeechFont)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.NumericUpDown_Flowers_Min)
         Me.Controls.Add(Me.CheckBox1)
-        Me.Controls.Add(Me.Label_TSSVolume)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TrackBar_TSSVolume)
         Me.Controls.Add(Me.RadioButton_TTSFemale)
@@ -265,7 +291,6 @@ Partial Class Form_Gdev
         Me.Controls.Add(Me.CheckBox_TTS)
         Me.Controls.Add(Me.Button_Close)
         Me.Controls.Add(Me.Button_Spawn)
-        Me.Controls.Add(Me.Label_Scale)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.TrackBar_ObjectScale)
         Me.Controls.Add(Me.CheckBox_TopMost)
@@ -303,4 +328,6 @@ Partial Class Form_Gdev
     Private WithEvents Label3 As Label
     Friend WithEvents Button_SpeechFont As Button
     Friend WithEvents FontDialog1 As FontDialog
+    Private WithEvents Label1 As Label
+    Friend WithEvents ComboBox_Display As ComboBox
 End Class

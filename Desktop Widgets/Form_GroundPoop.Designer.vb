@@ -29,12 +29,14 @@ Partial Class Form_GroundPoop
         '
         'PixelBox1
         '
+        Me.PixelBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PixelBox1.Image = Global.Desktop_Widgets.My.Resources.Resources.Poop
         Me.PixelBox1.Location = New System.Drawing.Point(0, 0)
         Me.PixelBox1.Name = "PixelBox1"
-        Me.PixelBox1.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.None
-        Me.PixelBox1.Size = New System.Drawing.Size(26, 20)
-        Me.PixelBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PixelBox1.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half
+        Me.PixelBox1.Size = New System.Drawing.Size(78, 79)
+        Me.PixelBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PixelBox1.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None
         Me.PixelBox1.TabIndex = 1
         Me.PixelBox1.TabStop = False
         '
@@ -42,7 +44,7 @@ Partial Class Form_GroundPoop
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.Fuchsia
+        Me.BackColor = System.Drawing.Color.DarkMagenta
         Me.ClientSize = New System.Drawing.Size(78, 79)
         Me.Controls.Add(Me.PixelBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -55,7 +57,6 @@ Partial Class Form_GroundPoop
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         CType(Me.PixelBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 

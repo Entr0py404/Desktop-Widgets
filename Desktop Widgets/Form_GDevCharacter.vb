@@ -59,16 +59,13 @@ Public Class Form_GDevCharacter
     'Form_GDevCharacter - Load
     Private Sub Form_GDevCharacter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Form_Phrase.Show()
-        Form_Phrase.Visible = False
+        'Form_Phrase.Visible = False
 
         Timer_Speak.Interval = randNum.Next(3500, 5500) '3.5 to 5.5 sec
         'synth.Rate = 3
         'synth.Rate = -2
 
-        'ScalePet(1)
-
         Form_Phrase.FontDialog1.Font = Form_Gdev.FontDialog1.Font
-
 
         FollowCursorToolStripMenuItem.Checked = Form_GDev.CheckBox_FollowCursor.Checked
 
@@ -319,14 +316,8 @@ Public Class Form_GDevCharacter
     End Sub
     'ToolStripComboBox1 - SelectedIndexChanged
     Private Sub ToolStripComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripComboBox1.SelectedIndexChanged
-        If ToolStripComboBox1.SelectedIndex = 0 Then
-            ScalePet(1)
-        ElseIf ToolStripComboBox1.SelectedIndex = 1 Then
-            ScalePet(2)
-        ElseIf ToolStripComboBox1.SelectedIndex = 2 Then
-            ScalePet(3)
-        ElseIf ToolStripComboBox1.SelectedIndex = 3 Then
-            ScalePet(4)
+        If Not ToolStripComboBox1.SelectedIndex = -1 Then
+            ScalePet(ToolStripComboBox1.SelectedIndex + 1)
         End If
     End Sub
     'PixelBox_Pet - Paint
@@ -416,9 +407,11 @@ Public Class Form_GDevCharacter
         Dim MyProcess() As Process
         MyProcess = Process.GetProcessesByName(ProcessesName)
         If MyProcess.Count > 0 Then
-            Return True
-        Else
-            Return False
+            If MyProcess(0).Threads(0).ThreadState = ThreadState.Running Then
+                Return True
+            Else
+                Return False
+            End If
         End If
     End Function
     'Comment
@@ -480,7 +473,7 @@ Public Class Form_GDevCharacter
 
             Form_Phrase.Label_Phrase.Text = phrase
             Form_Phrase.Location = New Point(Me.Location.X + CInt(Me.Width / 2) - CInt(Form_Phrase.Width / 2), Me.Location.Y - Form_Phrase.Height)
-            Form_Phrase.Visible = True
+            Form_Phrase.Opacity = 0.85 'Form_Phrase.Visible = True
 
             synth.Volume = Form_GDev.TrackBar_TSSVolume.Value
             'synth.SpeakAsync(phrase)

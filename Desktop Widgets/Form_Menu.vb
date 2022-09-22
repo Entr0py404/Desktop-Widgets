@@ -1,9 +1,27 @@
-﻿Public Class Form_Menu
-
+﻿Imports System.Management
+Public Class Form_Menu
+    Friend FormList_DesktopObject As New Dictionary(Of String, Form_DesktopObject)
+    Friend FormList_NatureObject As New Dictionary(Of String, Form_NatureObject)
+    Public IDCounter_DesktopObject As Integer = 0
+    Public IDCounter_NatureObject As Integer = 0
     'Form_Menu - Load
     Private Sub Form_Menu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.SelectedIndex = 0
         ContextMenuStrip_Main.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
+        Dim searcher1 As ManagementObjectSearcher = New ManagementObjectSearcher("root\WMI", "SELECT * FROM WmiMonitorBasicDisplayParams") '"SELECT * FROM Win32_DesktopMonitor"
+        For Each obj As ManagementObject In searcher1.Get
+            'Console.WriteLine(obj.ToString)
+        Next
+
+        Dim searcher2 As ManagementObjectSearcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_DesktopMonitor")
+        For Each obj As ManagementObject In searcher2.Get
+            'Console.WriteLine("DeviceID: {0}", obj("DeviceID"))
+            'Console.WriteLine(obj.ToString)
+        Next
+
+        For Each display In Screen.AllScreens
+            'Console.WriteLine(display.DeviceName.Replace("\\.\", ""))
+        Next
     End Sub
     'Button_DesktopPets - Click
     Private Sub Button_DesktopPets_Click(sender As Object, e As EventArgs) Handles Button_DesktopPets.Click
@@ -56,12 +74,12 @@
         Form_PhraseManager.BringToFront()
     End Sub
     'Button_PetBuilder - Click
-    Private Sub Button_PetBuilder_Click(sender As Object, e As EventArgs) Handles Button_PetBuilder.Click
-        Form_PhraseManager.Show()
-        If Form_PhraseManager.WindowState = FormWindowState.Minimized Then
-            Form_PhraseManager.WindowState = FormWindowState.Normal
+    Private Sub Button_AnimationBuilder_Click(sender As Object, e As EventArgs) Handles Button_AnimationBuilder.Click
+        Form_AnimationBuilder.Show()
+        If Form_AnimationBuilder.WindowState = FormWindowState.Minimized Then
+            Form_AnimationBuilder.WindowState = FormWindowState.Normal
         End If
-        Form_PhraseManager.BringToFront()
+        Form_AnimationBuilder.BringToFront()
     End Sub
     'DesktopPets (ToolStripMenuItem) - Click
     Private Sub DesktopPetsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DesktopPetsToolStripMenuItem.Click
@@ -86,7 +104,7 @@
 
     'PetBuilder (ToolStripMenuItem) - Click
     Private Sub PetBuilderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PetBuilderToolStripMenuItem.Click
-        Button_PetBuilder.PerformClick()
+        Button_AnimationBuilder.PerformClick()
     End Sub
     'Button_CloseSelected - Click
     Private Sub Button_CloseSelected_Click(sender As Object, e As EventArgs) Handles Button_CloseSelected.Click
@@ -98,9 +116,19 @@
         ElseIf ComboBox1.SelectedItem.ToString = "Flying Pets" Then
             CloseAllWindowsByName("Form_FlyingPet")
         ElseIf ComboBox1.SelectedItem.ToString = "Nature Objects" Then
-            CloseAllWindowsByName("Form_NatureObject")
+            Dim FormListArray As Array = FormList_NatureObject.Keys.ToArray
+            For Each item As String In FormListArray
+                FormList_NatureObject(item).Close()
+            Next
+            FormList_NatureObject.Clear()
+            Form_Nature.Button_Generate.Enabled = True
         ElseIf ComboBox1.SelectedItem.ToString = "Desktop Objects" Then
-            CloseAllWindowsByName("Form_DesktopObject")
+            Dim FormListArray As Array = FormList_DesktopObject.Keys.ToArray
+            For Each item As String In FormListArray
+                FormList_DesktopObject(item).Close()
+            Next
+            FormList_DesktopObject.Clear()
+
         ElseIf ComboBox1.SelectedItem.ToString = "GDev Character" Then
             Form_GDevCharacter.Close()
         End If
