@@ -39,10 +39,8 @@ Partial Class Form_GroundPet
         Me.Timer_TurningDecision = New System.Windows.Forms.Timer(Me.components)
         Me.Timer_IdleDecision = New System.Windows.Forms.Timer(Me.components)
         Me.PixelBox_Pet = New Desktop_Widgets.PixelBox()
-        Me.PixelBox_Emote = New Desktop_Widgets.PixelBox()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PixelBox_Pet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PixelBox_Emote, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ContextMenuStrip1
@@ -51,14 +49,14 @@ Partial Class Form_GroundPet
         Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AlwaysOnTopToolStripMenuItem, Me.FollowCursorToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.ScaleToolStripMenuItem, Me.PoopToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 176)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(173, 154)
         '
         'AlwaysOnTopToolStripMenuItem
         '
         Me.AlwaysOnTopToolStripMenuItem.CheckOnClick = True
         Me.AlwaysOnTopToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.AlwaysOnTopToolStripMenuItem.Name = "AlwaysOnTopToolStripMenuItem"
-        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
         Me.AlwaysOnTopToolStripMenuItem.Text = "Always on top"
         '
         'FollowCursorToolStripMenuItem
@@ -66,7 +64,7 @@ Partial Class Form_GroundPet
         Me.FollowCursorToolStripMenuItem.CheckOnClick = True
         Me.FollowCursorToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.FollowCursorToolStripMenuItem.Name = "FollowCursorToolStripMenuItem"
-        Me.FollowCursorToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.FollowCursorToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
         Me.FollowCursorToolStripMenuItem.Text = "Follow cursor"
         '
         'DisplayToolStripMenuItem
@@ -74,7 +72,7 @@ Partial Class Form_GroundPet
         Me.DisplayToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DisplayToolStripComboBox})
         Me.DisplayToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.DisplayToolStripMenuItem.Name = "DisplayToolStripMenuItem"
-        Me.DisplayToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.DisplayToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
         Me.DisplayToolStripMenuItem.Text = "Display"
         '
         'DisplayToolStripComboBox
@@ -91,7 +89,7 @@ Partial Class Form_GroundPet
         Me.ScaleToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ScaleToolStripComboBox})
         Me.ScaleToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ScaleToolStripMenuItem.Name = "ScaleToolStripMenuItem"
-        Me.ScaleToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.ScaleToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
         Me.ScaleToolStripMenuItem.Text = "Scale"
         '
         'ScaleToolStripComboBox
@@ -108,19 +106,19 @@ Partial Class Form_GroundPet
         '
         Me.PoopToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.PoopToolStripMenuItem.Name = "PoopToolStripMenuItem"
-        Me.PoopToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.PoopToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
         Me.PoopToolStripMenuItem.Text = "Poop!"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(169, 6)
         '
         'CloseToolStripMenuItem
         '
         Me.CloseToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
-        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
         Me.CloseToolStripMenuItem.Text = "Close"
         '
         'Timer_Walking
@@ -143,37 +141,23 @@ Partial Class Form_GroundPet
         '
         Me.PixelBox_Pet.BackColor = System.Drawing.Color.Fuchsia
         Me.PixelBox_Pet.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PixelBox_Pet.Location = New System.Drawing.Point(0, 38)
+        Me.PixelBox_Pet.Location = New System.Drawing.Point(0, 0)
         Me.PixelBox_Pet.Name = "PixelBox_Pet"
         Me.PixelBox_Pet.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half
-        Me.PixelBox_Pet.Size = New System.Drawing.Size(156, 108)
+        Me.PixelBox_Pet.Size = New System.Drawing.Size(32, 32)
         Me.PixelBox_Pet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PixelBox_Pet.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None
         Me.PixelBox_Pet.TabIndex = 2
         Me.PixelBox_Pet.TabStop = False
-        '
-        'PixelBox_Emote
-        '
-        Me.PixelBox_Emote.BackColor = System.Drawing.Color.Fuchsia
-        Me.PixelBox_Emote.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PixelBox_Emote.Location = New System.Drawing.Point(0, 0)
-        Me.PixelBox_Emote.Name = "PixelBox_Emote"
-        Me.PixelBox_Emote.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half
-        Me.PixelBox_Emote.Size = New System.Drawing.Size(156, 38)
-        Me.PixelBox_Emote.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.PixelBox_Emote.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None
-        Me.PixelBox_Emote.TabIndex = 3
-        Me.PixelBox_Emote.TabStop = False
         '
         'Form_GroundPet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Fuchsia
-        Me.ClientSize = New System.Drawing.Size(156, 146)
+        Me.ClientSize = New System.Drawing.Size(32, 32)
         Me.ContextMenuStrip = Me.ContextMenuStrip1
         Me.Controls.Add(Me.PixelBox_Pet)
-        Me.Controls.Add(Me.PixelBox_Emote)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -186,7 +170,6 @@ Partial Class Form_GroundPet
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         Me.ContextMenuStrip1.ResumeLayout(False)
         CType(Me.PixelBox_Pet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PixelBox_Emote, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -202,7 +185,6 @@ Partial Class Form_GroundPet
     Friend WithEvents PixelBox_Pet As PixelBox
     Friend WithEvents ScaleToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ScaleToolStripComboBox As ToolStripComboBox
-    Friend WithEvents PixelBox_Emote As PixelBox
     Friend WithEvents AlwaysOnTopToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DisplayToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DisplayToolStripComboBox As ToolStripComboBox

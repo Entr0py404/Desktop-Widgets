@@ -104,6 +104,7 @@ Partial Class Form_Menu
         Me.Button_GDev.TabIndex = 65
         Me.Button_GDev.Text = "GDev Character"
         Me.Button_GDev.UseVisualStyleBackColor = False
+        Me.Button_GDev.Visible = False
         '
         'ComboBox1
         '
@@ -238,6 +239,7 @@ Partial Class Form_Menu
         Me.Button_Phrases.TabIndex = 70
         Me.Button_Phrases.Text = "Phrases"
         Me.Button_Phrases.UseVisualStyleBackColor = False
+        Me.Button_Phrases.Visible = False
         '
         'Button_AnimationBuilder
         '

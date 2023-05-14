@@ -20,10 +20,14 @@ Public Class PixelBox
     Public Property CompositingQuality As CompositingQuality = CompositingQuality.Default
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
-        e.Graphics.InterpolationMode = Me.InterpolationMode
-        e.Graphics.PixelOffsetMode = Me.PixelOffsetMode
-        e.Graphics.SmoothingMode = Me.SmoothingMode
-        e.Graphics.CompositingQuality = Me.CompositingQuality
-        MyBase.OnPaint(e)
+        Try
+            e.Graphics.InterpolationMode = Me.InterpolationMode
+            e.Graphics.PixelOffsetMode = Me.PixelOffsetMode
+            e.Graphics.SmoothingMode = Me.SmoothingMode
+            e.Graphics.CompositingQuality = Me.CompositingQuality
+            MyBase.OnPaint(e)
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
     End Sub
 End Class

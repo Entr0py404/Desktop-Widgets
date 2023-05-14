@@ -67,8 +67,8 @@ Public Class Form_AnimationBuilder
 
             MyAnimatedGif2.AddFrame(tempImage, delay:=-1, quality:=GifQuality.Bit8)
         Next
-
         'End Using
+
         If RadioButton_FacingRight.Checked Then
             PixelBox_Left.Image = Image.FromStream(MyMemoryStream2)
             PixelBox_Right.Image = Image.FromStream(MyMemoryStream1)
@@ -197,7 +197,7 @@ Public Class Form_AnimationBuilder
             ClearAllUIObjects()
         End If
     End Sub
-
+    'savegif1
     Private Sub savegif1(filePath As String)
         Using gif = AnimatedGif.AnimatedGif.Create(filePath, CInt(NumericUpDown_Delay.Value), 0)
             For Each item As String In ListBox_Images.Items
@@ -205,7 +205,7 @@ Public Class Form_AnimationBuilder
             Next
         End Using
     End Sub
-
+    'savegif2
     Private Sub savegif2(filePath As String)
         Using gif = AnimatedGif.AnimatedGif.Create(filePath, CInt(NumericUpDown_Delay.Value), 0)
             For Each item As String In ListBox_Images.Items

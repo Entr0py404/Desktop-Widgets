@@ -100,10 +100,6 @@ Public Class Form_GDevCharacter
         If e.Button = Windows.Forms.MouseButtons.Left Then
             Dragging = True
 
-            'If PixelBox_Emote.Image IsNot My.Resources.Heart_Emote_Style_5 Then
-            PixelBox_Emote.Image = My.Resources.Heart_Emote_Style_5
-            'End If
-
             ' If randNum.Next(0, 100) < 75 Then
             Comment("Dragged")
                 ' End If

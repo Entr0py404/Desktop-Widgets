@@ -24,11 +24,10 @@ Partial Class Form_DesktopObjects
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_DesktopObjects))
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.ListView_Objects = New System.Windows.Forms.ListView()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ReloadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImageList_Objects = New System.Windows.Forms.ImageList(Me.components)
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label_AssetCount = New System.Windows.Forms.Label()
         Me.CheckBox_TopMost = New System.Windows.Forms.CheckBox()
         Me.Label_Scale = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -37,69 +36,71 @@ Partial Class Form_DesktopObjects
         Me.Button_AllDesktopObjects = New System.Windows.Forms.Button()
         Me.ComboBox_Display = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.GroupBox3.SuspendLayout()
-        Me.ContextMenuStrip1.SuspendLayout()
+        Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.Small_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Medium_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MediumLarge_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Large_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExtraLarge_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Panel2.SuspendLayout()
         CType(Me.TrackBar_ObjectScale, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
-        'GroupBox3
+        'FlowLayoutPanel1
         '
-        Me.GroupBox3.Controls.Add(Me.ListView_Objects)
-        Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.GroupBox3.Location = New System.Drawing.Point(8, 104)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(488, 344)
-        Me.GroupBox3.TabIndex = 51
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Objects"
+        Me.FlowLayoutPanel1.AutoScroll = True
+        Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 32)
+        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(666, 426)
+        Me.FlowLayoutPanel1.TabIndex = 1
         '
-        'ListView_Objects
+        'Panel2
         '
-        Me.ListView_Objects.Activation = System.Windows.Forms.ItemActivation.TwoClick
-        Me.ListView_Objects.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ListView_Objects.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.ListView_Objects.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.ListView_Objects.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ListView_Objects.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView_Objects.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ListView_Objects.HideSelection = False
-        Me.ListView_Objects.LabelWrap = False
-        Me.ListView_Objects.LargeImageList = Me.ImageList_Objects
-        Me.ListView_Objects.Location = New System.Drawing.Point(3, 18)
-        Me.ListView_Objects.MultiSelect = False
-        Me.ListView_Objects.Name = "ListView_Objects"
-        Me.ListView_Objects.Size = New System.Drawing.Size(482, 323)
-        Me.ListView_Objects.SmallImageList = Me.ImageList_Objects
-        Me.ListView_Objects.TabIndex = 35
-        Me.ListView_Objects.UseCompatibleStateImageBehavior = False
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.Button1)
+        Me.Panel2.Controls.Add(Me.Label_AssetCount)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(666, 32)
+        Me.Panel2.TabIndex = 102
         '
-        'ContextMenuStrip1
+        'Button1
         '
-        Me.ContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReloadToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.ShowImageMargin = False
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(101, 28)
+        Me.Button1.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(0, 0)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(32, 32)
+        Me.Button1.TabIndex = 96
+        Me.Button1.Text = "☰"
+        Me.Button1.UseVisualStyleBackColor = False
         '
-        'ReloadToolStripMenuItem
+        'Label_AssetCount
         '
-        Me.ReloadToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ReloadToolStripMenuItem.Name = "ReloadToolStripMenuItem"
-        Me.ReloadToolStripMenuItem.Size = New System.Drawing.Size(100, 24)
-        Me.ReloadToolStripMenuItem.Text = "Reload"
-        '
-        'ImageList_Objects
-        '
-        Me.ImageList_Objects.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit
-        Me.ImageList_Objects.ImageSize = New System.Drawing.Size(48, 48)
-        Me.ImageList_Objects.TransparentColor = System.Drawing.Color.Transparent
+        Me.Label_AssetCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Label_AssetCount.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label_AssetCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_AssetCount.Location = New System.Drawing.Point(0, 0)
+        Me.Label_AssetCount.Name = "Label_AssetCount"
+        Me.Label_AssetCount.Size = New System.Drawing.Size(666, 32)
+        Me.Label_AssetCount.TabIndex = 101
+        Me.Label_AssetCount.Text = "0 Desktop Objects"
+        Me.Label_AssetCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'CheckBox_TopMost
         '
-        Me.CheckBox_TopMost.Checked = True
-        Me.CheckBox_TopMost.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox_TopMost.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
         Me.CheckBox_TopMost.Location = New System.Drawing.Point(0, 72)
         Me.CheckBox_TopMost.Name = "CheckBox_TopMost"
@@ -159,7 +160,7 @@ Partial Class Form_DesktopObjects
         Me.Button_AllDesktopObjects.FlatAppearance.BorderSize = 0
         Me.Button_AllDesktopObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_AllDesktopObjects.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_AllDesktopObjects.Location = New System.Drawing.Point(8, 456)
+        Me.Button_AllDesktopObjects.Location = New System.Drawing.Point(456, 64)
         Me.Button_AllDesktopObjects.Name = "Button_AllDesktopObjects"
         Me.Button_AllDesktopObjects.Size = New System.Drawing.Size(200, 32)
         Me.Button_AllDesktopObjects.TabIndex = 57
@@ -188,47 +189,128 @@ Partial Class Form_DesktopObjects
         Me.Label1.Text = "Display"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'ContextMenuStrip2
+        '
+        Me.ContextMenuStrip2.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
+        Me.ContextMenuStrip2.Font = New System.Drawing.Font("Segoe UI", 11.25!)
+        Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Small_ToolStripMenuItem, Me.Medium_ToolStripMenuItem, Me.MediumLarge_ToolStripMenuItem, Me.Large_ToolStripMenuItem, Me.ExtraLarge_ToolStripMenuItem})
+        Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
+        Me.ContextMenuStrip2.ShowCheckMargin = True
+        Me.ContextMenuStrip2.ShowImageMargin = False
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(175, 124)
+        '
+        'Small_ToolStripMenuItem
+        '
+        Me.Small_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Small_ToolStripMenuItem.Name = "Small_ToolStripMenuItem"
+        Me.Small_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.Small_ToolStripMenuItem.Text = "Small"
+        '
+        'Medium_ToolStripMenuItem
+        '
+        Me.Medium_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Medium_ToolStripMenuItem.Name = "Medium_ToolStripMenuItem"
+        Me.Medium_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.Medium_ToolStripMenuItem.Text = "Medium"
+        '
+        'MediumLarge_ToolStripMenuItem
+        '
+        Me.MediumLarge_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.MediumLarge_ToolStripMenuItem.Name = "MediumLarge_ToolStripMenuItem"
+        Me.MediumLarge_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.MediumLarge_ToolStripMenuItem.Text = "Medium Large"
+        '
+        'Large_ToolStripMenuItem
+        '
+        Me.Large_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Large_ToolStripMenuItem.Name = "Large_ToolStripMenuItem"
+        Me.Large_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.Large_ToolStripMenuItem.Text = "Large"
+        '
+        'ExtraLarge_ToolStripMenuItem
+        '
+        Me.ExtraLarge_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ExtraLarge_ToolStripMenuItem.Name = "ExtraLarge_ToolStripMenuItem"
+        Me.ExtraLarge_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.ExtraLarge_ToolStripMenuItem.Text = "Extra Large"
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.Button_AllDesktopObjects)
+        Me.Panel1.Controls.Add(Me.Label9)
+        Me.Panel1.Controls.Add(Me.TrackBar_ObjectScale)
+        Me.Panel1.Controls.Add(Me.Label_Scale)
+        Me.Panel1.Controls.Add(Me.CheckBox_TopMost)
+        Me.Panel1.Controls.Add(Me.CheckBox_SnapToBar)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.ComboBox_Display)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(666, 104)
+        Me.Panel1.TabIndex = 60
+        '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.FlowLayoutPanel1)
+        Me.Panel3.Controls.Add(Me.Panel2)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(0, 104)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(666, 458)
+        Me.Panel3.TabIndex = 61
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel4.Location = New System.Drawing.Point(0, 562)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(666, 33)
+        Me.Panel4.TabIndex = 62
+        '
         'Form_DesktopObjects
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(505, 497)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ComboBox_Display)
-        Me.Controls.Add(Me.Button_AllDesktopObjects)
-        Me.Controls.Add(Me.CheckBox_SnapToBar)
-        Me.Controls.Add(Me.CheckBox_TopMost)
-        Me.Controls.Add(Me.Label_Scale)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.TrackBar_ObjectScale)
-        Me.Controls.Add(Me.GroupBox3)
+        Me.ClientSize = New System.Drawing.Size(666, 595)
+        Me.Controls.Add(Me.Panel3)
+        Me.Controls.Add(Me.Panel4)
+        Me.Controls.Add(Me.Panel1)
         Me.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximizeBox = False
         Me.Name = "Form_DesktopObjects"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Desktop Objects"
-        Me.GroupBox3.ResumeLayout(False)
-        Me.ContextMenuStrip1.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
         CType(Me.TrackBar_ObjectScale, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip2.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents ListView_Objects As ListView
     Friend WithEvents CheckBox_TopMost As CheckBox
     Private WithEvents Label_Scale As Label
     Private WithEvents Label9 As Label
     Friend WithEvents TrackBar_ObjectScale As TrackBar
-    Friend WithEvents ImageList_Objects As ImageList
     Friend WithEvents CheckBox_SnapToBar As CheckBox
     Friend WithEvents Button_AllDesktopObjects As Button
-    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
-    Friend WithEvents ReloadToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ComboBox_Display As ComboBox
     Private WithEvents Label1 As Label
+    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Label_AssetCount As Label
+    Friend WithEvents ContextMenuStrip2 As ContextMenuStrip
+    Friend WithEvents Small_ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Medium_ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MediumLarge_ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Large_ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExtraLarge_ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel4 As Panel
 End Class

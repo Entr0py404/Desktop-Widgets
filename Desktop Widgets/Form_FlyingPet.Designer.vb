@@ -40,15 +40,13 @@ Partial Class Form_FlyingPet
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Timer_ChangeModesDecision = New System.Windows.Forms.Timer(Me.components)
         Me.PixelBox_Pet = New Desktop_Widgets.PixelBox()
-        Me.PixelBox_Emote = New Desktop_Widgets.PixelBox()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PixelBox_Pet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PixelBox_Emote, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Timer_Walking
         '
-        Me.Timer_Walking.Interval = 10
+        Me.Timer_Walking.Interval = 1
         '
         'Timer_TurningDecision
         '
@@ -62,7 +60,7 @@ Partial Class Form_FlyingPet
         'Timer_Flying
         '
         Me.Timer_Flying.Enabled = True
-        Me.Timer_Flying.Interval = 10
+        Me.Timer_Flying.Interval = 1
         '
         'ContextMenuStrip1
         '
@@ -148,36 +146,23 @@ Partial Class Form_FlyingPet
         '
         'PixelBox_Pet
         '
-        Me.PixelBox_Pet.BackColor = System.Drawing.Color.MediumPurple
         Me.PixelBox_Pet.ContextMenuStrip = Me.ContextMenuStrip1
         Me.PixelBox_Pet.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PixelBox_Pet.Location = New System.Drawing.Point(0, 38)
+        Me.PixelBox_Pet.Location = New System.Drawing.Point(0, 0)
         Me.PixelBox_Pet.Name = "PixelBox_Pet"
-        Me.PixelBox_Pet.Size = New System.Drawing.Size(76, 77)
+        Me.PixelBox_Pet.Size = New System.Drawing.Size(32, 32)
         Me.PixelBox_Pet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PixelBox_Pet.TabIndex = 2
         Me.PixelBox_Pet.TabStop = False
-        '
-        'PixelBox_Emote
-        '
-        Me.PixelBox_Emote.BackColor = System.Drawing.Color.Thistle
-        Me.PixelBox_Emote.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PixelBox_Emote.Location = New System.Drawing.Point(0, 0)
-        Me.PixelBox_Emote.Name = "PixelBox_Emote"
-        Me.PixelBox_Emote.Size = New System.Drawing.Size(76, 38)
-        Me.PixelBox_Emote.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PixelBox_Emote.TabIndex = 3
-        Me.PixelBox_Emote.TabStop = False
         '
         'Form_FlyingPet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Fuchsia
-        Me.ClientSize = New System.Drawing.Size(76, 115)
+        Me.ClientSize = New System.Drawing.Size(32, 32)
         Me.ContextMenuStrip = Me.ContextMenuStrip1
         Me.Controls.Add(Me.PixelBox_Pet)
-        Me.Controls.Add(Me.PixelBox_Emote)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -190,7 +175,6 @@ Partial Class Form_FlyingPet
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         Me.ContextMenuStrip1.ResumeLayout(False)
         CType(Me.PixelBox_Pet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PixelBox_Emote, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -205,7 +189,6 @@ Partial Class Form_FlyingPet
     Friend WithEvents Timer_ChangeModesDecision As Timer
     Friend WithEvents Timer_Flying As Timer
     Friend WithEvents PixelBox_Pet As PixelBox
-    Friend WithEvents PixelBox_Emote As PixelBox
     Friend WithEvents ScaleToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ScaleToolStripComboBox As ToolStripComboBox
     Friend WithEvents AlwaysOnTopToolStripMenuItem As ToolStripMenuItem

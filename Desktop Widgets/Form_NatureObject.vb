@@ -3,7 +3,6 @@ Public Class Form_NatureObject
     Public UniqueSessionID As String
     Public ObjectImage As Image
     Public isMainGrass As Boolean = False
-    'Private Dragging As Boolean = False
     Dim FormLoadLock As Boolean = True
     Public MYScreen As Screen
     Public MYDisplay As Display
@@ -12,7 +11,6 @@ Public Class Form_NatureObject
 
     'Form_NatureObject - Load
     Private Sub Form_NatureObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
 
         Me.TopMost = Form_Nature.CheckBox_TopMost.Checked
@@ -31,12 +29,10 @@ Public Class Form_NatureObject
         Next
 
         DisplayToolStripComboBox.SelectedIndex = Form_Nature.ComboBox_Display.SelectedIndex
-
+        'DisplayToolStripComboBox.SelectedItem = Form_Nature.ComboBox_Display.SelectedItem
 
         'MYScreen = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
-
         'MYDisplay = MYDisplay_Test.GetScreen().AllScreens(Form_Nature.ComboBox_Display.SelectedIndex)
-
 
         'For Each target In PathDisplayTarget.GetDisplayTargets()
         'DisplayToolStripComboBox.Items.Add(target.FriendlyName & " - " & target.ToDisplayDevice.DisplayName.Replace("\\.\", ""))
@@ -57,6 +53,8 @@ Public Class Form_NatureObject
             'Me.Location = New Point(Display.WorkingArea.Left, Display.WorkingArea.Bottom - Me.Height)
         End If
 
+        Dim MyDisplay As WindowsDisplayAPI.Display = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex)
+        Me.Location = New Point(Rand.Next(MyDisplay.GetScreen.WorkingArea.Left, MyDisplay.GetScreen.WorkingArea.Right - Me.Width), MyDisplay.GetScreen.WorkingArea.Bottom - Me.Height)
 
         FormLoadLock = False
     End Sub
@@ -67,10 +65,9 @@ Public Class Form_NatureObject
         Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
     End Sub
     'PixelBox1 - MouseDown
-    Private Sub PixelBox_Pet_MouseDown(sender As Object, e As MouseEventArgs) Handles PixelBox1.MouseDown
+    Private Sub PixelBox1_MouseDown(sender As Object, e As MouseEventArgs) Handles PixelBox1.MouseDown
         If isMainGrass = False Then
             If e.Button = Windows.Forms.MouseButtons.Left Then
-                'Dragging = True
                 PixelBox1.Capture = False
                 Const WM_NCLBUTTONDOWN As Integer = &HA1S
                 'Const WM_NCRBUTTONDOWN As Integer = &HA4S
@@ -153,13 +150,11 @@ Public Class Form_NatureObject
     'DisplayToolStripComboBox - SelectedIndexChanged
     Private Sub DisplayToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayToolStripComboBox.SelectedIndexChanged
         If BlockEvent_DisplayComboBox = False Then
-            If Not DisplayToolStripComboBox.SelectedIndex = -1 Then
-                Dim bla As WindowsDisplayAPI.Display = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex)
-
+            If Not DisplayToolStripComboBox.SelectedIndex = -1 And FormLoadLock = False Then
+                Dim MyDisplay As WindowsDisplayAPI.Display = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex)
                 MYScreen = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
-                Me.Location = New Point(Rand.Next(bla.GetScreen.WorkingArea.Left, bla.GetScreen.WorkingArea.Right - Me.Width), bla.GetScreen.WorkingArea.Bottom - Me.Height)
-                Console.WriteLine("DisplayToolStripComboBox_SelectedIndexChanged")
-
+                Me.Location = New Point(Rand.Next(MyDisplay.GetScreen.WorkingArea.Left, MyDisplay.GetScreen.WorkingArea.Right - Me.Width), MyDisplay.GetScreen.WorkingArea.Bottom - Me.Height)
+                'Console.WriteLine("DisplayToolStripComboBox_SelectedIndexChanged")
             End If
         End If
     End Sub

@@ -5,8 +5,6 @@
             ComboBox_Topic.SelectedIndex = 0
         End If
     End Sub
-
-
     'ComboBox_Topic - SelectedIndexChanged
     Private Sub ComboBox_Topic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_Topic.SelectedIndexChanged
 

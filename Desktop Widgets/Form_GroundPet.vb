@@ -1,47 +1,35 @@
 ﻿Imports Microsoft.Win32
-
 Public Class Form_GroundPet
-    Public TurnLeft As Boolean = True
-    Dim Dragging As Boolean = False
-    Public FollowCursor As Boolean = False
-    Public Animation_Dragging_Left As Bitmap
-    Public Animation_Dragging_Right As Bitmap
-
-    Public Animation_Falling_Left As Bitmap
-    Public Animation_Falling_Right As Bitmap
-
-    'Public Animation_Idling As Bitmap
-
-    Public Animation_Walking_Left As Image
-    Public Animation_Walking_Right As Image
-
-    Public Animation_Idling_Left As Image
-    Public Animation_Idling_Right As Image
-
-    Public Animation_IdlingAlt_Left As Bitmap
-    Public Animation_IdlingAlt_Right As Bitmap
-
-    Public Animation_Action_Left As Bitmap
-    Public Animation_Action_Right As Bitmap
-
-    Public Animation_ActionAlt_Left As Bitmap
-    Public Animation_ActionAlt_Right As Bitmap
-
-    Public Animation_Sleeping_Left As Bitmap
-    Public Animation_Sleeping_Right As Bitmap
-
-    Public Animation_Jumping_Left As Bitmap
-    Public Animation_Jumping_Right As Bitmap
-
-    Public CurrentAnimatedImage As Bitmap
-    Public currentlyAnimating As Boolean = False
-
-    Dim Display As Screen = Screen.PrimaryScreen
     Dim Rand As New Random
+    Dim Dragging As Boolean = False
     Dim FormLoadLock As Boolean = True
-
+    Dim Display As Screen = Screen.PrimaryScreen
     Dim BlockEvent_DisplayComboBox As Boolean = False
 
+    Public TurnLeft As Boolean = True
+    Public FollowCursor As Boolean = False
+    Public currentlyAnimating As Boolean = False
+    Public PetDir As String
+
+    Public Animation_Dragging_Left As Bitmap
+    Public Animation_Dragging_Right As Bitmap
+    Public Animation_Falling_Left As Bitmap
+    Public Animation_Falling_Right As Bitmap
+    Public Animation_Walking_Left As Image
+    Public Animation_Walking_Right As Image
+    Public Animation_Idling_Left As Image
+    Public Animation_Idling_Right As Image
+    Public Animation_IdlingAlt_Left As Bitmap
+    Public Animation_IdlingAlt_Right As Bitmap
+    Public Animation_Action_Left As Bitmap
+    Public Animation_Action_Right As Bitmap
+    Public Animation_ActionAlt_Left As Bitmap
+    Public Animation_ActionAlt_Right As Bitmap
+    Public Animation_Sleeping_Left As Bitmap
+    Public Animation_Sleeping_Right As Bitmap
+    Public Animation_Jumping_Left As Bitmap
+    Public Animation_Jumping_Right As Bitmap
+    Public CurrentAnimatedImage As Bitmap
     'Form_GroundPet - Load
     Private Sub Form_GroundPet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         For Each Displays In Screen.AllScreens
@@ -67,42 +55,6 @@ Public Class Form_GroundPet
         FormLoadLock = False
 
         Console.WriteLine("Form_GroundPet_Load")
-    End Sub
-    'ScalePet()
-    Public Sub ScalePet(val As Integer)
-        Me.Width = Animation_Walking_Left.Width * val
-        Me.Height = (Animation_Walking_Left.Height * val) + PixelBox_Emote.Height
-        Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
-    End Sub
-    'PixelBox_Pet - MouseDown
-    Private Sub PixelBox_Pet_MouseDown(sender As Object, e As MouseEventArgs) Handles PixelBox_Pet.MouseDown
-        If e.Button = Windows.Forms.MouseButtons.Left Then
-            Dragging = True
-            PixelBox_Pet.Capture = False
-            Const WM_NCLBUTTONDOWN As Integer = &HA1S
-            'Const WM_NCRBUTTONDOWN As Integer = &HA4S
-            Const HTCAPTION As Integer = 2
-            Dim msg As Message = Message.Create(Me.Handle, WM_NCLBUTTONDOWN, New IntPtr(HTCAPTION), IntPtr.Zero)
-            Me.DefWndProc(msg)
-
-
-            Dim TempDisplay As Screen = Display
-            For Each Displays As Screen In Screen.AllScreens
-                If Me.Location.X >= Displays.Bounds.Left And Me.Location.X <= Displays.Bounds.Right Then
-                    TempDisplay = Displays
-                End If
-            Next
-
-            Display = TempDisplay
-
-            If Not DisplayToolStripComboBox.Text = "ALL" Then
-                BlockEvent_DisplayComboBox = True
-                DisplayToolStripComboBox.Text = Display.DeviceName.Replace("\\.\", "")
-                BlockEvent_DisplayComboBox = False
-            End If
-
-            Dragging = False
-        End If
     End Sub
     'Timer_Walking - Tick
     Private Sub Timer_Walking_Tick(sender As Object, e As EventArgs) Handles Timer_Walking.Tick
@@ -174,12 +126,12 @@ Public Class Form_GroundPet
                     If TurnLeft = True Then
                         If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
                             PixelBox_Pet.Image = Animation_Idling_Left
-                            Console.WriteLine("Animation_Idling_Left")
+                            'Console.WriteLine("Animation_Idling_Left")
                         End If
                     Else
                         If PixelBox_Pet.Image IsNot Animation_Idling_Right Then
                             PixelBox_Pet.Image = Animation_Idling_Right
-                            Console.WriteLine("Animation_Idling_Right")
+                            'Console.WriteLine("Animation_Idling_Right")
                         End If
                     End If
                 Else
@@ -187,12 +139,12 @@ Public Class Form_GroundPet
                     If TurnLeft = True Then
                         If PixelBox_Pet.Image IsNot Animation_Falling_Left Then
                             PixelBox_Pet.Image = Animation_Falling_Left
-                            Console.WriteLine("Animation_Falling_Left")
+                            'Console.WriteLine("Animation_Falling_Left")
                         End If
                     Else
                         If PixelBox_Pet.Image IsNot Animation_Falling_Right Then
                             PixelBox_Pet.Image = Animation_Falling_Right
-                            Console.WriteLine("Animation_Falling_Right")
+                            'Console.WriteLine("Animation_Falling_Right")
                         End If
                     End If
 
@@ -207,6 +159,33 @@ Public Class Form_GroundPet
             TurnLeft = True
         Else
             TurnLeft = False
+        End If
+    End Sub
+    'Timer_IdleDecision - Tick
+    Private Sub Timer_IdleDecision_Tick(sender As Object, e As EventArgs) Handles Timer_IdleDecision.Tick
+        If Not ContextMenuStrip1.Visible And Not Dragging Then
+            Dim R As Integer = CInt(Rnd(1))
+            'Console.WriteLine(R)
+            If R = 0 Then
+                Timer_Walking.Stop()
+
+                If TurnLeft = True Then
+                    If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
+                        PixelBox_Pet.Image = Animation_Idling_Left
+                        'CurrentAnimatedImage = Animation_Idling_Left
+                        'PixelBox_Pet.Image = CurrentAnimatedImage
+                        'Console.WriteLine("Animation_Idling_Left")
+                    End If
+                Else
+                    If PixelBox_Pet.Image IsNot Animation_Idling_Right Then
+                        PixelBox_Pet.Image = Animation_Idling_Right
+                        'CurrentAnimatedImage = Animation_Idling_Right
+                        'Console.WriteLine("Animation_Idling_Right")
+                    End If
+                End If
+            Else
+                Timer_Walking.Start()
+            End If
         End If
     End Sub
     'Screen Warping & Edge Turn Around
@@ -256,8 +235,6 @@ Public Class Form_GroundPet
                             Console.WriteLine("NOScreenOnRight")
                             Console.WriteLine("WARP")
                         End If
-
-
 
                     End If
                 End If
@@ -328,31 +305,40 @@ Public Class Form_GroundPet
             'End If
         End If
     End Sub
-    'Timer_IdleDecision - Tick
-    Private Sub Timer_IdleDecision_Tick(sender As Object, e As EventArgs) Handles Timer_IdleDecision.Tick
-        If Not ContextMenuStrip1.Visible And Not Dragging Then
-            Dim R As Integer = CInt(Rnd(1))
-            'Console.WriteLine(R)
-            If R = 0 Then
-                Timer_Walking.Stop()
+    'ScalePet()
+    Public Sub ScalePet(val As Integer)
+        Me.Width = Animation_Walking_Left.Width * val
+        Me.Height = Animation_Walking_Left.Height * val
+        Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
+    End Sub
+    'PixelBox_Pet - MouseDown
+    Private Sub PixelBox_Pet_MouseDown(sender As Object, e As MouseEventArgs) Handles PixelBox_Pet.MouseDown
+        If e.Button = Windows.Forms.MouseButtons.Left Then
+            Dragging = True
+            PixelBox_Pet.Capture = False
+            Const WM_NCLBUTTONDOWN As Integer = &HA1S
+            'Const WM_NCRBUTTONDOWN As Integer = &HA4S
+            Const HTCAPTION As Integer = 2
+            Dim msg As Message = Message.Create(Me.Handle, WM_NCLBUTTONDOWN, New IntPtr(HTCAPTION), IntPtr.Zero)
+            Me.DefWndProc(msg)
 
-                If TurnLeft = True Then
-                    If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
-                        PixelBox_Pet.Image = Animation_Idling_Left
-                        'CurrentAnimatedImage = Animation_Idling_Left
-                        'PixelBox_Pet.Image = CurrentAnimatedImage
-                        'Console.WriteLine("Animation_Idling_Left")
-                    End If
-                Else
-                    If PixelBox_Pet.Image IsNot Animation_Idling_Right Then
-                        PixelBox_Pet.Image = Animation_Idling_Right
-                        'CurrentAnimatedImage = Animation_Idling_Right
-                        'Console.WriteLine("Animation_Idling_Right")
-                    End If
+
+            Dim TempDisplay As Screen = Display
+            For Each Displays As Screen In Screen.AllScreens
+                If Me.Location.X >= Displays.Bounds.Left And Me.Location.X <= Displays.Bounds.Right Then
+                    TempDisplay = Displays
                 End If
-            Else
-                Timer_Walking.Start()
+            Next
+
+            Display = TempDisplay
+
+            If Not DisplayToolStripComboBox.Text = "ALL" Then
+                BlockEvent_DisplayComboBox = True
+                DisplayToolStripComboBox.Text = Display.DeviceName.Replace("\\.\", "")
+                BlockEvent_DisplayComboBox = False
             End If
+
+            Dragging = False
         End If
     End Sub
     'PoopToolStripMenuItem - Click
@@ -451,9 +437,8 @@ Public Class Form_GroundPet
         'Console.WriteLine("HERE!: " & Screen.AllScreens.Count)
         Dim OldSelectedIndex As Integer = 0
         If Not DisplayToolStripComboBox.SelectedIndex = -1 Then
-        OldSelectedIndex = DisplayToolStripComboBox.SelectedIndex
+            OldSelectedIndex = DisplayToolStripComboBox.SelectedIndex
         End If
-
 
         If Not DisplayToolStripComboBox.Items.Count = Screen.AllScreens.Count Then
             DisplayToolStripComboBox.Items.Clear()
