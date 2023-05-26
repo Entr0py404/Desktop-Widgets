@@ -1,4 +1,4 @@
-﻿Imports System.Management
+﻿'Imports System.Management
 Public Class Form_Menu
     Friend FormList_DesktopObject As New Dictionary(Of String, Form_DesktopObject)
     Friend FormList_NatureObject As New Dictionary(Of String, Form_NatureObject)
@@ -8,20 +8,20 @@ Public Class Form_Menu
     Private Sub Form_Menu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.SelectedIndex = 0
         ContextMenuStrip_Main.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
-        Dim searcher1 As ManagementObjectSearcher = New ManagementObjectSearcher("root\WMI", "SELECT * FROM WmiMonitorBasicDisplayParams") '"SELECT * FROM Win32_DesktopMonitor"
-        For Each obj As ManagementObject In searcher1.Get
-            'Console.WriteLine(obj.ToString)
-        Next
+        'Dim searcher1 As ManagementObjectSearcher = New ManagementObjectSearcher("root\WMI", "SELECT * FROM WmiMonitorBasicDisplayParams") '"SELECT * FROM Win32_DesktopMonitor"
+        'For Each obj As ManagementObject In searcher1.Get
+        'Console.WriteLine(obj.ToString)
+        'Next
 
-        Dim searcher2 As ManagementObjectSearcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_DesktopMonitor")
-        For Each obj As ManagementObject In searcher2.Get
-            'Console.WriteLine("DeviceID: {0}", obj("DeviceID"))
-            'Console.WriteLine(obj.ToString)
-        Next
+        'Dim searcher2 As ManagementObjectSearcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_DesktopMonitor")
+        'For Each obj As ManagementObject In searcher2.Get
+        'Console.WriteLine("DeviceID: {0}", obj("DeviceID"))
+        'Console.WriteLine(obj.ToString)
+        'Next
 
-        For Each display In Screen.AllScreens
-            'Console.WriteLine(display.DeviceName.Replace("\\.\", ""))
-        Next
+        'For Each display In Screen.AllScreens
+        'Console.WriteLine(display.DeviceName.Replace("\\.\", ""))
+        'Next
     End Sub
     'Button_DesktopPets - Click
     Private Sub Button_DesktopPets_Click(sender As Object, e As EventArgs) Handles Button_DesktopPets.Click
@@ -55,16 +55,6 @@ Public Class Form_Menu
         End If
         Form_Gdev.BringToFront()
     End Sub
-
-    'Button_Import - Click
-    'Private Sub Button_Import_Click(sender As Object, e As EventArgs)
-    'Form_Import.Show()
-    'If Form_Import.WindowState = FormWindowState.Minimized Then
-    'Form_Import.WindowState = FormWindowState.Normal
-    'End If
-    'Form_Import.BringToFront()
-    'End Sub
-
     'Button_Phrases - Click
     Private Sub Button_Phrases_Click(sender As Object, e As EventArgs) Handles Button_Phrases.Click
         Form_PhraseManager.Show()
@@ -97,11 +87,6 @@ Public Class Form_Menu
     Private Sub GDevCharacterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GDevCharacterToolStripMenuItem.Click
         Button_GDev.PerformClick()
     End Sub
-
-    'Import (ToolStripMenuItem) - Click
-    'Private Sub ImportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportToolStripMenuItem.Click
-    'End Sub
-
     'PetBuilder (ToolStripMenuItem) - Click
     Private Sub PetBuilderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PetBuilderToolStripMenuItem.Click
         Button_AnimationBuilder.PerformClick()
@@ -139,6 +124,7 @@ Public Class Form_Menu
             Me.WindowState = FormWindowState.Minimized
         Else
             Me.WindowState = FormWindowState.Normal
+            Me.BringToFront()
         End If
     End Sub
     'ExitToolStripMenuItem - Click

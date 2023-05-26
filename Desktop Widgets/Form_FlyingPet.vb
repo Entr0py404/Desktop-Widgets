@@ -1,5 +1,4 @@
-﻿'Imports MadMilkman.Ini
-
+﻿
 Public Class Form_FlyingPet
     Dim R As Integer = 0
     Dim Display As Screen
@@ -30,8 +29,7 @@ Public Class Form_FlyingPet
 
     'Behavior settings
     Dim DefaultScale As Integer = 1
-    Dim Walking_Movement_Tick As Integer = 1
-    Dim Flying_Movement_Tick As Integer = 1
+    Dim FollowCursor_StopingDistance_Px As Integer = 6
 
     Dim IdleDecision As Integer = 45
     Dim IdleAltDecision As Integer = 35
@@ -39,15 +37,17 @@ Public Class Form_FlyingPet
     Dim ScreenWarpingDecision As Integer = 60
     Dim LandingDecision As Integer = 70
 
+    Dim Flying_Movement_Tick As Integer = 1
+    Dim Walking_Movement_Tick As Integer = 1
+
     Dim TunringDecision_Min As Integer = 2500
     Dim TunringDecision_Max As Integer = 3500
     Dim IdleDecision_Min As Integer = 2500
     Dim IdleDecision_Max As Integer = 3500
-
     Dim TakeFlightDecision_Min As Integer = 3500
     Dim TakeFlightDecision_Max As Integer = 5000
 
-    Dim FollowCursor_StopingDistance As Integer = 6
+
 
     'Form_FlyingPet_Load
     Private Sub Form_FlyingPet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -62,7 +62,7 @@ Public Class Form_FlyingPet
         Me.TopMost = Form_Pets.CheckBox_TopMost.Checked
         AlwaysOnTopToolStripMenuItem.Checked = Form_Pets.CheckBox_TopMost.Checked
 
-        ScaleToolStripComboBox.SelectedIndex = Form_Pets.TrackBar_ObjectScale.Value - 1
+        ScaleToolStripComboBox.SelectedIndex = CInt(Form_Pets.NumericUpDown_ObjectScale.Value) - 1
 
         'Me.Location = New Point(GenerateRandomNumber(Me.Width, Display.WorkingArea.Right - Me.Width), GenerateRandomNumber(Me.Height, Display.WorkingArea.Bottom - Me.Height))
 
@@ -72,7 +72,7 @@ Public Class Form_FlyingPet
         If File.Exists(Application.StartupPath & "\" & PetDir & "\Behavior.ini") Then
             Dim INI As New MadMilkman.Ini.IniFile()
             INI.Load(Application.StartupPath & "\" & PetDir & "\Behavior.ini")
-
+            '[Settings]
             DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
             If DefaultScale = 0 Then
                 DefaultScale = 1
@@ -81,8 +81,9 @@ Public Class Form_FlyingPet
                 ScalePet(1)
             End If
 
-            FollowCursor_StopingDistance = CInt(INI.Sections("Settings").Keys("FollowCursor_StopingDistance").Value)
+            FollowCursor_StopingDistance_Px = CInt(INI.Sections("Settings").Keys("FollowCursor_StopingDistance_Px").Value)
 
+            '[Decisions]
             IdleDecision = CInt(INI.Sections("Decisions").Keys("IdleDecision").Value)
             IdleAltDecision = CInt(INI.Sections("Decisions").Keys("IdleAltDecision").Value)
             TakeFlightDecision = CInt(INI.Sections("Decisions").Keys("TakeFlightDecision").Value)
@@ -90,22 +91,24 @@ Public Class Form_FlyingPet
             ScreenWarpingDecision = CInt(INI.Sections("Decisions").Keys("ScreenWarpingDecision").Value)
             LandingDecision = CInt(INI.Sections("Decisions").Keys("LandingDecision").Value)
 
-            Flying_Movement_Tick = CInt(INI.Sections("Timers").Keys("Flying_Movement_Tick").Value)
+            '[Timers_Tick]
+            Flying_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Flying_Movement_Tick").Value)
             Timer_Flying.Interval = Flying_Movement_Tick
 
-            Walking_Movement_Tick = CInt(INI.Sections("Timers").Keys("Walking_Movement_Tick").Value)
+            Walking_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Walking_Movement_Tick").Value)
             Timer_Walking.Interval = Walking_Movement_Tick
 
-            TunringDecision_Min = CInt(INI.Sections("Timers").Keys("TunringDecision_Min").Value)
-            TunringDecision_Max = CInt(INI.Sections("Timers").Keys("TunringDecision_Max").Value)
+            '[Timers_Randomization]
+            TunringDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TunringDecision_Min").Value)
+            TunringDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TunringDecision_Max").Value)
             Timer_TurningDecision.Interval = Rand.Next(TunringDecision_Min, TunringDecision_Max + 1)
 
-            IdleDecision_Min = CInt(INI.Sections("Timers").Keys("IdleDecision_Min").Value)
-            IdleDecision_Max = CInt(INI.Sections("Timers").Keys("IdleDecision_Max").Value)
+            IdleDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Min").Value)
+            IdleDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Max").Value)
             Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
 
-            TakeFlightDecision_Min = CInt(INI.Sections("Timers").Keys("TakeFlightDecision_Min").Value)
-            TakeFlightDecision_Max = CInt(INI.Sections("Timers").Keys("TakeFlightDecision_Max").Value)
+            TakeFlightDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TakeFlightDecision_Min").Value)
+            TakeFlightDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TakeFlightDecision_Max").Value)
             Timer_ChangeModesDecision.Interval = Rand.Next(TakeFlightDecision_Min, TakeFlightDecision_Max + 1)
         Else
             Timer_TurningDecision.Interval = Rand.Next(TunringDecision_Min, TunringDecision_Max + 1)
@@ -143,7 +146,7 @@ Public Class Form_FlyingPet
 
                 Else
                     '
-                    If Me.Location.X > MousePosition.X + FollowCursor_StopingDistance Then
+                    If Me.Location.X > MousePosition.X + FollowCursor_StopingDistance_Px Then
                         MoveLeft = True
                         Me.Location = New Point(Me.Location.X - 1, Me.Location.Y)
                         If PixelBox_Pet.Image IsNot Animation_Flying_Left Then
@@ -152,7 +155,7 @@ Public Class Form_FlyingPet
                         End If
                     End If
                     '
-                    If Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StopingDistance Then
+                    If Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StopingDistance_Px Then
                         MoveLeft = False
                         Me.Location = New Point(Me.Location.X + 1, Me.Location.Y)
                         If PixelBox_Pet.Image IsNot Animation_Flying_Right Then
@@ -161,12 +164,12 @@ Public Class Form_FlyingPet
                         End If
                     End If
                     '
-                    If Me.Location.Y > MousePosition.Y + FollowCursor_StopingDistance Then
+                    If Me.Location.Y > MousePosition.Y + FollowCursor_StopingDistance_Px Then
                         MoveUp = True
                         Me.Location = New Point(Me.Location.X, Me.Location.Y - 1)
                     End If
                     '
-                    If Me.Location.Y < MousePosition.Y - Me.Height - FollowCursor_StopingDistance Then
+                    If Me.Location.Y < MousePosition.Y - Me.Height - FollowCursor_StopingDistance_Px Then
                         MoveUp = False
                         Me.Location = New Point(Me.Location.X, Me.Location.Y + 1)
                     End If
@@ -208,14 +211,14 @@ Public Class Form_FlyingPet
                 Else
 
                     If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
-                        If Me.Location.X > MousePosition.X + FollowCursor_StopingDistance Then
+                        If Me.Location.X > MousePosition.X + FollowCursor_StopingDistance_Px Then
                             MoveLeft = False
                             Me.Location = New Point(Me.Location.X - 1, Display.WorkingArea.Bottom - Me.Height)
                             If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
                                 PixelBox_Pet.Image = Animation_Walking_Left
                                 Console.WriteLine("Animation_Walking_Left")
                             End If
-                        ElseIf Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StopingDistance Then
+                        ElseIf Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StopingDistance_Px Then
                             MoveLeft = True
                             Me.Location = New Point(Me.Location.X + 1, Display.WorkingArea.Bottom - Me.Height)
                             If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
@@ -319,20 +322,20 @@ Public Class Form_FlyingPet
             'OVER RIGHT
             If Me.Location.X > Display.WorkingArea.Right - Me.Width / 2 Then
                 If ScreenWarpingDecision <= Rand.Next(0, 100 + 1) Then
+                    Me.Location = New Point(Display.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y)
+                Else
                     MoveLeft = True
                     Me.Location = New Point(Location.X - 1, Location.Y)
-                Else
-                    Me.Location = New Point(Display.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y)
                 End If
                 Console.WriteLine("OVER RIGHT")
             End If
             'OVER LEFT
             If Me.Location.X < Display.WorkingArea.Left - Me.Width / 2 Then
                 If ScreenWarpingDecision <= Rand.Next(0, 100 + 1) Then
+                    Me.Location = New Point(Display.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y)
+                Else
                     MoveLeft = False
                     Me.Location = New Point(Location.X + 1, Location.Y)
-                Else
-                    Me.Location = New Point(Display.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y)
                 End If
                 Console.WriteLine("OVER LEFT")
             End If

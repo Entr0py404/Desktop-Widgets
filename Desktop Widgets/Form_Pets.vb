@@ -6,9 +6,6 @@ Public Class Form_Pets
     Private Sub Form_Pets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.SelectedIndex = 0
         MenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
-
-        ContextMenuStrip_GroundPets.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
-        ContextMenuStrip_FlyingPets.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
         ContextMenuStrip2.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
 
         LoadGroundPets("Pets\Ground")
@@ -71,21 +68,8 @@ Public Class Form_Pets
                 End If
             Next
             'Label_Status.Text = "Load Completed."
-            FlowLayoutPanel2.Visible = True
+            'FlowLayoutPanel2.Visible = True
         End If
-    End Sub
-    'ReloadToolStripMenuItem_FlyingPets - Click
-    Private Sub ReloadToolStripMenuItem_FlyingPets_Click(sender As Object, e As EventArgs) Handles ReloadToolStripMenuItem_FlyingPets.Click
-        LoadFlyingPets("Pets\Flying")
-    End Sub
-    'ReloadToolStripMenuItem_GroundPets - Click
-    Private Sub ReloadToolStripMenuItem_GroundPets_Click(sender As Object, e As EventArgs) Handles ReloadToolStripMenuItem_GroundPets.Click
-        LoadGroundPets("Pets\Ground")
-    End Sub
-
-    'TrackBar_ObjectScale - ValueChanged
-    Private Sub TrackBar_ObjectScale_ValueChanged(sender As Object, e As EventArgs) Handles TrackBar_ObjectScale.ValueChanged
-        Label_Scale.Text = TrackBar_ObjectScale.Value.ToString & "x"
     End Sub
     'Button_CloseSelected - Click
     Private Sub Button_CloseSelected_Click(sender As Object, e As EventArgs) Handles Button_CloseSelected.Click
@@ -146,12 +130,6 @@ Public Class Form_Pets
             End If
         End If
     End Sub
-
-
-
-
-
-
     'AssetPanel1 - Click
     Private Sub PixelBox1_MouseClick(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Left Then
@@ -331,6 +309,7 @@ Public Class Form_Pets
             AddHandler AssetPixelBox.MouseClick, AddressOf PixelBox2_MouseClick
         End If
     End Sub
+    '
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ContextMenuStrip2.Show(Button1, 4, 4)
     End Sub

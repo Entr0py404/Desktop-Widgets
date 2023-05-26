@@ -47,19 +47,14 @@ Partial Class Form_Nature
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.ComboBox_Theme = New System.Windows.Forms.ComboBox()
-        Me.ContextMenuStrip_Theme = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button_CloseAll = New System.Windows.Forms.Button()
-        Me.TrackBar_ObjectScale = New System.Windows.Forms.TrackBar()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label_Scale = New System.Windows.Forms.Label()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ReloadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CheckBox_TopMost = New System.Windows.Forms.CheckBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.ComboBox_Display = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.NumericUpDown_ObjectScale = New System.Windows.Forms.NumericUpDown()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel6 = New System.Windows.Forms.Panel()
@@ -83,11 +78,9 @@ Partial Class Form_Nature
         CType(Me.NumericUpDown_Grass_Max, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.ContextMenuStrip_Theme.SuspendLayout()
-        CType(Me.TrackBar_ObjectScale, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ContextMenuStrip1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        CType(Me.NumericUpDown_ObjectScale, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.ContextMenuStrip3.SuspendLayout()
@@ -210,7 +203,7 @@ Partial Class Form_Nature
         Me.Button_Generate.FlatAppearance.BorderSize = 0
         Me.Button_Generate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_Generate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_Generate.Location = New System.Drawing.Point(176, 312)
+        Me.Button_Generate.Location = New System.Drawing.Point(160, 352)
         Me.Button_Generate.Name = "Button_Generate"
         Me.Button_Generate.Size = New System.Drawing.Size(120, 32)
         Me.Button_Generate.TabIndex = 33
@@ -284,7 +277,7 @@ Partial Class Form_Nature
         Me.Button_Randomize.FlatAppearance.BorderSize = 0
         Me.Button_Randomize.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_Randomize.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_Randomize.Location = New System.Drawing.Point(40, 312)
+        Me.Button_Randomize.Location = New System.Drawing.Point(24, 352)
         Me.Button_Randomize.Name = "Button_Randomize"
         Me.Button_Randomize.Size = New System.Drawing.Size(120, 32)
         Me.Button_Randomize.TabIndex = 40
@@ -324,7 +317,7 @@ Partial Class Form_Nature
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.Location = New System.Drawing.Point(0, 8)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(64, 24)
+        Me.Label8.Size = New System.Drawing.Size(80, 24)
         Me.Label8.TabIndex = 43
         Me.Label8.Text = "Theme"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -332,31 +325,15 @@ Partial Class Form_Nature
         'ComboBox_Theme
         '
         Me.ComboBox_Theme.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ComboBox_Theme.ContextMenuStrip = Me.ContextMenuStrip_Theme
         Me.ComboBox_Theme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox_Theme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ComboBox_Theme.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ComboBox_Theme.FormattingEnabled = True
-        Me.ComboBox_Theme.Location = New System.Drawing.Point(72, 8)
+        Me.ComboBox_Theme.ItemHeight = 13
+        Me.ComboBox_Theme.Location = New System.Drawing.Point(88, 8)
         Me.ComboBox_Theme.Name = "ComboBox_Theme"
         Me.ComboBox_Theme.Size = New System.Drawing.Size(160, 21)
         Me.ComboBox_Theme.TabIndex = 44
-        '
-        'ContextMenuStrip_Theme
-        '
-        Me.ContextMenuStrip_Theme.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ContextMenuStrip_Theme.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ContextMenuStrip_Theme.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1})
-        Me.ContextMenuStrip_Theme.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip_Theme.ShowImageMargin = False
-        Me.ContextMenuStrip_Theme.Size = New System.Drawing.Size(101, 28)
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(100, 24)
-        Me.ToolStripMenuItem1.Text = "Reload"
         '
         'Button_CloseAll
         '
@@ -365,63 +342,27 @@ Partial Class Form_Nature
         Me.Button_CloseAll.FlatAppearance.BorderSize = 0
         Me.Button_CloseAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_CloseAll.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_CloseAll.Location = New System.Drawing.Point(40, 360)
+        Me.Button_CloseAll.Location = New System.Drawing.Point(24, 400)
         Me.Button_CloseAll.Name = "Button_CloseAll"
         Me.Button_CloseAll.Size = New System.Drawing.Size(120, 32)
         Me.Button_CloseAll.TabIndex = 45
         Me.Button_CloseAll.Text = "Close All"
         Me.Button_CloseAll.UseVisualStyleBackColor = False
         '
-        'TrackBar_ObjectScale
-        '
-        Me.TrackBar_ObjectScale.Location = New System.Drawing.Point(72, 256)
-        Me.TrackBar_ObjectScale.Minimum = 1
-        Me.TrackBar_ObjectScale.Name = "TrackBar_ObjectScale"
-        Me.TrackBar_ObjectScale.Size = New System.Drawing.Size(168, 45)
-        Me.TrackBar_ObjectScale.TabIndex = 47
-        Me.TrackBar_ObjectScale.TickStyle = System.Windows.Forms.TickStyle.Both
-        Me.TrackBar_ObjectScale.Value = 1
-        '
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(8, 256)
+        Me.Label9.Location = New System.Drawing.Point(8, 272)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(64, 48)
+        Me.Label9.Size = New System.Drawing.Size(64, 24)
         Me.Label9.TabIndex = 48
         Me.Label9.Text = "Scale"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label_Scale
-        '
-        Me.Label_Scale.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_Scale.Location = New System.Drawing.Point(240, 256)
-        Me.Label_Scale.Name = "Label_Scale"
-        Me.Label_Scale.Size = New System.Drawing.Size(56, 40)
-        Me.Label_Scale.TabIndex = 49
-        Me.Label_Scale.Text = "1x"
-        Me.Label_Scale.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReloadToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.ShowImageMargin = False
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(101, 28)
-        '
-        'ReloadToolStripMenuItem
-        '
-        Me.ReloadToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ReloadToolStripMenuItem.Name = "ReloadToolStripMenuItem"
-        Me.ReloadToolStripMenuItem.Size = New System.Drawing.Size(100, 24)
-        Me.ReloadToolStripMenuItem.Text = "Reload"
-        '
         'CheckBox_TopMost
         '
         Me.CheckBox_TopMost.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.CheckBox_TopMost.Location = New System.Drawing.Point(8, 224)
+        Me.CheckBox_TopMost.Location = New System.Drawing.Point(0, 312)
         Me.CheckBox_TopMost.Name = "CheckBox_TopMost"
         Me.CheckBox_TopMost.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.CheckBox_TopMost.Size = New System.Drawing.Size(136, 24)
@@ -432,7 +373,7 @@ Partial Class Form_Nature
         'Label10
         '
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(256, 8)
+        Me.Label10.Location = New System.Drawing.Point(8, 232)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(64, 21)
         Me.Label10.TabIndex = 61
@@ -446,7 +387,7 @@ Partial Class Form_Nature
         Me.ComboBox_Display.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ComboBox_Display.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ComboBox_Display.FormattingEnabled = True
-        Me.ComboBox_Display.Location = New System.Drawing.Point(328, 8)
+        Me.ComboBox_Display.Location = New System.Drawing.Point(80, 232)
         Me.ComboBox_Display.Name = "ComboBox_Display"
         Me.ComboBox_Display.Size = New System.Drawing.Size(160, 21)
         Me.ComboBox_Display.TabIndex = 60
@@ -455,8 +396,6 @@ Partial Class Form_Nature
         '
         Me.Panel3.Controls.Add(Me.Label8)
         Me.Panel3.Controls.Add(Me.ComboBox_Theme)
-        Me.Panel3.Controls.Add(Me.ComboBox_Display)
-        Me.Panel3.Controls.Add(Me.Label10)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3.Name = "Panel3"
@@ -465,8 +404,12 @@ Partial Class Form_Nature
         '
         'Panel4
         '
+        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.NumericUpDown_ObjectScale)
         Me.Panel4.Controls.Add(Me.Panel2)
+        Me.Panel4.Controls.Add(Me.ComboBox_Display)
         Me.Panel4.Controls.Add(Me.Label2)
+        Me.Panel4.Controls.Add(Me.Label10)
         Me.Panel4.Controls.Add(Me.Label1)
         Me.Panel4.Controls.Add(Me.Label3)
         Me.Panel4.Controls.Add(Me.Button_Generate)
@@ -474,16 +417,27 @@ Partial Class Form_Nature
         Me.Panel4.Controls.Add(Me.CheckBox_TopMost)
         Me.Panel4.Controls.Add(Me.Label7)
         Me.Panel4.Controls.Add(Me.Button_Randomize)
-        Me.Panel4.Controls.Add(Me.Label_Scale)
         Me.Panel4.Controls.Add(Me.Panel1)
         Me.Panel4.Controls.Add(Me.Label9)
         Me.Panel4.Controls.Add(Me.Button_CloseAll)
-        Me.Panel4.Controls.Add(Me.TrackBar_ObjectScale)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel4.Location = New System.Drawing.Point(536, 32)
+        Me.Panel4.Location = New System.Drawing.Point(544, 32)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(304, 505)
+        Me.Panel4.Size = New System.Drawing.Size(296, 505)
         Me.Panel4.TabIndex = 63
+        '
+        'NumericUpDown_ObjectScale
+        '
+        Me.NumericUpDown_ObjectScale.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.NumericUpDown_ObjectScale.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_ObjectScale.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.NumericUpDown_ObjectScale.Location = New System.Drawing.Point(80, 272)
+        Me.NumericUpDown_ObjectScale.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.NumericUpDown_ObjectScale.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NumericUpDown_ObjectScale.Name = "NumericUpDown_ObjectScale"
+        Me.NumericUpDown_ObjectScale.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_ObjectScale.TabIndex = 52
+        Me.NumericUpDown_ObjectScale.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'Panel5
         '
@@ -502,7 +456,7 @@ Partial Class Form_Nature
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 32)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(536, 505)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(544, 505)
         Me.FlowLayoutPanel1.TabIndex = 2
         '
         'Panel6
@@ -520,6 +474,7 @@ Partial Class Form_Nature
         '
         Me.Button1.BackColor = System.Drawing.Color.DodgerBlue
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
         Me.Button1.FlatAppearance.BorderSize = 0
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -540,7 +495,7 @@ Partial Class Form_Nature
         Me.Label_AssetCount.Name = "Label_AssetCount"
         Me.Label_AssetCount.Size = New System.Drawing.Size(840, 32)
         Me.Label_AssetCount.TabIndex = 101
-        Me.Label_AssetCount.Text = "0 Nature Objects"
+        Me.Label_AssetCount.Text = "0 Objects"
         Me.Label_AssetCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ContextMenuStrip3
@@ -613,12 +568,9 @@ Partial Class Form_Nature
         CType(Me.NumericUpDown_Grass_Max, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
-        Me.ContextMenuStrip_Theme.ResumeLayout(False)
-        CType(Me.TrackBar_ObjectScale, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
-        Me.Panel4.PerformLayout()
+        CType(Me.NumericUpDown_ObjectScale, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
         Me.ContextMenuStrip3.ResumeLayout(False)
@@ -649,14 +601,8 @@ Partial Class Form_Nature
     Friend WithEvents Label8 As Label
     Friend WithEvents ComboBox_Theme As ComboBox
     Friend WithEvents Button_CloseAll As Button
-    Friend WithEvents TrackBar_ObjectScale As TrackBar
     Private WithEvents Label9 As Label
-    Private WithEvents Label_Scale As Label
     Friend WithEvents CheckBox_TopMost As CheckBox
-    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
-    Friend WithEvents ReloadToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ContextMenuStrip_Theme As ContextMenuStrip
-    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Private WithEvents Label10 As Label
     Friend WithEvents ComboBox_Display As ComboBox
     Friend WithEvents Panel3 As Panel
@@ -672,4 +618,5 @@ Partial Class Form_Nature
     Friend WithEvents MediumLarge_ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Large_ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExtraLarge_ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NumericUpDown_ObjectScale As NumericUpDown
 End Class

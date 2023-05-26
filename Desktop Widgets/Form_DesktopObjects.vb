@@ -12,42 +12,41 @@
         Next
 
         ComboBox_Display.SelectedIndex = 0
-    End Sub
-    'ListView_Objects - ItemActivate
-    Private Sub ListView_NatureObjects_ItemActivate(sender As Object, e As EventArgs)
-        'Dim DesktopObject = New Form_DesktopObject
-        'DesktopObject.ObjectImage = New Bitmap(ListView_Objects.SelectedItems(0).Name)
-        'DesktopObject.PixelBox1.Image = DesktopObject.ObjectImage
-        'DesktopObject.Name = "DesktopObject"
-        'Form_Menu.IDCounter_DesktopObject += 1
-        'Form_Menu.FormList_DesktopObject.Add(Form_Menu.IDCounter_DesktopObject.ToString, DesktopObject)
-        'DesktopObject.UniqueSessionID = Form_Menu.IDCounter_DesktopObject.ToString
-        'Form_Menu.FormList_DesktopObject(Form_Menu.IDCounter_DesktopObject.ToString).Show() 'DesktopObject.Show()
-    End Sub
-    'TrackBar_ObjectScale - ValueChanged
-    Private Sub TrackBar_ObjectScale_ValueChanged(sender As Object, e As EventArgs) Handles TrackBar_ObjectScale.ValueChanged
-        Label_Scale.Text = TrackBar_ObjectScale.Value.ToString & "x"
+
+
+        If Not Directory.Exists(Application.StartupPath & "\Objects\All") Then
+            Directory.CreateDirectory(Application.StartupPath & "\Objects\All")
+        End If
+
+        ComboBox_Objects.BeginUpdate()
+        For Each dir As String In Directory.GetDirectories(Application.StartupPath & "\Objects")
+            If Not Path.GetFileName(dir).ToLower = "all" Then
+                ComboBox_Objects.Items.Add(Path.GetFileName(dir))
+            End If
+        Next
+        'ComboBox_Objects.Items.Remove("All")
+        'ComboBoComboBox_Objectsx_Theme.Items.Remove("all")
+        ComboBox_Objects.Items.Add("All") 'Add all to the end of the list
+        ComboBox_Objects.SelectedIndex = 0
+
+        ComboBox_Objects.EndUpdate()
     End Sub
     'LoadDesktopObjects()
     Private Sub LoadDesktopObjects(filepath As String)
         If Directory.Exists(filepath) Then
             FlowLayoutPanel1.Visible = False
             FlowLayoutPanel1.Controls.Clear()
-            Label_AssetCount.Text = "Desktop Objects"
+            Label_AssetCount.Text = "0 Objects"
             Label_AssetCount.Update()
             'Label_Status.Text = "Loading Files..."
             'Label_Status.Refresh()
             Dim FilesToCheck As New ArrayList()
             FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.png", SearchOption.AllDirectories))
-            FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.gif", SearchOption.AllDirectories)) 'Fix gifs
-
+            FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.gif", SearchOption.AllDirectories))
             For Each item As String In FilesToCheck
                 CreateNewPanel(item, Path.GetFileNameWithoutExtension(item), Color.WhiteSmoke)
-                'DesktopObjects_ImageList.Images.Add(Image.FromFile(item))
-                'DesktopObjects_ListView.Items.Add(item, "", DesktopObjects_ImageList.Images.Count - 1)
             Next
-
-            Label_AssetCount.Text = FilesToCheck.Count.ToString & " Desktop Objects"
+            Label_AssetCount.Text = FilesToCheck.Count.ToString & " Objects"
 
             'Label_Status.Text = "Load Completed."
             FlowLayoutPanel1.Visible = True
@@ -79,11 +78,6 @@
                 Form_Menu.FormList_DesktopObject.Add(Form_Menu.IDCounter_DesktopObject.ToString, DesktopObject)
                 DesktopObject.UniqueSessionID = Form_Menu.IDCounter_DesktopObject.ToString
                 Form_Menu.FormList_DesktopObject(Form_Menu.IDCounter_DesktopObject.ToString).Show() 'DesktopObject.Show()
-
-
-                'AssetInfo.LoadAsset(DirectCast(sender, PixelBox).Text.ToString)
-                'AssetInfo.Show()
-                'AssetInfo.BringToFront()
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
             End Try
@@ -189,5 +183,15 @@
         MediumLarge_ToolStripMenuItem.Checked = False
         Large_ToolStripMenuItem.Checked = False
         ExtraLarge_ToolStripMenuItem.Checked = False
+    End Sub
+    'ComboBox_Objects - SelectedIndexChanged
+    Private Sub ComboBox_Objects_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_Objects.SelectedIndexChanged
+        If Not ComboBox_Objects.SelectedIndex = -1 Then
+            If Not ComboBox_Objects.SelectedItem.ToString = "All" Then
+                LoadDesktopObjects(Application.StartupPath & "\Objects\" & ComboBox_Objects.SelectedItem.ToString)
+            Else
+                LoadDesktopObjects(Application.StartupPath & "\Objects\")
+            End If
+        End If
     End Sub
 End Class

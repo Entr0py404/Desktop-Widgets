@@ -29,7 +29,6 @@ Partial Class Form_Menu
         Me.Button_DesktopObjects = New System.Windows.Forms.Button()
         Me.Button_GDev = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.Button_CloseSelected = New System.Windows.Forms.Button()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.ContextMenuStrip_Main = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -44,8 +43,10 @@ Partial Class Form_Menu
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button_Phrases = New System.Windows.Forms.Button()
         Me.Button_AnimationBuilder = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PixelBox1 = New Desktop_Widgets.PixelBox()
         Me.ContextMenuStrip_Main.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         CType(Me.PixelBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -109,36 +110,29 @@ Partial Class Form_Menu
         'ComboBox1
         '
         Me.ComboBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Left
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"All Pets", "Ground Pets", "Flying Pets", "Nature Objects", "Desktop Objects", "GDev Character"})
-        Me.ComboBox1.Location = New System.Drawing.Point(80, 272)
+        Me.ComboBox1.Location = New System.Drawing.Point(0, 0)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(128, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(136, 26)
         Me.ComboBox1.TabIndex = 66
-        '
-        'Label9
-        '
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(8, 272)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(67, 21)
-        Me.Label9.TabIndex = 67
-        Me.Label9.Text = "Close All"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Button_CloseSelected
         '
         Me.Button_CloseSelected.BackColor = System.Drawing.Color.Tomato
+        Me.Button_CloseSelected.Dock = System.Windows.Forms.DockStyle.Left
         Me.Button_CloseSelected.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
         Me.Button_CloseSelected.FlatAppearance.BorderSize = 0
         Me.Button_CloseSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_CloseSelected.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_CloseSelected.Location = New System.Drawing.Point(216, 272)
+        Me.Button_CloseSelected.Location = New System.Drawing.Point(136, 0)
         Me.Button_CloseSelected.Name = "Button_CloseSelected"
-        Me.Button_CloseSelected.Size = New System.Drawing.Size(96, 32)
+        Me.Button_CloseSelected.Size = New System.Drawing.Size(80, 26)
         Me.Button_CloseSelected.TabIndex = 68
         Me.Button_CloseSelected.Text = "Close"
         Me.Button_CloseSelected.UseVisualStyleBackColor = False
@@ -255,6 +249,17 @@ Partial Class Form_Menu
         Me.Button_AnimationBuilder.Text = "Animation Builder"
         Me.Button_AnimationBuilder.UseVisualStyleBackColor = False
         '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Button_CloseSelected)
+        Me.Panel1.Controls.Add(Me.ComboBox1)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel1.Location = New System.Drawing.Point(0, 272)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(425, 26)
+        Me.Panel1.TabIndex = 73
+        '
         'PixelBox1
         '
         Me.PixelBox1.Image = Global.Desktop_Widgets.My.Resources.Resources.four_squares
@@ -270,12 +275,10 @@ Partial Class Form_Menu
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(425, 314)
+        Me.ClientSize = New System.Drawing.Size(425, 298)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Button_AnimationBuilder)
         Me.Controls.Add(Me.Button_Phrases)
-        Me.Controls.Add(Me.Button_CloseSelected)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.Button_GDev)
         Me.Controls.Add(Me.Button_DesktopObjects)
         Me.Controls.Add(Me.Button_Nature)
@@ -291,6 +294,7 @@ Partial Class Form_Menu
         Me.Text = "Menu"
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         Me.ContextMenuStrip_Main.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
         CType(Me.PixelBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -300,7 +304,6 @@ Partial Class Form_Menu
     Friend WithEvents Button_DesktopObjects As Button
     Friend WithEvents Button_GDev As Button
     Friend WithEvents ComboBox1 As ComboBox
-    Private WithEvents Label9 As Label
     Friend WithEvents Button_CloseSelected As Button
     Friend WithEvents NotifyIcon1 As NotifyIcon
     Friend WithEvents ContextMenuStrip_Main As ContextMenuStrip
@@ -316,4 +319,5 @@ Partial Class Form_Menu
     Friend WithEvents PixelBox1 As PixelBox
     Friend WithEvents Button_AnimationBuilder As Button
     Friend WithEvents PetBuilderToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Panel1 As Panel
 End Class

@@ -137,12 +137,6 @@
     <Compile Include="Form_PhraseManager.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Import.Designer.vb">
-      <DependentUpon>Form_Import.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form_Import.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Form_Menu.Designer.vb">
       <DependentUpon>Form_Menu.vb</DependentUpon>
     </Compile>
@@ -240,9 +234,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_PhraseManager.resx">
       <DependentUpon>Form_PhraseManager.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Import.resx">
-      <DependentUpon>Form_Import.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Menu.resx">
       <DependentUpon>Form_Menu.vb</DependentUpon>

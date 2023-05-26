@@ -408,6 +408,8 @@ Public Class Form_GDevCharacter
             Else
                 Return False
             End If
+        Else
+            Return False
         End If
     End Function
     'Comment

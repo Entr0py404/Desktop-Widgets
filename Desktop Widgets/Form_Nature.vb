@@ -2,10 +2,21 @@
     Dim randNum As New Random
     Dim MYDisplay As Display
     Dim AssetPanel_Size As Integer = 98
+
+    Dim Flowers_Min As Integer = 6
+    Dim Bushes_Min As Integer = 2
+    Dim Trees_Min As Integer = 2
+    Dim Rocks_Min As Integer = 3
+    Dim Grass_Min As Integer = 5
+
+    Dim Flowers_Max As Integer = 15
+    Dim Bushes_Max As Integer = 4
+    Dim Trees_Max As Integer = 5
+    Dim Rocks_Max As Integer = 5
+    Dim Grass_Max As Integer = 10
+    Dim DefaultScale As Integer = 1
     'Form_Nature - Load
     Private Sub Form_Nature_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
-        ContextMenuStrip_Theme.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
         ContextMenuStrip3.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
 
         For Each Display As Display In Display.GetDisplays()
@@ -34,39 +45,45 @@
         'Console.WriteLine(target.FriendlyName & " - " & target.ToDisplayDevice.DisplayName.Replace("\\.\", ""))
         'Next
 
-        Dim dir As New DirectoryInfo(Application.StartupPath & "\Nature")
-        Dim directories As DirectoryInfo() = dir.GetDirectories().ToArray()
-        ComboBox_Theme.Items.AddRange(directories)
-        If ComboBox_Theme.Items.Count > 0 Then
-            ComboBox_Theme.SelectedIndex = 0
+        If Not Directory.Exists(Application.StartupPath & "\Nature\All") Then
+            Directory.CreateDirectory(Application.StartupPath & "\Nature\All")
         End If
 
-        If ComboBox_Theme.Items.Count > 0 Then
-            ComboBox_Theme.Items.Add("All")
-        End If
+        ComboBox_Theme.BeginUpdate()
+        For Each dir As String In Directory.GetDirectories(Application.StartupPath & "\Nature")
+            If Not Path.GetFileName(dir).ToLower = "all" Then
+                ComboBox_Theme.Items.Add(Path.GetFileName(dir))
+            End If
+        Next
+        'ComboBox_Theme.Items.Remove("All")
+        'ComboBox_Theme.Items.Remove("all")
+        ComboBox_Theme.Items.Add("All") 'Add all to the end of the list
+        ComboBox_Theme.SelectedIndex = 0
+
+        ComboBox_Theme.EndUpdate()
 
         Button_Randomize.PerformClick()
     End Sub
     'Button_Randomize - Click
     Private Sub Button_Randomize_Click(sender As Object, e As EventArgs) Handles Button_Randomize.Click
         'Maximum
-        NumericUpDown_Flowers_Min.Maximum = 1000
-        NumericUpDown_Bushes_Min.Maximum = 1000
-        NumericUpDown_Trees_Min.Maximum = 1000
-        NumericUpDown_Rocks_Min.Maximum = 1000
-        NumericUpDown_Grass_Min.Maximum = 1000
+        NumericUpDown_Flowers_Min.Maximum = 100
+        NumericUpDown_Bushes_Min.Maximum = 100
+        NumericUpDown_Trees_Min.Maximum = 100
+        NumericUpDown_Rocks_Min.Maximum = 100
+        NumericUpDown_Grass_Min.Maximum = 100
         'Min
-        NumericUpDown_Flowers_Min.Value = randNum.Next(6, 15 + 1)
-        NumericUpDown_Bushes_Min.Value = randNum.Next(2, 4 + 1)
-        NumericUpDown_Trees_Min.Value = randNum.Next(2, 5 + 1)
-        NumericUpDown_Rocks_Min.Value = randNum.Next(3, 5 + 1)
-        NumericUpDown_Grass_Min.Value = randNum.Next(5, 10 + 1)
+        NumericUpDown_Flowers_Min.Value = randNum.Next(Flowers_Min, Flowers_Max + 1)
+        NumericUpDown_Bushes_Min.Value = randNum.Next(Bushes_Min, Bushes_Max + 1)
+        NumericUpDown_Trees_Min.Value = randNum.Next(Trees_Min, Trees_Max + 1)
+        NumericUpDown_Rocks_Min.Value = randNum.Next(Rocks_Min, Rocks_Max + 1)
+        NumericUpDown_Grass_Min.Value = randNum.Next(Grass_Min, Grass_Max + 1)
         'Max
-        NumericUpDown_Flowers_Max.Value = randNum.Next(CInt(NumericUpDown_Flowers_Min.Value), 15 + 1)
-        NumericUpDown_Bushes_Max.Value = randNum.Next(CInt(NumericUpDown_Bushes_Min.Value), 4 + 1)
-        NumericUpDown_Trees_Max.Value = randNum.Next(CInt(NumericUpDown_Trees_Min.Value), 5 + 1)
-        NumericUpDown_Rocks_Max.Value = randNum.Next(CInt(NumericUpDown_Rocks_Min.Value), 5 + 1)
-        NumericUpDown_Grass_Max.Value = randNum.Next(CInt(NumericUpDown_Grass_Min.Value), 10 + 1)
+        NumericUpDown_Flowers_Max.Value = randNum.Next(CInt(NumericUpDown_Flowers_Min.Value), Flowers_Max + 1)
+        NumericUpDown_Bushes_Max.Value = randNum.Next(CInt(NumericUpDown_Bushes_Min.Value), Bushes_Max + 1)
+        NumericUpDown_Trees_Max.Value = randNum.Next(CInt(NumericUpDown_Trees_Min.Value), Trees_Max + 1)
+        NumericUpDown_Rocks_Max.Value = randNum.Next(CInt(NumericUpDown_Rocks_Min.Value), Rocks_Max + 1)
+        NumericUpDown_Grass_Max.Value = randNum.Next(CInt(NumericUpDown_Grass_Min.Value), Grass_Max + 1)
         'Maximum
         NumericUpDown_Flowers_Min.Maximum = NumericUpDown_Flowers_Max.Value
         NumericUpDown_Bushes_Min.Maximum = NumericUpDown_Bushes_Max.Value
@@ -118,6 +135,7 @@
                 NatureObject.ObjectImage = New Bitmap(FilesToCheck.Item(randNum.Next(0, FilesToCheck.Count)).ToString)
                 NatureObject.PixelBox1.Image = NatureObject.ObjectImage
                 NatureObject.Name = "NatureObject"
+                NatureObject.DefaultScale = DefaultScale
                 Form_Menu.IDCounter_NatureObject += 1
                 Form_Menu.FormList_NatureObject.Add(Form_Menu.IDCounter_NatureObject.ToString, NatureObject)
                 NatureObject.UniqueSessionID = Form_Menu.IDCounter_NatureObject.ToString
@@ -134,10 +152,6 @@
         Form_Menu.FormList_NatureObject.Clear()
         Button_Generate.Enabled = True
     End Sub
-    'TrackBar_ObjectScale - ValueChanged
-    Private Sub TrackBar_ObjectScale_ValueChanged(sender As Object, e As EventArgs) Handles TrackBar_ObjectScale.ValueChanged
-        Label_Scale.Text = TrackBar_ObjectScale.Value.ToString & "x"
-    End Sub
     'ComboBox_Theme - SelectedIndexChanged
     Private Sub ComboBox_Theme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_Theme.SelectedIndexChanged
         If Not ComboBox_Theme.SelectedIndex = -1 Then
@@ -148,6 +162,27 @@
                 LoadNatureObjects(Application.StartupPath & "\Nature\")
                 Button_Generate.Enabled = False
             End If
+
+            If File.Exists(Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString & "\Theme.ini") Then
+                Dim INI As New MadMilkman.Ini.IniFile()
+                INI.Load(Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString & "\Theme.ini")
+
+                DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
+
+                Flowers_Min = CInt(INI.Sections("Randomization_Min").Keys("Flowers").Value)
+                Bushes_Min = CInt(INI.Sections("Randomization_Min").Keys("Bushes").Value)
+                Trees_Min = CInt(INI.Sections("Randomization_Min").Keys("Trees").Value)
+                Rocks_Min = CInt(INI.Sections("Randomization_Min").Keys("Rocks").Value)
+                Grass_Min = CInt(INI.Sections("Randomization_Min").Keys("Grass").Value)
+
+                Flowers_Max = CInt(INI.Sections("Randomization_Max").Keys("Flowers").Value)
+                Bushes_Max = CInt(INI.Sections("Randomization_Max").Keys("Bushes").Value)
+                Trees_Max = CInt(INI.Sections("Randomization_Max").Keys("Trees").Value)
+                Rocks_Max = CInt(INI.Sections("Randomization_Max").Keys("Rocks").Value)
+                Grass_Max = CInt(INI.Sections("Randomization_Max").Keys("Grass").Value)
+
+                Button_Randomize.PerformClick()
+            End If
         End If
     End Sub
     'LoadNatureObjects()
@@ -155,7 +190,7 @@
         If Directory.Exists(filepath) Then
             FlowLayoutPanel1.Visible = False
             FlowLayoutPanel1.Controls.Clear()
-            Label_AssetCount.Text = "Desktop Objects"
+            Label_AssetCount.Text = "0 Objects"
             Label_AssetCount.Update()
             'Label_Status.Text = "Loading Files..."
             'Label_Status.Refresh()
@@ -164,38 +199,13 @@
             FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.gif", SearchOption.AllDirectories))
             For Each item As String In FilesToCheck
                 CreateNewPanel(item, Path.GetFileNameWithoutExtension(item), Color.WhiteSmoke)
-                'NatureObjects_ImageList.Images.Add(Image.FromFile(item))
-                'NatureObjects_ListView.Items.Add(item, "", NatureObjects_ImageList.Images.Count - 1)
             Next
-
-            Label_AssetCount.Text = FilesToCheck.Count.ToString & " Desktop Objects"
+            Label_AssetCount.Text = FilesToCheck.Count.ToString & " Objects"
 
             'Label_Status.Text = "Load Completed."
             FlowLayoutPanel1.Visible = True
         End If
     End Sub
-
-
-    'ReloadToolStripMenuItem - Click
-    Private Sub ReloadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReloadToolStripMenuItem.Click
-        If Not ComboBox_Theme.SelectedIndex = -1 Then
-            If Directory.Exists(Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString) Then
-                LoadNatureObjects(Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString)
-            End If
-        End If
-    End Sub
-    'ToolStripMenuItem1 - Click
-    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
-        ComboBox_Theme.Items.Clear()
-        Dim dir As New DirectoryInfo(Application.StartupPath & "\Nature")
-        Dim directories As DirectoryInfo() = dir.GetDirectories().ToArray()
-        ComboBox_Theme.Items.AddRange(directories)
-        If ComboBox_Theme.Items.Count > 0 Then
-            ComboBox_Theme.SelectedIndex = 0
-        End If
-    End Sub
-
-
     'AssetPanel1 - Click
     Private Sub PixelBox1_MouseClick(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Left Then
@@ -249,7 +259,7 @@
         AssetPixelBox.Name = "PixelBox1"
         AssetPixelBox.Cursor = Cursors.Hand
         AssetPixelBox.Text = imagePath
-        AssetPixelBox.ContextMenuStrip = ContextMenuStrip1
+        'AssetPixelBox.ContextMenuStrip = 
 
         'Add AssetLabel and AssetPixelBox to AssetPanel
         AssetPanel.Controls.Add(AssetPixelBox)
@@ -260,6 +270,7 @@
 
         AddHandler AssetPixelBox.MouseClick, AddressOf PixelBox1_MouseClick
     End Sub
+    'Button1 - Click
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ContextMenuStrip3.Show(Button1, 4, 4)
     End Sub

@@ -8,7 +8,7 @@ Public Class Form_NatureObject
     Public MYDisplay As Display
     Dim Rand As New Random
     Dim BlockEvent_DisplayComboBox As Boolean = False
-
+    Public DefaultScale As Integer = 1
     'Form_NatureObject - Load
     Private Sub Form_NatureObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
@@ -45,8 +45,8 @@ Public Class Form_NatureObject
         'DisplayToolStripComboBox.SelectedIndex = Form_Nature.ComboBox_Display.SelectedIndex
 
         If isMainGrass = False Then
-            ScaleToolStripComboBox.SelectedIndex = Form_Nature.TrackBar_ObjectScale.Value - 1
-            AllScaleToolStripComboBox.SelectedIndex = Form_Nature.TrackBar_ObjectScale.Value - 1
+            ScaleToolStripComboBox.SelectedIndex = CInt(Form_Nature.NumericUpDown_ObjectScale.Value) - 1
+            AllScaleToolStripComboBox.SelectedIndex = CInt(Form_Nature.NumericUpDown_ObjectScale.Value) - 1
         Else
             'Me.Width = Screen.PrimaryScreen.WorkingArea.Width
             'Me.Height = ObjectImage.Height
@@ -60,6 +60,7 @@ Public Class Form_NatureObject
     End Sub
     'ScaleObject()
     Public Sub ScaleObject(val As Integer)
+        val = val + DefaultScale - 1
         Me.Width = ObjectImage.Width * val
         Me.Height = ObjectImage.Height * val
         Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)

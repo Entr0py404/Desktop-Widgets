@@ -32,8 +32,8 @@ Public Class Form_DesktopObject
         AlwaysOnTopToolStripMenuItem.Checked = Form_DesktopObjects.CheckBox_TopMost.Checked
         AllAlwaysOnTopToolStripMenuItem.Checked = Form_DesktopObjects.CheckBox_TopMost.Checked
         SnapToBarToolStripMenuItem.Checked = Form_DesktopObjects.CheckBox_SnapToBar.Checked
-        ScaleToolStripComboBox.SelectedIndex = Form_DesktopObjects.TrackBar_ObjectScale.Value - 1
-        AllScaleToolStripComboBox.SelectedIndex = Form_DesktopObjects.TrackBar_ObjectScale.Value - 1
+        ScaleToolStripComboBox.SelectedIndex = CInt(Form_DesktopObjects.NumericUpDown_ObjectScale.Value) - 1
+        AllScaleToolStripComboBox.SelectedIndex = CInt(Form_DesktopObjects.NumericUpDown_ObjectScale.Value) - 1
 
         FormLoadLock = False
     End Sub

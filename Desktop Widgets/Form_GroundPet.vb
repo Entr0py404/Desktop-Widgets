@@ -1,4 +1,4 @@
-﻿Imports Microsoft.Win32
+﻿
 Public Class Form_GroundPet
     Dim Rand As New Random
     Dim Dragging As Boolean = False
@@ -30,6 +30,22 @@ Public Class Form_GroundPet
     Public Animation_Jumping_Left As Bitmap
     Public Animation_Jumping_Right As Bitmap
     Public CurrentAnimatedImage As Bitmap
+
+    'Behavior settings
+    Dim DefaultScale As Integer = 1
+    Dim FollowCursor_StopingDistance_Px As Integer = 6
+    Dim Falling_Movement_Px As Integer = 5
+
+    Dim IdleDecision As Integer = 45
+    Dim IdleAltDecision As Integer = 35
+    Dim ScreenWarpingDecision As Integer = 60
+
+    Dim Walking_Movement_Tick As Integer = 1
+    Dim Falling_Movement_Tick As Integer = 1
+    Dim TunringDecision_Min As Integer = 2500
+    Dim TunringDecision_Max As Integer = 3500
+    Dim IdleDecision_Min As Integer = 2500
+    Dim IdleDecision_Max As Integer = 3500
     'Form_GroundPet - Load
     Private Sub Form_GroundPet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         For Each Displays In Screen.AllScreens
@@ -44,14 +60,55 @@ Public Class Form_GroundPet
         FollowCursorToolStripMenuItem.Checked = Form_Pets.CheckBox_FollowCursor.Checked
         Me.TopMost = Form_Pets.CheckBox_TopMost.Checked
         AlwaysOnTopToolStripMenuItem.Checked = Form_Pets.CheckBox_TopMost.Checked
-        ScaleToolStripComboBox.SelectedIndex = Form_Pets.TrackBar_ObjectScale.Value - 1
+        ScaleToolStripComboBox.SelectedIndex = CInt(Form_Pets.NumericUpDown_ObjectScale.Value) - 1
 
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
         Timer_Walking.Enabled = True
         Timer_Falling.Enabled = True
         Timer_IdleDecision.Enabled = True
         Timer_TurningDecision.Enabled = True
-        AddHandler SystemEvents.DisplaySettingsChanged, AddressOf DisplaySettingsChanged
+        AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf DisplaySettingsChanged
+
+        If File.Exists(Application.StartupPath & "\" & PetDir & "\Behavior.ini") Then
+            Dim INI As New MadMilkman.Ini.IniFile()
+            INI.Load(Application.StartupPath & "\" & PetDir & "\Behavior.ini")
+            '[Settings]
+            DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
+            If DefaultScale = 0 Then
+                DefaultScale = 1
+            End If
+            If DefaultScale > 1 Then
+                ScalePet(1)
+            End If
+
+            FollowCursor_StopingDistance_Px = CInt(INI.Sections("Settings").Keys("FollowCursor_StopingDistance_Px").Value)
+            Falling_Movement_Px = CInt(INI.Sections("Settings").Keys("Falling_Movement_Px").Value)
+
+            '[Decisions]
+            IdleDecision = CInt(INI.Sections("Decisions").Keys("IdleDecision").Value)
+            IdleAltDecision = CInt(INI.Sections("Decisions").Keys("IdleAltDecision").Value)
+            ScreenWarpingDecision = CInt(INI.Sections("Decisions").Keys("ScreenWarpingDecision").Value)
+
+            '[Timers_Tick]
+            Walking_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Walking_Movement_Tick").Value)
+            Timer_Walking.Interval = Walking_Movement_Tick
+
+            Falling_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Falling_Movement_Tick").Value)
+            Timer_Falling.Interval = Falling_Movement_Tick
+
+            '[Timers_Randomization]
+            TunringDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TunringDecision_Min").Value)
+            TunringDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TunringDecision_Max").Value)
+            Timer_TurningDecision.Interval = Rand.Next(TunringDecision_Min, TunringDecision_Max + 1)
+
+            IdleDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Min").Value)
+            IdleDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Max").Value)
+            Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
+        Else
+            Timer_TurningDecision.Interval = Rand.Next(TunringDecision_Min, TunringDecision_Max + 1)
+            Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
+        End If
+
         FormLoadLock = False
 
         Console.WriteLine("Form_GroundPet_Load")
@@ -84,14 +141,14 @@ Public Class Form_GroundPet
             Else
 
                 If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
-                    If Me.Location.X > MousePosition.X + 6 Then
+                    If Me.Location.X > MousePosition.X + FollowCursor_StopingDistance_Px Then
                         TurnLeft = False
                         Me.Location = New Point(Me.Location.X - 1, Display.WorkingArea.Bottom - Me.Height)
                         If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
                             PixelBox_Pet.Image = Animation_Walking_Left
                             Console.WriteLine("Animation_Walking_Left")
                         End If
-                    ElseIf Me.Location.X < MousePosition.X - Me.Width - 6 Then
+                    ElseIf Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StopingDistance_Px Then
                         TurnLeft = True
                         Me.Location = New Point(Me.Location.X + 1, Display.WorkingArea.Bottom - Me.Height)
                         If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
@@ -120,7 +177,7 @@ Public Class Form_GroundPet
         'Dim Display_Test As Screen
         If Dragging = False Then
             If Me.Location.Y < Display.WorkingArea.Bottom - Me.Height Then
-                If Me.Location.Y + 5 >= Display.WorkingArea.Bottom - Me.Height Then
+                If Me.Location.Y + Falling_Movement_Px >= Display.WorkingArea.Bottom - Me.Height Then
                     Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
 
                     If TurnLeft = True Then
@@ -135,7 +192,7 @@ Public Class Form_GroundPet
                         End If
                     End If
                 Else
-                    Me.Location = New Point(Me.Location.X, Me.Location.Y + 5)
+                    Me.Location = New Point(Me.Location.X, Me.Location.Y + Falling_Movement_Px)
                     If TurnLeft = True Then
                         If PixelBox_Pet.Image IsNot Animation_Falling_Left Then
                             PixelBox_Pet.Image = Animation_Falling_Left
@@ -160,13 +217,13 @@ Public Class Form_GroundPet
         Else
             TurnLeft = False
         End If
+
+        Timer_TurningDecision.Interval = Rand.Next(TunringDecision_Min, TunringDecision_Max + 1)
     End Sub
     'Timer_IdleDecision - Tick
     Private Sub Timer_IdleDecision_Tick(sender As Object, e As EventArgs) Handles Timer_IdleDecision.Tick
         If Not ContextMenuStrip1.Visible And Not Dragging Then
-            Dim R As Integer = CInt(Rnd(1))
-            'Console.WriteLine(R)
-            If R = 0 Then
+            If IdleDecision <= Rand.Next(0, 100 + 1) Then
                 Timer_Walking.Stop()
 
                 If TurnLeft = True Then
@@ -187,17 +244,14 @@ Public Class Form_GroundPet
                 Timer_Walking.Start()
             End If
         End If
+        Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
     End Sub
     'Screen Warping & Edge Turn Around
     Private Sub Form1_LocationChanged(sender As Object, e As EventArgs) Handles Me.LocationChanged
         If Dragging = False And FormLoadLock = False Then
-            ' Console.WriteLine("LocationChanged")
-            Dim R As Integer = CInt(Rnd(1))
             'RIGHT
             If Me.Location.X > Display.WorkingArea.Right - Me.Width / 2 Then
-                If R = 0 Then
-                    TurnLeft = True 'TURNAROUND
-                Else
+                If ScreenWarpingDecision <= Rand.Next(0, 100 + 1) Then
                     If Not DisplayToolStripComboBox.SelectedItem.ToString = "ALL" Then
                         Me.Location = New Point(Display.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'WARP
                     Else
@@ -209,7 +263,6 @@ Public Class Form_GroundPet
 
                         'SET TO SCREEN WITH LOWEST X
                         For Each Displays As Screen In Screen.AllScreens
-
 
                             If Not Displays.Bounds = Display.Bounds Then
                                 If location >= Displays.Bounds.Left And location <= Displays.Bounds.Right Then
@@ -237,12 +290,12 @@ Public Class Form_GroundPet
                         End If
 
                     End If
+                Else
+                    TurnLeft = True 'TURNAROUND
                 End If
                 Console.WriteLine("OVER RIGHT")
             ElseIf Me.Location.X < Display.WorkingArea.Left - Me.Width / 2 Then 'LEFT
-                If R = 0 Then
-                    TurnLeft = False 'TURNAROUND
-                Else
+                If ScreenWarpingDecision <= Rand.Next(0, 100 + 1) Then
                     If Not DisplayToolStripComboBox.SelectedItem.ToString = "ALL" Then
                         Me.Location = New Point(Display.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'WARP
                     Else
@@ -282,6 +335,8 @@ Public Class Form_GroundPet
                         End If
 
                     End If
+                Else
+                    TurnLeft = False 'TURNAROUND
                 End If
                 Console.WriteLine("OVER LEFT")
             End If
@@ -307,6 +362,7 @@ Public Class Form_GroundPet
     End Sub
     'ScalePet()
     Public Sub ScalePet(val As Integer)
+        val = val + DefaultScale - 1
         Me.Width = Animation_Walking_Left.Width * val
         Me.Height = Animation_Walking_Left.Height * val
         Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
