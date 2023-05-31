@@ -1,4 +1,6 @@
-﻿Public Class Form_DesktopObjects
+﻿
+Public Class Form_DesktopObjects
+    Dim AssetPanel_Size As Integer = 98
     'Form_DesktopObjects - Load
     Private Sub Form_DesktopObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip2.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
@@ -71,9 +73,11 @@
         If e.Button = MouseButtons.Left Then
             Try
                 Dim DesktopObject = New Form_DesktopObject
-                DesktopObject.ObjectImage = New Bitmap(DirectCast(sender, PixelBox).Text.ToString)
+                Dim DesktopObjectFullPath As String = DirectCast(sender, PixelBox).Text.ToString
+                DesktopObject.ObjectImage = New Bitmap(DesktopObjectFullPath)
                 DesktopObject.PixelBox1.Image = DesktopObject.ObjectImage
                 DesktopObject.Name = "DesktopObject"
+                DesktopObject.Text = "Desktop Object - " & Path.GetFileNameWithoutExtension(DesktopObjectFullPath)
                 Form_Menu.IDCounter_DesktopObject += 1
                 Form_Menu.FormList_DesktopObject.Add(Form_Menu.IDCounter_DesktopObject.ToString, DesktopObject)
                 DesktopObject.UniqueSessionID = Form_Menu.IDCounter_DesktopObject.ToString
@@ -95,7 +99,7 @@
     Private Sub CreateNewPanel(imagePath As String, assetObjectText As String, textColor As Color)
         'Panel
         Dim AssetPanel = New Panel
-        AssetPanel.Size = New Size(98, 98)
+        AssetPanel.Size = New Size(AssetPanel_Size, AssetPanel_Size)
         AssetPanel.BackColor = Color.FromArgb(46, 49, 54)
         AssetPanel.Name = "AssetPanel1"
 
@@ -135,7 +139,7 @@
     'ResizePanels (sizeInt)
     Private Sub ResizePanels(sizeInt As Integer)
         'My.Settings.AssetPannelSize = sizeInt
-
+        AssetPanel_Size = sizeInt
         FlowLayoutPanel1.SuspendLayout()
         FlowLayoutPanel1.Visible = False
         For Each oObj As Control In FlowLayoutPanel1.Controls

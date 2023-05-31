@@ -44,6 +44,7 @@ Partial Class Form_Menu
         Me.Button_Phrases = New System.Windows.Forms.Button()
         Me.Button_AnimationBuilder = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.PixelBox1 = New Desktop_Widgets.PixelBox()
         Me.ContextMenuStrip_Main.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -99,7 +100,7 @@ Partial Class Form_Menu
         Me.Button_GDev.FlatAppearance.BorderSize = 0
         Me.Button_GDev.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_GDev.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_GDev.Location = New System.Drawing.Point(272, 136)
+        Me.Button_GDev.Location = New System.Drawing.Point(272, 216)
         Me.Button_GDev.Name = "Button_GDev"
         Me.Button_GDev.Size = New System.Drawing.Size(144, 32)
         Me.Button_GDev.TabIndex = 65
@@ -143,7 +144,6 @@ Partial Class Form_Menu
         Me.NotifyIcon1.ContextMenuStrip = Me.ContextMenuStrip_Main
         Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
         Me.NotifyIcon1.Text = "Desktop Pets"
-        Me.NotifyIcon1.Visible = True
         '
         'ContextMenuStrip_Main
         '
@@ -242,7 +242,7 @@ Partial Class Form_Menu
         Me.Button_AnimationBuilder.FlatAppearance.BorderSize = 0
         Me.Button_AnimationBuilder.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_AnimationBuilder.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_AnimationBuilder.Location = New System.Drawing.Point(272, 216)
+        Me.Button_AnimationBuilder.Location = New System.Drawing.Point(272, 136)
         Me.Button_AnimationBuilder.Name = "Button_AnimationBuilder"
         Me.Button_AnimationBuilder.Size = New System.Drawing.Size(144, 32)
         Me.Button_AnimationBuilder.TabIndex = 72
@@ -260,6 +260,17 @@ Partial Class Form_Menu
         Me.Panel1.Size = New System.Drawing.Size(425, 26)
         Me.Panel1.TabIndex = 73
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox1.Location = New System.Drawing.Point(272, 184)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.CheckBox1.Size = New System.Drawing.Size(120, 33)
+        Me.CheckBox1.TabIndex = 74
+        Me.CheckBox1.Text = "Use Tray Icon"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'PixelBox1
         '
         Me.PixelBox1.Image = Global.Desktop_Widgets.My.Resources.Resources.four_squares
@@ -276,6 +287,7 @@ Partial Class Form_Menu
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(425, 298)
+        Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Button_AnimationBuilder)
         Me.Controls.Add(Me.Button_Phrases)
@@ -320,4 +332,5 @@ Partial Class Form_Menu
     Friend WithEvents Button_AnimationBuilder As Button
     Friend WithEvents PetBuilderToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents CheckBox1 As CheckBox
 End Class

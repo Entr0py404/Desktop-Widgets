@@ -132,9 +132,11 @@
             FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\" & NatureFolder, "*.gif", SearchOption.TopDirectoryOnly))
             For i = 1 To randNum.Next(randMin, randMax)
                 Dim NatureObject = New Form_NatureObject
-                NatureObject.ObjectImage = New Bitmap(FilesToCheck.Item(randNum.Next(0, FilesToCheck.Count)).ToString)
+                Dim NatureObjectFullPath As String = FilesToCheck.Item(randNum.Next(0, FilesToCheck.Count)).ToString
+                NatureObject.ObjectImage = New Bitmap(NatureObjectFullPath)
                 NatureObject.PixelBox1.Image = NatureObject.ObjectImage
                 NatureObject.Name = "NatureObject"
+                NatureObject.Text = "Nature Object - " & Path.GetFileNameWithoutExtension(NatureObjectFullPath)
                 NatureObject.DefaultScale = DefaultScale
                 Form_Menu.IDCounter_NatureObject += 1
                 Form_Menu.FormList_NatureObject.Add(Form_Menu.IDCounter_NatureObject.ToString, NatureObject)
@@ -211,9 +213,11 @@
         If e.Button = MouseButtons.Left Then
             Try
                 Dim NatureObject As New Form_NatureObject
+                Dim NatureObjectFullPath As String = DirectCast(sender, PixelBox).Text.ToString
                 NatureObject.ObjectImage = New Bitmap(DirectCast(sender, PixelBox).Text.ToString)
                 NatureObject.PixelBox1.Image = NatureObject.ObjectImage
                 NatureObject.Name = "NatureObject"
+                NatureObject.Text = "Nature Object - " & Path.GetFileNameWithoutExtension(NatureObjectFullPath)
                 NatureObject.MYScreen = MYDisplay.GetScreen().AllScreens(ComboBox_Display.SelectedIndex)
                 Form_Menu.IDCounter_NatureObject += 1
                 Form_Menu.FormList_NatureObject.Add(Form_Menu.IDCounter_NatureObject.ToString, NatureObject)
@@ -236,7 +240,7 @@
     Private Sub CreateNewPanel(imagePath As String, assetObjectText As String, textColor As Color)
         'Panel
         Dim AssetPanel = New Panel
-        AssetPanel.Size = New Size(AssetPanel_size, AssetPanel_size)
+        AssetPanel.Size = New Size(AssetPanel_Size, AssetPanel_Size)
         AssetPanel.BackColor = Color.FromArgb(46, 49, 54)
         AssetPanel.Name = "AssetPanel1"
 
@@ -277,7 +281,7 @@
     'ResizePanels (sizeInt)
     Private Sub ResizePanels(sizeInt As Integer)
         'My.Settings.AssetPannelSize = sizeInt
-        AssetPanel_size = sizeInt
+        AssetPanel_Size = sizeInt
         FlowLayoutPanel1.SuspendLayout()
         FlowLayoutPanel1.Visible = False
         For Each oObj As Control In FlowLayoutPanel1.Controls

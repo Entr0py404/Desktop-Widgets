@@ -123,6 +123,7 @@ Public Class Form_Menu
         If Not Me.WindowState = FormWindowState.Minimized Then
             Me.WindowState = FormWindowState.Minimized
         Else
+            Me.Visible = True
             Me.WindowState = FormWindowState.Normal
             Me.BringToFront()
         End If
@@ -150,6 +151,26 @@ Public Class Form_Menu
         If Application.OpenForms.Count > 1 Then
             If MessageBox.Show("Multiple windows open, Close the application?", "Desktop Widgets", MessageBoxButtons.YesNo) = DialogResult.No Then
                 e.Cancel = True
+            End If
+        End If
+    End Sub
+    'CheckBox1 - CheckedChanged
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        If CheckBox1.Checked Then
+            NotifyIcon1.Visible = True
+            Me.ShowInTaskbar = False
+        Else
+            NotifyIcon1.Visible = False
+            Me.ShowInTaskbar = True
+        End If
+    End Sub
+    'Form_Menu - Resize
+    Private Sub Form_Menu_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        If Me.WindowState = FormWindowState.Minimized Then
+            If CheckBox1.Checked Then
+                Me.Visible = False
+            Else
+                Me.Visible = True
             End If
         End If
     End Sub

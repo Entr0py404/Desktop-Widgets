@@ -188,23 +188,23 @@ Public Class Form_FlyingPet
             If Dragging = False Then
                 If FollowCursor = False Then
                     If MoveLeft = True Then
-                        If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
-                            Me.Location = New Point(Me.Location.X - 1, Display.WorkingArea.Bottom - Me.Height)
+                        'If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
+                        Me.Location = New Point(Me.Location.X - 1, Display.WorkingArea.Bottom - Me.Height)
 
-                            If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
-                                PixelBox_Pet.Image = Animation_Walking_Left
-                                Console.WriteLine("Animation_Walking_Left")
-                            End If
-
+                        If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
+                            PixelBox_Pet.Image = Animation_Walking_Left
+                            Console.WriteLine("Animation_Walking_Left")
                         End If
-                    Else
-                        If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
-                            Me.Location = New Point(Me.Location.X + 1, Display.WorkingArea.Bottom - Me.Height)
 
-                            If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
-                                PixelBox_Pet.Image = Animation_Walking_Right
-                                Console.WriteLine("Animation_Walking_Right")
-                            End If
+                        'End If
+                    Else
+                        'If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
+                        Me.Location = New Point(Me.Location.X + 1, Display.WorkingArea.Bottom - Me.Height)
+
+                        If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
+                            PixelBox_Pet.Image = Animation_Walking_Right
+                            Console.WriteLine("Animation_Walking_Right")
+                            'End If
 
                         End If
                     End If
@@ -345,9 +345,6 @@ Public Class Form_FlyingPet
 
                 If HasAnimation_Walking = True Or HasAnimation_Idling = True Then
                     If LandingDecision <= Rand.Next(0, 100 + 1) Then
-                        MoveUp = True
-                        Me.Location = New Point(Location.X, Location.Y - 1)
-                    Else
                         Flying_Mode = False
                         Ground_Mode = True
                         Timer_ChangeModesDecision.Enabled = True
@@ -403,7 +400,11 @@ Public Class Form_FlyingPet
 
                         End If
 
+                    Else
+                        MoveUp = True
+                        Me.Location = New Point(Location.X, Location.Y - 1)
                     End If
+
                 Else
                     MoveUp = True
                     Me.Location = New Point(Location.X, Location.Y - 1)

@@ -183,6 +183,8 @@ Public Class Form_Pets
 
                 Form_GroundPetNew.PetDir = PetPath
 
+                Form_GroundPetNew.Text = "Pet - " & Path.GetFileName(PetPath)
+
                 Form_GroundPetNew.Show()
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
@@ -252,6 +254,8 @@ Public Class Form_Pets
                 'End If
 
                 Form_FlyingPetNew.PetDir = PetPath
+
+                Form_FlyingPetNew.Text = "Pet - " & Path.GetFileName(PetPath)
 
                 Form_FlyingPetNew.Show()
             Catch ex As Exception

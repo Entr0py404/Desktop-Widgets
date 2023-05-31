@@ -67,13 +67,13 @@ Public Class Form_GDevCharacter
 
         Form_Phrase.FontDialog1.Font = Form_Gdev.FontDialog1.Font
 
-        FollowCursorToolStripMenuItem.Checked = Form_GDev.CheckBox_FollowCursor.Checked
+        FollowCursorToolStripMenuItem.Checked = Form_Gdev.CheckBox_FollowCursor.Checked
 
-        Me.TopMost = Form_GDev.CheckBox_TopMost.Checked
-        AlwaysOnTopToolStripMenuItem.Checked = Form_GDev.CheckBox_TopMost.Checked
+        Me.TopMost = Form_Gdev.CheckBox_TopMost.Checked
+        AlwaysOnTopToolStripMenuItem.Checked = Form_Gdev.CheckBox_TopMost.Checked
         Form_Phrase.TopMost = AlwaysOnTopToolStripMenuItem.Checked
 
-        ToolStripComboBox1.SelectedIndex = Form_GDev.TrackBar_ObjectScale.Value - 1
+        ToolStripComboBox1.SelectedIndex = Form_Gdev.TrackBar_ObjectScale.Value - 1
 
         'Me.Width = Animation_Walking_Left.Width * 4
         'Me.Height = Animation_Walking_Left.Height * 4 + PictureBox_Emote.Height
@@ -102,8 +102,8 @@ Public Class Form_GDevCharacter
 
             ' If randNum.Next(0, 100) < 75 Then
             Comment("Dragged")
-                ' End If
-                Console.WriteLine("Dragged")
+            ' End If
+            Console.WriteLine("Dragged")
             PixelBox_Pet.Capture = False
             Const WM_NCLBUTTONDOWN As Integer = &HA1S
             'Const WM_NCRBUTTONDOWN As Integer = &HA4S
@@ -349,7 +349,7 @@ Public Class Form_GDevCharacter
     End Sub
     'Form_GDevCharacter - FormClosing
     Private Sub Form_GDevCharacter_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        Form_GDev.Button_Spawn.Enabled = True
+        Form_Gdev.Button_Spawn.Enabled = True
         Form_Phrase.Close()
     End Sub
     'PublicRoadmapToolStripMenuItem - Click
@@ -463,7 +463,7 @@ Public Class Form_GDevCharacter
             'Dim tempval As Integer = CInt(PixelBox_Pet.Width / 2)
             'Form_Main.NotifyIcon1.ShowBalloonTip(5000)
 
-            If Form_GDev.RadioButton_TTSFemale.Checked Then
+            If Form_Gdev.RadioButton_TTSFemale.Checked Then
                 synth.SelectVoiceByHints(VoiceGender.Female)
             Else
                 synth.SelectVoiceByHints(VoiceGender.Male)
@@ -473,7 +473,7 @@ Public Class Form_GDevCharacter
             Form_Phrase.Location = New Point(Me.Location.X + CInt(Me.Width / 2) - CInt(Form_Phrase.Width / 2), Me.Location.Y - Form_Phrase.Height)
             Form_Phrase.Opacity = 0.85 'Form_Phrase.Visible = True
 
-            synth.Volume = Form_GDev.TrackBar_TSSVolume.Value
+            synth.Volume = Form_Gdev.TrackBar_TSSVolume.Value
             'synth.SpeakAsync(phrase)
         End If
     End Sub

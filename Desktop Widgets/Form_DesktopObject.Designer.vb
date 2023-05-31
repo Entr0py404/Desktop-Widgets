@@ -51,7 +51,7 @@ Partial Class Form_DesktopObject
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.ShowCheckMargin = True
         Me.ContextMenuStrip1.ShowImageMargin = False
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(206, 200)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(206, 178)
         '
         'AllDesktopObjectsToolStripMenuItem
         '
@@ -187,7 +187,7 @@ Partial Class Form_DesktopObject
         Me.Name = "Form_DesktopObject"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Nature Object"
+        Me.Text = "Desktop Object"
         Me.TopMost = True
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         Me.ContextMenuStrip1.ResumeLayout(False)

@@ -27,12 +27,12 @@ Partial Class Form_AnimationBuilder
         Me.Button_Save = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ListBox_Images = New System.Windows.Forms.ListBox()
-        Me.RectangleShape2 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.ShapeContainer2 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
-        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel_Left = New System.Windows.Forms.Panel()
         Me.PixelBox_Left = New Desktop_Widgets.PixelBox()
         Me.ShapeContainer3 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.NumericUpDown_Delay = New System.Windows.Forms.NumericUpDown()
@@ -49,34 +49,35 @@ Partial Class Form_AnimationBuilder
         Me.RadioButton_TypeGroundPet = New System.Windows.Forms.RadioButton()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Panel_Right = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.PixelBox_Right = New Desktop_Widgets.PixelBox()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RectangleShape3 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.Button_SetDelay = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.RectangleShape4 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
-        Me.TextBox_Name = New System.Windows.Forms.TextBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.ShapeContainer5 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Panel8 = New System.Windows.Forms.Panel()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.NumericUpDown_FPS = New System.Windows.Forms.NumericUpDown()
+        Me.Label_Animation_Frame_Count = New System.Windows.Forms.Label()
+        Me.ComboBox_Name = New System.Windows.Forms.ComboBox()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
+        Me.Panel_Left.SuspendLayout()
         CType(Me.PixelBox_Left, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown_Delay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
-        Me.Panel5.SuspendLayout()
+        Me.Panel_Right.SuspendLayout()
         CType(Me.PixelBox_Right, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
         Me.Panel8.SuspendLayout()
-        Me.ContextMenuStrip1.SuspendLayout()
+        CType(Me.NumericUpDown_FPS, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel9.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button_Save
@@ -86,9 +87,9 @@ Partial Class Form_AnimationBuilder
         Me.Button_Save.FlatAppearance.BorderSize = 0
         Me.Button_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_Save.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_Save.Location = New System.Drawing.Point(424, 528)
+        Me.Button_Save.Location = New System.Drawing.Point(32, 376)
         Me.Button_Save.Name = "Button_Save"
-        Me.Button_Save.Size = New System.Drawing.Size(120, 32)
+        Me.Button_Save.Size = New System.Drawing.Size(192, 40)
         Me.Button_Save.TabIndex = 74
         Me.Button_Save.Text = "Save"
         Me.Button_Save.UseVisualStyleBackColor = False
@@ -105,29 +106,33 @@ Partial Class Form_AnimationBuilder
         '
         'ListBox_Images
         '
-        Me.ListBox_Images.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ListBox_Images.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
         Me.ListBox_Images.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.ListBox_Images.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.ListBox_Images.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListBox_Images.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ListBox_Images.FormattingEnabled = True
         Me.ListBox_Images.HorizontalScrollbar = True
-        Me.ListBox_Images.Location = New System.Drawing.Point(16, 32)
+        Me.ListBox_Images.Location = New System.Drawing.Point(0, 24)
         Me.ListBox_Images.Name = "ListBox_Images"
-        Me.ListBox_Images.Size = New System.Drawing.Size(520, 117)
+        Me.ListBox_Images.Size = New System.Drawing.Size(635, 538)
         Me.ListBox_Images.TabIndex = 77
         '
-        'RectangleShape2
+        'ContextMenuStrip1
         '
-        Me.RectangleShape2.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.RectangleShape2.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque
-        Me.RectangleShape2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.RectangleShape2.CornerRadius = 3
-        Me.RectangleShape2.FillColor = System.Drawing.Color.WhiteSmoke
-        Me.RectangleShape2.FillGradientColor = System.Drawing.Color.WhiteSmoke
-        Me.RectangleShape2.Location = New System.Drawing.Point(8, 24)
-        Me.RectangleShape2.Name = "RectangleShape2"
-        Me.RectangleShape2.SelectionColor = System.Drawing.Color.Transparent
-        Me.RectangleShape2.Size = New System.Drawing.Size(536, 136)
+        Me.ContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClearToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.ShowImageMargin = False
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(88, 28)
+        '
+        'ClearToolStripMenuItem
+        '
+        Me.ClearToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(87, 24)
+        Me.ClearToolStripMenuItem.Text = "Clear"
         '
         'RectangleShape1
         '
@@ -145,43 +150,36 @@ Partial Class Form_AnimationBuilder
         'Panel1
         '
         Me.Panel1.AllowDrop = True
-        Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.ListBox_Images)
-        Me.Panel1.Controls.Add(Me.ShapeContainer2)
-        Me.Panel1.Location = New System.Drawing.Point(0, 352)
+        Me.Panel1.Controls.Add(Me.Label_Animation_Frame_Count)
+        Me.Panel1.Controls.Add(Me.Label5)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(440, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(552, 168)
+        Me.Panel1.Size = New System.Drawing.Size(635, 582)
         Me.Panel1.TabIndex = 79
         '
         'Label5
         '
+        Me.Label5.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Label5.Dock = System.Windows.Forms.DockStyle.Top
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(8, 0)
+        Me.Label5.Location = New System.Drawing.Point(0, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(544, 24)
+        Me.Label5.Size = New System.Drawing.Size(635, 24)
         Me.Label5.TabIndex = 79
         Me.Label5.Text = "Drag Drop Images Here!"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'ShapeContainer2
+        'Panel_Left
         '
-        Me.ShapeContainer2.Location = New System.Drawing.Point(0, 0)
-        Me.ShapeContainer2.Margin = New System.Windows.Forms.Padding(0)
-        Me.ShapeContainer2.Name = "ShapeContainer2"
-        Me.ShapeContainer2.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.RectangleShape2})
-        Me.ShapeContainer2.Size = New System.Drawing.Size(552, 168)
-        Me.ShapeContainer2.TabIndex = 78
-        Me.ShapeContainer2.TabStop = False
-        '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Controls.Add(Me.PixelBox_Left)
-        Me.Panel2.Controls.Add(Me.ShapeContainer3)
-        Me.Panel2.Location = New System.Drawing.Point(120, 16)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(160, 176)
-        Me.Panel2.TabIndex = 80
+        Me.Panel_Left.Controls.Add(Me.Label1)
+        Me.Panel_Left.Controls.Add(Me.PixelBox_Left)
+        Me.Panel_Left.Controls.Add(Me.ShapeContainer3)
+        Me.Panel_Left.Location = New System.Drawing.Point(56, 8)
+        Me.Panel_Left.Name = "Panel_Left"
+        Me.Panel_Left.Size = New System.Drawing.Size(160, 176)
+        Me.Panel_Left.TabIndex = 80
         '
         'PixelBox_Left
         '
@@ -214,7 +212,7 @@ Partial Class Form_AnimationBuilder
         Me.NumericUpDown_Delay.Name = "NumericUpDown_Delay"
         Me.NumericUpDown_Delay.Size = New System.Drawing.Size(56, 20)
         Me.NumericUpDown_Delay.TabIndex = 81
-        Me.NumericUpDown_Delay.Value = New Decimal(New Integer() {150, 0, 0, 0})
+        Me.NumericUpDown_Delay.Value = New Decimal(New Integer() {33, 0, 0, 0})
         '
         'Label2
         '
@@ -275,7 +273,7 @@ Partial Class Form_AnimationBuilder
         Me.Panel3.Controls.Add(Me.RadioButton_TypeObject)
         Me.Panel3.Controls.Add(Me.RadioButton_TypeFlyingPet)
         Me.Panel3.Controls.Add(Me.RadioButton_TypeGroundPet)
-        Me.Panel3.Location = New System.Drawing.Point(48, 232)
+        Me.Panel3.Location = New System.Drawing.Point(0, 192)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(392, 40)
         Me.Panel3.TabIndex = 88
@@ -315,9 +313,9 @@ Partial Class Form_AnimationBuilder
         Me.RadioButton_TypeFlyingPet.AutoSize = True
         Me.RadioButton_TypeFlyingPet.Location = New System.Drawing.Point(168, 8)
         Me.RadioButton_TypeFlyingPet.Name = "RadioButton_TypeFlyingPet"
-        Me.RadioButton_TypeFlyingPet.Size = New System.Drawing.Size(70, 17)
+        Me.RadioButton_TypeFlyingPet.Size = New System.Drawing.Size(71, 17)
         Me.RadioButton_TypeFlyingPet.TabIndex = 86
-        Me.RadioButton_TypeFlyingPet.Text = "Flying pet"
+        Me.RadioButton_TypeFlyingPet.Text = "Flying Pet"
         Me.RadioButton_TypeFlyingPet.UseVisualStyleBackColor = True
         '
         'RadioButton_TypeGroundPet
@@ -326,10 +324,10 @@ Partial Class Form_AnimationBuilder
         Me.RadioButton_TypeGroundPet.Checked = True
         Me.RadioButton_TypeGroundPet.Location = New System.Drawing.Point(80, 8)
         Me.RadioButton_TypeGroundPet.Name = "RadioButton_TypeGroundPet"
-        Me.RadioButton_TypeGroundPet.Size = New System.Drawing.Size(78, 17)
+        Me.RadioButton_TypeGroundPet.Size = New System.Drawing.Size(79, 17)
         Me.RadioButton_TypeGroundPet.TabIndex = 85
         Me.RadioButton_TypeGroundPet.TabStop = True
-        Me.RadioButton_TypeGroundPet.Text = "Ground pet"
+        Me.RadioButton_TypeGroundPet.Text = "Ground Pet"
         Me.RadioButton_TypeGroundPet.UseVisualStyleBackColor = True
         '
         'Label7
@@ -347,20 +345,20 @@ Partial Class Form_AnimationBuilder
         Me.Panel4.Controls.Add(Me.RadioButton_FacingLeft)
         Me.Panel4.Controls.Add(Me.Label7)
         Me.Panel4.Controls.Add(Me.RadioButton_FacingRight)
-        Me.Panel4.Location = New System.Drawing.Point(48, 272)
+        Me.Panel4.Location = New System.Drawing.Point(0, 272)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(216, 40)
         Me.Panel4.TabIndex = 90
         '
-        'Panel5
+        'Panel_Right
         '
-        Me.Panel5.Controls.Add(Me.Label3)
-        Me.Panel5.Controls.Add(Me.PixelBox_Right)
-        Me.Panel5.Controls.Add(Me.ShapeContainer1)
-        Me.Panel5.Location = New System.Drawing.Point(280, 16)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(160, 176)
-        Me.Panel5.TabIndex = 91
+        Me.Panel_Right.Controls.Add(Me.Label3)
+        Me.Panel_Right.Controls.Add(Me.PixelBox_Right)
+        Me.Panel_Right.Controls.Add(Me.ShapeContainer1)
+        Me.Panel_Right.Location = New System.Drawing.Point(216, 8)
+        Me.Panel_Right.Name = "Panel_Right"
+        Me.Panel_Right.Size = New System.Drawing.Size(160, 176)
+        Me.Panel_Right.TabIndex = 91
         '
         'Label3
         '
@@ -410,25 +408,10 @@ Partial Class Form_AnimationBuilder
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.Location = New System.Drawing.Point(120, 8)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(88, 20)
+        Me.Label8.Size = New System.Drawing.Size(128, 20)
         Me.Label8.TabIndex = 92
-        Me.Label8.Text = " Milliseconds"
+        Me.Label8.Text = " Milliseconds      or"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Button_SetDelay
-        '
-        Me.Button_SetDelay.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Button_SetDelay.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Button_SetDelay.FlatAppearance.BorderSize = 0
-        Me.Button_SetDelay.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button_SetDelay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_SetDelay.Location = New System.Drawing.Point(456, 16)
-        Me.Button_SetDelay.Name = "Button_SetDelay"
-        Me.Button_SetDelay.Size = New System.Drawing.Size(88, 32)
-        Me.Button_SetDelay.TabIndex = 93
-        Me.Button_SetDelay.Text = "Set Delay"
-        Me.Button_SetDelay.UseVisualStyleBackColor = False
-        Me.Button_SetDelay.Visible = False
         '
         'Label9
         '
@@ -440,122 +423,128 @@ Partial Class Form_AnimationBuilder
         Me.Label9.Text = "Name:"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'RectangleShape4
-        '
-        Me.RectangleShape4.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.RectangleShape4.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque
-        Me.RectangleShape4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.RectangleShape4.CornerRadius = 3
-        Me.RectangleShape4.FillColor = System.Drawing.Color.WhiteSmoke
-        Me.RectangleShape4.FillGradientColor = System.Drawing.Color.WhiteSmoke
-        Me.RectangleShape4.Location = New System.Drawing.Point(80, 8)
-        Me.RectangleShape4.Name = "RectangleShape4"
-        Me.RectangleShape4.SelectionColor = System.Drawing.Color.Transparent
-        Me.RectangleShape4.Size = New System.Drawing.Size(304, 24)
-        '
-        'TextBox_Name
-        '
-        Me.TextBox_Name.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.TextBox_Name.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox_Name.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.TextBox_Name.Location = New System.Drawing.Point(88, 16)
-        Me.TextBox_Name.Name = "TextBox_Name"
-        Me.TextBox_Name.Size = New System.Drawing.Size(288, 13)
-        Me.TextBox_Name.TabIndex = 97
-        '
         'Panel6
         '
+        Me.Panel6.Controls.Add(Me.ComboBox_Name)
         Me.Panel6.Controls.Add(Me.Label9)
-        Me.Panel6.Controls.Add(Me.TextBox_Name)
-        Me.Panel6.Controls.Add(Me.ShapeContainer5)
-        Me.Panel6.Location = New System.Drawing.Point(48, 192)
+        Me.Panel6.Location = New System.Drawing.Point(0, 232)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(392, 40)
+        Me.Panel6.Size = New System.Drawing.Size(232, 40)
         Me.Panel6.TabIndex = 98
-        '
-        'ShapeContainer5
-        '
-        Me.ShapeContainer5.Location = New System.Drawing.Point(0, 0)
-        Me.ShapeContainer5.Margin = New System.Windows.Forms.Padding(0)
-        Me.ShapeContainer5.Name = "ShapeContainer5"
-        Me.ShapeContainer5.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.RectangleShape4})
-        Me.ShapeContainer5.Size = New System.Drawing.Size(392, 40)
-        Me.ShapeContainer5.TabIndex = 98
-        Me.ShapeContainer5.TabStop = False
         '
         'Panel7
         '
         Me.Panel7.Controls.Add(Me.Label4)
         Me.Panel7.Controls.Add(Me.ComboBox_Animation)
-        Me.Panel7.Location = New System.Drawing.Point(264, 272)
+        Me.Panel7.Location = New System.Drawing.Point(232, 232)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(200, 40)
         Me.Panel7.TabIndex = 99
         '
         'Panel8
         '
+        Me.Panel8.Controls.Add(Me.Label10)
+        Me.Panel8.Controls.Add(Me.NumericUpDown_FPS)
         Me.Panel8.Controls.Add(Me.Label8)
         Me.Panel8.Controls.Add(Me.NumericUpDown_Delay)
         Me.Panel8.Controls.Add(Me.Label2)
-        Me.Panel8.Location = New System.Drawing.Point(48, 312)
+        Me.Panel8.Location = New System.Drawing.Point(0, 312)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(216, 32)
+        Me.Panel8.Size = New System.Drawing.Size(392, 32)
         Me.Panel8.TabIndex = 100
         '
-        'ContextMenuStrip1
+        'Label10
         '
-        Me.ContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClearToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.ShowImageMargin = False
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(156, 50)
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(240, 8)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(48, 20)
+        Me.Label10.TabIndex = 93
+        Me.Label10.Text = "FPS:"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'ClearToolStripMenuItem
+        'NumericUpDown_FPS
         '
-        Me.ClearToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
-        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(155, 24)
-        Me.ClearToolStripMenuItem.Text = "Clear"
+        Me.NumericUpDown_FPS.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.NumericUpDown_FPS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_FPS.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.NumericUpDown_FPS.Location = New System.Drawing.Point(296, 8)
+        Me.NumericUpDown_FPS.Maximum = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.NumericUpDown_FPS.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NumericUpDown_FPS.Name = "NumericUpDown_FPS"
+        Me.NumericUpDown_FPS.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_FPS.TabIndex = 94
+        Me.NumericUpDown_FPS.Value = New Decimal(New Integer() {30, 0, 0, 0})
+        '
+        'Label_Animation_Frame_Count
+        '
+        Me.Label_Animation_Frame_Count.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Label_Animation_Frame_Count.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Label_Animation_Frame_Count.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_Animation_Frame_Count.Location = New System.Drawing.Point(0, 562)
+        Me.Label_Animation_Frame_Count.Name = "Label_Animation_Frame_Count"
+        Me.Label_Animation_Frame_Count.Size = New System.Drawing.Size(635, 20)
+        Me.Label_Animation_Frame_Count.TabIndex = 101
+        Me.Label_Animation_Frame_Count.Text = "Animation Frame Count: "
+        Me.Label_Animation_Frame_Count.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'ComboBox_Name
+        '
+        Me.ComboBox_Name.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ComboBox_Name.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox_Name.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ComboBox_Name.FormattingEnabled = True
+        Me.ComboBox_Name.Location = New System.Drawing.Point(80, 8)
+        Me.ComboBox_Name.Name = "ComboBox_Name"
+        Me.ComboBox_Name.Size = New System.Drawing.Size(144, 21)
+        Me.ComboBox_Name.TabIndex = 102
+        '
+        'Panel9
+        '
+        Me.Panel9.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.Panel9.Controls.Add(Me.Panel_Left)
+        Me.Panel9.Controls.Add(Me.Button_Save)
+        Me.Panel9.Controls.Add(Me.Panel8)
+        Me.Panel9.Controls.Add(Me.Panel3)
+        Me.Panel9.Controls.Add(Me.Panel7)
+        Me.Panel9.Controls.Add(Me.Panel4)
+        Me.Panel9.Controls.Add(Me.Panel6)
+        Me.Panel9.Controls.Add(Me.Panel_Right)
+        Me.Panel9.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Panel9.Location = New System.Drawing.Point(0, 0)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Size = New System.Drawing.Size(440, 582)
+        Me.Panel9.TabIndex = 101
         '
         'Form_AnimationBuilder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(552, 569)
-        Me.Controls.Add(Me.Panel8)
-        Me.Controls.Add(Me.Button_SetDelay)
-        Me.Controls.Add(Me.Panel7)
-        Me.Controls.Add(Me.Panel6)
-        Me.Controls.Add(Me.Panel5)
-        Me.Controls.Add(Me.Panel4)
-        Me.Controls.Add(Me.Panel3)
-        Me.Controls.Add(Me.Panel2)
+        Me.ClientSize = New System.Drawing.Size(1075, 582)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.Button_Save)
+        Me.Controls.Add(Me.Panel9)
         Me.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
-        Me.MaximizeBox = False
         Me.Name = "Form_AnimationBuilder"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Animation Builder"
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
+        Me.Panel_Left.ResumeLayout(False)
         CType(Me.PixelBox_Left, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown_Delay, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
-        Me.Panel5.ResumeLayout(False)
+        Me.Panel_Right.ResumeLayout(False)
         CType(Me.PixelBox_Right, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
-        Me.Panel6.PerformLayout()
         Me.Panel7.ResumeLayout(False)
         Me.Panel8.ResumeLayout(False)
-        Me.ContextMenuStrip1.ResumeLayout(False)
+        CType(Me.NumericUpDown_FPS, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel9.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -564,11 +553,9 @@ Partial Class Form_AnimationBuilder
     Friend WithEvents PixelBox_Left As PixelBox
     Private WithEvents Label1 As Label
     Friend WithEvents ListBox_Images As ListBox
-    Friend WithEvents RectangleShape2 As RectangleShape
     Friend WithEvents RectangleShape1 As RectangleShape
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents ShapeContainer2 As ShapeContainer
-    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Panel_Left As Panel
     Friend WithEvents ShapeContainer3 As ShapeContainer
     Friend WithEvents NumericUpDown_Delay As NumericUpDown
     Friend WithEvents Label2 As Label
@@ -583,22 +570,23 @@ Partial Class Form_AnimationBuilder
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents Panel5 As Panel
+    Friend WithEvents Panel_Right As Panel
     Private WithEvents Label3 As Label
     Friend WithEvents PixelBox_Right As PixelBox
     Friend WithEvents ShapeContainer1 As ShapeContainer
     Friend WithEvents RectangleShape3 As RectangleShape
     Friend WithEvents Label8 As Label
-    Friend WithEvents Button_SetDelay As Button
     Friend WithEvents Label9 As Label
-    Friend WithEvents RectangleShape4 As RectangleShape
-    Friend WithEvents TextBox_Name As TextBox
     Friend WithEvents Panel6 As Panel
-    Friend WithEvents ShapeContainer5 As ShapeContainer
     Friend WithEvents Panel7 As Panel
     Friend WithEvents Panel8 As Panel
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents ClearToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RadioButton_TypeNature As RadioButton
     Friend WithEvents RadioButton_TypeObject As RadioButton
+    Friend WithEvents NumericUpDown_FPS As NumericUpDown
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label_Animation_Frame_Count As Label
+    Friend WithEvents ComboBox_Name As ComboBox
+    Friend WithEvents Panel9 As Panel
 End Class
