@@ -17,6 +17,10 @@ Public Class Form_FlyingPet
     Public PetDir As String
 
     Public Animation_Dragging As Image
+    Public Animation_Dragging_Left As Image
+    Public Animation_Dragging_Right As Image
+    Public HasAnimation_Dragging As Boolean = False
+
     Public Animation_Falling As Image
     Public Animation_Flying_Left As Image
     Public Animation_Flying_Right As Image
@@ -47,10 +51,73 @@ Public Class Form_FlyingPet
     Dim TakeFlightDecision_Min As Integer = 3500
     Dim TakeFlightDecision_Max As Integer = 5000
 
-
-
     'Form_FlyingPet_Load
     Private Sub Form_FlyingPet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If File.Exists(PetDir & "\Flying Left.gif") Then
+            Animation_Flying_Left = Image.FromFile(PetDir & "\Flying Left.gif")
+            PixelBox_Pet.Image = Animation_Flying_Left
+        End If
+        If File.Exists(PetDir & "\Flying Right.gif") Then
+            Animation_Flying_Right = Image.FromFile(PetDir & "\Flying Right.gif")
+        End If
+
+        'Walking
+        If File.Exists(PetDir & "\Walking Left.gif") Then
+            Animation_Walking_Left = Image.FromFile(PetDir & "\Walking Left.gif")
+            HasAnimation_Walking = True
+        End If
+        If File.Exists(PetDir & "\Walking Right.gif") Then
+            Animation_Walking_Right = Image.FromFile(PetDir & "\Walking Right.gif")
+        End If
+
+        'Idling
+        If File.Exists(PetDir & "\Idling Left.gif") Then
+            Animation_Idling_Left = Image.FromFile(PetDir & "\Idling Left.gif")
+            HasAnimation_Idling = True
+        End If
+        If File.Exists(PetDir & "\Idling Right.gif") Then
+            Animation_Idling_Right = Image.FromFile(PetDir & "\Idling Right.gif")
+        End If
+
+        'Idling Alt
+        If File.Exists(PetDir & "\Idling Alt Left.gif") Then
+            Animation_IdlingAlt_Left = Image.FromFile(PetDir & "\Idling Alt Left.gif")
+            HasAnimation_IdlingAlt = True
+        End If
+        If File.Exists(PetDir & "\Idling Alt Right.gif") Then
+            Animation_IdlingAlt_Right = Image.FromFile(PetDir & "\Idling Alt Right.gif")
+        End If
+
+        'Dragging
+        If File.Exists(PetDir & "\Dragging.gif") Then
+            Animation_Dragging = Image.FromFile(PetDir & "\Dragging.gif")
+            HasAnimation_Dragging = True
+        Else
+            HasAnimation_Dragging = False
+        End If
+
+        'Dragging Left
+        If File.Exists(PetDir & "\Dragging Left.gif") Then
+            Animation_Dragging_Left = Image.FromFile(PetDir & "\Dragging Left.gif")
+        ElseIf File.Exists(PetDir & "\Idling Left.gif") Then
+            Animation_Dragging_Left = Image.FromFile(PetDir & "\Idling Left.gif")
+        ElseIf File.Exists(PetDir & "\Flying Left.gif") Then
+            Animation_Dragging_Left = Image.FromFile(PetDir & "\Flying Left.gif")
+        End If
+
+        'Dragging Right
+        If File.Exists(PetDir & "\Dragging Right.gif") Then
+            Animation_Dragging_Right = Image.FromFile(PetDir & "\Dragging Right.gif")
+        ElseIf File.Exists(PetDir & "\Idling Right.gif") Then
+            Animation_Dragging_Right = Image.FromFile(PetDir & "\Idling Right.gif")
+        ElseIf File.Exists(PetDir & "\Flying Right.gif") Then
+            Animation_Dragging_Right = Image.FromFile(PetDir & "\Flying Right.gif")
+        End If
+
+        Me.Text = "Pet - " & Path.GetFileName(PetDir)
+
+
+
         'Me.Width = PixelBox_Pet.Width
         'Me.Height = PixelBox_Pet.Height + PixelBox_Emote.Height
         For Each Display In Screen.AllScreens
@@ -266,34 +333,48 @@ Public Class Form_FlyingPet
         If IdleDecision <= Rand.Next(0, 100 + 1) Then
             Timer_Walking.Stop()
 
-            If IdleAltDecision <= Rand.Next(0, 100 + 1) Then
-                If MoveLeft = True Then
-                    If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
-                        PixelBox_Pet.Image = Animation_Idling_Left
-                        'Console.WriteLine("Animation_Idling_Left")
+            If HasAnimation_IdlingAlt Then
+                If IdleAltDecision <= Rand.Next(0, 100 + 1) Then
+                    If MoveLeft = True Then
+                        If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
+                            PixelBox_Pet.Image = Animation_Idling_Left
+                            Console.WriteLine("Animation_Idling_Left")
+                        End If
+                    Else
+                        If PixelBox_Pet.Image IsNot Animation_Idling_Right Then
+                            PixelBox_Pet.Image = Animation_Idling_Right
+                            Console.WriteLine("Animation_Idling_Right")
+                        End If
                     End If
                 Else
-                    If PixelBox_Pet.Image IsNot Animation_Idling_Right Then
-                        PixelBox_Pet.Image = Animation_Idling_Right
-                        'Console.WriteLine("Animation_Idling_Right")
+                    If MoveLeft = True Then
+                        If PixelBox_Pet.Image IsNot Animation_IdlingAlt_Left Then
+                            PixelBox_Pet.Image = Animation_IdlingAlt_Left
+                            Console.WriteLine("Animation_IdlingAlt_Left")
+                        End If
+                    Else
+                        If PixelBox_Pet.Image IsNot Animation_IdlingAlt_Right Then
+                            PixelBox_Pet.Image = Animation_IdlingAlt_Right
+                            Console.WriteLine("Animation_IdlingAlt_Right")
+                        End If
                     End If
                 End If
             Else
                 If MoveLeft = True Then
-                    If PixelBox_Pet.Image IsNot Animation_IdlingAlt_Left Then
-                        PixelBox_Pet.Image = Animation_IdlingAlt_Left
-                        'Console.WriteLine("Animation_IdlingAlt_Left")
+                    If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
+                        PixelBox_Pet.Image = Animation_Idling_Left
+                        Console.WriteLine("Animation_Idling_Left")
                     End If
                 Else
-                    If PixelBox_Pet.Image IsNot Animation_IdlingAlt_Right Then
-                        PixelBox_Pet.Image = Animation_IdlingAlt_Right
-                        'Console.WriteLine("Animation_IdlingAlt_Right")
+                    If PixelBox_Pet.Image IsNot Animation_Idling_Right Then
+                        PixelBox_Pet.Image = Animation_Idling_Right
+                        Console.WriteLine("Animation_Idling_Right")
                     End If
                 End If
             End If
 
         Else
-            If HasAnimation_Walking = True Then
+                If HasAnimation_Walking = True Then
                 Timer_Walking.Start()
             End If
         End If
@@ -421,13 +502,23 @@ Public Class Form_FlyingPet
             End If
 
         Else
-            If PixelBox_Pet.Image IsNot Animation_Dragging Then
-                PixelBox_Pet.Image = Animation_Dragging
+
+            If HasAnimation_Dragging = True Then
+                If PixelBox_Pet.Image IsNot Animation_Dragging Then
+                    PixelBox_Pet.Image = Animation_Dragging
+                End If
+            Else
+                If MoveLeft = True Then
+                    If PixelBox_Pet.Image IsNot Animation_Dragging_Left Then
+                        PixelBox_Pet.Image = Animation_Dragging_Left
+                    End If
+                Else
+                    If PixelBox_Pet.Image IsNot Animation_Dragging_Right Then
+                        PixelBox_Pet.Image = Animation_Dragging_Right
+                    End If
+                End If
             End If
 
-            'If MoveLeft = True Then
-            'PictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipX)
-            'End If
         End If
     End Sub
     'ScalePet()
@@ -467,16 +558,6 @@ Public Class Form_FlyingPet
             End If
 
             Console.WriteLine("PixelBox_Pet_MouseDown")
-        End If
-    End Sub
-    'PoopToolStripMenuItem - Click
-    Private Sub PoopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PoopToolStripMenuItem.Click
-        Dim Poop As New Form_GroundPoop
-        Poop.Show()
-        If MoveLeft = True Then
-            Poop.Location = New Point(Me.Location.X + Me.Width, Display.WorkingArea.Bottom - Poop.Height)
-        Else
-            Poop.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Poop.Height)
         End If
     End Sub
     'FollowCursorToolStripMenuItem - CheckedChanged

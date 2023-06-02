@@ -285,13 +285,13 @@ Public Class Form_GDevCharacter
     End Sub
     'PoopToolStripMenuItem - Click
     Private Sub PoopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PoopToolStripMenuItem.Click
-        Dim Poop As New Form_GroundPoop
-        Poop.Show()
-        If TurnLeft = True Then
-            Poop.Location = New Point(Me.Location.X + Me.Width, Screen.PrimaryScreen.WorkingArea.Bottom - Poop.Height)
-        Else
-            Poop.Location = New Point(Me.Location.X, Screen.PrimaryScreen.WorkingArea.Bottom - Poop.Height)
-        End If
+        'Dim Poop As New Form_GroundPoop
+        'Poop.Show()
+        'If TurnLeft = True Then
+        'Poop.Location = New Point(Me.Location.X + Me.Width, Screen.PrimaryScreen.WorkingArea.Bottom - Poop.Height)
+        'Else
+        'Poop.Location = New Point(Me.Location.X, Screen.PrimaryScreen.WorkingArea.Bottom - Poop.Height)
+        'End If
     End Sub
     'FollowCursorToolStripMenuItem - CheckedChanged
     Private Sub FollowCursorToolStripMenuItem_CheckedChanged(sender As Object, e As EventArgs) Handles FollowCursorToolStripMenuItem.CheckedChanged

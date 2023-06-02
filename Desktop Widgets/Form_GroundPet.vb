@@ -11,6 +11,8 @@ Public Class Form_GroundPet
     Public currentlyAnimating As Boolean = False
     Public PetDir As String
 
+    Public Animation_Dragging As Image
+    Public HasAnimation_Dragging As Boolean = False
     Public Animation_Dragging_Left As Bitmap
     Public Animation_Dragging_Right As Bitmap
     Public Animation_Falling_Left As Bitmap
@@ -48,6 +50,62 @@ Public Class Form_GroundPet
     Dim IdleDecision_Max As Integer = 3500
     'Form_GroundPet - Load
     Private Sub Form_GroundPet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Walking
+        If File.Exists(PetDir & "\Walking Left.gif") Then
+            Animation_Walking_Left = New Bitmap(PetDir & "\Walking Left.gif")
+        End If
+        If File.Exists(PetDir & "\Walking Right.gif") Then
+            Animation_Walking_Right = New Bitmap(PetDir & "\Walking Right.gif")
+        End If
+
+        'Idling
+        If File.Exists(PetDir & "\Idling Left.gif") Then
+            Animation_Idling_Left = Image.FromFile(PetDir & "\Idling Left.gif")
+        End If
+        If File.Exists(PetDir & "\Idling Right.gif") Then
+            Animation_Idling_Right = Image.FromFile(PetDir & "\Idling Right.gif")
+            PixelBox_Pet.Image = Animation_Idling_Right
+        End If
+
+        'Idling Alt
+        If File.Exists(PetDir & "\Idling Alt Left.gif") Then
+            Animation_IdlingAlt_Left = New Bitmap(PetDir & "\Idling Alt Left.gif")
+        End If
+        If File.Exists(PetDir & "\Idling Alt Right.gif") Then
+            Animation_IdlingAlt_Right = New Bitmap(PetDir & "\Idling Alt Right.gif")
+        End If
+
+        'Dragging
+        If File.Exists(PetDir & "\Dragging.gif") Then
+            Animation_Dragging = New Bitmap(PetDir & "\Dragging.gif")
+            HasAnimation_Dragging = True
+        End If
+        If File.Exists(PetDir & "\Dragging Left.gif") Then
+            Animation_Dragging_Left = New Bitmap(PetDir & "\Dragging Left.gif")
+        Else
+            Animation_Dragging_Left = New Bitmap(PetDir & "\Idling Left.gif")
+        End If
+        If File.Exists(PetDir & "\Dragging Right.gif") Then
+            Animation_Dragging_Right = New Bitmap(PetDir & "\Dragging Right.gif")
+        Else
+            Animation_Dragging_Right = New Bitmap(PetDir & "\Idling Right.gif")
+        End If
+
+        'Falling
+        If File.Exists(PetDir & "\Falling Left.gif") Then
+            Animation_Falling_Left = New Bitmap(PetDir & "\Falling Left.gif")
+        Else
+            Animation_Falling_Left = New Bitmap(PetDir & "\Idling Left.gif")
+        End If
+        If File.Exists(PetDir & "\Falling Right.gif") Then
+            Animation_Falling_Right = New Bitmap(PetDir & "\Falling Right.gif")
+        Else
+            Animation_Falling_Right = New Bitmap(PetDir & "\Idling Right.gif")
+        End If
+
+        Me.Text = "Pet - " & Path.GetFileName(PetDir)
+
+
         For Each Displays In Screen.AllScreens
             DisplayToolStripComboBox.Items.Add(Displays.DeviceName.Replace("\\.\", ""))
         Next
@@ -229,15 +287,10 @@ Public Class Form_GroundPet
                 If TurnLeft = True Then
                     If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
                         PixelBox_Pet.Image = Animation_Idling_Left
-                        'CurrentAnimatedImage = Animation_Idling_Left
-                        'PixelBox_Pet.Image = CurrentAnimatedImage
-                        'Console.WriteLine("Animation_Idling_Left")
                     End If
                 Else
                     If PixelBox_Pet.Image IsNot Animation_Idling_Right Then
                         PixelBox_Pet.Image = Animation_Idling_Right
-                        'CurrentAnimatedImage = Animation_Idling_Right
-                        'Console.WriteLine("Animation_Idling_Right")
                     End If
                 End If
             Else
@@ -342,22 +395,22 @@ Public Class Form_GroundPet
             End If
 
         Else
-
-            If TurnLeft = True Then
-                If PixelBox_Pet.Image IsNot Animation_Dragging_Left Then
-                    PixelBox_Pet.Image = Animation_Dragging_Left
-                    'CurrentAnimatedImage = Animation_Dragging
+            If HasAnimation_Dragging = True Then
+                If PixelBox_Pet.Image IsNot Animation_Dragging Then
+                    PixelBox_Pet.Image = Animation_Dragging
                 End If
             Else
-                If PixelBox_Pet.Image IsNot Animation_Dragging_Right Then
-                    PixelBox_Pet.Image = Animation_Dragging_Right
-                    'CurrentAnimatedImage = Animation_Dragging
+                If TurnLeft = True Then
+                    If PixelBox_Pet.Image IsNot Animation_Dragging_Left Then
+                        PixelBox_Pet.Image = Animation_Dragging_Left
+                    End If
+                Else
+                    If PixelBox_Pet.Image IsNot Animation_Dragging_Right Then
+                        PixelBox_Pet.Image = Animation_Dragging_Right
+                    End If
                 End If
             End If
 
-            'If TurnLeft = True Then
-            'PictureBox_Pet.Image.RotateFlip(RotateFlipType.RotateNoneFlipX)
-            'End If
         End If
     End Sub
     'ScalePet()
@@ -395,18 +448,6 @@ Public Class Form_GroundPet
             End If
 
             Dragging = False
-        End If
-    End Sub
-    'PoopToolStripMenuItem - Click
-    Private Sub PoopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PoopToolStripMenuItem.Click
-        Dim Poop As New Form_GroundPoop
-        Poop.Show()
-        Poop.ScaleObject(ScaleToolStripComboBox.SelectedIndex + 1)
-
-        If TurnLeft = True Then
-            Poop.Location = New Point(Me.Location.X + Me.Width - Poop.Width, Display.WorkingArea.Bottom - Poop.Height)
-        Else
-            Poop.Location = New Point(Me.Location.X + CInt(Poop.Width / 2), Display.WorkingArea.Bottom - Poop.Height)
         End If
     End Sub
     'FollowCursorToolStripMenuItem - CheckedChanged

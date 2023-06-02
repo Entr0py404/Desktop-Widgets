@@ -8,9 +8,9 @@ Public Class Form_Pets
         MenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
         ContextMenuStrip2.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
 
-        LoadGroundPets("Pets\Ground")
-        LoadFlyingPets("Pets\Flying")
-        Label_AssetCount.Text = GroundPetsCount & " Pets"
+        LoadPetsDirs("Pets\Ground\", ComboBox_GroundArtist)
+        LoadPetsDirs("Pets\Flying\", ComboBox_FlyingArtist)
+        LoadGroundPets("Pets\Ground\" & ComboBox_GroundArtist.Text)
 
         'ComboBox_Display.Items.Add("ALL")
         For Each displays In Screen.AllScreens
@@ -22,6 +22,19 @@ Public Class Form_Pets
         End If
 
         ComboBox_Display.SelectedIndex = 0
+    End Sub
+    'LoadPetsDirs()
+    Private Sub LoadPetsDirs(Pet_Path As String, Artist_Combobox As ComboBox)
+        Artist_Combobox.Items.Clear()
+        Artist_Combobox.BeginUpdate()
+        For Each pet_directory As String In Directory.GetDirectories(Pet_Path)
+            If Not Path.GetFileName(pet_directory).ToLower = "all" Then
+                Artist_Combobox.Items.Add(Path.GetFileName(pet_directory))
+            End If
+        Next
+        Artist_Combobox.Items.Add("All") 'Add all to the end of the list
+        Artist_Combobox.SelectedIndex = 0
+        Artist_Combobox.EndUpdate()
     End Sub
     'LoadGroundPets()
     Private Sub LoadGroundPets(path As String)
@@ -35,16 +48,17 @@ Public Class Form_Pets
             GroundPetsCount = 0
             Dim dir As New DirectoryInfo(path)
             Dim directories As DirectoryInfo() = dir.GetDirectories().ToArray()
-            For Each directory As DirectoryInfo In directories
-                If File.Exists(path & "\" & directory.Name & "\Walking Right.gif") Then
-                    CreateNewPanel(FlowLayoutPanel1, path & "\" & directory.Name & "\Walking Right.gif", directory.Name, Color.WhiteSmoke)
+            For Each pet_directory As DirectoryInfo In directories
+                If File.Exists(path & "\" & pet_directory.Name & "\Idling Right.gif") Then
+                    CreateNewPanel(FlowLayoutPanel1, path & "\" & pet_directory.Name & "\Idling Right.gif", pet_directory.Name, Color.WhiteSmoke)
                     GroundPetsCount += 1
-                    'Pets_ImageList.Images.Add(Image.FromFile(path & "\" & directory.Name & "\Idling Left.gif"))
-                    'pets_ListView.Items.Add(directory.Name, Pets_ImageList.Images.Count - 1)
                 End If
             Next
+            Label_AssetCount.Text = GroundPetsCount & " Pets"
             'Label_Status.Text = "Load Completed."
-            FlowLayoutPanel1.Visible = True
+            If GroundPetsToolStripMenuItem.BackColor = Color.RoyalBlue Then
+                FlowLayoutPanel1.Visible = True
+            End If
         End If
     End Sub
     'LoadFlyingPets()
@@ -59,16 +73,17 @@ Public Class Form_Pets
             FlyingPetsCount = 0
             Dim dir As New DirectoryInfo(path)
             Dim directories As DirectoryInfo() = dir.GetDirectories().ToArray()
-            For Each directory As DirectoryInfo In directories
-                If File.Exists(path & "\" & directory.Name & "\Flying Right.gif") Then
-                    CreateNewPanel(FlowLayoutPanel2, path & "\" & directory.Name & "\Flying Right.gif", directory.Name, Color.WhiteSmoke)
+            For Each pet_directory As DirectoryInfo In directories
+                If File.Exists(path & "\" & pet_directory.Name & "\Flying Right.gif") Then
+                    CreateNewPanel(FlowLayoutPanel2, path & "\" & pet_directory.Name & "\Flying Right.gif", pet_directory.Name, Color.WhiteSmoke)
                     FlyingPetsCount += 1
-                    'Pets_ImageList.Images.Add(Image.FromFile(path & "\" & directory.Name & "\Flying Left.gif"))
-                    'pets_ListView.Items.Add(directory.Name, Pets_ImageList.Images.Count - 1)
                 End If
             Next
+            Label_AssetCount.Text = FlyingPetsCount & " Pets"
             'Label_Status.Text = "Load Completed."
-            'FlowLayoutPanel2.Visible = True
+            If FlyingPetsToolStripMenuItem.BackColor = Color.RoyalBlue Then
+                FlowLayoutPanel2.Visible = True
+            End If
         End If
     End Sub
     'Button_CloseSelected - Click
@@ -100,22 +115,26 @@ Public Class Form_Pets
     Private Sub GroundPetsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GroundPetsToolStripMenuItem.Click
         FlowLayoutPanel1.Visible = True
         FlowLayoutPanel2.Visible = False
+        ComboBox_GroundArtist.Visible = True
+        ComboBox_FlyingArtist.Visible = False
         Label_AssetCount.Text = GroundPetsCount & " Pets"
         ResetToolStripMenuItemBackGroundColors()
         GroundPetsToolStripMenuItem.BackColor = Color.RoyalBlue
     End Sub
-    'FlyingPetsTextToolStripMenuItem - Click
-    Private Sub FlyingPetsTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FlyingPetsTextToolStripMenuItem.Click
+    'FlyingPetsToolStripMenuItem - Click
+    Private Sub FlyingPetsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FlyingPetsToolStripMenuItem.Click
         FlowLayoutPanel1.Visible = False
         FlowLayoutPanel2.Visible = True
+        ComboBox_GroundArtist.Visible = False
+        ComboBox_FlyingArtist.Visible = True
         Label_AssetCount.Text = FlyingPetsCount & " Pets"
         ResetToolStripMenuItemBackGroundColors()
-        FlyingPetsTextToolStripMenuItem.BackColor = Color.RoyalBlue
+        FlyingPetsToolStripMenuItem.BackColor = Color.RoyalBlue
     End Sub
     'ResetToolStripMenuItemBackGroundColors()
     Private Sub ResetToolStripMenuItemBackGroundColors()
         GroundPetsToolStripMenuItem.BackColor = Color.FromArgb(28, 30, 34)
-        FlyingPetsTextToolStripMenuItem.BackColor = Color.FromArgb(28, 30, 34)
+        FlyingPetsToolStripMenuItem.BackColor = Color.FromArgb(28, 30, 34)
     End Sub
     'DisplaySettingsChanged
     Public Sub DisplaySettingsChanged(ByVal sender As Object, ByVal e As EventArgs)
@@ -134,57 +153,11 @@ Public Class Form_Pets
     Private Sub PixelBox1_MouseClick(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Left Then
             Try
-                Dim Form_GroundPetNew = New Form_GroundPet
-
                 'Ground
-                Dim PetPath As String = Path.GetDirectoryName(DirectCast(sender, PixelBox).Text.ToString)
-                Console.WriteLine(PetPath)
-
-                'Walking
-                If File.Exists(PetPath & "\Walking Left.gif") Then
-                    Form_GroundPetNew.Animation_Walking_Left = New Bitmap(PetPath & "\Walking Left.gif")
-                End If
-                If File.Exists(PetPath & "\Walking Right.gif") Then
-                    Form_GroundPetNew.Animation_Walking_Right = New Bitmap(PetPath & "\Walking Right.gif")
-                End If
-
-                'Idling
-                If File.Exists(PetPath & "\Idling Left.gif") Then
-                    Form_GroundPetNew.Animation_Idling_Left = Image.FromFile(PetPath & "\Idling Left.gif")
-                    Form_GroundPetNew.PixelBox_Pet.Image = Form_GroundPetNew.Animation_Idling_Left
-                End If
-                If File.Exists(PetPath & "\Idling Right.gif") Then
-                    Form_GroundPetNew.Animation_Idling_Right = Image.FromFile(PetPath & "\Idling Right.gif")
-                End If
-
-                'Idling Alt
-                If File.Exists(PetPath & "\Idling Alt Left.gif") Then
-                    Form_GroundPetNew.Animation_IdlingAlt_Left = New Bitmap(PetPath & "\Idling Alt Left.gif")
-                End If
-                If File.Exists(PetPath & "\Idling Alt Right.gif") Then
-                    Form_GroundPetNew.Animation_IdlingAlt_Right = New Bitmap(PetPath & "\Idling Alt Right.gif")
-                End If
-
-                'Dragging
-                If File.Exists(PetPath & "\Dragging Left.gif") Then
-                    Form_GroundPetNew.Animation_Dragging_Left = New Bitmap(PetPath & "\Dragging Left.gif")
-                End If
-                If File.Exists(PetPath & "\Dragging Right.gif") Then
-                    Form_GroundPetNew.Animation_Dragging_Right = New Bitmap(PetPath & "\Dragging Right.gif")
-                End If
-
-                'Falling
-                If File.Exists(PetPath & "\Falling Left.gif") Then
-                    Form_GroundPetNew.Animation_Falling_Left = New Bitmap(PetPath & "\Falling Left.gif")
-                End If
-                If File.Exists(PetPath & "\Falling Right.gif") Then
-                    Form_GroundPetNew.Animation_Falling_Right = New Bitmap(PetPath & "\Falling Right.gif")
-                End If
-
-                Form_GroundPetNew.PetDir = PetPath
-
-                Form_GroundPetNew.Text = "Pet - " & Path.GetFileName(PetPath)
-
+                Dim Form_GroundPetNew = New Form_GroundPet
+                Dim PetDir As String = Path.GetDirectoryName(DirectCast(sender, PixelBox).Text.ToString)
+                Form_GroundPetNew.PetDir = PetDir
+                Console.WriteLine(PetDir)
                 Form_GroundPetNew.Show()
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
@@ -195,68 +168,11 @@ Public Class Form_Pets
     Private Sub PixelBox2_MouseClick(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Left Then
             Try
-                Dim Form_FlyingPetNew = New Form_FlyingPet
-
                 'Flying
-                Dim PetPath As String = Path.GetDirectoryName(DirectCast(sender, PixelBox).Text.ToString)
-
-                If File.Exists(PetPath & "\Flying Left.gif") Then
-                    Form_FlyingPetNew.Animation_Flying_Left = Image.FromFile(PetPath & "\Flying Left.gif")
-                    Form_FlyingPetNew.PixelBox_Pet.Image = Form_FlyingPetNew.Animation_Flying_Left
-                End If
-                If File.Exists(PetPath & "\Flying Right.gif") Then
-                    Form_FlyingPetNew.Animation_Flying_Right = Image.FromFile(PetPath & "\Flying Right.gif")
-                End If
-
-                'Walking
-                If File.Exists(PetPath & "\Walking Left.gif") Then
-                    Form_FlyingPetNew.Animation_Walking_Left = Image.FromFile(PetPath & "\Walking Left.gif")
-                    Form_FlyingPetNew.HasAnimation_Walking = True
-                End If
-                If File.Exists(PetPath & "\Walking Right.gif") Then
-                    Form_FlyingPetNew.Animation_Walking_Right = Image.FromFile(PetPath & "\Walking Right.gif")
-                End If
-
-                'Idling
-                If File.Exists(PetPath & "\Idling Left.gif") Then
-                    Form_FlyingPetNew.Animation_Idling_Left = Image.FromFile(PetPath & "\Idling Left.gif")
-                    Form_FlyingPetNew.HasAnimation_Idling = True
-                End If
-                If File.Exists(PetPath & "\Idling Right.gif") Then
-                    Form_FlyingPetNew.Animation_Idling_Right = Image.FromFile(PetPath & "\Idling Right.gif")
-                End If
-
-                'Idling Alt
-                If File.Exists(PetPath & "\Idling Alt Left.gif") Then
-                    Form_FlyingPetNew.Animation_IdlingAlt_Left = Image.FromFile(PetPath & "\Idling Alt Left.gif")
-                    Form_FlyingPetNew.HasAnimation_IdlingAlt = True
-                End If
-                If File.Exists(PetPath & "\Idling Alt Right.gif") Then
-                    Form_FlyingPetNew.Animation_IdlingAlt_Right = Image.FromFile(PetPath & "\Idling Alt Right.gif")
-                End If
-
-                'Hovering
-                'If File.Exists(PetPath & "\Hovering.gif") Then
-                'Form_FlyingPetNew.Animation_Hovering = Image.FromFile(PetPath & "Hovering.gif")
-                'End If
-                'If File.Exists(PetPath & "\Hovering Right.gif") Then
-                'Form_FlyingPetNew.Animation_Hovering_Right = Image.FromFile(PetPath & "\Hovering Right.gif")
-                'End If
-
-                'Dragging
-                If File.Exists(PetPath & "\Dragging.gif") Then
-                    Form_FlyingPetNew.Animation_Dragging = Image.FromFile(PetPath & "\Dragging.gif")
-                Else
-                    Form_FlyingPetNew.Animation_Dragging = Image.FromFile(PetPath & "\Flying Right.gif") 'Fallback Animation
-                End If
-                'If File.Exists(PetPath & "\Dragging Right.gif") Then
-                'Form_FlyingPetNew.Animation_Dragging = Image.FromFile(PetPath & "\Dragging Right.gif")
-                'End If
-
-                Form_FlyingPetNew.PetDir = PetPath
-
-                Form_FlyingPetNew.Text = "Pet - " & Path.GetFileName(PetPath)
-
+                Dim Form_FlyingPetNew = New Form_FlyingPet
+                Dim PetDir As String = Path.GetDirectoryName(DirectCast(sender, PixelBox).Text.ToString)
+                Form_FlyingPetNew.PetDir = PetDir
+                Console.WriteLine(PetDir)
                 Form_FlyingPetNew.Show()
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
@@ -382,5 +298,13 @@ Public Class Form_Pets
         MediumLarge_ToolStripMenuItem.Checked = False
         Large_ToolStripMenuItem.Checked = False
         ExtraLarge_ToolStripMenuItem.Checked = False
+    End Sub
+    'ComboBox_GroundArtist - SelectedIndexChanged
+    Private Sub ComboBox_GroundArtist_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_GroundArtist.SelectedIndexChanged
+        LoadGroundPets("Pets\Ground\" & ComboBox_GroundArtist.Text)
+    End Sub
+    'ComboBox_FlyingArtist - SelectedIndexChanged
+    Private Sub ComboBox_FlyingArtist_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_FlyingArtist.SelectedIndexChanged
+        LoadFlyingPets("Pets\Flying\" & ComboBox_FlyingArtist.Text)
     End Sub
 End Class

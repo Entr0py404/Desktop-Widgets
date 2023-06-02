@@ -73,23 +73,27 @@ Public Class Form_Menu
     End Sub
     'DesktopPets (ToolStripMenuItem) - Click
     Private Sub DesktopPetsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DesktopPetsToolStripMenuItem.Click
-        Button_DesktopPets.PerformClick()
+        Form_Pets.Show()
+        If Form_Pets.WindowState = FormWindowState.Minimized Then
+            Form_Pets.WindowState = FormWindowState.Normal
+        End If
+        Form_Pets.BringToFront()
     End Sub
     'Nature (ToolStripMenuItem) - Click
-    Private Sub NatureToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NatureToolStripMenuItem.Click
-        Button_Nature.PerformClick()
+    Private Sub DesktopNatureToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DesktopNatureToolStripMenuItem.Click
+        Form_Nature.Show()
+        If Form_Nature.WindowState = FormWindowState.Minimized Then
+            Form_Nature.WindowState = FormWindowState.Normal
+        End If
+        Form_Nature.BringToFront()
     End Sub
     'DesktopObjects (ToolStripMenuItem) - Click
     Private Sub DesktopObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DesktopObjectsToolStripMenuItem.Click
-        Button_DesktopObjects.PerformClick()
-    End Sub
-    'GDevCharacter (ToolStripMenuItem) - Click
-    Private Sub GDevCharacterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GDevCharacterToolStripMenuItem.Click
-        Button_GDev.PerformClick()
-    End Sub
-    'PetBuilder (ToolStripMenuItem) - Click
-    Private Sub PetBuilderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PetBuilderToolStripMenuItem.Click
-        Button_AnimationBuilder.PerformClick()
+        Form_DesktopObjects.Show()
+        If Form_DesktopObjects.WindowState = FormWindowState.Minimized Then
+            Form_DesktopObjects.WindowState = FormWindowState.Normal
+        End If
+        Form_DesktopObjects.BringToFront()
     End Sub
     'Button_CloseSelected - Click
     Private Sub Button_CloseSelected_Click(sender As Object, e As EventArgs) Handles Button_CloseSelected.Click
