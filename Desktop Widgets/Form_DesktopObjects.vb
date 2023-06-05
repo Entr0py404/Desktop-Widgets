@@ -9,9 +9,11 @@ Public Class Form_DesktopObjects
             LoadDesktopObjects(Application.StartupPath & "\Objects\")
         End If
 
+        ComboBox_Display.BeginUpdate()
         For Each display In Screen.AllScreens
             ComboBox_Display.Items.Add(display.DeviceName.Replace("\\.\", ""))
         Next
+        ComboBox_Display.EndUpdate()
 
         ComboBox_Display.SelectedIndex = 0
 
@@ -29,9 +31,8 @@ Public Class Form_DesktopObjects
         'ComboBox_Objects.Items.Remove("All")
         'ComboBoComboBox_Objectsx_Theme.Items.Remove("all")
         ComboBox_Objects.Items.Add("All") 'Add all to the end of the list
-        ComboBox_Objects.SelectedIndex = 0
-
         ComboBox_Objects.EndUpdate()
+        ComboBox_Objects.SelectedIndex = 0
     End Sub
     'LoadDesktopObjects()
     Private Sub LoadDesktopObjects(filepath As String)

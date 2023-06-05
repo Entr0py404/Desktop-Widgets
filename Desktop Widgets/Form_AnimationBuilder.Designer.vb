@@ -34,6 +34,7 @@ Partial Class Form_AnimationBuilder
         Me.Label_Animation_Frame_Count = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel_Left = New System.Windows.Forms.Panel()
+        Me.PixelBox_Left = New Desktop_Widgets.PixelBox()
         Me.ShapeContainer3 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.NumericUpDown_Delay = New System.Windows.Forms.NumericUpDown()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -52,6 +53,7 @@ Partial Class Form_AnimationBuilder
         Me.Button_Flip = New System.Windows.Forms.Button()
         Me.Panel_Right = New System.Windows.Forms.Panel()
         Me.Label_Right = New System.Windows.Forms.Label()
+        Me.PixelBox_Right = New Desktop_Widgets.PixelBox()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RectangleShape3 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -64,22 +66,21 @@ Partial Class Form_AnimationBuilder
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.PixelBox_Left = New Desktop_Widgets.PixelBox()
-        Me.PixelBox_Right = New Desktop_Widgets.PixelBox()
+        Me.CheckBox_NonDirectional = New System.Windows.Forms.CheckBox()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel_Left.SuspendLayout()
+        CType(Me.PixelBox_Left, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown_Delay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel_Right.SuspendLayout()
+        CType(Me.PixelBox_Right, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
         CType(Me.NumericUpDown_FPS, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel9.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        CType(Me.PixelBox_Left, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PixelBox_Right, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button_Save
@@ -194,6 +195,16 @@ Partial Class Form_AnimationBuilder
         Me.Panel_Left.Name = "Panel_Left"
         Me.Panel_Left.Size = New System.Drawing.Size(160, 176)
         Me.Panel_Left.TabIndex = 80
+        '
+        'PixelBox_Left
+        '
+        Me.PixelBox_Left.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.PixelBox_Left.Location = New System.Drawing.Point(16, 32)
+        Me.PixelBox_Left.Name = "PixelBox_Left"
+        Me.PixelBox_Left.Size = New System.Drawing.Size(128, 128)
+        Me.PixelBox_Left.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PixelBox_Left.TabIndex = 75
+        Me.PixelBox_Left.TabStop = False
         '
         'ShapeContainer3
         '
@@ -390,6 +401,16 @@ Partial Class Form_AnimationBuilder
         Me.Label_Right.Text = "Right"
         Me.Label_Right.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'PixelBox_Right
+        '
+        Me.PixelBox_Right.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.PixelBox_Right.Location = New System.Drawing.Point(16, 32)
+        Me.PixelBox_Right.Name = "PixelBox_Right"
+        Me.PixelBox_Right.Size = New System.Drawing.Size(128, 128)
+        Me.PixelBox_Right.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PixelBox_Right.TabIndex = 75
+        Me.PixelBox_Right.TabStop = False
+        '
         'ShapeContainer1
         '
         Me.ShapeContainer1.Location = New System.Drawing.Point(0, 0)
@@ -480,6 +501,7 @@ Partial Class Form_AnimationBuilder
         'Panel9
         '
         Me.Panel9.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.Panel9.Controls.Add(Me.CheckBox_NonDirectional)
         Me.Panel9.Controls.Add(Me.Label7)
         Me.Panel9.Controls.Add(Me.Button_Flip)
         Me.Panel9.Controls.Add(Me.Panel2)
@@ -532,25 +554,18 @@ Partial Class Form_AnimationBuilder
         Me.Label11.Text = "FPS:"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'PixelBox_Left
+        'CheckBox_NonDirectional
         '
-        Me.PixelBox_Left.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.PixelBox_Left.Location = New System.Drawing.Point(16, 32)
-        Me.PixelBox_Left.Name = "PixelBox_Left"
-        Me.PixelBox_Left.Size = New System.Drawing.Size(128, 128)
-        Me.PixelBox_Left.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PixelBox_Left.TabIndex = 75
-        Me.PixelBox_Left.TabStop = False
-        '
-        'PixelBox_Right
-        '
-        Me.PixelBox_Right.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.PixelBox_Right.Location = New System.Drawing.Point(16, 32)
-        Me.PixelBox_Right.Name = "PixelBox_Right"
-        Me.PixelBox_Right.Size = New System.Drawing.Size(128, 128)
-        Me.PixelBox_Right.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PixelBox_Right.TabIndex = 75
-        Me.PixelBox_Right.TabStop = False
+        Me.CheckBox_NonDirectional.AutoSize = True
+        Me.CheckBox_NonDirectional.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.CheckBox_NonDirectional.Location = New System.Drawing.Point(304, 328)
+        Me.CheckBox_NonDirectional.Name = "CheckBox_NonDirectional"
+        Me.CheckBox_NonDirectional.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.CheckBox_NonDirectional.Size = New System.Drawing.Size(114, 17)
+        Me.CheckBox_NonDirectional.TabIndex = 103
+        Me.CheckBox_NonDirectional.Text = "Non Directional"
+        Me.CheckBox_NonDirectional.UseVisualStyleBackColor = True
+        Me.CheckBox_NonDirectional.Visible = False
         '
         'Form_AnimationBuilder
         '
@@ -569,18 +584,19 @@ Partial Class Form_AnimationBuilder
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel_Left.ResumeLayout(False)
+        CType(Me.PixelBox_Left, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown_Delay, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel_Right.ResumeLayout(False)
+        CType(Me.PixelBox_Right, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
         CType(Me.NumericUpDown_FPS, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel9.ResumeLayout(False)
+        Me.Panel9.PerformLayout()
         Me.Panel2.ResumeLayout(False)
-        CType(Me.PixelBox_Left, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PixelBox_Right, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -627,4 +643,5 @@ Partial Class Form_AnimationBuilder
     Friend WithEvents Button_Flip As Button
     Friend WithEvents Label_Artist As Label
     Friend WithEvents ComboBox_Artist As ComboBox
+    Friend WithEvents CheckBox_NonDirectional As CheckBox
 End Class

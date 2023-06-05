@@ -2,6 +2,7 @@
 Public Class Form_Pets
     Dim FlyingPetsCount As Integer = 0
     Dim GroundPetsCount As Integer = 0
+    Dim AssetPanel_Size As Integer = 98
     'Form_Pets - Load
     Private Sub Form_Pets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.SelectedIndex = 0
@@ -13,6 +14,7 @@ Public Class Form_Pets
         LoadGroundPets("Pets\Ground\" & ComboBox_GroundArtist.Text)
 
         'ComboBox_Display.Items.Add("ALL")
+        ComboBox_Display.BeginUpdate()
         For Each displays In Screen.AllScreens
             ComboBox_Display.Items.Add(displays.DeviceName.Replace("\\.\", ""))
         Next
@@ -20,25 +22,25 @@ Public Class Form_Pets
         If ComboBox_Display.Items.Count >= 2 Then
             ComboBox_Display.Items.Add("ALL")
         End If
-
+        ComboBox_Display.EndUpdate()
         ComboBox_Display.SelectedIndex = 0
     End Sub
     'LoadPetsDirs()
-    Private Sub LoadPetsDirs(Pet_Path As String, Artist_Combobox As ComboBox)
-        Artist_Combobox.Items.Clear()
-        Artist_Combobox.BeginUpdate()
+    Private Sub LoadPetsDirs(Pet_Path As String, Artist_ComboBox As ComboBox)
+        Artist_ComboBox.Items.Clear()
+        Artist_ComboBox.BeginUpdate()
         For Each pet_directory As String In Directory.GetDirectories(Pet_Path)
             If Not Path.GetFileName(pet_directory).ToLower = "all" Then
-                Artist_Combobox.Items.Add(Path.GetFileName(pet_directory))
+                Artist_ComboBox.Items.Add(Path.GetFileName(pet_directory))
             End If
         Next
-        Artist_Combobox.Items.Add("All") 'Add all to the end of the list
-        Artist_Combobox.SelectedIndex = 0
-        Artist_Combobox.EndUpdate()
+        Artist_ComboBox.Items.Add("All") 'Add all to the end of the list
+        Artist_ComboBox.EndUpdate()
+        Artist_ComboBox.SelectedIndex = 0
     End Sub
     'LoadGroundPets()
-    Private Sub LoadGroundPets(path As String)
-        If Directory.Exists(path) Then
+    Private Sub LoadGroundPets(Pet_Path As String)
+        If Directory.Exists(Pet_Path) Then
             FlowLayoutPanel1.Visible = False
             FlowLayoutPanel1.Controls.Clear()
             'Label_AssetCount.Text = "Pets"
@@ -46,11 +48,11 @@ Public Class Form_Pets
             'Label_Status.Text = "Loading Files..."
             'Label_Status.Refresh()
             GroundPetsCount = 0
-            Dim dir As New DirectoryInfo(path)
-            Dim directories As DirectoryInfo() = dir.GetDirectories().ToArray()
-            For Each pet_directory As DirectoryInfo In directories
-                If File.Exists(path & "\" & pet_directory.Name & "\Idling Right.gif") Then
-                    CreateNewPanel(FlowLayoutPanel1, path & "\" & pet_directory.Name & "\Idling Right.gif", pet_directory.Name, Color.WhiteSmoke)
+            Dim FilesToCheck As New ArrayList()
+            FilesToCheck.AddRange(Directory.GetFiles(Pet_Path, "*.gif", SearchOption.AllDirectories))
+            For Each Item As String In FilesToCheck
+                If Path.GetFileName(Item) = "Idling Right.gif" Then
+                    CreateNewPanel(FlowLayoutPanel1, Item, Path.GetFileName(Path.GetDirectoryName(Item)), Color.WhiteSmoke)
                     GroundPetsCount += 1
                 End If
             Next
@@ -62,8 +64,8 @@ Public Class Form_Pets
         End If
     End Sub
     'LoadFlyingPets()
-    Private Sub LoadFlyingPets(path As String)
-        If Directory.Exists(path) Then
+    Private Sub LoadFlyingPets(Pet_Path As String)
+        If Directory.Exists(Pet_Path) Then
             FlowLayoutPanel2.Visible = False
             FlowLayoutPanel2.Controls.Clear()
             'Label_AssetCount.Text = "Pets"
@@ -71,11 +73,11 @@ Public Class Form_Pets
             'Label_Status.Text = "Loading Files..."
             'Label_Status.Refresh()
             FlyingPetsCount = 0
-            Dim dir As New DirectoryInfo(path)
-            Dim directories As DirectoryInfo() = dir.GetDirectories().ToArray()
-            For Each pet_directory As DirectoryInfo In directories
-                If File.Exists(path & "\" & pet_directory.Name & "\Flying Right.gif") Then
-                    CreateNewPanel(FlowLayoutPanel2, path & "\" & pet_directory.Name & "\Flying Right.gif", pet_directory.Name, Color.WhiteSmoke)
+            Dim FilesToCheck As New ArrayList()
+            FilesToCheck.AddRange(Directory.GetFiles(Pet_Path, "*.gif", SearchOption.AllDirectories))
+            For Each Item As String In FilesToCheck
+                If Path.GetFileName(Item) = "Flying Right.gif" Then
+                    CreateNewPanel(FlowLayoutPanel2, Item, Path.GetFileName(Path.GetDirectoryName(Item)), Color.WhiteSmoke)
                     FlyingPetsCount += 1
                 End If
             Next
@@ -140,6 +142,7 @@ Public Class Form_Pets
     Public Sub DisplaySettingsChanged(ByVal sender As Object, ByVal e As EventArgs)
         If Not ComboBox_Display.Items.Count = Screen.AllScreens.Count Then
             ComboBox_Display.Items.Clear()
+            ComboBox_Display.BeginUpdate()
             For Each Displays In Screen.AllScreens
                 ComboBox_Display.Items.Add(Displays.DeviceName.Replace("\\.\", ""))
             Next
@@ -147,6 +150,7 @@ Public Class Form_Pets
             If ComboBox_Display.Items.Count >= 2 Then
                 ComboBox_Display.Items.Add("ALL")
             End If
+            ComboBox_Display.EndUpdate()
         End If
     End Sub
     'AssetPanel1 - Click
@@ -191,7 +195,7 @@ Public Class Form_Pets
     Private Sub CreateNewPanel(flowLayout As FlowLayoutPanel, imagePath As String, assetObjectText As String, textColor As Color)
         'Panel
         Dim AssetPanel = New Panel
-        AssetPanel.Size = New Size(98, 98)
+        AssetPanel.Size = New Size(AssetPanel_Size, AssetPanel_Size)
         AssetPanel.BackColor = Color.FromArgb(46, 49, 54)
         AssetPanel.Name = "AssetPanel1"
 
@@ -236,7 +240,7 @@ Public Class Form_Pets
     'ResizePanels (sizeInt)
     Private Sub ResizePanels(sizeInt As Integer)
         'My.Settings.AssetPannelSize = sizeInt
-
+        AssetPanel_Size = sizeInt
         FlowLayoutPanel1.SuspendLayout()
         FlowLayoutPanel1.Visible = False
         For Each oObj As Control In FlowLayoutPanel1.Controls
@@ -301,10 +305,18 @@ Public Class Form_Pets
     End Sub
     'ComboBox_GroundArtist - SelectedIndexChanged
     Private Sub ComboBox_GroundArtist_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_GroundArtist.SelectedIndexChanged
-        LoadGroundPets("Pets\Ground\" & ComboBox_GroundArtist.Text)
+        If Not ComboBox_GroundArtist.SelectedItem.ToString = "All" Then
+            LoadGroundPets("Pets\Ground\" & ComboBox_GroundArtist.Text)
+        Else
+            LoadGroundPets("Pets\Ground\")
+        End If
     End Sub
     'ComboBox_FlyingArtist - SelectedIndexChanged
     Private Sub ComboBox_FlyingArtist_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_FlyingArtist.SelectedIndexChanged
-        LoadFlyingPets("Pets\Flying\" & ComboBox_FlyingArtist.Text)
+        If Not ComboBox_FlyingArtist.SelectedItem.ToString = "All" Then
+            LoadFlyingPets("Pets\Flying\" & ComboBox_FlyingArtist.Text)
+        Else
+            LoadFlyingPets("Pets\Flying\")
+        End If
     End Sub
 End Class

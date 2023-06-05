@@ -27,23 +27,23 @@ Partial Class Form_Menu
         Me.Button_DesktopPets = New System.Windows.Forms.Button()
         Me.Button_Nature = New System.Windows.Forms.Button()
         Me.Button_DesktopObjects = New System.Windows.Forms.Button()
-        Me.Button_GDev = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Button_CloseSelected = New System.Windows.Forms.Button()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.ContextMenuStrip_Main = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.MenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Button_Phrases = New System.Windows.Forms.Button()
-        Me.Button_AnimationBuilder = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.PixelBox1 = New Desktop_Widgets.PixelBox()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.DesktopPetsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DesktopNatureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DesktopObjectsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Button_AnimationBuilder = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.Button_MotionDesktop = New System.Windows.Forms.Button()
+        Me.Button_DualBackgrounds = New System.Windows.Forms.Button()
+        Me.PixelBox1 = New Desktop_Widgets.PixelBox()
         Me.ContextMenuStrip_Main.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PixelBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,7 +56,7 @@ Partial Class Form_Menu
         Me.Button_DesktopPets.FlatAppearance.BorderSize = 0
         Me.Button_DesktopPets.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_DesktopPets.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_DesktopPets.Location = New System.Drawing.Point(272, 16)
+        Me.Button_DesktopPets.Location = New System.Drawing.Point(224, 8)
         Me.Button_DesktopPets.Name = "Button_DesktopPets"
         Me.Button_DesktopPets.Size = New System.Drawing.Size(144, 32)
         Me.Button_DesktopPets.TabIndex = 62
@@ -70,7 +70,7 @@ Partial Class Form_Menu
         Me.Button_Nature.FlatAppearance.BorderSize = 0
         Me.Button_Nature.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_Nature.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_Nature.Location = New System.Drawing.Point(272, 56)
+        Me.Button_Nature.Location = New System.Drawing.Point(224, 48)
         Me.Button_Nature.Name = "Button_Nature"
         Me.Button_Nature.Size = New System.Drawing.Size(144, 32)
         Me.Button_Nature.TabIndex = 63
@@ -84,27 +84,12 @@ Partial Class Form_Menu
         Me.Button_DesktopObjects.FlatAppearance.BorderSize = 0
         Me.Button_DesktopObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_DesktopObjects.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_DesktopObjects.Location = New System.Drawing.Point(272, 96)
+        Me.Button_DesktopObjects.Location = New System.Drawing.Point(224, 88)
         Me.Button_DesktopObjects.Name = "Button_DesktopObjects"
         Me.Button_DesktopObjects.Size = New System.Drawing.Size(144, 32)
         Me.Button_DesktopObjects.TabIndex = 64
         Me.Button_DesktopObjects.Text = "Desktop Objects"
         Me.Button_DesktopObjects.UseVisualStyleBackColor = False
-        '
-        'Button_GDev
-        '
-        Me.Button_GDev.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Button_GDev.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Button_GDev.FlatAppearance.BorderSize = 0
-        Me.Button_GDev.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button_GDev.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_GDev.Location = New System.Drawing.Point(272, 216)
-        Me.Button_GDev.Name = "Button_GDev"
-        Me.Button_GDev.Size = New System.Drawing.Size(144, 32)
-        Me.Button_GDev.TabIndex = 65
-        Me.Button_GDev.Text = "GDev Character"
-        Me.Button_GDev.UseVisualStyleBackColor = False
-        Me.Button_GDev.Visible = False
         '
         'ComboBox1
         '
@@ -149,7 +134,7 @@ Partial Class Form_Menu
         Me.ContextMenuStrip_Main.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ContextMenuStrip_Main.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem, Me.ToolStripSeparator1, Me.DesktopPetsToolStripMenuItem, Me.DesktopNatureToolStripMenuItem, Me.DesktopObjectsToolStripMenuItem, Me.ToolStripSeparator2, Me.ExitToolStripMenuItem})
         Me.ContextMenuStrip_Main.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip_Main.Size = New System.Drawing.Size(188, 158)
+        Me.ContextMenuStrip_Main.Size = New System.Drawing.Size(188, 136)
         '
         'MenuToolStripMenuItem
         '
@@ -157,79 +142,6 @@ Partial Class Form_Menu
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
         Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(187, 24)
         Me.MenuToolStripMenuItem.Text = "Menu"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(184, 6)
-        '
-        'ExitToolStripMenuItem
-        '
-        Me.ExitToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(187, 24)
-        Me.ExitToolStripMenuItem.Text = "Exit"
-        '
-        'Button_Phrases
-        '
-        Me.Button_Phrases.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Button_Phrases.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Button_Phrases.FlatAppearance.BorderSize = 0
-        Me.Button_Phrases.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button_Phrases.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_Phrases.Location = New System.Drawing.Point(272, 176)
-        Me.Button_Phrases.Name = "Button_Phrases"
-        Me.Button_Phrases.Size = New System.Drawing.Size(144, 32)
-        Me.Button_Phrases.TabIndex = 70
-        Me.Button_Phrases.Text = "Phrases"
-        Me.Button_Phrases.UseVisualStyleBackColor = False
-        Me.Button_Phrases.Visible = False
-        '
-        'Button_AnimationBuilder
-        '
-        Me.Button_AnimationBuilder.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Button_AnimationBuilder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Button_AnimationBuilder.FlatAppearance.BorderSize = 0
-        Me.Button_AnimationBuilder.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button_AnimationBuilder.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_AnimationBuilder.Location = New System.Drawing.Point(272, 136)
-        Me.Button_AnimationBuilder.Name = "Button_AnimationBuilder"
-        Me.Button_AnimationBuilder.Size = New System.Drawing.Size(144, 32)
-        Me.Button_AnimationBuilder.TabIndex = 72
-        Me.Button_AnimationBuilder.Text = "Animation Builder"
-        Me.Button_AnimationBuilder.UseVisualStyleBackColor = False
-        '
-        'Panel1
-        '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.Button_CloseSelected)
-        Me.Panel1.Controls.Add(Me.ComboBox1)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 272)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(425, 26)
-        Me.Panel1.TabIndex = 73
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(272, 184)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.CheckBox1.Size = New System.Drawing.Size(120, 33)
-        Me.CheckBox1.TabIndex = 74
-        Me.CheckBox1.Text = "Use Tray Icon"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'PixelBox1
-        '
-        Me.PixelBox1.Image = Global.Desktop_Widgets.My.Resources.Resources.four_squares
-        Me.PixelBox1.Location = New System.Drawing.Point(8, 8)
-        Me.PixelBox1.Name = "PixelBox1"
-        Me.PixelBox1.Size = New System.Drawing.Size(256, 256)
-        Me.PixelBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PixelBox1.TabIndex = 71
-        Me.PixelBox1.TabStop = False
         '
         'ToolStripSeparator1
         '
@@ -257,21 +169,109 @@ Partial Class Form_Menu
         Me.DesktopObjectsToolStripMenuItem.Size = New System.Drawing.Size(187, 24)
         Me.DesktopObjectsToolStripMenuItem.Text = "Desktop Objects"
         '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(184, 6)
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(187, 24)
+        Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'Button_AnimationBuilder
+        '
+        Me.Button_AnimationBuilder.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Button_AnimationBuilder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Button_AnimationBuilder.FlatAppearance.BorderSize = 0
+        Me.Button_AnimationBuilder.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button_AnimationBuilder.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button_AnimationBuilder.Location = New System.Drawing.Point(376, 88)
+        Me.Button_AnimationBuilder.Name = "Button_AnimationBuilder"
+        Me.Button_AnimationBuilder.Size = New System.Drawing.Size(144, 32)
+        Me.Button_AnimationBuilder.TabIndex = 72
+        Me.Button_AnimationBuilder.Text = "Animation Builder"
+        Me.Button_AnimationBuilder.UseVisualStyleBackColor = False
+        '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.CheckBox1)
+        Me.Panel1.Controls.Add(Me.Button_CloseSelected)
+        Me.Panel1.Controls.Add(Me.ComboBox1)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel1.Location = New System.Drawing.Point(0, 129)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(530, 26)
+        Me.Panel1.TabIndex = 73
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox1.Location = New System.Drawing.Point(216, 0)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.CheckBox1.Size = New System.Drawing.Size(120, 26)
+        Me.CheckBox1.TabIndex = 74
+        Me.CheckBox1.Text = "Use Tray Icon"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'Button_MotionDesktop
+        '
+        Me.Button_MotionDesktop.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Button_MotionDesktop.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Button_MotionDesktop.FlatAppearance.BorderSize = 0
+        Me.Button_MotionDesktop.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button_MotionDesktop.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button_MotionDesktop.Location = New System.Drawing.Point(376, 8)
+        Me.Button_MotionDesktop.Name = "Button_MotionDesktop"
+        Me.Button_MotionDesktop.Size = New System.Drawing.Size(144, 32)
+        Me.Button_MotionDesktop.TabIndex = 75
+        Me.Button_MotionDesktop.Text = "Motion Desktop"
+        Me.Button_MotionDesktop.UseVisualStyleBackColor = False
+        '
+        'Button_DualBackgrounds
+        '
+        Me.Button_DualBackgrounds.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Button_DualBackgrounds.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Button_DualBackgrounds.FlatAppearance.BorderSize = 0
+        Me.Button_DualBackgrounds.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button_DualBackgrounds.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button_DualBackgrounds.Location = New System.Drawing.Point(376, 48)
+        Me.Button_DualBackgrounds.Name = "Button_DualBackgrounds"
+        Me.Button_DualBackgrounds.Size = New System.Drawing.Size(144, 32)
+        Me.Button_DualBackgrounds.TabIndex = 76
+        Me.Button_DualBackgrounds.Text = "Dual Backgrounds"
+        Me.Button_DualBackgrounds.UseVisualStyleBackColor = False
+        '
+        'PixelBox1
+        '
+        Me.PixelBox1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.PixelBox1.Image = Global.Desktop_Widgets.My.Resources.Resources.four_squares
+        Me.PixelBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PixelBox1.Name = "PixelBox1"
+        Me.PixelBox1.Size = New System.Drawing.Size(216, 129)
+        Me.PixelBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PixelBox1.TabIndex = 71
+        Me.PixelBox1.TabStop = False
+        '
         'Form_Menu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(425, 298)
-        Me.Controls.Add(Me.CheckBox1)
+        Me.ClientSize = New System.Drawing.Size(530, 155)
+        Me.Controls.Add(Me.PixelBox1)
+        Me.Controls.Add(Me.Button_DualBackgrounds)
+        Me.Controls.Add(Me.Button_MotionDesktop)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Button_AnimationBuilder)
-        Me.Controls.Add(Me.Button_Phrases)
-        Me.Controls.Add(Me.Button_GDev)
         Me.Controls.Add(Me.Button_DesktopObjects)
         Me.Controls.Add(Me.Button_Nature)
         Me.Controls.Add(Me.Button_DesktopPets)
-        Me.Controls.Add(Me.PixelBox1)
         Me.DoubleBuffered = True
         Me.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -290,7 +290,6 @@ Partial Class Form_Menu
     Friend WithEvents Button_DesktopPets As Button
     Friend WithEvents Button_Nature As Button
     Friend WithEvents Button_DesktopObjects As Button
-    Friend WithEvents Button_GDev As Button
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Button_CloseSelected As Button
     Friend WithEvents NotifyIcon1 As NotifyIcon
@@ -298,7 +297,6 @@ Partial Class Form_Menu
     Friend WithEvents MenuToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Button_Phrases As Button
     Friend WithEvents PixelBox1 As PixelBox
     Friend WithEvents Button_AnimationBuilder As Button
     Friend WithEvents Panel1 As Panel
@@ -307,4 +305,6 @@ Partial Class Form_Menu
     Friend WithEvents DesktopNatureToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DesktopPetsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DesktopObjectsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Button_MotionDesktop As Button
+    Friend WithEvents Button_DualBackgrounds As Button
 End Class

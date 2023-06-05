@@ -48,7 +48,7 @@ Public Class Form_Menu
         Form_DesktopObjects.BringToFront()
     End Sub
     'Button_GDev - Click
-    Private Sub Button_GDev_Click(sender As Object, e As EventArgs) Handles Button_GDev.Click
+    Private Sub Button_GDev_Click(sender As Object, e As EventArgs)
         Form_Gdev.Show()
         If Form_Gdev.WindowState = FormWindowState.Minimized Then
             Form_Gdev.WindowState = FormWindowState.Normal
@@ -56,7 +56,7 @@ Public Class Form_Menu
         Form_Gdev.BringToFront()
     End Sub
     'Button_Phrases - Click
-    Private Sub Button_Phrases_Click(sender As Object, e As EventArgs) Handles Button_Phrases.Click
+    Private Sub Button_Phrases_Click(sender As Object, e As EventArgs)
         Form_PhraseManager.Show()
         If Form_PhraseManager.WindowState = FormWindowState.Minimized Then
             Form_PhraseManager.WindowState = FormWindowState.Normal
@@ -176,6 +176,22 @@ Public Class Form_Menu
             Else
                 Me.Visible = True
             End If
+        End If
+    End Sub
+    'Button_MotionDesktop - Click
+    Private Sub Button_MotionDesktop_Click(sender As Object, e As EventArgs) Handles Button_MotionDesktop.Click
+        If File.Exists(Application.StartupPath & "\Motion Desktop\Motion Desktop.exe") Then
+            Process.Start(Application.StartupPath & "\Motion Desktop\Motion Desktop.exe")
+        Else
+            MsgBox("The executable 'Motion Desktop.exe' is missing.", MsgBoxStyle.Information, "Desktop Widgets")
+        End If
+    End Sub
+    'Button_DualBackgrounds - Click
+    Private Sub Button_DualBackgrounds_Click(sender As Object, e As EventArgs) Handles Button_DualBackgrounds.Click
+        If File.Exists(Application.StartupPath & "\Dual Backgrounds\Dual Backgrounds.exe") Then
+            Process.Start(Application.StartupPath & "\Dual Backgrounds\Dual Backgrounds.exe")
+        Else
+            MsgBox("The executable 'Dual Backgrounds.exe' is missing.", MsgBoxStyle.Information, "Desktop Widgets")
         End If
     End Sub
 End Class

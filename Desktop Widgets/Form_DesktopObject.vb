@@ -22,9 +22,12 @@ Public Class Form_DesktopObject
             Console.WriteLine("StaticImage")
         End If
 
+        DisplayToolStripComboBox.BeginUpdate()
         For Each Display In Screen.AllScreens
             DisplayToolStripComboBox.Items.Add(Display.DeviceName.Replace("\\.\", ""))
         Next
+        DisplayToolStripComboBox.EndUpdate()
+
         DisplayToolStripComboBox.SelectedIndex = Form_DesktopObjects.ComboBox_Display.SelectedIndex
 
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())

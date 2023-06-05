@@ -19,6 +19,7 @@ Public Class Form_NatureObject
 
         'Dim TempScreen As Screen = MYScreen
         'MYDisplay_Test.GetScreen().AllScreens
+        DisplayToolStripComboBox.BeginUpdate()
         For Each Displays As Display In Display.GetDisplays()
             If Displays.IsGDIPrimary Then
                 DisplayToolStripComboBox.Items.Add(Displays.ToPathDisplayTarget.FriendlyName & " (Primary)")
@@ -27,7 +28,7 @@ Public Class Form_NatureObject
                 DisplayToolStripComboBox.Items.Add(Displays.ToPathDisplayTarget.FriendlyName)
             End If
         Next
-
+        DisplayToolStripComboBox.EndUpdate()
         DisplayToolStripComboBox.SelectedIndex = Form_Nature.ComboBox_Display.SelectedIndex
         'DisplayToolStripComboBox.SelectedItem = Form_Nature.ComboBox_Display.SelectedItem
 

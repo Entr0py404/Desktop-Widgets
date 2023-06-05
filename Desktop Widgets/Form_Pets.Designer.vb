@@ -148,12 +148,12 @@ Partial Class Form_Pets
         'Button_CloseSelected
         '
         Me.Button_CloseSelected.BackColor = System.Drawing.Color.Tomato
-        Me.Button_CloseSelected.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Button_CloseSelected.Dock = System.Windows.Forms.DockStyle.Left
         Me.Button_CloseSelected.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
         Me.Button_CloseSelected.FlatAppearance.BorderSize = 0
         Me.Button_CloseSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_CloseSelected.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_CloseSelected.Location = New System.Drawing.Point(655, 0)
+        Me.Button_CloseSelected.Location = New System.Drawing.Point(112, 0)
         Me.Button_CloseSelected.Name = "Button_CloseSelected"
         Me.Button_CloseSelected.Size = New System.Drawing.Size(77, 26)
         Me.Button_CloseSelected.TabIndex = 71
@@ -163,14 +163,14 @@ Partial Class Form_Pets
         'ComboBox1
         '
         Me.ComboBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Left
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!)
         Me.ComboBox1.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"All Pets", "Ground Pets", "Flying Pets"})
-        Me.ComboBox1.Location = New System.Drawing.Point(543, 0)
+        Me.ComboBox1.Location = New System.Drawing.Point(0, 0)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(112, 26)
         Me.ComboBox1.TabIndex = 69
@@ -247,8 +247,8 @@ Partial Class Form_Pets
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.ComboBox1)
         Me.Panel1.Controls.Add(Me.Button_CloseSelected)
+        Me.Panel1.Controls.Add(Me.ComboBox1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel1.Location = New System.Drawing.Point(0, 378)
         Me.Panel1.Name = "Panel1"

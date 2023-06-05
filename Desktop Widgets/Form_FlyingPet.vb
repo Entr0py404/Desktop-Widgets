@@ -64,28 +64,28 @@ Public Class Form_FlyingPet
         'Walking
         If File.Exists(PetDir & "\Walking Left.gif") Then
             Animation_Walking_Left = Image.FromFile(PetDir & "\Walking Left.gif")
-            HasAnimation_Walking = True
         End If
         If File.Exists(PetDir & "\Walking Right.gif") Then
             Animation_Walking_Right = Image.FromFile(PetDir & "\Walking Right.gif")
+            HasAnimation_Walking = True
         End If
 
         'Idling
         If File.Exists(PetDir & "\Idling Left.gif") Then
             Animation_Idling_Left = Image.FromFile(PetDir & "\Idling Left.gif")
-            HasAnimation_Idling = True
         End If
         If File.Exists(PetDir & "\Idling Right.gif") Then
             Animation_Idling_Right = Image.FromFile(PetDir & "\Idling Right.gif")
+            HasAnimation_Idling = True
         End If
 
         'Idling Alt
         If File.Exists(PetDir & "\Idling Alt Left.gif") Then
             Animation_IdlingAlt_Left = Image.FromFile(PetDir & "\Idling Alt Left.gif")
-            HasAnimation_IdlingAlt = True
         End If
         If File.Exists(PetDir & "\Idling Alt Right.gif") Then
             Animation_IdlingAlt_Right = Image.FromFile(PetDir & "\Idling Alt Right.gif")
+            HasAnimation_IdlingAlt = True
         End If
 
         'Dragging
@@ -116,13 +116,26 @@ Public Class Form_FlyingPet
 
         Me.Text = "Pet - " & Path.GetFileName(PetDir)
 
-
+        Dim R As Integer = CInt(Rnd(1))
+        If R = 0 Then
+            MoveLeft = True
+        Else
+            MoveLeft = False
+        End If
+        R = CInt(Rnd(1))
+        If R = 0 Then
+            MoveUp = True
+        Else
+            MoveUp = False
+        End If
 
         'Me.Width = PixelBox_Pet.Width
         'Me.Height = PixelBox_Pet.Height + PixelBox_Emote.Height
+        DisplayToolStripComboBox.BeginUpdate()
         For Each Display In Screen.AllScreens
             DisplayToolStripComboBox.Items.Add(Display.DeviceName.Replace("\\.\", ""))
         Next
+        DisplayToolStripComboBox.EndUpdate()
         DisplayToolStripComboBox.SelectedIndex = Form_Pets.ComboBox_Display.SelectedIndex
 
         FollowCursorToolStripMenuItem.Checked = Form_Pets.CheckBox_FollowCursor.Checked
@@ -399,7 +412,6 @@ Public Class Form_FlyingPet
     'Screen Warping & Edge Turn Around
     Private Sub Form1_LocationChanged(sender As Object, e As EventArgs) Handles MyBase.LocationChanged
         If Dragging = False And FormLoadLock = False Then
-
             'OVER RIGHT
             If Me.Location.X > Display.WorkingArea.Right - Me.Width / 2 Then
                 If ScreenWarpingDecision <= Rand.Next(0, 100 + 1) Then
@@ -410,6 +422,7 @@ Public Class Form_FlyingPet
                 End If
                 Console.WriteLine("OVER RIGHT")
             End If
+
             'OVER LEFT
             If Me.Location.X < Display.WorkingArea.Left - Me.Width / 2 Then
                 If ScreenWarpingDecision <= Rand.Next(0, 100 + 1) Then
@@ -502,7 +515,6 @@ Public Class Form_FlyingPet
             End If
 
         Else
-
             If HasAnimation_Dragging = True Then
                 If PixelBox_Pet.Image IsNot Animation_Dragging Then
                     PixelBox_Pet.Image = Animation_Dragging
@@ -524,15 +536,10 @@ Public Class Form_FlyingPet
     'ScalePet()
     Public Sub ScalePet(val As Integer)
         val = val + DefaultScale - 1
+        'Dim oldLocation As Point = Me.Location
         Me.Width = Animation_Flying_Left.Width * val
         Me.Height = Animation_Flying_Left.Height * val
-
-        Me.Location = New Point(Me.Location.X, Me.Location.Y + Me.Height) '- PixelBox_Emote.Height
-        'Me.Width = PixelBox_Pet.Width
-        'Me.Height = PixelBox_Pet.Height + PictureBox_Emote.Height
-
-        'Me.Width = Animation_Walking_Left.Width
-        'Me.Height = Animation_Walking_Left.Height + PictureBox_Emote.Height
+        'Me.Location = oldLocation
     End Sub
     'PixelBox_Pet - MouseDown
     Private Sub PixelBox_Pet_MouseDown(sender As Object, e As MouseEventArgs) Handles PixelBox_Pet.MouseDown

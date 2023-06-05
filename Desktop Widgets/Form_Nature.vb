@@ -18,7 +18,7 @@
     'Form_Nature - Load
     Private Sub Form_Nature_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip3.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
-
+        ComboBox_Display.BeginUpdate()
         For Each Display As Display In Display.GetDisplays()
             If Display.IsGDIPrimary Then
                 ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
@@ -29,6 +29,7 @@
                 Console.WriteLine(Display.ToPathDisplayTarget.FriendlyName)
             End If
         Next
+        ComboBox_Display.EndUpdate()
         Console.WriteLine()
         'For Each target In PathDisplayTarget.GetDisplayTargets()
         'ComboBox_Display.Items.Add(target.FriendlyName & " - " & target.ToDisplayDevice.DisplayName.Replace("\\.\", ""))
@@ -58,9 +59,8 @@
         'ComboBox_Theme.Items.Remove("All")
         'ComboBox_Theme.Items.Remove("all")
         ComboBox_Theme.Items.Add("All") 'Add all to the end of the list
-        ComboBox_Theme.SelectedIndex = 0
-
         ComboBox_Theme.EndUpdate()
+        ComboBox_Theme.SelectedIndex = 0
 
         Button_Randomize.PerformClick()
     End Sub

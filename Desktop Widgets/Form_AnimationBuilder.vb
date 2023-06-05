@@ -98,13 +98,16 @@ Public Class Form_AnimationBuilder
         If RadioButton_TypeGroundPet.Checked Then
             ComboBox_Animation.Items.Clear()
             ComboBox_Animation.Enabled = True
+            ComboBox_Animation.BeginUpdate()
             ComboBox_Animation.Items.Add("Walking")
             ComboBox_Animation.Items.Add("Idling")
             ComboBox_Animation.Items.Add("Idling Alt")
             ComboBox_Animation.Items.Add("Dragging")
             ComboBox_Animation.Items.Add("Falling")
             ComboBox_Animation.Items.Add("Sleeping")
+            ComboBox_Animation.EndUpdate()
             ComboBox_Animation.SelectedIndex = 0
+            CheckBox_NonDirectional.Visible = False
             Panel_Right.Visible = True
             Label_Left.Visible = True
             ComboBox_Name.Text = ""
@@ -119,12 +122,15 @@ Public Class Form_AnimationBuilder
         If RadioButton_TypeFlyingPet.Checked Then
             ComboBox_Animation.Items.Clear()
             ComboBox_Animation.Enabled = True
+            ComboBox_Animation.BeginUpdate()
             ComboBox_Animation.Items.Add("Flying")
             ComboBox_Animation.Items.Add("Walking")
             ComboBox_Animation.Items.Add("Idling")
             ComboBox_Animation.Items.Add("Idling Alt")
             ComboBox_Animation.Items.Add("Dragging")
+            ComboBox_Animation.EndUpdate()
             ComboBox_Animation.SelectedIndex = 0
+            CheckBox_NonDirectional.Visible = False
             Panel_Right.Visible = True
             Label_Left.Visible = True
             ComboBox_Name.Text = ""
@@ -142,6 +148,7 @@ Public Class Form_AnimationBuilder
             ComboBox_Name.Items.Clear()
             ComboBox_Artist.Items.Clear()
             ComboBox_Animation.Enabled = False
+            CheckBox_NonDirectional.Visible = False
             Panel_Right.Visible = False
             Label_Left.Visible = False
             Label_Artist.Text = "Objects:"
@@ -157,6 +164,7 @@ Public Class Form_AnimationBuilder
             ComboBox_Name.Items.Clear()
             ComboBox_Artist.Items.Clear()
             ComboBox_Animation.Enabled = True
+            CheckBox_NonDirectional.Visible = False
             Panel_Right.Visible = False
             Label_Left.Visible = False
             Label_Artist.Text = "Theme:"
@@ -190,8 +198,18 @@ Public Class Form_AnimationBuilder
                         Directory.CreateDirectory(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
                     End If
 
-                    PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Left.gif", Imaging.ImageFormat.Gif)
-                    PixelBox_Right.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif", Imaging.ImageFormat.Gif)
+                    If RadioButton_TypeFlyingPet.Checked Or RadioButton_TypeGroundPet.Checked And ComboBox_Animation.Text = "Dragging" Then
+                        If CheckBox_NonDirectional.Checked Then
+                            PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & ".gif", Imaging.ImageFormat.Gif)
+                        Else
+                            PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Left.gif", Imaging.ImageFormat.Gif)
+                            PixelBox_Right.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif", Imaging.ImageFormat.Gif)
+                        End If
+                    Else
+                        PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Left.gif", Imaging.ImageFormat.Gif)
+                        PixelBox_Right.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif", Imaging.ImageFormat.Gif)
+                    End If
+
                     'Clear for Next
                     ClearAllUIObjects()
                 End If
@@ -202,8 +220,18 @@ Public Class Form_AnimationBuilder
                         Directory.CreateDirectory(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
                     End If
 
-                    PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Left.gif", Imaging.ImageFormat.Gif)
-                    PixelBox_Right.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif", Imaging.ImageFormat.Gif)
+                    If RadioButton_TypeFlyingPet.Checked Or RadioButton_TypeGroundPet.Checked And ComboBox_Animation.Text = "Dragging" Then
+                        If CheckBox_NonDirectional.Checked Then
+                            PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & ".gif", Imaging.ImageFormat.Gif)
+                        Else
+                            PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Left.gif", Imaging.ImageFormat.Gif)
+                            PixelBox_Right.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif", Imaging.ImageFormat.Gif)
+                        End If
+                    Else
+                        PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Left.gif", Imaging.ImageFormat.Gif)
+                        PixelBox_Right.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif", Imaging.ImageFormat.Gif)
+                    End If
+
                     'Clear for Next
                     ClearAllUIObjects()
                 End If
@@ -294,6 +322,25 @@ Public Class Form_AnimationBuilder
     Private Sub ComboBox_Animation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_Animation.SelectedIndexChanged
         If RadioButton_TypeNature.Checked Then
             LoadFiles(Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Animation.Text)
+        End If
+
+        CheckBox_NonDirectional.Visible = False
+        If RadioButton_TypeFlyingPet.Checked Or RadioButton_TypeGroundPet.Checked Then
+            If ComboBox_Animation.Text = "Dragging" Then
+                CheckBox_NonDirectional.Visible = True
+            Else
+                CheckBox_NonDirectional.Checked = False
+            End If
+        End If
+    End Sub
+
+    Private Sub CheckBox_NonDirectional_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox_NonDirectional.CheckedChanged
+        If CheckBox_NonDirectional.Checked Then
+            Panel_Right.Visible = False
+            Label_Left.Visible = False
+        Else
+            Panel_Right.Visible = True
+            Label_Left.Visible = True
         End If
     End Sub
 End Class
