@@ -1,6 +1,4 @@
 ﻿
-Imports System.Net.Security
-
 Public Class Form_GroundPet
     Dim Rand As New Random
     Dim Dragging As Boolean = False
@@ -38,7 +36,7 @@ Public Class Form_GroundPet
 
     'Behavior settings
     Dim DefaultScale As Integer = 1
-    Dim FollowCursor_StopingDistance_Px As Integer = 6
+    Dim FollowCursor_StoppingDistance_Px As Integer = 6
     Dim Falling_Movement_Px As Integer = 5
 
     Dim IdleDecision As Integer = 45
@@ -47,10 +45,15 @@ Public Class Form_GroundPet
 
     Dim Walking_Movement_Tick As Integer = 1
     Dim Falling_Movement_Tick As Integer = 1
-    Dim TunringDecision_Min As Integer = 2500
-    Dim TunringDecision_Max As Integer = 3500
+    Dim TurningDecision_Min As Integer = 2500
+    Dim TurningDecision_Max As Integer = 3500
     Dim IdleDecision_Min As Integer = 2500
     Dim IdleDecision_Max As Integer = 3500
+
+    Dim SleepDecision As Integer = 5
+    Dim Sleeping_Min As Integer = 90000
+    Dim Sleeping_Max As Integer = 150000
+    Dim HasAnimation_Sleeping As Boolean = False
 
     'Form_GroundPet - Load
     Private Sub Form_GroundPet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -78,6 +81,15 @@ Public Class Form_GroundPet
         If File.Exists(PetDir & "\Idling Alt Right.gif") Then
             Animation_IdlingAlt_Right = New Bitmap(PetDir & "\Idling Alt Right.gif")
             HasAnimation_IdlingAlt = True
+        End If
+
+        'Sleeping
+        If File.Exists(PetDir & "\Sleeping Left.gif") Then
+            Animation_Sleeping_Left = New Bitmap(PetDir & "\Sleeping Left.gif")
+        End If
+        If File.Exists(PetDir & "\Sleeping Right.gif") Then
+            Animation_Sleeping_Right = New Bitmap(PetDir & "\Sleeping Right.gif")
+            HasAnimation_Sleeping = True
         End If
 
         'Dragging
@@ -152,13 +164,14 @@ Public Class Form_GroundPet
                 ScalePet(1)
             End If
 
-            FollowCursor_StopingDistance_Px = CInt(INI.Sections("Settings").Keys("FollowCursor_StopingDistance_Px").Value)
+            FollowCursor_StoppingDistance_Px = CInt(INI.Sections("Settings").Keys("FollowCursor_StoppingDistance_Px").Value)
             Falling_Movement_Px = CInt(INI.Sections("Settings").Keys("Falling_Movement_Px").Value)
 
             '[Decisions]
             IdleDecision = CInt(INI.Sections("Decisions").Keys("IdleDecision").Value)
             IdleAltDecision = CInt(INI.Sections("Decisions").Keys("IdleAltDecision").Value)
             ScreenWarpingDecision = CInt(INI.Sections("Decisions").Keys("ScreenWarpingDecision").Value)
+            SleepDecision = CInt(INI.Sections("Decisions").Keys("SleepDecision").Value)
 
             '[Timers_Tick]
             Walking_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Walking_Movement_Tick").Value)
@@ -168,16 +181,21 @@ Public Class Form_GroundPet
             Timer_Falling.Interval = Falling_Movement_Tick
 
             '[Timers_Randomization]
-            TunringDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TunringDecision_Min").Value)
-            TunringDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TunringDecision_Max").Value)
-            Timer_TurningDecision.Interval = Rand.Next(TunringDecision_Min, TunringDecision_Max + 1)
+            TurningDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Min").Value)
+            TurningDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Max").Value)
+            Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
 
             IdleDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Min").Value)
             IdleDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Max").Value)
             Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
+
+            Sleeping_Min = CInt(INI.Sections("Timers_Randomization").Keys("Sleeping_Min").Value)
+            Sleeping_Max = CInt(INI.Sections("Timers_Randomization").Keys("Sleeping_Max").Value)
+            Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
         Else
-            Timer_TurningDecision.Interval = Rand.Next(TunringDecision_Min, TunringDecision_Max + 1)
+            Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
             Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
+            Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
         End If
 
         FormLoadLock = False
@@ -213,14 +231,14 @@ Public Class Form_GroundPet
             Else
 
                 If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
-                    If Me.Location.X > MousePosition.X + FollowCursor_StopingDistance_Px Then
+                    If Me.Location.X > MousePosition.X + FollowCursor_StoppingDistance_Px Then
                         TurnLeft = False
                         Me.Location = New Point(Me.Location.X - 1, Display.WorkingArea.Bottom - Me.Height)
                         If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
                             PixelBox_Pet.Image = Animation_Walking_Left
                             Console.WriteLine("Animation_Walking_Left")
                         End If
-                    ElseIf Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StopingDistance_Px Then
+                    ElseIf Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StoppingDistance_Px Then
                         TurnLeft = True
                         Me.Location = New Point(Me.Location.X + 1, Display.WorkingArea.Bottom - Me.Height)
                         If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
@@ -290,16 +308,16 @@ Public Class Form_GroundPet
             TurnLeft = False
         End If
 
-        Timer_TurningDecision.Interval = Rand.Next(TunringDecision_Min, TunringDecision_Max + 1)
+        Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
     End Sub
     'Timer_IdleDecision - Tick
     Private Sub Timer_IdleDecision_Tick(sender As Object, e As EventArgs) Handles Timer_IdleDecision.Tick
         If Not ContextMenuStrip1.Visible And Not Dragging Then
-            If IdleDecision <= Rand.Next(0, 100 + 1) Then
+            If Rand.Next(0, 100 + 1) <= IdleDecision Then
                 Timer_Walking.Stop()
 
                 If HasAnimation_IdlingAlt Then
-                    If IdleAltDecision <= Rand.Next(0, 100 + 1) Then
+                    If Rand.Next(0, 100 + 1) <= IdleAltDecision Then
                         If TurnLeft = True Then
                             If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
                                 PixelBox_Pet.Image = Animation_Idling_Left
@@ -337,6 +355,28 @@ Public Class Form_GroundPet
                         End If
                     End If
                 End If
+
+
+                ' Console.WriteLine(Rand.Next(0, 100 + 1))
+
+                If HasAnimation_Sleeping Then
+                    If Rand.Next(0, 100 + 1) <= SleepDecision Then
+                        If TurnLeft = True Then
+                            If PixelBox_Pet.Image IsNot Animation_Sleeping_Left Then
+                                PixelBox_Pet.Image = Animation_Sleeping_Left
+                                Console.WriteLine("Animation_Sleeping_Left")
+                            End If
+                        Else
+                            If PixelBox_Pet.Image IsNot Animation_Sleeping_Right Then
+                                PixelBox_Pet.Image = Animation_Sleeping_Right
+                                Console.WriteLine("Animation_Sleeping_Right")
+                            End If
+                        End If
+                        Timer_Sleeping.Enabled = True
+                        Timer_IdleDecision.Enabled = False
+                    End If
+                End If
+
             Else
                 Timer_Walking.Start()
             End If
@@ -349,7 +389,7 @@ Public Class Form_GroundPet
             If Dragging = False Then
                 'RIGHT & Left
                 If Me.Location.X > Display.WorkingArea.Right - Me.Width / 2 Then
-                    If ScreenWarpingDecision <= Rand.Next(0, 100 + 1) Then
+                    If Rand.Next(0, 100 + 1) <= ScreenWarpingDecision Then
                         If Not DisplayToolStripComboBox.SelectedItem.ToString = "ALL" Then
                             Me.Location = New Point(Display.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'WARP
                         Else
@@ -393,7 +433,7 @@ Public Class Form_GroundPet
                     End If
                     Console.WriteLine("OVER RIGHT")
                 ElseIf Me.Location.X < Display.WorkingArea.Left - Me.Width / 2 Then 'LEFT
-                    If ScreenWarpingDecision <= Rand.Next(0, 100 + 1) Then
+                    If Rand.Next(0, 100 + 1) <= ScreenWarpingDecision Then
                         If Not DisplayToolStripComboBox.SelectedItem.ToString = "ALL" Then
                             Me.Location = New Point(Display.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'WARP
                         Else
@@ -620,5 +660,11 @@ Public Class Form_GroundPet
             Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
             'Console.WriteLine("HERE! 3")
         End If
+    End Sub
+    'Timer_Sleeping - Tick
+    Private Sub Timer_Sleeping_Tick(sender As Object, e As EventArgs) Handles Timer_Sleeping.Tick
+        Timer_IdleDecision.Enabled = True
+        Timer_Sleeping.Enabled = False
+        Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
     End Sub
 End Class

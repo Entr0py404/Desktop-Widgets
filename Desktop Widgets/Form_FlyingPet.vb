@@ -33,25 +33,25 @@ Public Class Form_FlyingPet
 
     'Behavior settings
     Dim DefaultScale As Integer = 1
-    Dim FollowCursor_StopingDistance_Px As Integer = 6
+    Dim FollowCursor_StoppingDistance_Px As Integer = 6
 
     Dim IdleDecision As Integer = 45
     Dim IdleAltDecision As Integer = 35
     Dim TakeFlightDecision As Integer = 60
     Dim ScreenWarpingDecision As Integer = 60
-    Dim LandingDecision As Integer = 70
+    Dim LandingDecision As Integer = 45
 
     Dim Flying_Movement_Tick As Integer = 1
     Dim Walking_Movement_Tick As Integer = 1
 
-    Dim TunringDecision_Min As Integer = 2500
-    Dim TunringDecision_Max As Integer = 3500
+    Dim TurningDecision_Min As Integer = 2500
+    Dim TurningDecision_Max As Integer = 3500
     Dim IdleDecision_Min As Integer = 2500
     Dim IdleDecision_Max As Integer = 3500
     Dim TakeFlightDecision_Min As Integer = 3500
     Dim TakeFlightDecision_Max As Integer = 5000
 
-    'Form_FlyingPet_Load
+    ' Form_FlyingPet_Load
     Private Sub Form_FlyingPet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If File.Exists(PetDir & "\Flying Left.gif") Then
             Animation_Flying_Left = Image.FromFile(PetDir & "\Flying Left.gif")
@@ -161,7 +161,7 @@ Public Class Form_FlyingPet
                 ScalePet(1)
             End If
 
-            FollowCursor_StopingDistance_Px = CInt(INI.Sections("Settings").Keys("FollowCursor_StopingDistance_Px").Value)
+            FollowCursor_StoppingDistance_Px = CInt(INI.Sections("Settings").Keys("FollowCursor_StoppingDistance_Px").Value)
 
             '[Decisions]
             IdleDecision = CInt(INI.Sections("Decisions").Keys("IdleDecision").Value)
@@ -179,9 +179,9 @@ Public Class Form_FlyingPet
             Timer_Walking.Interval = Walking_Movement_Tick
 
             '[Timers_Randomization]
-            TunringDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TunringDecision_Min").Value)
-            TunringDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TunringDecision_Max").Value)
-            Timer_TurningDecision.Interval = Rand.Next(TunringDecision_Min, TunringDecision_Max + 1)
+            TurningDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Min").Value)
+            TurningDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Max").Value)
+            Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
 
             IdleDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Min").Value)
             IdleDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Max").Value)
@@ -191,14 +191,15 @@ Public Class Form_FlyingPet
             TakeFlightDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TakeFlightDecision_Max").Value)
             Timer_ChangeModesDecision.Interval = Rand.Next(TakeFlightDecision_Min, TakeFlightDecision_Max + 1)
         Else
-            Timer_TurningDecision.Interval = Rand.Next(TunringDecision_Min, TunringDecision_Max + 1)
+            Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
             Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
             Timer_ChangeModesDecision.Interval = Rand.Next(TakeFlightDecision_Min, TakeFlightDecision_Max + 1)
         End If
 
         FormLoadLock = False
     End Sub
-    'Timer_Flying - Tick
+
+    ' Timer_Flying - Tick
     Private Sub Timer_Flying_Tick(sender As Object, e As EventArgs) Handles Timer_Flying.Tick
         If Not ContextMenuStrip1.Visible Then
             If Dragging = False Then
@@ -226,7 +227,7 @@ Public Class Form_FlyingPet
 
                 Else
                     '
-                    If Me.Location.X > MousePosition.X + FollowCursor_StopingDistance_Px Then
+                    If Me.Location.X > MousePosition.X + FollowCursor_StoppingDistance_Px Then
                         MoveLeft = True
                         Me.Location = New Point(Me.Location.X - 1, Me.Location.Y)
                         If PixelBox_Pet.Image IsNot Animation_Flying_Left Then
@@ -235,7 +236,7 @@ Public Class Form_FlyingPet
                         End If
                     End If
                     '
-                    If Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StopingDistance_Px Then
+                    If Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StoppingDistance_Px Then
                         MoveLeft = False
                         Me.Location = New Point(Me.Location.X + 1, Me.Location.Y)
                         If PixelBox_Pet.Image IsNot Animation_Flying_Right Then
@@ -244,12 +245,12 @@ Public Class Form_FlyingPet
                         End If
                     End If
                     '
-                    If Me.Location.Y > MousePosition.Y + FollowCursor_StopingDistance_Px Then
+                    If Me.Location.Y > MousePosition.Y + FollowCursor_StoppingDistance_Px Then
                         MoveUp = True
                         Me.Location = New Point(Me.Location.X, Me.Location.Y - 1)
                     End If
                     '
-                    If Me.Location.Y < MousePosition.Y - Me.Height - FollowCursor_StopingDistance_Px Then
+                    If Me.Location.Y < MousePosition.Y - Me.Height - FollowCursor_StoppingDistance_Px Then
                         MoveUp = False
                         Me.Location = New Point(Me.Location.X, Me.Location.Y + 1)
                     End If
@@ -262,7 +263,8 @@ Public Class Form_FlyingPet
             End If
         End If
     End Sub
-    'Timer_Walking - Tick
+
+    ' Timer_Walking - Tick
     Private Sub Timer_Walking_Tick(sender As Object, e As EventArgs) Handles Timer_Walking.Tick
         If Not ContextMenuStrip1.Visible Then
             If Dragging = False Then
@@ -291,14 +293,14 @@ Public Class Form_FlyingPet
                 Else
 
                     If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
-                        If Me.Location.X > MousePosition.X + FollowCursor_StopingDistance_Px Then
+                        If Me.Location.X > MousePosition.X + FollowCursor_StoppingDistance_Px Then
                             MoveLeft = False
                             Me.Location = New Point(Me.Location.X - 1, Display.WorkingArea.Bottom - Me.Height)
                             If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
                                 PixelBox_Pet.Image = Animation_Walking_Left
                                 Console.WriteLine("Animation_Walking_Left")
                             End If
-                        ElseIf Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StopingDistance_Px Then
+                        ElseIf Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StoppingDistance_Px Then
                             MoveLeft = True
                             Me.Location = New Point(Me.Location.X + 1, Display.WorkingArea.Bottom - Me.Height)
                             If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
@@ -321,7 +323,8 @@ Public Class Form_FlyingPet
         End If
         'Console.WriteLine("Timer_Walking - Tick")
     End Sub
-    'Timer_TurningDecision - Tick
+
+    ' Timer_TurningDecision - Tick
     Private Sub Timer_TurningDecision_Tick(sender As Object, e As EventArgs) Handles Timer_TurningDecision.Tick
         'Left & Right
         R = CInt(Rnd(1))
@@ -339,15 +342,16 @@ Public Class Form_FlyingPet
             MoveUp = False
         End If
 
-        Timer_TurningDecision.Interval = Rand.Next(TunringDecision_Min, TunringDecision_Max + 1)
+        Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
     End Sub
-    'Timer_IdleDecision - Tick
+
+    ' Timer_IdleDecision - Tick
     Private Sub Timer_IdleDecision_Tick(sender As Object, e As EventArgs) Handles Timer_IdleDecision.Tick
-        If IdleDecision <= Rand.Next(0, 100 + 1) Then
+        If Rand.Next(0, 100 + 1) <= IdleDecision Then
             Timer_Walking.Stop()
 
             If HasAnimation_IdlingAlt Then
-                If IdleAltDecision <= Rand.Next(0, 100 + 1) Then
+                If Rand.Next(0, 100 + 1) <= IdleAltDecision Then
                     If MoveLeft = True Then
                         If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
                             PixelBox_Pet.Image = Animation_Idling_Left
@@ -387,15 +391,16 @@ Public Class Form_FlyingPet
             End If
 
         Else
-                If HasAnimation_Walking = True Then
+            If HasAnimation_Walking = True Then
                 Timer_Walking.Start()
             End If
         End If
         Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
     End Sub
-    'Timer_ChangeModesDecision - Tick
+
+    ' Timer_ChangeModesDecision - Tick
     Private Sub Timer_ChangeModesDecision_Tick(sender As Object, e As EventArgs) Handles Timer_ChangeModesDecision.Tick
-        If TakeFlightDecision <= Rand.Next(0, 100 + 1) Then
+        If Rand.Next(0, 100 + 1) <= TakeFlightDecision Then
             Flying_Mode = True
             Ground_Mode = False
             Timer_ChangeModesDecision.Enabled = False
@@ -409,12 +414,13 @@ Public Class Form_FlyingPet
 
         Timer_ChangeModesDecision.Interval = Rand.Next(TakeFlightDecision_Min, TakeFlightDecision_Max + 1)
     End Sub
-    'Screen Warping & Edge Turn Around
+
+    ' Screen Warping & Edge Turn Around
     Private Sub Form1_LocationChanged(sender As Object, e As EventArgs) Handles MyBase.LocationChanged
         If Dragging = False And FormLoadLock = False Then
             'OVER RIGHT
             If Me.Location.X > Display.WorkingArea.Right - Me.Width / 2 Then
-                If ScreenWarpingDecision <= Rand.Next(0, 100 + 1) Then
+                If Rand.Next(0, 100 + 1) <= ScreenWarpingDecision Then
                     Me.Location = New Point(Display.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y)
                 Else
                     MoveLeft = True
@@ -425,7 +431,7 @@ Public Class Form_FlyingPet
 
             'OVER LEFT
             If Me.Location.X < Display.WorkingArea.Left - Me.Width / 2 Then
-                If ScreenWarpingDecision <= Rand.Next(0, 100 + 1) Then
+                If Rand.Next(0, 100 + 1) <= ScreenWarpingDecision Then
                     Me.Location = New Point(Display.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y)
                 Else
                     MoveLeft = False
@@ -438,7 +444,7 @@ Public Class Form_FlyingPet
             If Me.Location.Y > Display.WorkingArea.Height - Me.Height Then
 
                 If HasAnimation_Walking = True Or HasAnimation_Idling = True Then
-                    If LandingDecision <= Rand.Next(0, 100 + 1) Then
+                    If Rand.Next(0, 100 + 1) <= LandingDecision Then
                         Flying_Mode = False
                         Ground_Mode = True
                         Timer_ChangeModesDecision.Enabled = True
@@ -533,7 +539,8 @@ Public Class Form_FlyingPet
 
         End If
     End Sub
-    'ScalePet()
+
+    ' ScalePet()
     Public Sub ScalePet(val As Integer)
         val = val + DefaultScale - 1
         'Dim oldLocation As Point = Me.Location
@@ -541,7 +548,8 @@ Public Class Form_FlyingPet
         Me.Height = Animation_Flying_Left.Height * val
         'Me.Location = oldLocation
     End Sub
-    'PixelBox_Pet - MouseDown
+
+    ' PixelBox_Pet - MouseDown
     Private Sub PixelBox_Pet_MouseDown(sender As Object, e As MouseEventArgs) Handles PixelBox_Pet.MouseDown
         If e.Button = Windows.Forms.MouseButtons.Left Then
             Dragging = True
@@ -567,7 +575,8 @@ Public Class Form_FlyingPet
             Console.WriteLine("PixelBox_Pet_MouseDown")
         End If
     End Sub
-    'FollowCursorToolStripMenuItem - CheckedChanged
+
+    ' FollowCursorToolStripMenuItem - CheckedChanged
     Private Sub FollowCursorToolStripMenuItem_CheckedChanged(sender As Object, e As EventArgs) Handles FollowCursorToolStripMenuItem.CheckedChanged
         FollowCursor = FollowCursorToolStripMenuItem.Checked
         If FollowCursorToolStripMenuItem.Checked Then
@@ -586,21 +595,25 @@ Public Class Form_FlyingPet
             End If
         End If
     End Sub
-    'CloseToolStripMenuItem - Click
+
+    ' CloseToolStripMenuItem - Click
     Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
         Me.Close()
     End Sub
-    'ScaleToolStripComboBox - SelectedIndexChanged
+
+    ' ScaleToolStripComboBox - SelectedIndexChanged
     Private Sub ScaleToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ScaleToolStripComboBox.SelectedIndexChanged
         If Not ScaleToolStripComboBox.SelectedIndex = -1 Then
             ScalePet(ScaleToolStripComboBox.SelectedIndex + 1)
         End If
     End Sub
-    'AlwaysOnTopToolStripMenuItem - Click
+
+    ' AlwaysOnTopToolStripMenuItem - Click
     Private Sub AlwaysOnTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlwaysOnTopToolStripMenuItem.Click
         Me.TopMost = AlwaysOnTopToolStripMenuItem.Checked
     End Sub
-    'DisplayToolStripComboBox - SelectedIndexChanged
+
+    ' DisplayToolStripComboBox - SelectedIndexChanged
     Private Sub DisplayToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayToolStripComboBox.SelectedIndexChanged
         If Not DisplayToolStripComboBox.SelectedIndex = -1 Then
             Display = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
