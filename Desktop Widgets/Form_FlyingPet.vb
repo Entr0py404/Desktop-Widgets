@@ -1,7 +1,8 @@
 ﻿
 Public Class Form_FlyingPet
     Dim R As Integer = 0
-    Dim Display As Screen
+    Dim Display As Screen = Screen.PrimaryScreen
+    Dim BlockEvent_DisplayComboBox As Boolean = False
     Dim Rand As New Random
     Dim FormLoadLock As Boolean = True
     Dim MoveLeft As Boolean = True
@@ -135,6 +136,11 @@ Public Class Form_FlyingPet
         For Each Display In Screen.AllScreens
             DisplayToolStripComboBox.Items.Add(Display.DeviceName.Replace("\\.\", ""))
         Next
+
+        If DisplayToolStripComboBox.Items.Count >= 2 Then
+            DisplayToolStripComboBox.Items.Add("ALL")
+        End If
+
         DisplayToolStripComboBox.EndUpdate()
         DisplayToolStripComboBox.SelectedIndex = Form_Pets.ComboBox_Display.SelectedIndex
 
@@ -148,13 +154,15 @@ Public Class Form_FlyingPet
 
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
 
+        AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf DisplaySettingsChanged
 
         If File.Exists(Application.StartupPath & "\" & PetDir & "\Behavior.ini") Then
             Dim INI As New MadMilkman.Ini.IniFile()
             INI.Load(Application.StartupPath & "\" & PetDir & "\Behavior.ini")
             '[Settings]
             DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
-            If DefaultScale = 0 Then
+
+            If DefaultScale <= 0 Then
                 DefaultScale = 1
             End If
             If DefaultScale > 1 Then
@@ -418,27 +426,105 @@ Public Class Form_FlyingPet
     ' Screen Warping & Edge Turn Around
     Private Sub Form1_LocationChanged(sender As Object, e As EventArgs) Handles MyBase.LocationChanged
         If Dragging = False And FormLoadLock = False Then
-            'OVER RIGHT
+
+            'RIGHT & Left
             If Me.Location.X > Display.WorkingArea.Right - Me.Width / 2 Then
                 If Rand.Next(0, 100 + 1) <= ScreenWarpingDecision Then
-                    Me.Location = New Point(Display.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y)
+                    If Not DisplayToolStripComboBox.SelectedItem.ToString = "ALL" Then
+                        Me.Location = New Point(Display.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'WARP
+                    Else
+
+                        Dim TempDisplay_LOW As Screen = Display
+                        Dim TempDisplay_Right As Screen = Display
+                        Dim HasScreenOnRight As Boolean = False
+                        Dim location As Double = Me.Location.X + Me.Width / 2
+
+                        'SET TO SCREEN WITH LOWEST X
+                        For Each Displays As Screen In Screen.AllScreens
+
+                            If Not Displays.Bounds = Display.Bounds Then
+                                If location >= Displays.Bounds.Left And location <= Displays.Bounds.Right Then
+                                    TempDisplay_Right = Displays
+                                    HasScreenOnRight = True
+                                End If
+                            End If
+
+                            If Displays.Bounds.X < Display.Bounds.X Then
+                                TempDisplay_LOW = Displays
+                            End If
+
+                        Next
+
+                        If HasScreenOnRight Then
+                            Display = TempDisplay_Right
+                            Me.Location = New Point(Display.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'Travel
+                            Console.WriteLine("HasScreenOnRight")
+                            Console.WriteLine("Travel")
+                        Else
+                            Display = TempDisplay_LOW
+                            Me.Location = New Point(Display.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'WARP
+                            Console.WriteLine("NOScreenOnRight")
+                            Console.WriteLine("WARP")
+                        End If
+
+                    End If
                 Else
-                    MoveLeft = True
-                    Me.Location = New Point(Location.X - 1, Location.Y)
+                    MoveLeft = True 'TURNAROUND
                 End If
                 Console.WriteLine("OVER RIGHT")
-            End If
-
-            'OVER LEFT
-            If Me.Location.X < Display.WorkingArea.Left - Me.Width / 2 Then
+            ElseIf Me.Location.X < Display.WorkingArea.Left - Me.Width / 2 Then 'LEFT
                 If Rand.Next(0, 100 + 1) <= ScreenWarpingDecision Then
-                    Me.Location = New Point(Display.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y)
+                    If Not DisplayToolStripComboBox.SelectedItem.ToString = "ALL" Then
+                        Me.Location = New Point(Display.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'WARP
+                    Else
+
+                        Dim TempDisplay_HIGH As Screen = Display
+                        Dim TempDisplay_Left As Screen = Display
+                        Dim HasScreenOnLeft As Boolean = False
+                        Dim location As Double = Me.Location.X + Me.Width / 2
+
+                        'SET TO SCREEN WITH HIGHEST X
+                        For Each Displays As Screen In Screen.AllScreens
+
+                            If Not Displays.Bounds = Display.Bounds Then
+                                If location >= Displays.Bounds.Left And location <= Displays.Bounds.Right Then
+                                    TempDisplay_Left = Displays
+                                    HasScreenOnLeft = True
+                                End If
+                            End If
+
+                            If Displays.Bounds.X > Display.Bounds.X Then
+                                TempDisplay_HIGH = Displays
+                            End If
+
+                        Next
+
+                        If HasScreenOnLeft Then
+                            Display = TempDisplay_Left
+                            Me.Location = New Point(Display.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'Travel
+                            Console.WriteLine("HasScreenOnLeft")
+                            Console.WriteLine("Travel")
+
+                        Else
+                            Display = TempDisplay_HIGH
+                            Me.Location = New Point(Display.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'WARP
+                            Console.WriteLine("NOScreenOnLeft")
+                            Console.WriteLine("WARP")
+                        End If
+
+                    End If
                 Else
-                    MoveLeft = False
-                    Me.Location = New Point(Location.X + 1, Location.Y)
+                    MoveLeft = False 'TURNAROUND
                 End If
                 Console.WriteLine("OVER LEFT")
             End If
+
+
+
+
+
+
+
 
             'OVER DOWN No Wrap
             If Me.Location.Y > Display.WorkingArea.Height - Me.Height Then
@@ -561,6 +647,22 @@ Public Class Form_FlyingPet
             Me.DefWndProc(msg)
             Dragging = False
 
+            Dim TempDisplay As Screen = Display
+            For Each Displays As Screen In Screen.AllScreens
+                If Me.Location.X >= Displays.Bounds.Left And Me.Location.X <= Displays.Bounds.Right Then
+                    TempDisplay = Displays
+                End If
+            Next
+
+            Display = TempDisplay
+
+            If Not DisplayToolStripComboBox.Text = "ALL" Then
+                BlockEvent_DisplayComboBox = True
+                DisplayToolStripComboBox.Text = Display.DeviceName.Replace("\\.\", "")
+                BlockEvent_DisplayComboBox = False
+            End If
+
+
             If Ground_Mode = True Then
                 Flying_Mode = True
                 Ground_Mode = False
@@ -615,9 +717,54 @@ Public Class Form_FlyingPet
 
     ' DisplayToolStripComboBox - SelectedIndexChanged
     Private Sub DisplayToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayToolStripComboBox.SelectedIndexChanged
+        If BlockEvent_DisplayComboBox = False Then
+            If Not DisplayToolStripComboBox.SelectedIndex = -1 And Not DisplayToolStripComboBox.SelectedItem.ToString = "ALL" Then
+                Display = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
+                Me.Location = New Point(Rand.Next(Display.WorkingArea.Left, Display.WorkingArea.Right - Me.Width), Rand.Next(Display.WorkingArea.Top, Display.WorkingArea.Bottom - Me.Height))
+                Console.WriteLine("DisplayToolStripComboBox - SelectedIndexChanged")
+            End If
+        End If
+    End Sub
+
+    'DisplaySettingsChanged
+    Public Sub DisplaySettingsChanged(ByVal sender As Object, ByVal e As EventArgs)
+        Console.WriteLine("HERE!: DisplaySettingsChanging()")
+        'Console.WriteLine("HERE!: " & DisplayToolStripComboBox.Items.Count)
+        'Console.WriteLine("HERE!: " & Screen.AllScreens.Count)
+        Dim OldSelectedIndex As Integer = 0
         If Not DisplayToolStripComboBox.SelectedIndex = -1 Then
+            OldSelectedIndex = DisplayToolStripComboBox.SelectedIndex
+        End If
+
+        If Not DisplayToolStripComboBox.Items.Count = Screen.AllScreens.Count Then
+            DisplayToolStripComboBox.Items.Clear()
+            DisplayToolStripComboBox.BeginUpdate()
+            For Each Displays In Screen.AllScreens
+                DisplayToolStripComboBox.Items.Add(Displays.DeviceName.Replace("\\.\", ""))
+            Next
+
+            If DisplayToolStripComboBox.Items.Count >= 2 Then
+                DisplayToolStripComboBox.Items.Add("ALL")
+            End If
+            DisplayToolStripComboBox.EndUpdate()
+
+            If DisplayToolStripComboBox.Items.Count > 0 Then
+                If DisplayToolStripComboBox.Items.Count >= OldSelectedIndex Then
+                    DisplayToolStripComboBox.SelectedIndex = OldSelectedIndex
+                    Display = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
+                    Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
+                    'Console.WriteLine("HERE! 1")
+                Else
+                    DisplayToolStripComboBox.SelectedIndex = 0
+                    Display = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
+                    Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
+                    'Console.WriteLine("HERE! 2")
+                End If
+            End If
+        Else
             Display = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
-            Me.Location = New Point(Rand.Next(Display.WorkingArea.Left, Display.WorkingArea.Right - Me.Width), Rand.Next(Display.WorkingArea.Top, Display.WorkingArea.Bottom - Me.Height))
+            Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
+            'Console.WriteLine("HERE! 3")
         End If
     End Sub
 End Class

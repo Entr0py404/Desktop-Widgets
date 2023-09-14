@@ -157,7 +157,7 @@ Public Class Form_GroundPet
             INI.Load(Application.StartupPath & "\" & PetDir & "\Behavior.ini")
             '[Settings]
             DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
-            If DefaultScale = 0 Then
+            If DefaultScale <= 0 Then
                 DefaultScale = 1
             End If
             If DefaultScale > 1 Then

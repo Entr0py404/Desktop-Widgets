@@ -1,10 +1,10 @@
-﻿'Imports System.Management
-Public Class Form_Menu
+﻿Public Class Form_Menu
     Friend FormList_DesktopObject As New Dictionary(Of String, Form_DesktopObject)
     Friend FormList_NatureObject As New Dictionary(Of String, Form_NatureObject)
     Public IDCounter_DesktopObject As Integer = 0
     Public IDCounter_NatureObject As Integer = 0
-    'Form_Menu - Load
+
+    ' Form_Menu - Load
     Private Sub Form_Menu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.SelectedIndex = 0
         ContextMenuStrip_Main.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
@@ -23,7 +23,8 @@ Public Class Form_Menu
         'Console.WriteLine(display.DeviceName.Replace("\\.\", ""))
         'Next
     End Sub
-    'Button_DesktopPets - Click
+
+    ' Button_DesktopPets - Click
     Private Sub Button_DesktopPets_Click(sender As Object, e As EventArgs) Handles Button_DesktopPets.Click
         Form_Pets.Show()
         If Form_Pets.WindowState = FormWindowState.Minimized Then
@@ -31,7 +32,8 @@ Public Class Form_Menu
         End If
         Form_Pets.BringToFront()
     End Sub
-    'Button_Nature - Click
+
+    ' Button_Nature - Click
     Private Sub Button_Nature_Click(sender As Object, e As EventArgs) Handles Button_Nature.Click
         Form_Nature.Show()
         If Form_Nature.WindowState = FormWindowState.Minimized Then
@@ -39,7 +41,8 @@ Public Class Form_Menu
         End If
         Form_Nature.BringToFront()
     End Sub
-    'Button_DesktopObjects - Click
+
+    ' Button_DesktopObjects - Click
     Private Sub Button_DesktopObjects_Click(sender As Object, e As EventArgs) Handles Button_DesktopObjects.Click
         Form_DesktopObjects.Show()
         If Form_DesktopObjects.WindowState = FormWindowState.Minimized Then
@@ -47,7 +50,8 @@ Public Class Form_Menu
         End If
         Form_DesktopObjects.BringToFront()
     End Sub
-    'Button_GDev - Click
+
+    ' Button_GDev - Click
     Private Sub Button_GDev_Click(sender As Object, e As EventArgs)
         Form_Gdev.Show()
         If Form_Gdev.WindowState = FormWindowState.Minimized Then
@@ -55,7 +59,8 @@ Public Class Form_Menu
         End If
         Form_Gdev.BringToFront()
     End Sub
-    'Button_Phrases - Click
+
+    ' Button_Phrases - Click
     Private Sub Button_Phrases_Click(sender As Object, e As EventArgs)
         Form_PhraseManager.Show()
         If Form_PhraseManager.WindowState = FormWindowState.Minimized Then
@@ -63,7 +68,8 @@ Public Class Form_Menu
         End If
         Form_PhraseManager.BringToFront()
     End Sub
-    'Button_PetBuilder - Click
+
+    ' Button_PetBuilder - Click
     Private Sub Button_AnimationBuilder_Click(sender As Object, e As EventArgs) Handles Button_AnimationBuilder.Click
         Form_AnimationBuilder.Show()
         If Form_AnimationBuilder.WindowState = FormWindowState.Minimized Then
@@ -71,7 +77,8 @@ Public Class Form_Menu
         End If
         Form_AnimationBuilder.BringToFront()
     End Sub
-    'DesktopPets (ToolStripMenuItem) - Click
+
+    ' DesktopPets (ToolStripMenuItem) - Click
     Private Sub DesktopPetsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DesktopPetsToolStripMenuItem.Click
         Form_Pets.Show()
         If Form_Pets.WindowState = FormWindowState.Minimized Then
@@ -79,7 +86,8 @@ Public Class Form_Menu
         End If
         Form_Pets.BringToFront()
     End Sub
-    'Nature (ToolStripMenuItem) - Click
+
+    ' Nature (ToolStripMenuItem) - Click
     Private Sub DesktopNatureToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DesktopNatureToolStripMenuItem.Click
         Form_Nature.Show()
         If Form_Nature.WindowState = FormWindowState.Minimized Then
@@ -87,7 +95,8 @@ Public Class Form_Menu
         End If
         Form_Nature.BringToFront()
     End Sub
-    'DesktopObjects (ToolStripMenuItem) - Click
+
+    ' DesktopObjects (ToolStripMenuItem) - Click
     Private Sub DesktopObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DesktopObjectsToolStripMenuItem.Click
         Form_DesktopObjects.Show()
         If Form_DesktopObjects.WindowState = FormWindowState.Minimized Then
@@ -95,7 +104,8 @@ Public Class Form_Menu
         End If
         Form_DesktopObjects.BringToFront()
     End Sub
-    'Button_CloseSelected - Click
+
+    ' Button_CloseSelected - Click
     Private Sub Button_CloseSelected_Click(sender As Object, e As EventArgs) Handles Button_CloseSelected.Click
         If ComboBox1.SelectedItem.ToString = "All Pets" Then
             CloseAllWindowsByName("Form_GroundPet")
@@ -122,7 +132,8 @@ Public Class Form_Menu
             Form_GDevCharacter.Close()
         End If
     End Sub
-    'MenuToolStripMenuItem - Click
+
+    ' MenuToolStripMenuItem - Click
     Private Sub MenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MenuToolStripMenuItem.Click
         If Not Me.WindowState = FormWindowState.Minimized Then
             Me.WindowState = FormWindowState.Minimized
@@ -132,11 +143,13 @@ Public Class Form_Menu
             Me.BringToFront()
         End If
     End Sub
-    'ExitToolStripMenuItem - Click
+
+    ' ExitToolStripMenuItem - Click
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
     End Sub
-    'CloseAllWindowsbyName()
+
+    ' CloseAllWindowsbyName()
     Private Sub CloseAllWindowsByName(WindowName As String)
         Dim FormOpenCount As Integer = 0
         Dim lista As FormCollection = Application.OpenForms
@@ -150,7 +163,8 @@ Public Class Form_Menu
             My.Application.OpenForms.Item(WindowName).Close()
         Next
     End Sub
-    'Form_Menu - FormClosing
+
+    ' Form_Menu - FormClosing
     Private Sub Form_Menu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If Application.OpenForms.Count > 1 Then
             If MessageBox.Show("Multiple windows open, Close the application?", "Desktop Widgets", MessageBoxButtons.YesNo) = DialogResult.No Then
@@ -158,7 +172,8 @@ Public Class Form_Menu
             End If
         End If
     End Sub
-    'CheckBox1 - CheckedChanged
+
+    ' CheckBox1 - CheckedChanged
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         If CheckBox1.Checked Then
             NotifyIcon1.Visible = True
@@ -168,7 +183,8 @@ Public Class Form_Menu
             Me.ShowInTaskbar = True
         End If
     End Sub
-    'Form_Menu - Resize
+
+    ' Form_Menu - Resize
     Private Sub Form_Menu_Resize(sender As Object, e As EventArgs) Handles Me.Resize
         If Me.WindowState = FormWindowState.Minimized Then
             If CheckBox1.Checked Then
@@ -178,7 +194,8 @@ Public Class Form_Menu
             End If
         End If
     End Sub
-    'Button_MotionDesktop - Click
+
+    ' Button_MotionDesktop - Click
     Private Sub Button_MotionDesktop_Click(sender As Object, e As EventArgs) Handles Button_MotionDesktop.Click
         If File.Exists(Application.StartupPath & "\Motion Desktop\Motion Desktop.exe") Then
             Process.Start(Application.StartupPath & "\Motion Desktop\Motion Desktop.exe")
@@ -186,12 +203,26 @@ Public Class Form_Menu
             MsgBox("The executable 'Motion Desktop.exe' is missing.", MsgBoxStyle.Information, "Desktop Widgets")
         End If
     End Sub
-    'Button_DualBackgrounds - Click
+
+    ' Button_DualBackgrounds - Click
     Private Sub Button_DualBackgrounds_Click(sender As Object, e As EventArgs) Handles Button_DualBackgrounds.Click
         If File.Exists(Application.StartupPath & "\Dual Backgrounds\Dual Backgrounds.exe") Then
             Process.Start(Application.StartupPath & "\Dual Backgrounds\Dual Backgrounds.exe")
         Else
             MsgBox("The executable 'Dual Backgrounds.exe' is missing.", MsgBoxStyle.Information, "Desktop Widgets")
+        End If
+    End Sub
+
+    ' NotifyIcon1 - MouseClick
+    Private Sub NotifyIcon1_MouseClick(sender As Object, e As MouseEventArgs) Handles NotifyIcon1.MouseClick
+        If e.Button = MouseButtons.Left Then
+            If Not Me.WindowState = FormWindowState.Minimized Then
+                Me.WindowState = FormWindowState.Minimized
+            Else
+                Me.Visible = True
+                Me.WindowState = FormWindowState.Normal
+                Me.BringToFront()
+            End If
         End If
     End Sub
 End Class

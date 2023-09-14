@@ -1,4 +1,4 @@
-﻿'Imports MadMilkman.Ini
+﻿
 Public Class Form_Pets
     Dim FlyingPetsCount As Integer = 0
     Dim GroundPetsCount As Integer = 0
