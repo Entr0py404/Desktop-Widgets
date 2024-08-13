@@ -16,7 +16,7 @@ Public Class Form_Nature
     Dim Rocks_Max As Integer = 5
     Dim Grass_Max As Integer = 10
     Dim DefaultScale As Integer = 1
-    'Form_Nature - Load
+    ' Form_Nature - Load
     Private Sub Form_Nature_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip3.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
 
@@ -38,48 +38,48 @@ Public Class Form_Nature
             Directory.CreateDirectory(Application.StartupPath & "\Nature\All")
         End If
 
-        ComboBox_Theme.BeginUpdate()
+        ComboBox_NatureObjects.BeginUpdate()
         For Each dir As String In Directory.GetDirectories(Application.StartupPath & "\Nature")
             If Not Path.GetFileName(dir).ToLower = "all" Then
-                ComboBox_Theme.Items.Add(Path.GetFileName(dir))
+                ComboBox_NatureObjects.Items.Add(Path.GetFileName(dir))
             End If
         Next
-        ComboBox_Theme.Items.Add("All") 'Add all to the end of the list
-        ComboBox_Theme.EndUpdate()
-        ComboBox_Theme.SelectedIndex = 0
+        ComboBox_NatureObjects.Items.Add("All") ' Add all to the end of the list
+        ComboBox_NatureObjects.EndUpdate()
+        ComboBox_NatureObjects.SelectedIndex = 0
 
         Button_Randomize.PerformClick()
     End Sub
-    'Button_Randomize - Click
+    ' Button_Randomize - Click
     Private Sub Button_Randomize_Click(sender As Object, e As EventArgs) Handles Button_Randomize.Click
-        'Maximum
+        ' Maximum
         NumericUpDown_Flowers_Min.Maximum = 100
         NumericUpDown_Bushes_Min.Maximum = 100
         NumericUpDown_Trees_Min.Maximum = 100
         NumericUpDown_Rocks_Min.Maximum = 100
         NumericUpDown_Grass_Min.Maximum = 100
-        'Min
+        ' Min
         NumericUpDown_Flowers_Min.Value = randNum.Next(Flowers_Min, Flowers_Max + 1)
         NumericUpDown_Bushes_Min.Value = randNum.Next(Bushes_Min, Bushes_Max + 1)
         NumericUpDown_Trees_Min.Value = randNum.Next(Trees_Min, Trees_Max + 1)
         NumericUpDown_Rocks_Min.Value = randNum.Next(Rocks_Min, Rocks_Max + 1)
         NumericUpDown_Grass_Min.Value = randNum.Next(Grass_Min, Grass_Max + 1)
-        'Max
+        ' Max
         NumericUpDown_Flowers_Max.Value = randNum.Next(CInt(NumericUpDown_Flowers_Min.Value), Flowers_Max + 1)
         NumericUpDown_Bushes_Max.Value = randNum.Next(CInt(NumericUpDown_Bushes_Min.Value), Bushes_Max + 1)
         NumericUpDown_Trees_Max.Value = randNum.Next(CInt(NumericUpDown_Trees_Min.Value), Trees_Max + 1)
         NumericUpDown_Rocks_Max.Value = randNum.Next(CInt(NumericUpDown_Rocks_Min.Value), Rocks_Max + 1)
         NumericUpDown_Grass_Max.Value = randNum.Next(CInt(NumericUpDown_Grass_Min.Value), Grass_Max + 1)
-        'Maximum
+        ' Maximum
         NumericUpDown_Flowers_Min.Maximum = NumericUpDown_Flowers_Max.Value
         NumericUpDown_Bushes_Min.Maximum = NumericUpDown_Bushes_Max.Value
         NumericUpDown_Trees_Min.Maximum = NumericUpDown_Trees_Max.Value
         NumericUpDown_Rocks_Min.Maximum = NumericUpDown_Rocks_Max.Value
         NumericUpDown_Grass_Min.Maximum = NumericUpDown_Grass_Max.Value
     End Sub
-    'Button_Generate - Click
+    ' Button_Generate - Click
     Private Sub Button_Generate_Click(sender As Object, e As EventArgs) Handles Button_Generate.Click
-        Dim NatureObjectPath As String = Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString
+        Dim NatureObjectPath As String = Application.StartupPath & "\Nature\" & ComboBox_NatureObjects.SelectedItem.ToString
         'Main Grass
         'If File.Exists(NatureObjectPath & "\Grass.png") Then
         'Dim NatureObject = New Form_NatureObject
@@ -108,11 +108,11 @@ Public Class Form_Nature
 
         Button_Generate.Enabled = False
     End Sub
-    'GenerateNature()
+    ' GenerateNature()
     Private Sub GenerateNature(NatureFolder As String, randMin As Integer, randMax As Integer)
-        If Directory.Exists(Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString & "\" & NatureFolder) Then
+        If Directory.Exists(Application.StartupPath & "\Nature\" & ComboBox_NatureObjects.SelectedItem.ToString & "\" & NatureFolder) Then
             Dim FilesToCheck As New ArrayList()
-            Dim NatureObjectPath As String = Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString
+            Dim NatureObjectPath As String = Application.StartupPath & "\Nature\" & ComboBox_NatureObjects.SelectedItem.ToString
             FilesToCheck.Clear()
             FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\" & NatureFolder, "*.png", SearchOption.TopDirectoryOnly))
             FilesToCheck.AddRange(Directory.GetFiles(NatureObjectPath & "\" & NatureFolder, "*.gif", SearchOption.TopDirectoryOnly))
@@ -127,11 +127,11 @@ Public Class Form_Nature
                 Form_Menu.IDCounter_NatureObject += 1
                 Form_Menu.FormList_NatureObject.Add(Form_Menu.IDCounter_NatureObject.ToString, NatureObject)
                 NatureObject.UniqueSessionID = Form_Menu.IDCounter_NatureObject.ToString
-                Form_Menu.FormList_NatureObject(Form_Menu.IDCounter_NatureObject.ToString).Show() 'NatureObject.Show()
+                Form_Menu.FormList_NatureObject(Form_Menu.IDCounter_NatureObject.ToString).Show() ' NatureObject.Show()
             Next
         End If
     End Sub
-    'Button_CloseAll - Click
+    ' Button_CloseAll - Click
     Private Sub Button_CloseAll_Click(sender As Object, e As EventArgs) Handles Button_CloseAll.Click
         Dim FormListArray As Array = Form_Menu.FormList_NatureObject.Keys.ToArray
         For Each item As String In FormListArray
@@ -140,57 +140,90 @@ Public Class Form_Nature
         Form_Menu.FormList_NatureObject.Clear()
         Button_Generate.Enabled = True
     End Sub
-    'ComboBox_Theme - SelectedIndexChanged
-    Private Sub ComboBox_Theme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_Theme.SelectedIndexChanged
-        If Not ComboBox_Theme.SelectedIndex = -1 Then
-            If Not ComboBox_Theme.SelectedItem.ToString = "All" Then
-                LoadNatureObjects(Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString)
+    ' ComboBox_NatureObjects - SelectedIndexChanged
+    Private Sub ComboBox_NatureObjects_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_NatureObjects.SelectedIndexChanged
+        If Not ComboBox_NatureObjects.SelectedIndex = -1 Then
+            If Not ComboBox_NatureObjects.SelectedItem.ToString = "All" Then
+                LoadNatureObjects(Application.StartupPath & "\Nature\" & ComboBox_NatureObjects.SelectedItem.ToString)
                 Button_Generate.Enabled = True
             Else
                 LoadNatureObjects(Application.StartupPath & "\Nature\")
                 Button_Generate.Enabled = False
             End If
 
-            If File.Exists(Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString & "\Theme.ini") Then
+            If File.Exists(Application.StartupPath & "\Nature\" & ComboBox_NatureObjects.SelectedItem.ToString & "\Theme.ini") Then
                 Dim INI As New MadMilkman.Ini.IniFile()
-                INI.Load(Application.StartupPath & "\Nature\" & ComboBox_Theme.SelectedItem.ToString & "\Theme.ini")
+                INI.Load(Application.StartupPath & "\Nature\" & ComboBox_NatureObjects.SelectedItem.ToString & "\Theme.ini")
 
-                DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
+                If INI.Sections("Settings") IsNot Nothing Then
+                    If INI.Sections("Settings").Keys("DefaultScale") IsNot Nothing Then
+                        DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
+                    End If
+                End If
 
-                Flowers_Min = CInt(INI.Sections("Randomization_Min").Keys("Flowers").Value)
-                Bushes_Min = CInt(INI.Sections("Randomization_Min").Keys("Bushes").Value)
-                Trees_Min = CInt(INI.Sections("Randomization_Min").Keys("Trees").Value)
-                Rocks_Min = CInt(INI.Sections("Randomization_Min").Keys("Rocks").Value)
-                Grass_Min = CInt(INI.Sections("Randomization_Min").Keys("Grass").Value)
+                If INI.Sections("Randomization_Min") IsNot Nothing Then
+                    If INI.Sections("Randomization_Min").Keys("Flowers") IsNot Nothing Then
+                        Flowers_Min = CInt(INI.Sections("Randomization_Min").Keys("Flowers").Value)
+                    End If
 
-                Flowers_Max = CInt(INI.Sections("Randomization_Max").Keys("Flowers").Value)
-                Bushes_Max = CInt(INI.Sections("Randomization_Max").Keys("Bushes").Value)
-                Trees_Max = CInt(INI.Sections("Randomization_Max").Keys("Trees").Value)
-                Rocks_Max = CInt(INI.Sections("Randomization_Max").Keys("Rocks").Value)
-                Grass_Max = CInt(INI.Sections("Randomization_Max").Keys("Grass").Value)
+                    If INI.Sections("Randomization_Min").Keys("Bushes") IsNot Nothing Then
+                        Bushes_Min = CInt(INI.Sections("Randomization_Min").Keys("Bushes").Value)
+                    End If
+
+                    If INI.Sections("Randomization_Min").Keys("Trees") IsNot Nothing Then
+                        Trees_Min = CInt(INI.Sections("Randomization_Min").Keys("Trees").Value)
+                    End If
+
+                    If INI.Sections("Randomization_Min").Keys("Rocks") IsNot Nothing Then
+                        Rocks_Min = CInt(INI.Sections("Randomization_Min").Keys("Rocks").Value)
+                    End If
+
+                    If INI.Sections("Randomization_Min").Keys("Grass") IsNot Nothing Then
+                        Grass_Min = CInt(INI.Sections("Randomization_Min").Keys("Grass").Value)
+                    End If
+                End If
+
+                If INI.Sections("Randomization_Max") IsNot Nothing Then
+                    If INI.Sections("Randomization_Max").Keys("Flowers") IsNot Nothing Then
+                        Flowers_Max = CInt(INI.Sections("Randomization_Max").Keys("Flowers").Value)
+                    End If
+
+                    If INI.Sections("Randomization_Max").Keys("Bushes") IsNot Nothing Then
+                        Bushes_Max = CInt(INI.Sections("Randomization_Max").Keys("Bushes").Value)
+                    End If
+
+                    If INI.Sections("Randomization_Max").Keys("Trees") IsNot Nothing Then
+                        Trees_Max = CInt(INI.Sections("Randomization_Max").Keys("Trees").Value)
+                    End If
+
+                    If INI.Sections("Randomization_Max").Keys("Rocks") IsNot Nothing Then
+                        Rocks_Max = CInt(INI.Sections("Randomization_Max").Keys("Rocks").Value)
+                    End If
+
+                    If INI.Sections("Randomization_Max").Keys("Grass") IsNot Nothing Then
+                        Grass_Max = CInt(INI.Sections("Randomization_Max").Keys("Grass").Value)
+                    End If
+                End If
 
                 Button_Randomize.PerformClick()
             End If
         End If
     End Sub
-    'LoadNatureObjects()
+    ' LoadNatureObjects()
     Private Sub LoadNatureObjects(filepath As String)
         If Directory.Exists(filepath) Then
             FlowLayoutPanel1.Visible = False
             FlowLayoutPanel1.Controls.Clear()
-            'Label_AssetCount.Text = "0 Nature Objects"
-            'Label_AssetCount.Update()
             Dim FilesToCheck As New ArrayList()
             FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.png", SearchOption.AllDirectories))
             FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.gif", SearchOption.AllDirectories))
             For Each item As String In FilesToCheck
                 CreateNewPanel(item, Path.GetFileNameWithoutExtension(item))
             Next
-            'Label_AssetCount.Text = FilesToCheck.Count.ToString & " Nature Objects"
             FlowLayoutPanel1.Visible = True
         End If
     End Sub
-    'AssetPanel1 - Click
+    ' AssetPanel1 - Click
     Private Sub PixelBox1_MouseClick(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Left Then
             Try
@@ -209,7 +242,7 @@ Public Class Form_Nature
             End Try
         End If
     End Sub
-    'SafeImageFromFile()
+    ' SafeImageFromFile()
     Public Shared Function SafeImageFromFile(path As String) As Image
         Dim bytes = File.ReadAllBytes(path)
         Using ms As New MemoryStream(bytes)
@@ -217,15 +250,15 @@ Public Class Form_Nature
             Return img
         End Using
     End Function
-    'CreateNewPanel
+    ' CreateNewPanel
     Private Sub CreateNewPanel(imagePath As String, assetObjectText As String)
-        'Panel
+        ' Panel
         Dim AssetPanel = New Panel
         AssetPanel.Size = New Size(AssetPanel_Size, AssetPanel_Size)
         AssetPanel.BackColor = Color.FromArgb(46, 49, 54)
         AssetPanel.Name = "AssetPanel1"
 
-        'Label
+        ' Label
         Dim AssetLabel = New Label
         AssetLabel.AutoEllipsis = True
         AssetLabel.TextAlign = ContentAlignment.MiddleCenter
@@ -235,7 +268,7 @@ Public Class Form_Nature
         AssetLabel.Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Bold, GraphicsUnit.Point, CType(0, Byte))
         AssetLabel.BackColor = Color.FromArgb(28, 30, 34)
 
-        'PixelBox
+        ' PixelBox
         Dim AssetPixelBox = New PixelBox
         AssetPixelBox.Dock = DockStyle.Fill
         AssetPixelBox.Image = Image.FromFile(imagePath) 'SafeImageFromFile(imagePath)
@@ -244,20 +277,20 @@ Public Class Form_Nature
         AssetPixelBox.Cursor = Cursors.Hand
         AssetPixelBox.Text = imagePath
 
-        'Add AssetLabel and AssetPixelBox to AssetPanel
+        ' Add AssetLabel and AssetPixelBox to AssetPanel
         AssetPanel.Controls.Add(AssetPixelBox)
         AssetPanel.Controls.Add(AssetLabel)
 
-        'Add AssetPanel to FlowLayoutPanel1
+        ' Add AssetPanel to FlowLayoutPanel1
         FlowLayoutPanel1.Controls.Add(AssetPanel)
 
         AddHandler AssetPixelBox.MouseClick, AddressOf PixelBox1_MouseClick
     End Sub
-    'Button1 - Click
+    ' Button1 - Click
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ContextMenuStrip3.Show(Button1, 4, 4)
     End Sub
-    'ResizePanels (sizeInt)
+    ' ResizePanels (sizeInt)
     Private Sub ResizePanels(sizeInt As Integer)
         AssetPanel_Size = sizeInt
         FlowLayoutPanel1.SuspendLayout()
@@ -270,37 +303,37 @@ Public Class Form_Nature
         FlowLayoutPanel1.Visible = True
         FlowLayoutPanel1.ResumeLayout()
     End Sub
-    'Small_ToolStripMenuItem - Click
+    ' Small_ToolStripMenuItem - Click
     Private Sub Small_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Small_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Small_ToolStripMenuItem.Checked = True
         ResizePanels(98)
     End Sub
-    'Medium_ToolStripMenuItem - Click
+    ' Medium_ToolStripMenuItem - Click
     Private Sub Medium_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Medium_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Medium_ToolStripMenuItem.Checked = True
         ResizePanels(128)
     End Sub
-    'MediumLarge_ToolStripMenuItem - Click
+    ' MediumLarge_ToolStripMenuItem - Click
     Private Sub MediumLarge_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MediumLarge_ToolStripMenuItem.Click
         UnCheckAllSizes()
         MediumLarge_ToolStripMenuItem.Checked = True
         ResizePanels(150)
     End Sub
-    'Large_ToolStripMenuItem - Click
+    ' Large_ToolStripMenuItem - Click
     Private Sub Large_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Large_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Large_ToolStripMenuItem.Checked = True
         ResizePanels(182)
     End Sub
-    'ExtraLarge_ToolStripMenuItem - Click
+    ' ExtraLarge_ToolStripMenuItem - Click
     Private Sub ExtraLarge_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExtraLarge_ToolStripMenuItem.Click
         UnCheckAllSizes()
         ExtraLarge_ToolStripMenuItem.Checked = True
         ResizePanels(229)
     End Sub
-    'UnCheckAllSizes
+    ' UnCheckAllSizes
     Private Sub UnCheckAllSizes()
         Small_ToolStripMenuItem.Checked = False
         Medium_ToolStripMenuItem.Checked = False
@@ -308,23 +341,23 @@ Public Class Form_Nature
         Large_ToolStripMenuItem.Checked = False
         ExtraLarge_ToolStripMenuItem.Checked = False
     End Sub
-    'NumericUpDown_Flowers_Max - ValueChanged
+    ' NumericUpDown_Flowers_Max - ValueChanged
     Private Sub NumericUpDown_Flowers_Max_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown_Flowers_Max.ValueChanged
         NumericUpDown_Flowers_Min.Maximum = NumericUpDown_Flowers_Max.Value
     End Sub
-    'NumericUpDown_Bushes_Max - ValueChanged
+    ' NumericUpDown_Bushes_Max - ValueChanged
     Private Sub NumericUpDown_Bushes_Max_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown_Bushes_Max.ValueChanged
         NumericUpDown_Bushes_Min.Maximum = NumericUpDown_Bushes_Max.Value
     End Sub
-    'NumericUpDown_Trees_Max_ValueChanged
+    ' NumericUpDown_Trees_Max_ValueChanged
     Private Sub NumericUpDown_Trees_Max_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown_Trees_Max.ValueChanged
         NumericUpDown_Trees_Min.Maximum = NumericUpDown_Trees_Max.Value
     End Sub
-    'NumericUpDown_Rocks_Max - ValueChanged
+    ' NumericUpDown_Rocks_Max - ValueChanged
     Private Sub NumericUpDown_Rocks_Max_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown_Rocks_Max.ValueChanged
         NumericUpDown_Rocks_Min.Maximum = NumericUpDown_Rocks_Max.Value
     End Sub
-    'NumericUpDown_Grass_Max - ValueChanged
+    ' NumericUpDown_Grass_Max - ValueChanged
     Private Sub NumericUpDown_Grass_Max_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown_Grass_Max.ValueChanged
         NumericUpDown_Grass_Min.Maximum = NumericUpDown_Grass_Max.Value
     End Sub

@@ -148,9 +148,9 @@ Public Class Form_Menu
         End If
     End Sub
 
-    ' CheckBox1 - CheckedChanged
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-        If CheckBox1.Checked Then
+    ' CheckBox_UseTrayIcon - CheckedChanged
+    Private Sub CheckBox_UseTrayIcon_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox_UseTrayIcon.CheckedChanged
+        If CheckBox_UseTrayIcon.Checked Then
             NotifyIcon1.Visible = True
             Me.ShowInTaskbar = False
         Else
@@ -162,7 +162,7 @@ Public Class Form_Menu
     ' Form_Menu - Resize
     Private Sub Form_Menu_Resize(sender As Object, e As EventArgs) Handles Me.Resize
         If Me.WindowState = FormWindowState.Minimized Then
-            If CheckBox1.Checked Then
+            If CheckBox_UseTrayIcon.Checked Then
                 Me.Visible = False
             Else
                 Me.Visible = True

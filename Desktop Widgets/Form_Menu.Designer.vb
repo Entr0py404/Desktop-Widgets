@@ -39,13 +39,13 @@ Partial Class Form_Menu
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button_AnimationBuilder = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.Panel_Bottom = New System.Windows.Forms.Panel()
+        Me.CheckBox_UseTrayIcon = New System.Windows.Forms.CheckBox()
         Me.Button_MotionDesktop = New System.Windows.Forms.Button()
         Me.Button_DualBackgrounds = New System.Windows.Forms.Button()
         Me.PixelBox1 = New Desktop_Widgets.PixelBox()
         Me.ContextMenuStrip_Main.SuspendLayout()
-        Me.Panel1.SuspendLayout()
+        Me.Panel_Bottom.SuspendLayout()
         CType(Me.PixelBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -123,10 +123,9 @@ Partial Class Form_Menu
         '
         'NotifyIcon1
         '
-        Me.NotifyIcon1.BalloonTipText = "Test"
         Me.NotifyIcon1.ContextMenuStrip = Me.ContextMenuStrip_Main
         Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
-        Me.NotifyIcon1.Text = "Desktop Pets"
+        Me.NotifyIcon1.Text = "Desktop Widgets"
         '
         'ContextMenuStrip_Main
         '
@@ -195,29 +194,29 @@ Partial Class Form_Menu
         Me.Button_AnimationBuilder.Text = "Animation Builder"
         Me.Button_AnimationBuilder.UseVisualStyleBackColor = False
         '
-        'Panel1
+        'Panel_Bottom
         '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.CheckBox1)
-        Me.Panel1.Controls.Add(Me.Button_CloseSelected)
-        Me.Panel1.Controls.Add(Me.ComboBox1)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 129)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(528, 26)
-        Me.Panel1.TabIndex = 73
+        Me.Panel_Bottom.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Panel_Bottom.Controls.Add(Me.CheckBox_UseTrayIcon)
+        Me.Panel_Bottom.Controls.Add(Me.Button_CloseSelected)
+        Me.Panel_Bottom.Controls.Add(Me.ComboBox1)
+        Me.Panel_Bottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel_Bottom.Location = New System.Drawing.Point(0, 129)
+        Me.Panel_Bottom.Name = "Panel_Bottom"
+        Me.Panel_Bottom.Size = New System.Drawing.Size(528, 26)
+        Me.Panel_Bottom.TabIndex = 73
         '
-        'CheckBox1
+        'CheckBox_UseTrayIcon
         '
-        Me.CheckBox1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(240, 0)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.CheckBox1.Size = New System.Drawing.Size(120, 26)
-        Me.CheckBox1.TabIndex = 74
-        Me.CheckBox1.Text = "Use Tray Icon"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.CheckBox_UseTrayIcon.Dock = System.Windows.Forms.DockStyle.Left
+        Me.CheckBox_UseTrayIcon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox_UseTrayIcon.Location = New System.Drawing.Point(240, 0)
+        Me.CheckBox_UseTrayIcon.Name = "CheckBox_UseTrayIcon"
+        Me.CheckBox_UseTrayIcon.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.CheckBox_UseTrayIcon.Size = New System.Drawing.Size(120, 26)
+        Me.CheckBox_UseTrayIcon.TabIndex = 74
+        Me.CheckBox_UseTrayIcon.Text = "Use Tray Icon"
+        Me.CheckBox_UseTrayIcon.UseVisualStyleBackColor = True
         '
         'Button_MotionDesktop
         '
@@ -267,7 +266,7 @@ Partial Class Form_Menu
         Me.Controls.Add(Me.PixelBox1)
         Me.Controls.Add(Me.Button_DualBackgrounds)
         Me.Controls.Add(Me.Button_MotionDesktop)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Panel_Bottom)
         Me.Controls.Add(Me.Button_AnimationBuilder)
         Me.Controls.Add(Me.Button_DesktopObjects)
         Me.Controls.Add(Me.Button_Nature)
@@ -282,7 +281,7 @@ Partial Class Form_Menu
         Me.Text = "Menu"
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         Me.ContextMenuStrip_Main.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
+        Me.Panel_Bottom.ResumeLayout(False)
         CType(Me.PixelBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -299,8 +298,8 @@ Partial Class Form_Menu
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PixelBox1 As PixelBox
     Friend WithEvents Button_AnimationBuilder As Button
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents Panel_Bottom As Panel
+    Friend WithEvents CheckBox_UseTrayIcon As CheckBox
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents DesktopNatureToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DesktopPetsToolStripMenuItem As ToolStripMenuItem

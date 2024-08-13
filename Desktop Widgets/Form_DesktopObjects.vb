@@ -1,7 +1,7 @@
 ﻿
 Public Class Form_DesktopObjects
     Dim AssetPanel_Size As Integer = 98
-    'Form_DesktopObjects - Load
+    ' Form_DesktopObjects - Load
     Private Sub Form_DesktopObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip2.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
 
@@ -27,34 +27,31 @@ Public Class Form_DesktopObjects
             Directory.CreateDirectory(Application.StartupPath & "\Objects\All")
         End If
 
-        ComboBox_Objects.BeginUpdate()
+        ComboBox_DesktopObjects.BeginUpdate()
         For Each dir As String In Directory.GetDirectories(Application.StartupPath & "\Objects")
             If Not Path.GetFileName(dir).ToLower = "all" Then
-                ComboBox_Objects.Items.Add(Path.GetFileName(dir))
+                ComboBox_DesktopObjects.Items.Add(Path.GetFileName(dir))
             End If
         Next
-        ComboBox_Objects.Items.Add("All") 'Add all to the end of the list
-        ComboBox_Objects.EndUpdate()
-        ComboBox_Objects.SelectedIndex = 0
+        ComboBox_DesktopObjects.Items.Add("All") ' Add all to the end of the list
+        ComboBox_DesktopObjects.EndUpdate()
+        ComboBox_DesktopObjects.SelectedIndex = 0
     End Sub
-    'LoadDesktopObjects()
+    ' LoadDesktopObjects()
     Private Sub LoadDesktopObjects(filepath As String)
         If Directory.Exists(filepath) Then
             FlowLayoutPanel1.Visible = False
             FlowLayoutPanel1.Controls.Clear()
-            'Label_AssetCount.Text = "0 Desktop Objects"
-            'Label_AssetCount.Update()
             Dim FilesToCheck As New ArrayList()
             FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.png", SearchOption.AllDirectories))
             FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.gif", SearchOption.AllDirectories))
             For Each item As String In FilesToCheck
                 CreateNewPanel(item, Path.GetFileNameWithoutExtension(item))
             Next
-            'Label_AssetCount.Text = FilesToCheck.Count.ToString & " Desktop Objects"
             FlowLayoutPanel1.Visible = True
         End If
     End Sub
-    'Button_AllDesktopObjects - Click
+    ' Button_AllDesktopObjects - Click
     Private Sub Button_AllDesktopObjects_Click(sender As Object, e As EventArgs) Handles Button_AllDesktopObjects.Click
         Dim FormListArray As Array = Form_Menu.FormList_DesktopObject.Keys.ToArray
         For Each item As String In FormListArray
@@ -62,13 +59,13 @@ Public Class Form_DesktopObjects
         Next
         Form_Menu.FormList_DesktopObject.Clear()
     End Sub
-    'ReloadToolStripMenuItem - Click
+    ' ReloadToolStripMenuItem - Click
     Private Sub ReloadToolStripMenuItem_Click(sender As Object, e As EventArgs)
         If Directory.Exists(Application.StartupPath & "\Objects\") Then
             LoadDesktopObjects(Application.StartupPath & "\Objects\")
         End If
     End Sub
-    'AssetPanel1 - Click
+    ' AssetPanel1 - Click
     Private Sub PixelBox1_MouseClick(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Left Then
             Try
@@ -81,13 +78,13 @@ Public Class Form_DesktopObjects
                 Form_Menu.IDCounter_DesktopObject += 1
                 Form_Menu.FormList_DesktopObject.Add(Form_Menu.IDCounter_DesktopObject.ToString, DesktopObject)
                 DesktopObject.UniqueSessionID = Form_Menu.IDCounter_DesktopObject.ToString
-                Form_Menu.FormList_DesktopObject(Form_Menu.IDCounter_DesktopObject.ToString).Show() 'DesktopObject.Show()
+                Form_Menu.FormList_DesktopObject(Form_Menu.IDCounter_DesktopObject.ToString).Show() ' DesktopObject.Show()
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
             End Try
         End If
     End Sub
-    'SafeImageFromFile()
+    ' SafeImageFromFile()
     Public Shared Function SafeImageFromFile(path As String) As Image
         Dim bytes = File.ReadAllBytes(path)
         Using ms As New MemoryStream(bytes)
@@ -95,15 +92,15 @@ Public Class Form_DesktopObjects
             Return img
         End Using
     End Function
-    'CreateNewPanel
+    ' CreateNewPanel
     Private Sub CreateNewPanel(imagePath As String, assetObjectText As String)
-        'Panel
+        ' Panel
         Dim AssetPanel = New Panel
         AssetPanel.Size = New Size(AssetPanel_Size, AssetPanel_Size)
         AssetPanel.BackColor = Color.FromArgb(46, 49, 54)
         AssetPanel.Name = "AssetPanel1"
 
-        'Label
+        ' Label
         Dim AssetLabel = New Label
         AssetLabel.AutoEllipsis = True
         AssetLabel.TextAlign = ContentAlignment.MiddleCenter
@@ -113,7 +110,7 @@ Public Class Form_DesktopObjects
         AssetLabel.Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Bold, GraphicsUnit.Point, CType(0, Byte))
         AssetLabel.BackColor = Color.FromArgb(28, 30, 34)
 
-        'PixelBox
+        ' PixelBox
         Dim AssetPixelBox = New PixelBox
         AssetPixelBox.Dock = DockStyle.Fill
         AssetPixelBox.Image = Image.FromFile(imagePath) 'SafeImageFromFile(imagePath)
@@ -122,20 +119,20 @@ Public Class Form_DesktopObjects
         AssetPixelBox.Cursor = Cursors.Hand
         AssetPixelBox.Text = imagePath
 
-        'Add AssetLabel and AssetPixelBox to AssetPanel
+        ' Add AssetLabel and AssetPixelBox to AssetPanel
         AssetPanel.Controls.Add(AssetPixelBox)
         AssetPanel.Controls.Add(AssetLabel)
 
-        'Add AssetPanel to FlowLayoutPanel1
+        ' Add AssetPanel to FlowLayoutPanel1
         FlowLayoutPanel1.Controls.Add(AssetPanel)
 
         AddHandler AssetPixelBox.MouseClick, AddressOf PixelBox1_MouseClick
     End Sub
-    '
+    ' Button1 - Click
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ContextMenuStrip2.Show(Button1, 4, 4)
     End Sub
-    'ResizePanels (sizeInt)
+    ' ResizePanels (sizeInt)
     Private Sub ResizePanels(sizeInt As Integer)
         AssetPanel_Size = sizeInt
         FlowLayoutPanel1.SuspendLayout()
@@ -148,37 +145,37 @@ Public Class Form_DesktopObjects
         FlowLayoutPanel1.Visible = True
         FlowLayoutPanel1.ResumeLayout()
     End Sub
-    'Small_ToolStripMenuItem - Click
+    ' Small_ToolStripMenuItem - Click
     Private Sub Small_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Small_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Small_ToolStripMenuItem.Checked = True
         ResizePanels(98)
     End Sub
-    'Medium_ToolStripMenuItem - Click
+    ' Medium_ToolStripMenuItem - Click
     Private Sub Medium_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Medium_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Medium_ToolStripMenuItem.Checked = True
         ResizePanels(128)
     End Sub
-    'MediumLarge_ToolStripMenuItem - Click
+    ' MediumLarge_ToolStripMenuItem - Click
     Private Sub MediumLarge_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MediumLarge_ToolStripMenuItem.Click
         UnCheckAllSizes()
         MediumLarge_ToolStripMenuItem.Checked = True
         ResizePanels(150)
     End Sub
-    'Large_ToolStripMenuItem - Click
+    ' Large_ToolStripMenuItem - Click
     Private Sub Large_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Large_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Large_ToolStripMenuItem.Checked = True
         ResizePanels(182)
     End Sub
-    'ExtraLarge_ToolStripMenuItem - Click
+    ' ExtraLarge_ToolStripMenuItem - Click
     Private Sub ExtraLarge_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExtraLarge_ToolStripMenuItem.Click
         UnCheckAllSizes()
         ExtraLarge_ToolStripMenuItem.Checked = True
         ResizePanels(229)
     End Sub
-    'UnCheckAllSizes
+    ' UnCheckAllSizes
     Private Sub UnCheckAllSizes()
         Small_ToolStripMenuItem.Checked = False
         Medium_ToolStripMenuItem.Checked = False
@@ -186,11 +183,11 @@ Public Class Form_DesktopObjects
         Large_ToolStripMenuItem.Checked = False
         ExtraLarge_ToolStripMenuItem.Checked = False
     End Sub
-    'ComboBox_Objects - SelectedIndexChanged
-    Private Sub ComboBox_Objects_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_Objects.SelectedIndexChanged
-        If Not ComboBox_Objects.SelectedIndex = -1 Then
-            If Not ComboBox_Objects.SelectedItem.ToString = "All" Then
-                LoadDesktopObjects(Application.StartupPath & "\Objects\" & ComboBox_Objects.SelectedItem.ToString)
+    ' ComboBox_DesktopObjects - SelectedIndexChanged
+    Private Sub ComboBox_DesktopObjects_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_DesktopObjects.SelectedIndexChanged
+        If Not ComboBox_DesktopObjects.SelectedIndex = -1 Then
+            If Not ComboBox_DesktopObjects.SelectedItem.ToString = "All" Then
+                LoadDesktopObjects(Application.StartupPath & "\Objects\" & ComboBox_DesktopObjects.SelectedItem.ToString)
             Else
                 LoadDesktopObjects(Application.StartupPath & "\Objects\")
             End If

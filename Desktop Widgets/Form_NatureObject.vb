@@ -9,7 +9,7 @@ Public Class Form_NatureObject
     Dim Rand As New Random
     Dim BlockEvent_DisplayComboBox As Boolean = False
     Public DefaultScale As Integer = 1
-    'Form_NatureObject - Load
+    ' Form_NatureObject - Load
     Private Sub Form_NatureObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
 
@@ -57,32 +57,22 @@ Public Class Form_NatureObject
 
         FormLoadLock = False
     End Sub
-    'ScaleObject()
+    ' ScaleObject()
     Public Sub ScaleObject(val As Integer)
         val = val + DefaultScale - 1
         Me.Width = ObjectImage.Width * val
         Me.Height = ObjectImage.Height * val
         Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
     End Sub
-    'PixelBox1 - MouseDown
+    ' PixelBox1 - MouseDown
     Private Sub PixelBox1_MouseDown(sender As Object, e As MouseEventArgs) Handles PixelBox1.MouseDown
         If isMainGrass = False Then
             If e.Button = Windows.Forms.MouseButtons.Left Then
                 PixelBox1.Capture = False
                 Const WM_NCLBUTTONDOWN As Integer = &HA1S
-                'Const WM_NCRBUTTONDOWN As Integer = &HA4S
                 Const HTCAPTION As Integer = 2
                 Dim msg As Message = Message.Create(Me.Handle, WM_NCLBUTTONDOWN, New IntPtr(HTCAPTION), IntPtr.Zero)
                 Me.DefWndProc(msg)
-
-
-                'Dim tempval As Integer = -1
-                'For Each Displays As Screen In Screen.AllScreens
-                'If Me.Location.X >= Displays.Bounds.Left And Me.Location.X <= Displays.Bounds.Right Then
-                'TempDisplay = Displays
-                'End If
-                'Next
-
 
                 BlockEvent_DisplayComboBox = True
                 Dim TempScreen As Screen = MYScreen
@@ -100,46 +90,35 @@ Public Class Form_NatureObject
                 MYScreen = TempScreen
 
                 Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
-
-
-                'TempDisplay
-                'DisplayToolStripComboBox.Text = MYDisplay.ToPathDisplayTarget.GetDisplayTargets(tempval).FriendlyName 'MYScreen.DeviceName.Replace("\\.\", "")
-                'Console.WriteLine("HERE: " & bla.ToPathDisplayTarget.FriendlyName)
-                'Console.WriteLine(tempval)
-                'MYDisplay = MYScreen
-                'MYDisplay = 
-                'MYDisplay.ToPathDisplayTarget.FriendlyName
-
-                'Dragging = False
             End If
         End If
     End Sub
-    'ScaleToolStripComboBox - SelectedIndexChanged
+    ' ScaleToolStripComboBox - SelectedIndexChanged
     Private Sub ScaleToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ScaleToolStripComboBox.SelectedIndexChanged
         If Not ScaleToolStripComboBox.SelectedIndex = -1 Then
             ScaleObject(ScaleToolStripComboBox.SelectedIndex + 1)
         End If
     End Sub
-    'CloseToolStripMenuItem - Click
+    ' CloseToolStripMenuItem - Click
     Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
         Me.Close()
     End Sub
-    'AlwaysOnTopToolStripMenuItem - Click
+    ' AlwaysOnTopToolStripMenuItem - Click
     Private Sub AlwaysOnTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlwaysOnTopToolStripMenuItem.Click
         Me.TopMost = AlwaysOnTopToolStripMenuItem.Checked
     End Sub
-    'Form_NatureObject - Closing
+    ' Form_NatureObject - Closing
     Private Sub Form_NatureObject_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Me.Closing
         Form_Menu.FormList_NatureObject.Remove(UniqueSessionID)
     End Sub
-    'AllAlwaysOnTopToolStripMenuItem - Click
+    ' AllAlwaysOnTopToolStripMenuItem - Click
     Private Sub AllAlwaysOnTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AllAlwaysOnTopToolStripMenuItem.Click
         For Each item In Form_Menu.FormList_NatureObject.Keys
             Form_Menu.FormList_NatureObject(item).AlwaysOnTopToolStripMenuItem.Checked = AllAlwaysOnTopToolStripMenuItem.Checked
             Form_Menu.FormList_NatureObject(item).TopMost = AllAlwaysOnTopToolStripMenuItem.Checked
         Next
     End Sub
-    'AllScaleToolStripComboBox - SelectedIndexChanged
+    ' AllScaleToolStripComboBox - SelectedIndexChanged
     Private Sub AllScaleToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AllScaleToolStripComboBox.SelectedIndexChanged
         If Not AllScaleToolStripComboBox.SelectedIndex = -1 And FormLoadLock = False Then
             For Each item In Form_Menu.FormList_NatureObject.Keys
@@ -147,14 +126,13 @@ Public Class Form_NatureObject
             Next
         End If
     End Sub
-    'DisplayToolStripComboBox - SelectedIndexChanged
+    ' DisplayToolStripComboBox - SelectedIndexChanged
     Private Sub DisplayToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayToolStripComboBox.SelectedIndexChanged
         If BlockEvent_DisplayComboBox = False Then
             If Not DisplayToolStripComboBox.SelectedIndex = -1 And FormLoadLock = False Then
                 Dim MyDisplay As WindowsDisplayAPI.Display = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex)
                 MYScreen = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
                 Me.Location = New Point(Rand.Next(MyDisplay.GetScreen.WorkingArea.Left, MyDisplay.GetScreen.WorkingArea.Right - Me.Width), MyDisplay.GetScreen.WorkingArea.Bottom - Me.Height)
-                'Console.WriteLine("DisplayToolStripComboBox_SelectedIndexChanged")
             End If
         End If
     End Sub

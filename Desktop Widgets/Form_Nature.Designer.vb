@@ -30,34 +30,34 @@ Partial Class Form_Nature
         Me.NumericUpDown_Bushes_Max = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown_Trees_Max = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown_Trees_Min = New System.Windows.Forms.NumericUpDown()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label_Bushes = New System.Windows.Forms.Label()
+        Me.Label_Flowers = New System.Windows.Forms.Label()
+        Me.Label_Trees = New System.Windows.Forms.Label()
+        Me.Label_GenMin = New System.Windows.Forms.Label()
+        Me.Label_GenMax = New System.Windows.Forms.Label()
         Me.Button_Generate = New System.Windows.Forms.Button()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label_Rocks = New System.Windows.Forms.Label()
         Me.NumericUpDown_Rocks_Min = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown_Rocks_Max = New System.Windows.Forms.NumericUpDown()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label_Grass = New System.Windows.Forms.Label()
         Me.NumericUpDown_Grass_Min = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown_Grass_Max = New System.Windows.Forms.NumericUpDown()
         Me.Button_Randomize = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.ComboBox_Theme = New System.Windows.Forms.ComboBox()
+        Me.Panel_GenMax = New System.Windows.Forms.Panel()
+        Me.Panel_GenMin = New System.Windows.Forms.Panel()
+        Me.Label_NatureObjects = New System.Windows.Forms.Label()
+        Me.ComboBox_NatureObjects = New System.Windows.Forms.ComboBox()
         Me.Button_CloseAll = New System.Windows.Forms.Button()
-        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label_Scale = New System.Windows.Forms.Label()
         Me.CheckBox_TopMost = New System.Windows.Forms.CheckBox()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label_Display = New System.Windows.Forms.Label()
         Me.ComboBox_Display = New System.Windows.Forms.ComboBox()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Panel_Bottom = New System.Windows.Forms.Panel()
+        Me.Panel_Side = New System.Windows.Forms.Panel()
         Me.NumericUpDown_ObjectScale = New System.Windows.Forms.NumericUpDown()
-        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Panel_Main = New System.Windows.Forms.Panel()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Panel_Top = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.ContextMenuStrip3 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.Small_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -75,13 +75,13 @@ Partial Class Form_Nature
         CType(Me.NumericUpDown_Rocks_Max, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown_Grass_Min, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown_Grass_Max, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
-        Me.Panel3.SuspendLayout()
-        Me.Panel4.SuspendLayout()
+        Me.Panel_GenMax.SuspendLayout()
+        Me.Panel_GenMin.SuspendLayout()
+        Me.Panel_Bottom.SuspendLayout()
+        Me.Panel_Side.SuspendLayout()
         CType(Me.NumericUpDown_ObjectScale, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel5.SuspendLayout()
-        Me.Panel6.SuspendLayout()
+        Me.Panel_Main.SuspendLayout()
+        Me.Panel_Top.SuspendLayout()
         Me.ContextMenuStrip3.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -145,55 +145,55 @@ Partial Class Form_Nature
         Me.NumericUpDown_Trees_Min.Size = New System.Drawing.Size(56, 20)
         Me.NumericUpDown_Trees_Min.TabIndex = 26
         '
-        'Label2
+        'Label_Bushes
         '
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(8, 88)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(60, 24)
-        Me.Label2.TabIndex = 28
-        Me.Label2.Text = "Bushes"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label_Bushes.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_Bushes.Location = New System.Drawing.Point(8, 88)
+        Me.Label_Bushes.Name = "Label_Bushes"
+        Me.Label_Bushes.Size = New System.Drawing.Size(60, 24)
+        Me.Label_Bushes.TabIndex = 28
+        Me.Label_Bushes.Text = "Bushes"
+        Me.Label_Bushes.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label1
+        'Label_Flowers
         '
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(8, 56)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(64, 24)
-        Me.Label1.TabIndex = 29
-        Me.Label1.Text = "Flowers"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label_Flowers.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_Flowers.Location = New System.Drawing.Point(8, 56)
+        Me.Label_Flowers.Name = "Label_Flowers"
+        Me.Label_Flowers.Size = New System.Drawing.Size(64, 24)
+        Me.Label_Flowers.TabIndex = 29
+        Me.Label_Flowers.Text = "Flowers"
+        Me.Label_Flowers.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label3
+        'Label_Trees
         '
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(8, 120)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(60, 24)
-        Me.Label3.TabIndex = 30
-        Me.Label3.Text = "Trees"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label_Trees.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_Trees.Location = New System.Drawing.Point(8, 120)
+        Me.Label_Trees.Name = "Label_Trees"
+        Me.Label_Trees.Size = New System.Drawing.Size(60, 24)
+        Me.Label_Trees.TabIndex = 30
+        Me.Label_Trees.Text = "Trees"
+        Me.Label_Trees.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label4
+        'Label_GenMin
         '
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(8, 8)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(56, 24)
-        Me.Label4.TabIndex = 31
-        Me.Label4.Text = "Min"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label_GenMin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_GenMin.Location = New System.Drawing.Point(8, 8)
+        Me.Label_GenMin.Name = "Label_GenMin"
+        Me.Label_GenMin.Size = New System.Drawing.Size(56, 24)
+        Me.Label_GenMin.TabIndex = 31
+        Me.Label_GenMin.Text = "Min"
+        Me.Label_GenMin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label5
+        'Label_GenMax
         '
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(8, 8)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(56, 24)
-        Me.Label5.TabIndex = 32
-        Me.Label5.Text = "Max"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label_GenMax.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_GenMax.Location = New System.Drawing.Point(8, 8)
+        Me.Label_GenMax.Name = "Label_GenMax"
+        Me.Label_GenMax.Size = New System.Drawing.Size(56, 24)
+        Me.Label_GenMax.TabIndex = 32
+        Me.Label_GenMax.Text = "Max"
+        Me.Label_GenMax.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Button_Generate
         '
@@ -209,15 +209,15 @@ Partial Class Form_Nature
         Me.Button_Generate.Text = "Generate"
         Me.Button_Generate.UseVisualStyleBackColor = False
         '
-        'Label6
+        'Label_Rocks
         '
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(8, 152)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(60, 24)
-        Me.Label6.TabIndex = 36
-        Me.Label6.Text = "Rocks"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label_Rocks.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_Rocks.Location = New System.Drawing.Point(8, 152)
+        Me.Label_Rocks.Name = "Label_Rocks"
+        Me.Label_Rocks.Size = New System.Drawing.Size(60, 24)
+        Me.Label_Rocks.TabIndex = 36
+        Me.Label_Rocks.Text = "Rocks"
+        Me.Label_Rocks.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'NumericUpDown_Rocks_Min
         '
@@ -239,15 +239,15 @@ Partial Class Form_Nature
         Me.NumericUpDown_Rocks_Max.Size = New System.Drawing.Size(56, 20)
         Me.NumericUpDown_Rocks_Max.TabIndex = 34
         '
-        'Label7
+        'Label_Grass
         '
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(8, 184)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(60, 24)
-        Me.Label7.TabIndex = 39
-        Me.Label7.Text = "Grass"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label_Grass.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_Grass.Location = New System.Drawing.Point(8, 184)
+        Me.Label_Grass.Name = "Label_Grass"
+        Me.Label_Grass.Size = New System.Drawing.Size(60, 24)
+        Me.Label_Grass.TabIndex = 39
+        Me.Label_Grass.Text = "Grass"
+        Me.Label_Grass.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'NumericUpDown_Grass_Min
         '
@@ -283,57 +283,57 @@ Partial Class Form_Nature
         Me.Button_Randomize.Text = "Randomize"
         Me.Button_Randomize.UseVisualStyleBackColor = False
         '
-        'Panel1
+        'Panel_GenMax
         '
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.Label5)
-        Me.Panel1.Controls.Add(Me.NumericUpDown_Flowers_Max)
-        Me.Panel1.Controls.Add(Me.NumericUpDown_Bushes_Max)
-        Me.Panel1.Controls.Add(Me.NumericUpDown_Trees_Max)
-        Me.Panel1.Controls.Add(Me.NumericUpDown_Grass_Max)
-        Me.Panel1.Controls.Add(Me.NumericUpDown_Rocks_Max)
-        Me.Panel1.Location = New System.Drawing.Point(168, 8)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(72, 208)
-        Me.Panel1.TabIndex = 41
+        Me.Panel_GenMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel_GenMax.Controls.Add(Me.Label_GenMax)
+        Me.Panel_GenMax.Controls.Add(Me.NumericUpDown_Flowers_Max)
+        Me.Panel_GenMax.Controls.Add(Me.NumericUpDown_Bushes_Max)
+        Me.Panel_GenMax.Controls.Add(Me.NumericUpDown_Trees_Max)
+        Me.Panel_GenMax.Controls.Add(Me.NumericUpDown_Grass_Max)
+        Me.Panel_GenMax.Controls.Add(Me.NumericUpDown_Rocks_Max)
+        Me.Panel_GenMax.Location = New System.Drawing.Point(168, 8)
+        Me.Panel_GenMax.Name = "Panel_GenMax"
+        Me.Panel_GenMax.Size = New System.Drawing.Size(72, 208)
+        Me.Panel_GenMax.TabIndex = 41
         '
-        'Panel2
+        'Panel_GenMin
         '
-        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel2.Controls.Add(Me.Label4)
-        Me.Panel2.Controls.Add(Me.NumericUpDown_Flowers_Min)
-        Me.Panel2.Controls.Add(Me.NumericUpDown_Bushes_Min)
-        Me.Panel2.Controls.Add(Me.NumericUpDown_Trees_Min)
-        Me.Panel2.Controls.Add(Me.NumericUpDown_Grass_Min)
-        Me.Panel2.Controls.Add(Me.NumericUpDown_Rocks_Min)
-        Me.Panel2.Location = New System.Drawing.Point(80, 8)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(72, 208)
-        Me.Panel2.TabIndex = 42
+        Me.Panel_GenMin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel_GenMin.Controls.Add(Me.Label_GenMin)
+        Me.Panel_GenMin.Controls.Add(Me.NumericUpDown_Flowers_Min)
+        Me.Panel_GenMin.Controls.Add(Me.NumericUpDown_Bushes_Min)
+        Me.Panel_GenMin.Controls.Add(Me.NumericUpDown_Trees_Min)
+        Me.Panel_GenMin.Controls.Add(Me.NumericUpDown_Grass_Min)
+        Me.Panel_GenMin.Controls.Add(Me.NumericUpDown_Rocks_Min)
+        Me.Panel_GenMin.Location = New System.Drawing.Point(80, 8)
+        Me.Panel_GenMin.Name = "Panel_GenMin"
+        Me.Panel_GenMin.Size = New System.Drawing.Size(72, 208)
+        Me.Panel_GenMin.TabIndex = 42
         '
-        'Label8
+        'Label_NatureObjects
         '
-        Me.Label8.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(40, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(120, 40)
-        Me.Label8.TabIndex = 43
-        Me.Label8.Text = "Nature Objects"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label_NatureObjects.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label_NatureObjects.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_NatureObjects.Location = New System.Drawing.Point(40, 0)
+        Me.Label_NatureObjects.Name = "Label_NatureObjects"
+        Me.Label_NatureObjects.Size = New System.Drawing.Size(120, 40)
+        Me.Label_NatureObjects.TabIndex = 43
+        Me.Label_NatureObjects.Text = "Nature Objects"
+        Me.Label_NatureObjects.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'ComboBox_Theme
+        'ComboBox_NatureObjects
         '
-        Me.ComboBox_Theme.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ComboBox_Theme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox_Theme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ComboBox_Theme.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ComboBox_Theme.FormattingEnabled = True
-        Me.ComboBox_Theme.ItemHeight = 13
-        Me.ComboBox_Theme.Location = New System.Drawing.Point(168, 10)
-        Me.ComboBox_Theme.Name = "ComboBox_Theme"
-        Me.ComboBox_Theme.Size = New System.Drawing.Size(160, 21)
-        Me.ComboBox_Theme.TabIndex = 44
+        Me.ComboBox_NatureObjects.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ComboBox_NatureObjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox_NatureObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox_NatureObjects.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ComboBox_NatureObjects.FormattingEnabled = True
+        Me.ComboBox_NatureObjects.ItemHeight = 13
+        Me.ComboBox_NatureObjects.Location = New System.Drawing.Point(168, 10)
+        Me.ComboBox_NatureObjects.Name = "ComboBox_NatureObjects"
+        Me.ComboBox_NatureObjects.Size = New System.Drawing.Size(160, 21)
+        Me.ComboBox_NatureObjects.TabIndex = 44
         '
         'Button_CloseAll
         '
@@ -350,15 +350,15 @@ Partial Class Form_Nature
         Me.Button_CloseAll.Text = "Close All"
         Me.Button_CloseAll.UseVisualStyleBackColor = False
         '
-        'Label9
+        'Label_Scale
         '
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(8, 272)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(64, 24)
-        Me.Label9.TabIndex = 48
-        Me.Label9.Text = "Scale"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label_Scale.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_Scale.Location = New System.Drawing.Point(8, 272)
+        Me.Label_Scale.Name = "Label_Scale"
+        Me.Label_Scale.Size = New System.Drawing.Size(64, 24)
+        Me.Label_Scale.TabIndex = 48
+        Me.Label_Scale.Text = "Scale"
+        Me.Label_Scale.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'CheckBox_TopMost
         '
@@ -371,15 +371,15 @@ Partial Class Form_Nature
         Me.CheckBox_TopMost.Text = "Always On Top"
         Me.CheckBox_TopMost.UseVisualStyleBackColor = True
         '
-        'Label10
+        'Label_Display
         '
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(8, 232)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(64, 21)
-        Me.Label10.TabIndex = 61
-        Me.Label10.Text = "Display"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label_Display.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_Display.Location = New System.Drawing.Point(8, 232)
+        Me.Label_Display.Name = "Label_Display"
+        Me.Label_Display.Size = New System.Drawing.Size(64, 21)
+        Me.Label_Display.TabIndex = 61
+        Me.Label_Display.Text = "Display"
+        Me.Label_Display.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'ComboBox_Display
         '
@@ -393,38 +393,38 @@ Partial Class Form_Nature
         Me.ComboBox_Display.Size = New System.Drawing.Size(160, 21)
         Me.ComboBox_Display.TabIndex = 60
         '
-        'Panel3
+        'Panel_Bottom
         '
-        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Panel3.Controls.Add(Me.Button_CloseAll)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel3.Location = New System.Drawing.Point(0, 551)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(840, 26)
-        Me.Panel3.TabIndex = 62
+        Me.Panel_Bottom.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Panel_Bottom.Controls.Add(Me.Button_CloseAll)
+        Me.Panel_Bottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel_Bottom.Location = New System.Drawing.Point(0, 551)
+        Me.Panel_Bottom.Name = "Panel_Bottom"
+        Me.Panel_Bottom.Size = New System.Drawing.Size(840, 26)
+        Me.Panel_Bottom.TabIndex = 62
         '
-        'Panel4
+        'Panel_Side
         '
-        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.Panel4.Controls.Add(Me.NumericUpDown_ObjectScale)
-        Me.Panel4.Controls.Add(Me.Panel2)
-        Me.Panel4.Controls.Add(Me.ComboBox_Display)
-        Me.Panel4.Controls.Add(Me.Label2)
-        Me.Panel4.Controls.Add(Me.Label10)
-        Me.Panel4.Controls.Add(Me.Label1)
-        Me.Panel4.Controls.Add(Me.Label3)
-        Me.Panel4.Controls.Add(Me.Button_Generate)
-        Me.Panel4.Controls.Add(Me.Label6)
-        Me.Panel4.Controls.Add(Me.CheckBox_TopMost)
-        Me.Panel4.Controls.Add(Me.Label7)
-        Me.Panel4.Controls.Add(Me.Button_Randomize)
-        Me.Panel4.Controls.Add(Me.Panel1)
-        Me.Panel4.Controls.Add(Me.Label9)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel4.Location = New System.Drawing.Point(544, 40)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(296, 511)
-        Me.Panel4.TabIndex = 63
+        Me.Panel_Side.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.Panel_Side.Controls.Add(Me.NumericUpDown_ObjectScale)
+        Me.Panel_Side.Controls.Add(Me.Panel_GenMin)
+        Me.Panel_Side.Controls.Add(Me.ComboBox_Display)
+        Me.Panel_Side.Controls.Add(Me.Label_Bushes)
+        Me.Panel_Side.Controls.Add(Me.Label_Display)
+        Me.Panel_Side.Controls.Add(Me.Label_Flowers)
+        Me.Panel_Side.Controls.Add(Me.Label_Trees)
+        Me.Panel_Side.Controls.Add(Me.Button_Generate)
+        Me.Panel_Side.Controls.Add(Me.Label_Rocks)
+        Me.Panel_Side.Controls.Add(Me.CheckBox_TopMost)
+        Me.Panel_Side.Controls.Add(Me.Label_Grass)
+        Me.Panel_Side.Controls.Add(Me.Button_Randomize)
+        Me.Panel_Side.Controls.Add(Me.Panel_GenMax)
+        Me.Panel_Side.Controls.Add(Me.Label_Scale)
+        Me.Panel_Side.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Panel_Side.Location = New System.Drawing.Point(544, 0)
+        Me.Panel_Side.Name = "Panel_Side"
+        Me.Panel_Side.Size = New System.Drawing.Size(296, 511)
+        Me.Panel_Side.TabIndex = 63
         '
         'NumericUpDown_ObjectScale
         '
@@ -439,37 +439,36 @@ Partial Class Form_Nature
         Me.NumericUpDown_ObjectScale.TabIndex = 52
         Me.NumericUpDown_ObjectScale.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
-        'Panel5
+        'Panel_Main
         '
-        Me.Panel5.Controls.Add(Me.FlowLayoutPanel1)
-        Me.Panel5.Controls.Add(Me.Panel4)
-        Me.Panel5.Controls.Add(Me.Panel6)
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(0, 0)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(840, 551)
-        Me.Panel5.TabIndex = 64
+        Me.Panel_Main.Controls.Add(Me.FlowLayoutPanel1)
+        Me.Panel_Main.Controls.Add(Me.Panel_Side)
+        Me.Panel_Main.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel_Main.Location = New System.Drawing.Point(0, 40)
+        Me.Panel_Main.Name = "Panel_Main"
+        Me.Panel_Main.Size = New System.Drawing.Size(840, 511)
+        Me.Panel_Main.TabIndex = 64
         '
         'FlowLayoutPanel1
         '
         Me.FlowLayoutPanel1.AutoScroll = True
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 40)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(544, 511)
         Me.FlowLayoutPanel1.TabIndex = 2
         '
-        'Panel6
+        'Panel_Top
         '
-        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Panel6.Controls.Add(Me.Label8)
-        Me.Panel6.Controls.Add(Me.ComboBox_Theme)
-        Me.Panel6.Controls.Add(Me.Button1)
-        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel6.Location = New System.Drawing.Point(0, 0)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(840, 40)
-        Me.Panel6.TabIndex = 103
+        Me.Panel_Top.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Panel_Top.Controls.Add(Me.Label_NatureObjects)
+        Me.Panel_Top.Controls.Add(Me.ComboBox_NatureObjects)
+        Me.Panel_Top.Controls.Add(Me.Button1)
+        Me.Panel_Top.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_Top.Location = New System.Drawing.Point(0, 0)
+        Me.Panel_Top.Name = "Panel_Top"
+        Me.Panel_Top.Size = New System.Drawing.Size(840, 40)
+        Me.Panel_Top.TabIndex = 103
         '
         'Button1
         '
@@ -538,8 +537,9 @@ Partial Class Form_Nature
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(840, 577)
-        Me.Controls.Add(Me.Panel5)
-        Me.Controls.Add(Me.Panel3)
+        Me.Controls.Add(Me.Panel_Main)
+        Me.Controls.Add(Me.Panel_Top)
+        Me.Controls.Add(Me.Panel_Bottom)
         Me.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form_Nature"
@@ -555,13 +555,13 @@ Partial Class Form_Nature
         CType(Me.NumericUpDown_Rocks_Max, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown_Grass_Min, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown_Grass_Max, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
-        Me.Panel4.ResumeLayout(False)
+        Me.Panel_GenMax.ResumeLayout(False)
+        Me.Panel_GenMin.ResumeLayout(False)
+        Me.Panel_Bottom.ResumeLayout(False)
+        Me.Panel_Side.ResumeLayout(False)
         CType(Me.NumericUpDown_ObjectScale, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel5.ResumeLayout(False)
-        Me.Panel6.ResumeLayout(False)
+        Me.Panel_Main.ResumeLayout(False)
+        Me.Panel_Top.ResumeLayout(False)
         Me.ContextMenuStrip3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -572,33 +572,33 @@ Partial Class Form_Nature
     Friend WithEvents NumericUpDown_Bushes_Max As NumericUpDown
     Friend WithEvents NumericUpDown_Trees_Max As NumericUpDown
     Friend WithEvents NumericUpDown_Trees_Min As NumericUpDown
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents Label_Bushes As Label
+    Friend WithEvents Label_Flowers As Label
+    Friend WithEvents Label_Trees As Label
+    Friend WithEvents Label_GenMin As Label
+    Friend WithEvents Label_GenMax As Label
     Friend WithEvents Button_Generate As Button
-    Friend WithEvents Label6 As Label
+    Friend WithEvents Label_Rocks As Label
     Friend WithEvents NumericUpDown_Rocks_Min As NumericUpDown
     Friend WithEvents NumericUpDown_Rocks_Max As NumericUpDown
-    Friend WithEvents Label7 As Label
+    Friend WithEvents Label_Grass As Label
     Friend WithEvents NumericUpDown_Grass_Min As NumericUpDown
     Friend WithEvents NumericUpDown_Grass_Max As NumericUpDown
     Friend WithEvents Button_Randomize As Button
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents Label8 As Label
-    Friend WithEvents ComboBox_Theme As ComboBox
+    Friend WithEvents Panel_GenMax As Panel
+    Friend WithEvents Panel_GenMin As Panel
+    Friend WithEvents Label_NatureObjects As Label
+    Friend WithEvents ComboBox_NatureObjects As ComboBox
     Friend WithEvents Button_CloseAll As Button
-    Private WithEvents Label9 As Label
+    Private WithEvents Label_Scale As Label
     Friend WithEvents CheckBox_TopMost As CheckBox
-    Private WithEvents Label10 As Label
+    Private WithEvents Label_Display As Label
     Friend WithEvents ComboBox_Display As ComboBox
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents Panel4 As Panel
-    Friend WithEvents Panel5 As Panel
+    Friend WithEvents Panel_Bottom As Panel
+    Friend WithEvents Panel_Side As Panel
+    Friend WithEvents Panel_Main As Panel
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
-    Friend WithEvents Panel6 As Panel
+    Friend WithEvents Panel_Top As Panel
     Friend WithEvents Button1 As Button
     Friend WithEvents ContextMenuStrip3 As ContextMenuStrip
     Friend WithEvents Small_ToolStripMenuItem As ToolStripMenuItem

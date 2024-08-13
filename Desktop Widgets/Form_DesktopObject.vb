@@ -7,8 +7,7 @@ Public Class Form_DesktopObject
     Dim FrameDimension As Imaging.FrameDimension
     Dim StaticImage As Bitmap
     Dim FormLoadLock As Boolean = True
-    'Dim Display As Screen
-    Public MYScreen As Screen
+    Dim MYScreen As Screen
     Dim MYDisplay As Display
     Dim Rand As New Random
     Dim BlockEvent_DisplayComboBox As Boolean = False
@@ -61,7 +60,6 @@ Public Class Form_DesktopObject
             Dragging = True
             PixelBox1.Capture = False
             Const WM_NCLBUTTONDOWN As Integer = &HA1S
-            'Const WM_NCRBUTTONDOWN As Integer = &HA4S
             Const HTCAPTION As Integer = 2
             Dim msg As Message = Message.Create(Me.Handle, WM_NCLBUTTONDOWN, New IntPtr(HTCAPTION), IntPtr.Zero)
             Me.DefWndProc(msg)
@@ -88,8 +86,8 @@ Public Class Form_DesktopObject
             Dragging = False
         End If
     End Sub
-    'ToolStripComboBox1 - SelectedIndexChanged
-    Private Sub ToolStripComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ScaleToolStripComboBox.SelectedIndexChanged
+    'ScaleToolStripComboBox - SelectedIndexChanged
+    Private Sub ScaleToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ScaleToolStripComboBox.SelectedIndexChanged
         If Not ScaleToolStripComboBox.SelectedIndex = -1 Then
             ScaleObject(ScaleToolStripComboBox.SelectedIndex + 1)
         End If

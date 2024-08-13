@@ -26,7 +26,7 @@ Partial Class Form_Pets
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Pets))
         Me.CheckBox_FollowCursor = New System.Windows.Forms.CheckBox()
         Me.CheckBox_TopMost = New System.Windows.Forms.CheckBox()
-        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label_Scale = New System.Windows.Forms.Label()
         Me.Button_CloseSelected = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
@@ -34,17 +34,17 @@ Partial Class Form_Pets
         Me.FlyingPetsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label_Display = New System.Windows.Forms.Label()
         Me.ComboBox_Display = New System.Windows.Forms.ComboBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Panel_Bottom = New System.Windows.Forms.Panel()
+        Me.Panel_Main = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.ComboBox_GroundArtist = New System.Windows.Forms.ComboBox()
-        Me.ComboBox_FlyingArtist = New System.Windows.Forms.ComboBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Panel_Side = New System.Windows.Forms.Panel()
         Me.NumericUpDown_ObjectScale = New System.Windows.Forms.NumericUpDown()
-        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Panel_Top = New System.Windows.Forms.Panel()
+        Me.ComboBox_FlyingPetObjects = New System.Windows.Forms.ComboBox()
+        Me.ComboBox_GroundPetObjects = New System.Windows.Forms.ComboBox()
+        Me.Label_Pets = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.Small_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -103,12 +103,12 @@ Partial Class Form_Pets
         Me.toolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.Panel3.SuspendLayout()
+        Me.Panel_Bottom.SuspendLayout()
+        Me.Panel_Main.SuspendLayout()
         Me.Panel5.SuspendLayout()
-        Me.Panel4.SuspendLayout()
+        Me.Panel_Side.SuspendLayout()
         CType(Me.NumericUpDown_ObjectScale, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel6.SuspendLayout()
+        Me.Panel_Top.SuspendLayout()
         Me.ContextMenuStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -134,15 +134,15 @@ Partial Class Form_Pets
         Me.CheckBox_TopMost.Text = "Always On Top"
         Me.CheckBox_TopMost.UseVisualStyleBackColor = True
         '
-        'Label9
+        'Label_Scale
         '
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(16, 56)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(48, 20)
-        Me.Label9.TabIndex = 51
-        Me.Label9.Text = "Scale"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label_Scale.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_Scale.Location = New System.Drawing.Point(16, 56)
+        Me.Label_Scale.Name = "Label_Scale"
+        Me.Label_Scale.Size = New System.Drawing.Size(48, 20)
+        Me.Label_Scale.TabIndex = 51
+        Me.Label_Scale.Text = "Scale"
+        Me.Label_Scale.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Button_CloseSelected
         '
@@ -178,14 +178,14 @@ Partial Class Form_Pets
         '
         Me.MenuStrip1.AutoSize = False
         Me.MenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.MenuStrip1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.MenuStrip1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MenuStrip1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GroundPetsToolStripMenuItem, Me.FlyingPetsToolStripMenuItem})
         Me.MenuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(216, 29)
+        Me.MenuStrip1.Size = New System.Drawing.Size(506, 30)
         Me.MenuStrip1.TabIndex = 119
         '
         'GroundPetsToolStripMenuItem
@@ -193,43 +193,43 @@ Partial Class Form_Pets
         Me.GroundPetsToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.GroundPetsToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.GroundPetsToolStripMenuItem.Name = "GroundPetsToolStripMenuItem"
-        Me.GroundPetsToolStripMenuItem.Size = New System.Drawing.Size(107, 25)
+        Me.GroundPetsToolStripMenuItem.Size = New System.Drawing.Size(107, 26)
         Me.GroundPetsToolStripMenuItem.Text = "Ground Pets"
         '
         'FlyingPetsToolStripMenuItem
         '
         Me.FlyingPetsToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.FlyingPetsToolStripMenuItem.Name = "FlyingPetsToolStripMenuItem"
-        Me.FlyingPetsToolStripMenuItem.Size = New System.Drawing.Size(96, 25)
+        Me.FlyingPetsToolStripMenuItem.Size = New System.Drawing.Size(96, 26)
         Me.FlyingPetsToolStripMenuItem.Text = "Flying Pets"
         '
         'FlowLayoutPanel1
         '
         Me.FlowLayoutPanel1.AutoScroll = True
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 69)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 30)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(506, 397)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(506, 396)
         Me.FlowLayoutPanel1.TabIndex = 121
         '
         'FlowLayoutPanel2
         '
         Me.FlowLayoutPanel2.AutoScroll = True
         Me.FlowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(0, 69)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(0, 30)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(506, 397)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(506, 396)
         Me.FlowLayoutPanel2.TabIndex = 122
         '
-        'Label2
+        'Label_Display
         '
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(0, 16)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(64, 24)
-        Me.Label2.TabIndex = 122
-        Me.Label2.Text = "Display"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label_Display.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_Display.Location = New System.Drawing.Point(0, 16)
+        Me.Label_Display.Name = "Label_Display"
+        Me.Label_Display.Size = New System.Drawing.Size(64, 24)
+        Me.Label_Display.TabIndex = 122
+        Me.Label_Display.Text = "Display"
+        Me.Label_Display.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'ComboBox_Display
         '
@@ -243,91 +243,52 @@ Partial Class Form_Pets
         Me.ComboBox_Display.Size = New System.Drawing.Size(160, 21)
         Me.ComboBox_Display.TabIndex = 121
         '
-        'Panel1
+        'Panel_Bottom
         '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.Button_CloseSelected)
-        Me.Panel1.Controls.Add(Me.ComboBox1)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 466)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(750, 26)
-        Me.Panel1.TabIndex = 123
+        Me.Panel_Bottom.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Panel_Bottom.Controls.Add(Me.Button_CloseSelected)
+        Me.Panel_Bottom.Controls.Add(Me.ComboBox1)
+        Me.Panel_Bottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel_Bottom.Location = New System.Drawing.Point(0, 466)
+        Me.Panel_Bottom.Name = "Panel_Bottom"
+        Me.Panel_Bottom.Size = New System.Drawing.Size(750, 26)
+        Me.Panel_Bottom.TabIndex = 123
         '
-        'Panel3
+        'Panel_Main
         '
-        Me.Panel3.Controls.Add(Me.FlowLayoutPanel1)
-        Me.Panel3.Controls.Add(Me.FlowLayoutPanel2)
-        Me.Panel3.Controls.Add(Me.Panel5)
-        Me.Panel3.Controls.Add(Me.Panel4)
-        Me.Panel3.Controls.Add(Me.Panel6)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(0, 0)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(750, 466)
-        Me.Panel3.TabIndex = 125
+        Me.Panel_Main.Controls.Add(Me.FlowLayoutPanel1)
+        Me.Panel_Main.Controls.Add(Me.FlowLayoutPanel2)
+        Me.Panel_Main.Controls.Add(Me.Panel5)
+        Me.Panel_Main.Controls.Add(Me.Panel_Side)
+        Me.Panel_Main.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel_Main.Location = New System.Drawing.Point(0, 40)
+        Me.Panel_Main.Name = "Panel_Main"
+        Me.Panel_Main.Size = New System.Drawing.Size(750, 426)
+        Me.Panel_Main.TabIndex = 125
         '
         'Panel5
         '
         Me.Panel5.Controls.Add(Me.MenuStrip1)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel5.Location = New System.Drawing.Point(0, 40)
+        Me.Panel5.Location = New System.Drawing.Point(0, 0)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(506, 29)
+        Me.Panel5.Size = New System.Drawing.Size(506, 30)
         Me.Panel5.TabIndex = 124
         '
-        'ComboBox_GroundArtist
+        'Panel_Side
         '
-        Me.ComboBox_GroundArtist.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ComboBox_GroundArtist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox_GroundArtist.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ComboBox_GroundArtist.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ComboBox_GroundArtist.FormattingEnabled = True
-        Me.ComboBox_GroundArtist.ItemHeight = 13
-        Me.ComboBox_GroundArtist.Location = New System.Drawing.Point(104, 10)
-        Me.ComboBox_GroundArtist.Name = "ComboBox_GroundArtist"
-        Me.ComboBox_GroundArtist.Size = New System.Drawing.Size(160, 21)
-        Me.ComboBox_GroundArtist.TabIndex = 121
-        '
-        'ComboBox_FlyingArtist
-        '
-        Me.ComboBox_FlyingArtist.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ComboBox_FlyingArtist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox_FlyingArtist.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ComboBox_FlyingArtist.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ComboBox_FlyingArtist.FormattingEnabled = True
-        Me.ComboBox_FlyingArtist.ItemHeight = 13
-        Me.ComboBox_FlyingArtist.Location = New System.Drawing.Point(104, 10)
-        Me.ComboBox_FlyingArtist.Name = "ComboBox_FlyingArtist"
-        Me.ComboBox_FlyingArtist.Size = New System.Drawing.Size(160, 21)
-        Me.ComboBox_FlyingArtist.TabIndex = 122
-        Me.ComboBox_FlyingArtist.Visible = False
-        '
-        'Label8
-        '
-        Me.Label8.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(40, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(56, 40)
-        Me.Label8.TabIndex = 120
-        Me.Label8.Text = "Pets"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.Panel4.Controls.Add(Me.Label2)
-        Me.Panel4.Controls.Add(Me.ComboBox_Display)
-        Me.Panel4.Controls.Add(Me.CheckBox_TopMost)
-        Me.Panel4.Controls.Add(Me.CheckBox_FollowCursor)
-        Me.Panel4.Controls.Add(Me.NumericUpDown_ObjectScale)
-        Me.Panel4.Controls.Add(Me.Label9)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel4.Location = New System.Drawing.Point(506, 40)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(244, 426)
-        Me.Panel4.TabIndex = 123
+        Me.Panel_Side.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.Panel_Side.Controls.Add(Me.Label_Display)
+        Me.Panel_Side.Controls.Add(Me.ComboBox_Display)
+        Me.Panel_Side.Controls.Add(Me.CheckBox_TopMost)
+        Me.Panel_Side.Controls.Add(Me.CheckBox_FollowCursor)
+        Me.Panel_Side.Controls.Add(Me.NumericUpDown_ObjectScale)
+        Me.Panel_Side.Controls.Add(Me.Label_Scale)
+        Me.Panel_Side.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Panel_Side.Location = New System.Drawing.Point(506, 0)
+        Me.Panel_Side.Name = "Panel_Side"
+        Me.Panel_Side.Size = New System.Drawing.Size(244, 426)
+        Me.Panel_Side.TabIndex = 123
         '
         'NumericUpDown_ObjectScale
         '
@@ -342,18 +303,56 @@ Partial Class Form_Pets
         Me.NumericUpDown_ObjectScale.TabIndex = 123
         Me.NumericUpDown_ObjectScale.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
-        'Panel6
+        'Panel_Top
         '
-        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Panel6.Controls.Add(Me.ComboBox_FlyingArtist)
-        Me.Panel6.Controls.Add(Me.ComboBox_GroundArtist)
-        Me.Panel6.Controls.Add(Me.Label8)
-        Me.Panel6.Controls.Add(Me.Button1)
-        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel6.Location = New System.Drawing.Point(0, 0)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(750, 40)
-        Me.Panel6.TabIndex = 122
+        Me.Panel_Top.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Panel_Top.Controls.Add(Me.ComboBox_FlyingPetObjects)
+        Me.Panel_Top.Controls.Add(Me.ComboBox_GroundPetObjects)
+        Me.Panel_Top.Controls.Add(Me.Label_Pets)
+        Me.Panel_Top.Controls.Add(Me.Button1)
+        Me.Panel_Top.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_Top.Location = New System.Drawing.Point(0, 0)
+        Me.Panel_Top.Name = "Panel_Top"
+        Me.Panel_Top.Size = New System.Drawing.Size(750, 40)
+        Me.Panel_Top.TabIndex = 122
+        '
+        'ComboBox_FlyingPetObjects
+        '
+        Me.ComboBox_FlyingPetObjects.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ComboBox_FlyingPetObjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox_FlyingPetObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox_FlyingPetObjects.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ComboBox_FlyingPetObjects.FormattingEnabled = True
+        Me.ComboBox_FlyingPetObjects.ItemHeight = 13
+        Me.ComboBox_FlyingPetObjects.Location = New System.Drawing.Point(104, 10)
+        Me.ComboBox_FlyingPetObjects.Name = "ComboBox_FlyingPetObjects"
+        Me.ComboBox_FlyingPetObjects.Size = New System.Drawing.Size(160, 21)
+        Me.ComboBox_FlyingPetObjects.TabIndex = 122
+        Me.ComboBox_FlyingPetObjects.Visible = False
+        '
+        'ComboBox_GroundPetObjects
+        '
+        Me.ComboBox_GroundPetObjects.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ComboBox_GroundPetObjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox_GroundPetObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox_GroundPetObjects.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ComboBox_GroundPetObjects.FormattingEnabled = True
+        Me.ComboBox_GroundPetObjects.ItemHeight = 13
+        Me.ComboBox_GroundPetObjects.Location = New System.Drawing.Point(104, 10)
+        Me.ComboBox_GroundPetObjects.Name = "ComboBox_GroundPetObjects"
+        Me.ComboBox_GroundPetObjects.Size = New System.Drawing.Size(160, 21)
+        Me.ComboBox_GroundPetObjects.TabIndex = 121
+        '
+        'Label_Pets
+        '
+        Me.Label_Pets.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label_Pets.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_Pets.Location = New System.Drawing.Point(40, 0)
+        Me.Label_Pets.Name = "Label_Pets"
+        Me.Label_Pets.Size = New System.Drawing.Size(56, 40)
+        Me.Label_Pets.TabIndex = 120
+        Me.Label_Pets.Text = "Pets"
+        Me.Label_Pets.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Button1
         '
@@ -726,8 +725,9 @@ Partial Class Form_Pets
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(750, 492)
-        Me.Controls.Add(Me.Panel3)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Panel_Main)
+        Me.Controls.Add(Me.Panel_Bottom)
+        Me.Controls.Add(Me.Panel_Top)
         Me.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form_Pets"
@@ -735,28 +735,28 @@ Partial Class Form_Pets
         Me.Text = "Desktop Pets"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
+        Me.Panel_Bottom.ResumeLayout(False)
+        Me.Panel_Main.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
-        Me.Panel4.ResumeLayout(False)
+        Me.Panel_Side.ResumeLayout(False)
         CType(Me.NumericUpDown_ObjectScale, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel6.ResumeLayout(False)
+        Me.Panel_Top.ResumeLayout(False)
         Me.ContextMenuStrip2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents CheckBox_FollowCursor As CheckBox
     Friend WithEvents CheckBox_TopMost As CheckBox
-    Private WithEvents Label9 As Label
+    Private WithEvents Label_Scale As Label
     Friend WithEvents Button_CloseSelected As Button
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents GroundPetsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FlyingPetsToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents Label2 As Label
+    Private WithEvents Label_Display As Label
     Friend WithEvents ComboBox_Display As ComboBox
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel_Bottom As Panel
+    Friend WithEvents Panel_Main As Panel
     Friend WithEvents ContextMenuStrip2 As ContextMenuStrip
     Friend WithEvents Small_ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Medium_ToolStripMenuItem As ToolStripMenuItem
@@ -764,14 +764,14 @@ Partial Class Form_Pets
     Friend WithEvents Large_ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExtraLarge_ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
-    Friend WithEvents Panel6 As Panel
+    Friend WithEvents Panel_Top As Panel
     Friend WithEvents Button1 As Button
     Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
     Friend WithEvents NumericUpDown_ObjectScale As NumericUpDown
-    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Panel_Side As Panel
     Friend WithEvents Panel5 As Panel
-    Friend WithEvents Label8 As Label
-    Friend WithEvents ComboBox_GroundArtist As ComboBox
+    Friend WithEvents Label_Pets As Label
+    Friend WithEvents ComboBox_GroundPetObjects As ComboBox
     Friend WithEvents NewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents toolStripSeparator As ToolStripSeparator
@@ -822,5 +822,5 @@ Partial Class Form_Pets
     Friend WithEvents SearchToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents toolStripSeparator11 As ToolStripSeparator
     Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents ComboBox_FlyingArtist As ComboBox
+    Friend WithEvents ComboBox_FlyingPetObjects As ComboBox
 End Class
