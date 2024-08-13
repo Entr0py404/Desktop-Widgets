@@ -1,4 +1,5 @@
 ﻿
+
 Public Class Form_FlyingPet
     Dim R As Integer = 0
     Dim Display As Screen = Screen.PrimaryScreen
@@ -130,8 +131,6 @@ Public Class Form_FlyingPet
             MoveUp = False
         End If
 
-        'Me.Width = PixelBox_Pet.Width
-        'Me.Height = PixelBox_Pet.Height + PixelBox_Emote.Height
         DisplayToolStripComboBox.BeginUpdate()
         For Each Display In Screen.AllScreens
             DisplayToolStripComboBox.Items.Add(Display.DeviceName.Replace("\\.\", ""))
@@ -148,8 +147,6 @@ Public Class Form_FlyingPet
         Me.TopMost = Form_Pets.CheckBox_TopMost.Checked
         AlwaysOnTopToolStripMenuItem.Checked = Form_Pets.CheckBox_TopMost.Checked
 
-        ScaleToolStripComboBox.SelectedIndex = CInt(Form_Pets.NumericUpDown_ObjectScale.Value) - 1
-
         'Me.Location = New Point(GenerateRandomNumber(Me.Width, Display.WorkingArea.Right - Me.Width), GenerateRandomNumber(Me.Height, Display.WorkingArea.Bottom - Me.Height))
 
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
@@ -159,50 +156,100 @@ Public Class Form_FlyingPet
         If File.Exists(Application.StartupPath & "\" & PetDir & "\Behavior.ini") Then
             Dim INI As New MadMilkman.Ini.IniFile()
             INI.Load(Application.StartupPath & "\" & PetDir & "\Behavior.ini")
+
             '[Settings]
-            DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
+            If INI.Sections("Settings") IsNot Nothing Then
+                If INI.Sections("Settings").Keys("DefaultScale") IsNot Nothing Then
+                    DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
+                    If DefaultScale <= 0 Then
+                        DefaultScale = 1
+                    End If
+                End If
 
-            If DefaultScale <= 0 Then
-                DefaultScale = 1
+                If INI.Sections("Settings").Keys("FollowCursor_StoppingDistance_Px") IsNot Nothing Then
+                    FollowCursor_StoppingDistance_Px = CInt(INI.Sections("Settings").Keys("FollowCursor_StoppingDistance_Px").Value)
+                End If
             End If
-            If DefaultScale > 1 Then
-                ScalePet(1)
-            End If
-
-            FollowCursor_StoppingDistance_Px = CInt(INI.Sections("Settings").Keys("FollowCursor_StoppingDistance_Px").Value)
 
             '[Decisions]
-            IdleDecision = CInt(INI.Sections("Decisions").Keys("IdleDecision").Value)
-            IdleAltDecision = CInt(INI.Sections("Decisions").Keys("IdleAltDecision").Value)
-            TakeFlightDecision = CInt(INI.Sections("Decisions").Keys("TakeFlightDecision").Value)
+            If INI.Sections("Decisions") IsNot Nothing Then
+                If INI.Sections("Decisions").Keys("IdleDecision") IsNot Nothing Then
+                    IdleDecision = CInt(INI.Sections("Decisions").Keys("IdleDecision").Value)
+                End If
 
-            ScreenWarpingDecision = CInt(INI.Sections("Decisions").Keys("ScreenWarpingDecision").Value)
-            LandingDecision = CInt(INI.Sections("Decisions").Keys("LandingDecision").Value)
+                If INI.Sections("Decisions").Keys("IdleAltDecision") IsNot Nothing Then
+                    IdleAltDecision = CInt(INI.Sections("Decisions").Keys("IdleAltDecision").Value)
+                End If
+
+                If INI.Sections("Decisions").Keys("TakeFlightDecision") IsNot Nothing Then
+                    TakeFlightDecision = CInt(INI.Sections("Decisions").Keys("TakeFlightDecision").Value)
+                End If
+
+                If INI.Sections("Decisions").Keys("ScreenWarpingDecision") IsNot Nothing Then
+                    ScreenWarpingDecision = CInt(INI.Sections("Decisions").Keys("ScreenWarpingDecision").Value)
+                End If
+
+                If INI.Sections("Decisions").Keys("LandingDecision") IsNot Nothing Then
+                    LandingDecision = CInt(INI.Sections("Decisions").Keys("LandingDecision").Value)
+                End If
+            End If
 
             '[Timers_Tick]
-            Flying_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Flying_Movement_Tick").Value)
-            Timer_Flying.Interval = Flying_Movement_Tick
+            If INI.Sections("Timers_Tick") IsNot Nothing Then
+                If INI.Sections("Timers_Tick").Keys("Flying_Movement_Tick") IsNot Nothing Then
+                    Flying_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Flying_Movement_Tick").Value)
+                    Timer_Flying.Interval = Flying_Movement_Tick
+                End If
 
-            Walking_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Walking_Movement_Tick").Value)
-            Timer_Walking.Interval = Walking_Movement_Tick
+                If INI.Sections("Timers_Tick").Keys("Walking_Movement_Tick") IsNot Nothing Then
+                    Walking_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Walking_Movement_Tick").Value)
+                    Timer_Walking.Interval = Walking_Movement_Tick
+                End If
+            End If
 
             '[Timers_Randomization]
-            TurningDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Min").Value)
-            TurningDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Max").Value)
-            Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
+            If INI.Sections("Timers_Randomization") IsNot Nothing Then
 
-            IdleDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Min").Value)
-            IdleDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Max").Value)
-            Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
+                If INI.Sections("Timers_Randomization").Keys("TurningDecision_Min") IsNot Nothing Then
+                    TurningDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Min").Value)
+                End If
+                If INI.Sections("Timers_Randomization").Keys("TurningDecision_Max") IsNot Nothing Then
+                    TurningDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Max").Value)
+                End If
+                If TurningDecision_Min <> 0 AndAlso TurningDecision_Max <> 0 Then
+                    Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
+                End If
 
-            TakeFlightDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TakeFlightDecision_Min").Value)
-            TakeFlightDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TakeFlightDecision_Max").Value)
-            Timer_ChangeModesDecision.Interval = Rand.Next(TakeFlightDecision_Min, TakeFlightDecision_Max + 1)
+
+                If INI.Sections("Timers_Randomization").Keys("IdleDecision_Min") IsNot Nothing Then
+                    IdleDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Min").Value)
+                End If
+                If INI.Sections("Timers_Randomization").Keys("IdleDecision_Max") IsNot Nothing Then
+                    IdleDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Max").Value)
+                End If
+                If IdleDecision_Min <> 0 AndAlso IdleDecision_Max <> 0 Then
+                    Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
+                End If
+
+
+                If INI.Sections("Timers_Randomization").Keys("TakeFlightDecision_Min") IsNot Nothing Then
+                    TakeFlightDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TakeFlightDecision_Min").Value)
+                End If
+                If INI.Sections("Timers_Randomization").Keys("TakeFlightDecision_Max") IsNot Nothing Then
+                    TakeFlightDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TakeFlightDecision_Max").Value)
+                End If
+                If TakeFlightDecision_Min <> 0 AndAlso TakeFlightDecision_Max <> 0 Then
+                    Timer_ChangeModesDecision.Interval = Rand.Next(TakeFlightDecision_Min, TakeFlightDecision_Max + 1)
+                End If
+
+            End If
         Else
             Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
             Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
             Timer_ChangeModesDecision.Interval = Rand.Next(TakeFlightDecision_Min, TakeFlightDecision_Max + 1)
         End If
+
+        ScaleToolStripComboBox.SelectedIndex = CInt(Form_Pets.NumericUpDown_ObjectScale.Value) - 1
 
         FormLoadLock = False
     End Sub

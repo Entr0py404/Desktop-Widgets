@@ -495,7 +495,7 @@ Partial Class Form_Nature
         Me.Label_AssetCount.Name = "Label_AssetCount"
         Me.Label_AssetCount.Size = New System.Drawing.Size(840, 32)
         Me.Label_AssetCount.TabIndex = 101
-        Me.Label_AssetCount.Text = "0 Objects"
+        Me.Label_AssetCount.Text = "0 Nature Objects"
         Me.Label_AssetCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ContextMenuStrip3

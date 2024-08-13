@@ -4,7 +4,7 @@
     'Form1 - Load
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Opacity = 0
-        Label_Phrase.Font = Form_Gdev.FontDialog1.Font
+        'Label_Phrase.Font = Form_Gdev.FontDialog1.Font
     End Sub
     'Label_Phrase - TextChanged
     Private Sub Label_Phrase_TextChanged(sender As Object, e As EventArgs) Handles Label_Phrase.TextChanged

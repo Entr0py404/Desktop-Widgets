@@ -52,7 +52,7 @@ Public Class Form_Pets
             FilesToCheck.AddRange(Directory.GetFiles(Pet_Path, "*.gif", SearchOption.AllDirectories))
             For Each Item As String In FilesToCheck
                 If Path.GetFileName(Item) = "Idling Right.gif" Then
-                    CreateNewPanel(FlowLayoutPanel1, Item, Path.GetFileName(Path.GetDirectoryName(Item)), Color.WhiteSmoke)
+                    CreateNewPanel(FlowLayoutPanel1, Item, Path.GetFileName(Path.GetDirectoryName(Item)))
                     GroundPetsCount += 1
                 End If
             Next
@@ -77,7 +77,7 @@ Public Class Form_Pets
             FilesToCheck.AddRange(Directory.GetFiles(Pet_Path, "*.gif", SearchOption.AllDirectories))
             For Each Item As String In FilesToCheck
                 If Path.GetFileName(Item) = "Flying Right.gif" Then
-                    CreateNewPanel(FlowLayoutPanel2, Item, Path.GetFileName(Path.GetDirectoryName(Item)), Color.WhiteSmoke)
+                    CreateNewPanel(FlowLayoutPanel2, Item, Path.GetFileName(Path.GetDirectoryName(Item)))
                     FlyingPetsCount += 1
                 End If
             Next
@@ -192,7 +192,7 @@ Public Class Form_Pets
         End Using
     End Function
     'CreateNewPanel
-    Private Sub CreateNewPanel(flowLayout As FlowLayoutPanel, imagePath As String, assetObjectText As String, textColor As Color)
+    Private Sub CreateNewPanel(flowLayout As FlowLayoutPanel, imagePath As String, assetObjectText As String)
         'Panel
         Dim AssetPanel = New Panel
         AssetPanel.Size = New Size(AssetPanel_Size, AssetPanel_Size)
@@ -205,10 +205,9 @@ Public Class Form_Pets
         AssetLabel.TextAlign = ContentAlignment.MiddleCenter
         AssetLabel.Dock = DockStyle.Bottom
         AssetLabel.Text = assetObjectText
-        AssetLabel.ForeColor = textColor
+        AssetLabel.ForeColor = Color.WhiteSmoke
         AssetLabel.Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Bold, GraphicsUnit.Point, CType(0, Byte))
         AssetLabel.BackColor = Color.FromArgb(28, 30, 34)
-        'ToolTip1.SetToolTip(AssetLabel, imagePath)
 
         'PixelBox
         Dim AssetPixelBox = New PixelBox
@@ -218,7 +217,6 @@ Public Class Form_Pets
         AssetPixelBox.Name = "PixelBox1"
         AssetPixelBox.Cursor = Cursors.Hand
         AssetPixelBox.Text = imagePath
-        'AssetPixelBox.ContextMenuStrip = ContextMenuStrip1
 
         'Add AssetLabel and AssetPixelBox to AssetPanel
         AssetPanel.Controls.Add(AssetPixelBox)

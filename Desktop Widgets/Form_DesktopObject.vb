@@ -7,7 +7,9 @@ Public Class Form_DesktopObject
     Dim FrameDimension As Imaging.FrameDimension
     Dim StaticImage As Bitmap
     Dim FormLoadLock As Boolean = True
-    Dim Display As Screen
+    'Dim Display As Screen
+    Public MYScreen As Screen
+    Dim MYDisplay As Display
     Dim Rand As New Random
     Dim BlockEvent_DisplayComboBox As Boolean = False
 
@@ -23,11 +25,15 @@ Public Class Form_DesktopObject
         End If
 
         DisplayToolStripComboBox.BeginUpdate()
-        For Each Display In Screen.AllScreens
-            DisplayToolStripComboBox.Items.Add(Display.DeviceName.Replace("\\.\", ""))
+        For Each Displays As Display In Display.GetDisplays()
+            If Displays.IsGDIPrimary Then
+                DisplayToolStripComboBox.Items.Add(Displays.ToPathDisplayTarget.FriendlyName & " (Primary)")
+                MYScreen = Displays.GetScreen
+            Else
+                DisplayToolStripComboBox.Items.Add(Displays.ToPathDisplayTarget.FriendlyName)
+            End If
         Next
         DisplayToolStripComboBox.EndUpdate()
-
         DisplayToolStripComboBox.SelectedIndex = Form_DesktopObjects.ComboBox_Display.SelectedIndex
 
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
@@ -46,7 +52,7 @@ Public Class Form_DesktopObject
         Me.Height = ObjectImage.Height * val
 
         If SnapToBarToolStripMenuItem.Checked Then
-            Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
+            Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
         End If
     End Sub
     'PixelBox1 - MouseDown
@@ -60,21 +66,23 @@ Public Class Form_DesktopObject
             Dim msg As Message = Message.Create(Me.Handle, WM_NCLBUTTONDOWN, New IntPtr(HTCAPTION), IntPtr.Zero)
             Me.DefWndProc(msg)
 
-            Dim TempDisplay As Screen = Display
-            For Each Displays As Screen In Screen.AllScreens
-                If Me.Location.X >= Displays.Bounds.Left And Me.Location.X <= Displays.Bounds.Right Then
-                    TempDisplay = Displays
+            BlockEvent_DisplayComboBox = True
+            Dim TempScreen As Screen = MYScreen
+            For Each Displays As Display In Display.GetDisplays()
+                If Me.Location.X >= Displays.GetScreen.Bounds.Left And Me.Location.X <= Displays.GetScreen.Bounds.Right Then
+                    TempScreen = Displays.GetScreen
+                    If Displays.IsGDIPrimary Then
+                        DisplayToolStripComboBox.Text = Displays.ToPathDisplayTarget.FriendlyName & " (Primary)"
+                    Else
+                        DisplayToolStripComboBox.Text = Displays.ToPathDisplayTarget.FriendlyName
+                    End If
                 End If
             Next
-
-            Display = TempDisplay
-
-            BlockEvent_DisplayComboBox = True
-            DisplayToolStripComboBox.Text = Display.DeviceName.Replace("\\.\", "")
             BlockEvent_DisplayComboBox = False
+            MYScreen = TempScreen
 
             If SnapToBarToolStripMenuItem.Checked Then
-                Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
+                Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
             End If
 
             Dragging = False
@@ -97,7 +105,7 @@ Public Class Form_DesktopObject
     'SnapToBarToolStripMenuItem - Click
     Private Sub SnapToBarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SnapToBarToolStripMenuItem.Click
         If SnapToBarToolStripMenuItem.Checked Then
-            Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
+            Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
         End If
     End Sub
     'PauseAnimationToolStripMenuItem - Click
@@ -135,9 +143,10 @@ Public Class Form_DesktopObject
     'DisplayToolStripComboBox - SelectedIndexChanged
     Private Sub DisplayToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayToolStripComboBox.SelectedIndexChanged
         If BlockEvent_DisplayComboBox = False Then
-            If Not DisplayToolStripComboBox.SelectedIndex = -1 Then
-                Display = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
-                Me.Location = New Point(Rand.Next(Display.WorkingArea.Left, Display.WorkingArea.Right - Me.Width), Display.WorkingArea.Bottom - Me.Height)
+            If Not DisplayToolStripComboBox.SelectedIndex = -1 And FormLoadLock = False Then
+                Dim MyDisplay As WindowsDisplayAPI.Display = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex)
+                MYScreen = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
+                Me.Location = New Point(Rand.Next(MyDisplay.GetScreen.WorkingArea.Left, MyDisplay.GetScreen.WorkingArea.Right - Me.Width), MyDisplay.GetScreen.WorkingArea.Bottom - Me.Height)
             End If
         End If
     End Sub

@@ -17,8 +17,6 @@ Public Class Form_NatureObject
         AlwaysOnTopToolStripMenuItem.Checked = Form_Nature.CheckBox_TopMost.Checked
         AllAlwaysOnTopToolStripMenuItem.Checked = Form_Nature.CheckBox_TopMost.Checked
 
-        'Dim TempScreen As Screen = MYScreen
-        'MYDisplay_Test.GetScreen().AllScreens
         DisplayToolStripComboBox.BeginUpdate()
         For Each Displays As Display In Display.GetDisplays()
             If Displays.IsGDIPrimary Then
@@ -33,7 +31,7 @@ Public Class Form_NatureObject
         'DisplayToolStripComboBox.SelectedItem = Form_Nature.ComboBox_Display.SelectedItem
 
         'MYScreen = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
-        'MYDisplay = MYDisplay_Test.GetScreen().AllScreens(Form_Nature.ComboBox_Display.SelectedIndex)
+        'MyDisplay = MYDisplay_Test.GetScreen().AllScreens(Form_Nature.ComboBox_Display.SelectedIndex)
 
         'For Each target In PathDisplayTarget.GetDisplayTargets()
         'DisplayToolStripComboBox.Items.Add(target.FriendlyName & " - " & target.ToDisplayDevice.DisplayName.Replace("\\.\", ""))

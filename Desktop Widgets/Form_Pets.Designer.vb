@@ -116,7 +116,7 @@ Partial Class Form_Pets
         'CheckBox_FollowCursor
         '
         Me.CheckBox_FollowCursor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.CheckBox_FollowCursor.Location = New System.Drawing.Point(8, 96)
+        Me.CheckBox_FollowCursor.Location = New System.Drawing.Point(8, 136)
         Me.CheckBox_FollowCursor.Name = "CheckBox_FollowCursor"
         Me.CheckBox_FollowCursor.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.CheckBox_FollowCursor.Size = New System.Drawing.Size(118, 20)
@@ -127,7 +127,7 @@ Partial Class Form_Pets
         'CheckBox_TopMost
         '
         Me.CheckBox_TopMost.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.CheckBox_TopMost.Location = New System.Drawing.Point(8, 136)
+        Me.CheckBox_TopMost.Location = New System.Drawing.Point(8, 96)
         Me.CheckBox_TopMost.Name = "CheckBox_TopMost"
         Me.CheckBox_TopMost.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.CheckBox_TopMost.Size = New System.Drawing.Size(119, 20)
@@ -210,7 +210,7 @@ Partial Class Form_Pets
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 61)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(540, 317)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(506, 405)
         Me.FlowLayoutPanel1.TabIndex = 121
         '
         'FlowLayoutPanel2
@@ -219,7 +219,7 @@ Partial Class Form_Pets
         Me.FlowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel2.Location = New System.Drawing.Point(0, 61)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(540, 317)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(506, 405)
         Me.FlowLayoutPanel2.TabIndex = 122
         '
         'Label2
@@ -241,7 +241,7 @@ Partial Class Form_Pets
         Me.ComboBox_Display.FormattingEnabled = True
         Me.ComboBox_Display.Location = New System.Drawing.Point(72, 16)
         Me.ComboBox_Display.Name = "ComboBox_Display"
-        Me.ComboBox_Display.Size = New System.Drawing.Size(104, 21)
+        Me.ComboBox_Display.Size = New System.Drawing.Size(160, 21)
         Me.ComboBox_Display.TabIndex = 121
         '
         'Panel1
@@ -250,9 +250,9 @@ Partial Class Form_Pets
         Me.Panel1.Controls.Add(Me.Button_CloseSelected)
         Me.Panel1.Controls.Add(Me.ComboBox1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 378)
+        Me.Panel1.Location = New System.Drawing.Point(0, 466)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(732, 26)
+        Me.Panel1.Size = New System.Drawing.Size(750, 26)
         Me.Panel1.TabIndex = 123
         '
         'Panel3
@@ -265,7 +265,7 @@ Partial Class Form_Pets
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(732, 378)
+        Me.Panel3.Size = New System.Drawing.Size(750, 466)
         Me.Panel3.TabIndex = 125
         '
         'Panel5
@@ -277,7 +277,7 @@ Partial Class Form_Pets
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel5.Location = New System.Drawing.Point(0, 32)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(540, 29)
+        Me.Panel5.Size = New System.Drawing.Size(506, 29)
         Me.Panel5.TabIndex = 124
         '
         'ComboBox_GroundArtist
@@ -328,9 +328,9 @@ Partial Class Form_Pets
         Me.Panel4.Controls.Add(Me.NumericUpDown_ObjectScale)
         Me.Panel4.Controls.Add(Me.Label9)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel4.Location = New System.Drawing.Point(540, 32)
+        Me.Panel4.Location = New System.Drawing.Point(506, 32)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(192, 346)
+        Me.Panel4.Size = New System.Drawing.Size(244, 434)
         Me.Panel4.TabIndex = 123
         '
         'NumericUpDown_ObjectScale
@@ -354,7 +354,7 @@ Partial Class Form_Pets
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel6.Location = New System.Drawing.Point(0, 0)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(732, 32)
+        Me.Panel6.Size = New System.Drawing.Size(750, 32)
         Me.Panel6.TabIndex = 122
         '
         'Button1
@@ -379,7 +379,7 @@ Partial Class Form_Pets
         Me.Label_AssetCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_AssetCount.Location = New System.Drawing.Point(0, 0)
         Me.Label_AssetCount.Name = "Label_AssetCount"
-        Me.Label_AssetCount.Size = New System.Drawing.Size(732, 32)
+        Me.Label_AssetCount.Size = New System.Drawing.Size(750, 32)
         Me.Label_AssetCount.TabIndex = 101
         Me.Label_AssetCount.Text = "0 Pets"
         Me.Label_AssetCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -738,7 +738,7 @@ Partial Class Form_Pets
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(732, 404)
+        Me.ClientSize = New System.Drawing.Size(750, 492)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel1)
         Me.ForeColor = System.Drawing.Color.WhiteSmoke

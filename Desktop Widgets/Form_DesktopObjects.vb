@@ -5,18 +5,23 @@ Public Class Form_DesktopObjects
     Private Sub Form_DesktopObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip2.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
 
+        ComboBox_Display.BeginUpdate()
+        For Each Display As Display In Display.GetDisplays()
+            If Display.IsGDIPrimary Then
+                ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
+                ComboBox_Display.SelectedIndex = ComboBox_Display.Items.Count - 1
+                'Console.WriteLine(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
+            Else
+                ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName)
+                'Console.WriteLine(Display.ToPathDisplayTarget.FriendlyName)
+            End If
+        Next
+        ComboBox_Display.EndUpdate()
+        'Console.WriteLine()
+
         If Directory.Exists(Application.StartupPath & "\Objects\") Then
             LoadDesktopObjects(Application.StartupPath & "\Objects\")
         End If
-
-        ComboBox_Display.BeginUpdate()
-        For Each display In Screen.AllScreens
-            ComboBox_Display.Items.Add(display.DeviceName.Replace("\\.\", ""))
-        Next
-        ComboBox_Display.EndUpdate()
-
-        ComboBox_Display.SelectedIndex = 0
-
 
         If Not Directory.Exists(Application.StartupPath & "\Objects\All") Then
             Directory.CreateDirectory(Application.StartupPath & "\Objects\All")
@@ -28,8 +33,6 @@ Public Class Form_DesktopObjects
                 ComboBox_Objects.Items.Add(Path.GetFileName(dir))
             End If
         Next
-        'ComboBox_Objects.Items.Remove("All")
-        'ComboBoComboBox_Objectsx_Theme.Items.Remove("all")
         ComboBox_Objects.Items.Add("All") 'Add all to the end of the list
         ComboBox_Objects.EndUpdate()
         ComboBox_Objects.SelectedIndex = 0
@@ -39,19 +42,15 @@ Public Class Form_DesktopObjects
         If Directory.Exists(filepath) Then
             FlowLayoutPanel1.Visible = False
             FlowLayoutPanel1.Controls.Clear()
-            Label_AssetCount.Text = "0 Objects"
+            Label_AssetCount.Text = "0 Desktop Objects"
             Label_AssetCount.Update()
-            'Label_Status.Text = "Loading Files..."
-            'Label_Status.Refresh()
             Dim FilesToCheck As New ArrayList()
             FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.png", SearchOption.AllDirectories))
             FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.gif", SearchOption.AllDirectories))
             For Each item As String In FilesToCheck
-                CreateNewPanel(item, Path.GetFileNameWithoutExtension(item), Color.WhiteSmoke)
+                CreateNewPanel(item, Path.GetFileNameWithoutExtension(item))
             Next
-            Label_AssetCount.Text = FilesToCheck.Count.ToString & " Objects"
-
-            'Label_Status.Text = "Load Completed."
+            Label_AssetCount.Text = FilesToCheck.Count.ToString & " Desktop Objects"
             FlowLayoutPanel1.Visible = True
         End If
     End Sub
@@ -92,12 +91,12 @@ Public Class Form_DesktopObjects
     Public Shared Function SafeImageFromFile(path As String) As Image
         Dim bytes = File.ReadAllBytes(path)
         Using ms As New MemoryStream(bytes)
-            Dim img = Image.FromStream(ms) 'Bitmap.FromStream(ms) '
+            Dim img = Image.FromStream(ms) 'Bitmap.FromStream(ms)
             Return img
         End Using
     End Function
     'CreateNewPanel
-    Private Sub CreateNewPanel(imagePath As String, assetObjectText As String, textColor As Color)
+    Private Sub CreateNewPanel(imagePath As String, assetObjectText As String)
         'Panel
         Dim AssetPanel = New Panel
         AssetPanel.Size = New Size(AssetPanel_Size, AssetPanel_Size)
@@ -110,10 +109,9 @@ Public Class Form_DesktopObjects
         AssetLabel.TextAlign = ContentAlignment.MiddleCenter
         AssetLabel.Dock = DockStyle.Bottom
         AssetLabel.Text = assetObjectText
-        AssetLabel.ForeColor = textColor
+        AssetLabel.ForeColor = Color.WhiteSmoke
         AssetLabel.Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Bold, GraphicsUnit.Point, CType(0, Byte))
         AssetLabel.BackColor = Color.FromArgb(28, 30, 34)
-        'ToolTip1.SetToolTip(AssetLabel, imagePath)
 
         'PixelBox
         Dim AssetPixelBox = New PixelBox
@@ -123,7 +121,6 @@ Public Class Form_DesktopObjects
         AssetPixelBox.Name = "PixelBox1"
         AssetPixelBox.Cursor = Cursors.Hand
         AssetPixelBox.Text = imagePath
-        'AssetPixelBox.ContextMenuStrip = ContextMenuStrip1
 
         'Add AssetLabel and AssetPixelBox to AssetPanel
         AssetPanel.Controls.Add(AssetPixelBox)
@@ -134,12 +131,12 @@ Public Class Form_DesktopObjects
 
         AddHandler AssetPixelBox.MouseClick, AddressOf PixelBox1_MouseClick
     End Sub
+    '
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ContextMenuStrip2.Show(Button1, 4, 4)
     End Sub
     'ResizePanels (sizeInt)
     Private Sub ResizePanels(sizeInt As Integer)
-        'My.Settings.AssetPannelSize = sizeInt
         AssetPanel_Size = sizeInt
         FlowLayoutPanel1.SuspendLayout()
         FlowLayoutPanel1.Visible = False

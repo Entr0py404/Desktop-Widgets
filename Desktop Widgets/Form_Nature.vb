@@ -1,4 +1,5 @@
-﻿Public Class Form_Nature
+﻿
+Public Class Form_Nature
     Dim randNum As New Random
     Dim MYDisplay As Display
     Dim AssetPanel_Size As Integer = 98
@@ -18,33 +19,20 @@
     'Form_Nature - Load
     Private Sub Form_Nature_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip3.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
+
         ComboBox_Display.BeginUpdate()
         For Each Display As Display In Display.GetDisplays()
             If Display.IsGDIPrimary Then
                 ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
                 ComboBox_Display.SelectedIndex = ComboBox_Display.Items.Count - 1
-                Console.WriteLine(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
+                'Console.WriteLine(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
             Else
                 ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName)
-                Console.WriteLine(Display.ToPathDisplayTarget.FriendlyName)
+                'Console.WriteLine(Display.ToPathDisplayTarget.FriendlyName)
             End If
         Next
         ComboBox_Display.EndUpdate()
-        Console.WriteLine()
-        'For Each target In PathDisplayTarget.GetDisplayTargets()
-        'ComboBox_Display.Items.Add(target.FriendlyName & " - " & target.ToDisplayDevice.DisplayName.Replace("\\.\", ""))
-        'Next
-        'ComboBox_Display.SelectedIndex = 0
-
-        For Each display In Screen.AllScreens
-            'ComboBox_Display.Items.Add(display.DeviceName.Replace("\\.\", ""))
-            Console.WriteLine(display.DeviceName.Replace("\\.\", ""))
-        Next
-
-        Console.WriteLine()
-        'For Each target In PathDisplayTarget.GetDisplayTargets()
-        'Console.WriteLine(target.FriendlyName & " - " & target.ToDisplayDevice.DisplayName.Replace("\\.\", ""))
-        'Next
+        'Console.WriteLine()
 
         If Not Directory.Exists(Application.StartupPath & "\Nature\All") Then
             Directory.CreateDirectory(Application.StartupPath & "\Nature\All")
@@ -56,8 +44,6 @@
                 ComboBox_Theme.Items.Add(Path.GetFileName(dir))
             End If
         Next
-        'ComboBox_Theme.Items.Remove("All")
-        'ComboBox_Theme.Items.Remove("all")
         ComboBox_Theme.Items.Add("All") 'Add all to the end of the list
         ComboBox_Theme.EndUpdate()
         ComboBox_Theme.SelectedIndex = 0
@@ -192,19 +178,15 @@
         If Directory.Exists(filepath) Then
             FlowLayoutPanel1.Visible = False
             FlowLayoutPanel1.Controls.Clear()
-            Label_AssetCount.Text = "0 Objects"
+            Label_AssetCount.Text = "0 Nature Objects"
             Label_AssetCount.Update()
-            'Label_Status.Text = "Loading Files..."
-            'Label_Status.Refresh()
             Dim FilesToCheck As New ArrayList()
             FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.png", SearchOption.AllDirectories))
             FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.gif", SearchOption.AllDirectories))
             For Each item As String In FilesToCheck
-                CreateNewPanel(item, Path.GetFileNameWithoutExtension(item), Color.WhiteSmoke)
+                CreateNewPanel(item, Path.GetFileNameWithoutExtension(item))
             Next
-            Label_AssetCount.Text = FilesToCheck.Count.ToString & " Objects"
-
-            'Label_Status.Text = "Load Completed."
+            Label_AssetCount.Text = FilesToCheck.Count.ToString & " Nature Objects"
             FlowLayoutPanel1.Visible = True
         End If
     End Sub
@@ -218,7 +200,6 @@
                 NatureObject.PixelBox1.Image = NatureObject.ObjectImage
                 NatureObject.Name = "NatureObject"
                 NatureObject.Text = "Nature Object - " & Path.GetFileNameWithoutExtension(NatureObjectFullPath)
-                NatureObject.MYScreen = MYDisplay.GetScreen().AllScreens(ComboBox_Display.SelectedIndex)
                 Form_Menu.IDCounter_NatureObject += 1
                 Form_Menu.FormList_NatureObject.Add(Form_Menu.IDCounter_NatureObject.ToString, NatureObject)
                 NatureObject.UniqueSessionID = Form_Menu.IDCounter_NatureObject.ToString
@@ -237,7 +218,7 @@
         End Using
     End Function
     'CreateNewPanel
-    Private Sub CreateNewPanel(imagePath As String, assetObjectText As String, textColor As Color)
+    Private Sub CreateNewPanel(imagePath As String, assetObjectText As String)
         'Panel
         Dim AssetPanel = New Panel
         AssetPanel.Size = New Size(AssetPanel_Size, AssetPanel_Size)
@@ -250,10 +231,9 @@
         AssetLabel.TextAlign = ContentAlignment.MiddleCenter
         AssetLabel.Dock = DockStyle.Bottom
         AssetLabel.Text = assetObjectText
-        AssetLabel.ForeColor = textColor
+        AssetLabel.ForeColor = Color.WhiteSmoke
         AssetLabel.Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Bold, GraphicsUnit.Point, CType(0, Byte))
         AssetLabel.BackColor = Color.FromArgb(28, 30, 34)
-        'ToolTip1.SetToolTip(AssetLabel, imagePath)
 
         'PixelBox
         Dim AssetPixelBox = New PixelBox
@@ -263,7 +243,6 @@
         AssetPixelBox.Name = "PixelBox1"
         AssetPixelBox.Cursor = Cursors.Hand
         AssetPixelBox.Text = imagePath
-        'AssetPixelBox.ContextMenuStrip = 
 
         'Add AssetLabel and AssetPixelBox to AssetPanel
         AssetPanel.Controls.Add(AssetPixelBox)
@@ -280,7 +259,6 @@
     End Sub
     'ResizePanels (sizeInt)
     Private Sub ResizePanels(sizeInt As Integer)
-        'My.Settings.AssetPannelSize = sizeInt
         AssetPanel_Size = sizeInt
         FlowLayoutPanel1.SuspendLayout()
         FlowLayoutPanel1.Visible = False

@@ -37,6 +37,7 @@ Partial Class Form_NatureObject
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PixelBox1 = New Desktop_Widgets.PixelBox()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PixelBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -45,11 +46,11 @@ Partial Class Form_NatureObject
         '
         Me.ContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AllNatureObjectsToolStripMenuItem, Me.AlwaysOnTopToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.ScaleToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AllNatureObjectsToolStripMenuItem, Me.ToolStripSeparator1, Me.AlwaysOnTopToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.ScaleToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.ShowCheckMargin = True
         Me.ContextMenuStrip1.ShowImageMargin = False
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(195, 152)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(195, 158)
         '
         'AllNatureObjectsToolStripMenuItem
         '
@@ -110,7 +111,7 @@ Partial Class Form_NatureObject
         Me.DisplayToolStripComboBox.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DisplayToolStripComboBox.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.DisplayToolStripComboBox.Name = "DisplayToolStripComboBox"
-        Me.DisplayToolStripComboBox.Size = New System.Drawing.Size(121, 28)
+        Me.DisplayToolStripComboBox.Size = New System.Drawing.Size(200, 28)
         '
         'ScaleToolStripMenuItem
         '
@@ -156,6 +157,11 @@ Partial Class Form_NatureObject
         Me.PixelBox1.TabIndex = 3
         Me.PixelBox1.TabStop = False
         '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(191, 6)
+        '
         'Form_NatureObject
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -192,4 +198,5 @@ Partial Class Form_NatureObject
     Friend WithEvents AllAlwaysOnTopToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DisplayToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DisplayToolStripComboBox As ToolStripComboBox
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
 End Class

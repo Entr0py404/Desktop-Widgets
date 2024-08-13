@@ -62,7 +62,7 @@ Partial Class Form_DesktopObjects
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 32)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(545, 417)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(496, 417)
         Me.FlowLayoutPanel1.TabIndex = 1
         '
         'Panel2
@@ -100,7 +100,7 @@ Partial Class Form_DesktopObjects
         Me.Label_AssetCount.Name = "Label_AssetCount"
         Me.Label_AssetCount.Size = New System.Drawing.Size(737, 32)
         Me.Label_AssetCount.TabIndex = 101
-        Me.Label_AssetCount.Text = "0 Objects"
+        Me.Label_AssetCount.Text = "0 Desktop Objects"
         Me.Label_AssetCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'CheckBox_TopMost
@@ -161,7 +161,7 @@ Partial Class Form_DesktopObjects
         Me.ComboBox_Display.FormattingEnabled = True
         Me.ComboBox_Display.Location = New System.Drawing.Point(72, 16)
         Me.ComboBox_Display.Name = "ComboBox_Display"
-        Me.ComboBox_Display.Size = New System.Drawing.Size(104, 21)
+        Me.ComboBox_Display.Size = New System.Drawing.Size(160, 21)
         Me.ComboBox_Display.TabIndex = 58
         '
         'Label1
@@ -234,7 +234,7 @@ Partial Class Form_DesktopObjects
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.Location = New System.Drawing.Point(0, 8)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(88, 24)
+        Me.Label8.Size = New System.Drawing.Size(80, 24)
         Me.Label8.TabIndex = 60
         Me.Label8.Text = "Objects"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -246,7 +246,7 @@ Partial Class Form_DesktopObjects
         Me.ComboBox_Objects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ComboBox_Objects.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ComboBox_Objects.FormattingEnabled = True
-        Me.ComboBox_Objects.Location = New System.Drawing.Point(96, 8)
+        Me.ComboBox_Objects.Location = New System.Drawing.Point(88, 8)
         Me.ComboBox_Objects.Name = "ComboBox_Objects"
         Me.ComboBox_Objects.Size = New System.Drawing.Size(160, 21)
         Me.ComboBox_Objects.TabIndex = 61
@@ -272,9 +272,9 @@ Partial Class Form_DesktopObjects
         Me.Panel5.Controls.Add(Me.CheckBox_SnapToBar)
         Me.Panel5.Controls.Add(Me.CheckBox_TopMost)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel5.Location = New System.Drawing.Point(545, 32)
+        Me.Panel5.Location = New System.Drawing.Point(496, 32)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(192, 417)
+        Me.Panel5.Size = New System.Drawing.Size(241, 417)
         Me.Panel5.TabIndex = 103
         '
         'NumericUpDown_ObjectScale

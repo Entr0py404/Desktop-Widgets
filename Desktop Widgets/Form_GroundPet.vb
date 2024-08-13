@@ -143,64 +143,122 @@ Public Class Form_GroundPet
         FollowCursorToolStripMenuItem.Checked = Form_Pets.CheckBox_FollowCursor.Checked
         Me.TopMost = Form_Pets.CheckBox_TopMost.Checked
         AlwaysOnTopToolStripMenuItem.Checked = Form_Pets.CheckBox_TopMost.Checked
-        ScaleToolStripComboBox.SelectedIndex = CInt(Form_Pets.NumericUpDown_ObjectScale.Value) - 1
 
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
         Timer_Walking.Enabled = True
         Timer_Falling.Enabled = True
         Timer_IdleDecision.Enabled = True
         Timer_TurningDecision.Enabled = True
+
         AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf DisplaySettingsChanged
 
-        If File.Exists(Application.StartupPath & "\" & PetDir & "\Behavior.ini") Then
-            Dim INI As New MadMilkman.Ini.IniFile()
-            INI.Load(Application.StartupPath & "\" & PetDir & "\Behavior.ini")
-            '[Settings]
-            DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
-            If DefaultScale <= 0 Then
-                DefaultScale = 1
+        Try
+            Dim iniFilePath As String = Application.StartupPath & "\" & PetDir & "\Behavior.ini"
+            If File.Exists(iniFilePath) Then
+                Dim INI As New MadMilkman.Ini.IniFile()
+                INI.Load(iniFilePath)
+
+                ' [Settings]
+                If INI.Sections("Settings") IsNot Nothing Then
+                    If INI.Sections("Settings").Keys("DefaultScale") IsNot Nothing Then
+                        DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
+                        'Console.WriteLine("DefaultScale = " & DefaultScale)
+                        If DefaultScale <= 0 Then
+                            DefaultScale = 1
+                        End If
+                    End If
+
+                    If INI.Sections("Settings").Keys("FollowCursor_StoppingDistance_Px") IsNot Nothing Then
+                        FollowCursor_StoppingDistance_Px = CInt(INI.Sections("Settings").Keys("FollowCursor_StoppingDistance_Px").Value)
+                    End If
+
+                    If INI.Sections("Settings").Keys("Falling_Movement_Px") IsNot Nothing Then
+                        Falling_Movement_Px = CInt(INI.Sections("Settings").Keys("Falling_Movement_Px").Value)
+                    End If
+                End If
+
+                ' [Decisions]
+                If INI.Sections("Decisions") IsNot Nothing Then
+                    If INI.Sections("Decisions").Keys("IdleDecision") IsNot Nothing Then
+                        IdleDecision = CInt(INI.Sections("Decisions").Keys("IdleDecision").Value)
+                    End If
+
+                    If INI.Sections("Decisions").Keys("IdleAltDecision") IsNot Nothing Then
+                        IdleAltDecision = CInt(INI.Sections("Decisions").Keys("IdleAltDecision").Value)
+                    End If
+
+                    If INI.Sections("Decisions").Keys("ScreenWarpingDecision") IsNot Nothing Then
+                        ScreenWarpingDecision = CInt(INI.Sections("Decisions").Keys("ScreenWarpingDecision").Value)
+                    End If
+
+                    If INI.Sections("Decisions").Keys("SleepDecision") IsNot Nothing Then
+                        SleepDecision = CInt(INI.Sections("Decisions").Keys("SleepDecision").Value)
+                    End If
+                End If
+
+                ' [Timers_Tick]
+                If INI.Sections("Timers_Tick") IsNot Nothing Then
+                    If INI.Sections("Timers_Tick").Keys("Walking_Movement_Tick") IsNot Nothing Then
+                        Walking_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Walking_Movement_Tick").Value)
+                        Timer_Walking.Interval = Walking_Movement_Tick
+                    End If
+                    If INI.Sections("Timers_Tick").Keys("Falling_Movement_Tick") IsNot Nothing Then
+                        Falling_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Falling_Movement_Tick").Value)
+                        Timer_Falling.Interval = Falling_Movement_Tick
+                    End If
+                End If
+
+                ' [Timers_Randomization]
+                If INI.Sections("Timers_Randomization") IsNot Nothing Then
+
+                    If INI.Sections("Timers_Randomization").Keys("TurningDecision_Min") IsNot Nothing Then
+                        TurningDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Min").Value)
+                    End If
+                    If INI.Sections("Timers_Randomization").Keys("TurningDecision_Max") IsNot Nothing Then
+                        TurningDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Max").Value)
+                    End If
+                    If TurningDecision_Min <> 0 AndAlso TurningDecision_Max <> 0 Then
+                        Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
+                    End If
+
+
+                    If INI.Sections("Timers_Randomization").Keys("IdleDecision_Min") IsNot Nothing Then
+                        IdleDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Min").Value)
+                    End If
+                    If INI.Sections("Timers_Randomization").Keys("IdleDecision_Max") IsNot Nothing Then
+                        IdleDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Max").Value)
+                    End If
+                    If IdleDecision_Min <> 0 AndAlso IdleDecision_Max <> 0 Then
+                        Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
+                    End If
+
+
+                    If INI.Sections("Timers_Randomization").Keys("Sleeping_Min") IsNot Nothing Then
+                        Sleeping_Min = CInt(INI.Sections("Timers_Randomization").Keys("Sleeping_Min").Value)
+                    End If
+                    If INI.Sections("Timers_Randomization").Keys("Sleeping_Max") IsNot Nothing Then
+                        Sleeping_Max = CInt(INI.Sections("Timers_Randomization").Keys("Sleeping_Max").Value)
+                    End If
+                    If Sleeping_Min <> 0 AndAlso Sleeping_Max <> 0 Then
+                        Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
+                    End If
+
+                End If
+            Else
+                Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
+                Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
+                Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
             End If
-            If DefaultScale > 1 Then
-                ScalePet(1)
-            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
-            FollowCursor_StoppingDistance_Px = CInt(INI.Sections("Settings").Keys("FollowCursor_StoppingDistance_Px").Value)
-            Falling_Movement_Px = CInt(INI.Sections("Settings").Keys("Falling_Movement_Px").Value)
 
-            '[Decisions]
-            IdleDecision = CInt(INI.Sections("Decisions").Keys("IdleDecision").Value)
-            IdleAltDecision = CInt(INI.Sections("Decisions").Keys("IdleAltDecision").Value)
-            ScreenWarpingDecision = CInt(INI.Sections("Decisions").Keys("ScreenWarpingDecision").Value)
-            SleepDecision = CInt(INI.Sections("Decisions").Keys("SleepDecision").Value)
-
-            '[Timers_Tick]
-            Walking_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Walking_Movement_Tick").Value)
-            Timer_Walking.Interval = Walking_Movement_Tick
-
-            Falling_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Falling_Movement_Tick").Value)
-            Timer_Falling.Interval = Falling_Movement_Tick
-
-            '[Timers_Randomization]
-            TurningDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Min").Value)
-            TurningDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Max").Value)
-            Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
-
-            IdleDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Min").Value)
-            IdleDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("IdleDecision_Max").Value)
-            Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
-
-            Sleeping_Min = CInt(INI.Sections("Timers_Randomization").Keys("Sleeping_Min").Value)
-            Sleeping_Max = CInt(INI.Sections("Timers_Randomization").Keys("Sleeping_Max").Value)
-            Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
-        Else
-            Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
-            Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
-            Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
-        End If
+        ScaleToolStripComboBox.SelectedIndex = CInt(Form_Pets.NumericUpDown_ObjectScale.Value) - 1
 
         FormLoadLock = False
 
-        Console.WriteLine("Form_GroundPet_Load")
+        'Console.WriteLine("Form_GroundPet_Load")
     End Sub
     'Timer_Walking - Tick
     Private Sub Timer_Walking_Tick(sender As Object, e As EventArgs) Handles Timer_Walking.Tick
@@ -213,7 +271,7 @@ Public Class Form_GroundPet
 
                         If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
                             PixelBox_Pet.Image = Animation_Walking_Left
-                            Console.WriteLine("Animation_Walking_Left")
+                            'Console.WriteLine("Animation_Walking_Left")
                         End If
 
                     End If
@@ -223,7 +281,7 @@ Public Class Form_GroundPet
 
                         If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
                             PixelBox_Pet.Image = Animation_Walking_Right
-                            Console.WriteLine("Animation_Walking_Right")
+                            'Console.WriteLine("Animation_Walking_Right")
                         End If
 
                     End If
@@ -236,24 +294,24 @@ Public Class Form_GroundPet
                         Me.Location = New Point(Me.Location.X - 1, Display.WorkingArea.Bottom - Me.Height)
                         If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
                             PixelBox_Pet.Image = Animation_Walking_Left
-                            Console.WriteLine("Animation_Walking_Left")
+                            'Console.WriteLine("Animation_Walking_Left")
                         End If
                     ElseIf Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StoppingDistance_Px Then
                         TurnLeft = True
                         Me.Location = New Point(Me.Location.X + 1, Display.WorkingArea.Bottom - Me.Height)
                         If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
                             PixelBox_Pet.Image = Animation_Walking_Right
-                            Console.WriteLine("Animation_Walking_Right")
+                            'Console.WriteLine("Animation_Walking_Right")
                         End If
                     Else
 
                         If PixelBox_Pet.Image IsNot Animation_Idling_Left Or PixelBox_Pet.Image IsNot Animation_Idling_Right Then
                             If TurnLeft = True Then
                                 PixelBox_Pet.Image = Animation_Idling_Left
-                                Console.WriteLine("Animation_Idling_Left")
+                                'Console.WriteLine("Animation_Idling_Left")
                             Else
                                 PixelBox_Pet.Image = Animation_Idling_Right
-                                Console.WriteLine("Animation_Idling_Right")
+                                'Console.WriteLine("Animation_Idling_Right")
                             End If
                         End If
                     End If
@@ -321,24 +379,24 @@ Public Class Form_GroundPet
                         If TurnLeft = True Then
                             If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
                                 PixelBox_Pet.Image = Animation_Idling_Left
-                                Console.WriteLine("Animation_Idling_Left")
+                                'Console.WriteLine("Animation_Idling_Left")
                             End If
                         Else
                             If PixelBox_Pet.Image IsNot Animation_Idling_Right Then
                                 PixelBox_Pet.Image = Animation_Idling_Right
-                                Console.WriteLine("Animation_Idling_Right")
+                                'Console.WriteLine("Animation_Idling_Right")
                             End If
                         End If
                     Else
                         If TurnLeft = True Then
                             If PixelBox_Pet.Image IsNot Animation_IdlingAlt_Left Then
                                 PixelBox_Pet.Image = Animation_IdlingAlt_Left
-                                Console.WriteLine("Animation_IdlingAlt_Left")
+                                'Console.WriteLine("Animation_IdlingAlt_Left")
                             End If
                         Else
                             If PixelBox_Pet.Image IsNot Animation_IdlingAlt_Right Then
                                 PixelBox_Pet.Image = Animation_IdlingAlt_Right
-                                Console.WriteLine("Animation_IdlingAlt_Right")
+                                'Console.WriteLine("Animation_IdlingAlt_Right")
                             End If
                         End If
                     End If
@@ -346,12 +404,12 @@ Public Class Form_GroundPet
                     If TurnLeft = True Then
                         If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
                             PixelBox_Pet.Image = Animation_Idling_Left
-                            Console.WriteLine("Animation_Idling_Left")
+                            'Console.WriteLine("Animation_Idling_Left")
                         End If
                     Else
                         If PixelBox_Pet.Image IsNot Animation_Idling_Right Then
                             PixelBox_Pet.Image = Animation_Idling_Right
-                            Console.WriteLine("Animation_Idling_Right")
+                            'Console.WriteLine("Animation_Idling_Right")
                         End If
                     End If
                 End If
@@ -364,12 +422,12 @@ Public Class Form_GroundPet
                         If TurnLeft = True Then
                             If PixelBox_Pet.Image IsNot Animation_Sleeping_Left Then
                                 PixelBox_Pet.Image = Animation_Sleeping_Left
-                                Console.WriteLine("Animation_Sleeping_Left")
+                                'Console.WriteLine("Animation_Sleeping_Left")
                             End If
                         Else
                             If PixelBox_Pet.Image IsNot Animation_Sleeping_Right Then
                                 PixelBox_Pet.Image = Animation_Sleeping_Right
-                                Console.WriteLine("Animation_Sleeping_Right")
+                                'Console.WriteLine("Animation_Sleeping_Right")
                             End If
                         End If
                         Timer_Sleeping.Enabled = True
@@ -502,6 +560,7 @@ Public Class Form_GroundPet
     End Sub
     'ScalePet()
     Public Sub ScalePet(val As Integer)
+        Console.WriteLine("ScalePet")
         val = val + DefaultScale - 1
         Me.Width = Animation_Walking_Left.Width * val
         Me.Height = Animation_Walking_Left.Height * val
@@ -567,7 +626,7 @@ Public Class Form_GroundPet
         End If
     End Sub
     'PixelBox_Pet - Paint
-    Private Sub PixelBox_Pet_Paint(sender As Object, e As PaintEventArgs) Handles PixelBox_Pet.Paint
+    Private Sub PixelBox_Pet_Paint(sender As Object, e As PaintEventArgs) 'Handles PixelBox_Pet.Paint
         If CurrentAnimatedImage IsNot Nothing Then
             AnimateImage()
             ImageAnimator.UpdateFrames()

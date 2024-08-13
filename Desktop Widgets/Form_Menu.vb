@@ -1,4 +1,5 @@
-﻿Public Class Form_Menu
+﻿
+Public Class Form_Menu
     Friend FormList_DesktopObject As New Dictionary(Of String, Form_DesktopObject)
     Friend FormList_NatureObject As New Dictionary(Of String, Form_NatureObject)
     Public IDCounter_DesktopObject As Integer = 0
@@ -8,20 +9,6 @@
     Private Sub Form_Menu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.SelectedIndex = 0
         ContextMenuStrip_Main.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
-        'Dim searcher1 As ManagementObjectSearcher = New ManagementObjectSearcher("root\WMI", "SELECT * FROM WmiMonitorBasicDisplayParams") '"SELECT * FROM Win32_DesktopMonitor"
-        'For Each obj As ManagementObject In searcher1.Get
-        'Console.WriteLine(obj.ToString)
-        'Next
-
-        'Dim searcher2 As ManagementObjectSearcher = New ManagementObjectSearcher("root\CIMV2", "SELECT * FROM Win32_DesktopMonitor")
-        'For Each obj As ManagementObject In searcher2.Get
-        'Console.WriteLine("DeviceID: {0}", obj("DeviceID"))
-        'Console.WriteLine(obj.ToString)
-        'Next
-
-        'For Each display In Screen.AllScreens
-        'Console.WriteLine(display.DeviceName.Replace("\\.\", ""))
-        'Next
     End Sub
 
     ' Button_DesktopPets - Click
@@ -49,15 +36,6 @@
             Form_DesktopObjects.WindowState = FormWindowState.Normal
         End If
         Form_DesktopObjects.BringToFront()
-    End Sub
-
-    ' Button_GDev - Click
-    Private Sub Button_GDev_Click(sender As Object, e As EventArgs)
-        Form_Gdev.Show()
-        If Form_Gdev.WindowState = FormWindowState.Minimized Then
-            Form_Gdev.WindowState = FormWindowState.Normal
-        End If
-        Form_Gdev.BringToFront()
     End Sub
 
     ' Button_Phrases - Click
@@ -127,9 +105,6 @@
                 FormList_DesktopObject(item).Close()
             Next
             FormList_DesktopObject.Clear()
-
-        ElseIf ComboBox1.SelectedItem.ToString = "GDev Character" Then
-            Form_GDevCharacter.Close()
         End If
     End Sub
 

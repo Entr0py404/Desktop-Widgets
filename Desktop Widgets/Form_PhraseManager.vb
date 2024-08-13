@@ -13,8 +13,6 @@
     Private Sub ComboBox_Topic_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox_Topic.SelectedValueChanged
 
     End Sub
-
-
     'ListBox_Phrases - MouseDoubleClick
     Private Sub ListBox_Phrases_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListBox_Phrases.MouseDoubleClick
         If Not ListBox_Phrases.SelectedIndex = -1 Then

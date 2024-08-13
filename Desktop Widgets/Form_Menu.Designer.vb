@@ -84,7 +84,7 @@ Partial Class Form_Menu
         Me.Button_DesktopObjects.FlatAppearance.BorderSize = 0
         Me.Button_DesktopObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_DesktopObjects.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_DesktopObjects.Location = New System.Drawing.Point(224, 88)
+        Me.Button_DesktopObjects.Location = New System.Drawing.Point(376, 8)
         Me.Button_DesktopObjects.Name = "Button_DesktopObjects"
         Me.Button_DesktopObjects.Size = New System.Drawing.Size(144, 32)
         Me.Button_DesktopObjects.TabIndex = 64
@@ -100,7 +100,7 @@ Partial Class Form_Menu
         Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"All Pets", "Ground Pets", "Flying Pets", "Nature Objects", "Desktop Objects", "GDev Character"})
+        Me.ComboBox1.Items.AddRange(New Object() {"All Pets", "Ground Pets", "Flying Pets", "Nature Objects", "Desktop Objects"})
         Me.ComboBox1.Location = New System.Drawing.Point(0, 0)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(136, 26)
@@ -188,7 +188,7 @@ Partial Class Form_Menu
         Me.Button_AnimationBuilder.FlatAppearance.BorderSize = 0
         Me.Button_AnimationBuilder.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_AnimationBuilder.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_AnimationBuilder.Location = New System.Drawing.Point(376, 88)
+        Me.Button_AnimationBuilder.Location = New System.Drawing.Point(376, 48)
         Me.Button_AnimationBuilder.Name = "Button_AnimationBuilder"
         Me.Button_AnimationBuilder.Size = New System.Drawing.Size(144, 32)
         Me.Button_AnimationBuilder.TabIndex = 72
@@ -204,7 +204,7 @@ Partial Class Form_Menu
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel1.Location = New System.Drawing.Point(0, 129)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(530, 26)
+        Me.Panel1.Size = New System.Drawing.Size(528, 26)
         Me.Panel1.TabIndex = 73
         '
         'CheckBox1
@@ -221,12 +221,12 @@ Partial Class Form_Menu
         '
         'Button_MotionDesktop
         '
-        Me.Button_MotionDesktop.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Button_MotionDesktop.BackColor = System.Drawing.Color.MediumSeaGreen
         Me.Button_MotionDesktop.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
         Me.Button_MotionDesktop.FlatAppearance.BorderSize = 0
         Me.Button_MotionDesktop.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_MotionDesktop.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_MotionDesktop.Location = New System.Drawing.Point(376, 8)
+        Me.Button_MotionDesktop.Location = New System.Drawing.Point(224, 88)
         Me.Button_MotionDesktop.Name = "Button_MotionDesktop"
         Me.Button_MotionDesktop.Size = New System.Drawing.Size(144, 32)
         Me.Button_MotionDesktop.TabIndex = 75
@@ -235,12 +235,12 @@ Partial Class Form_Menu
         '
         'Button_DualBackgrounds
         '
-        Me.Button_DualBackgrounds.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Button_DualBackgrounds.BackColor = System.Drawing.Color.MediumSeaGreen
         Me.Button_DualBackgrounds.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
         Me.Button_DualBackgrounds.FlatAppearance.BorderSize = 0
         Me.Button_DualBackgrounds.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_DualBackgrounds.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_DualBackgrounds.Location = New System.Drawing.Point(376, 48)
+        Me.Button_DualBackgrounds.Location = New System.Drawing.Point(376, 88)
         Me.Button_DualBackgrounds.Name = "Button_DualBackgrounds"
         Me.Button_DualBackgrounds.Size = New System.Drawing.Size(144, 32)
         Me.Button_DualBackgrounds.TabIndex = 76
@@ -263,7 +263,7 @@ Partial Class Form_Menu
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(530, 155)
+        Me.ClientSize = New System.Drawing.Size(528, 155)
         Me.Controls.Add(Me.PixelBox1)
         Me.Controls.Add(Me.Button_DualBackgrounds)
         Me.Controls.Add(Me.Button_MotionDesktop)

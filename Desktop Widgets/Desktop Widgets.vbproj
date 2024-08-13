@@ -143,22 +143,10 @@
     <Compile Include="Form_Menu.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Gdev.Designer.vb">
-      <DependentUpon>Form_Gdev.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form_Gdev.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Form_DesktopObjects.Designer.vb">
       <DependentUpon>Form_DesktopObjects.vb</DependentUpon>
     </Compile>
     <Compile Include="Form_DesktopObjects.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_GDevCharacter.Designer.vb">
-      <DependentUpon>Form_GDevCharacter.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form_GDevCharacter.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_Nature.Designer.vb">
@@ -232,14 +220,8 @@
     <EmbeddedResource Include="Form_Menu.resx">
       <DependentUpon>Form_Menu.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Gdev.resx">
-      <DependentUpon>Form_Gdev.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form_DesktopObjects.resx">
       <DependentUpon>Form_DesktopObjects.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_GDevCharacter.resx">
-      <DependentUpon>Form_GDevCharacter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Nature.resx">
       <DependentUpon>Form_Nature.vb</DependentUpon>
