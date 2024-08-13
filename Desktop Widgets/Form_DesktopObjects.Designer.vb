@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form_DesktopObjects
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,18 +20,17 @@ Partial Class Form_DesktopObjects
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_DesktopObjects))
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ComboBox_Objects = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label_AssetCount = New System.Windows.Forms.Label()
         Me.CheckBox_TopMost = New System.Windows.Forms.CheckBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.CheckBox_SnapToBar = New System.Windows.Forms.CheckBox()
-        Me.Button_AllDesktopObjects = New System.Windows.Forms.Button()
         Me.ComboBox_Display = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -40,16 +39,14 @@ Partial Class Form_DesktopObjects
         Me.MediumLarge_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Large_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExtraLarge_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.ComboBox_Objects = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.NumericUpDown_ObjectScale = New System.Windows.Forms.NumericUpDown()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Button_AllDesktopObjects = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
         Me.ContextMenuStrip2.SuspendLayout()
-        Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel5.SuspendLayout()
         CType(Me.NumericUpDown_ObjectScale, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -60,48 +57,50 @@ Partial Class Form_DesktopObjects
         '
         Me.FlowLayoutPanel1.AutoScroll = True
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 32)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 40)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(496, 417)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(737, 449)
         Me.FlowLayoutPanel1.TabIndex = 1
         '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.Label8)
+        Me.Panel2.Controls.Add(Me.ComboBox_Objects)
         Me.Panel2.Controls.Add(Me.Button1)
-        Me.Panel2.Controls.Add(Me.Label_AssetCount)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(737, 32)
+        Me.Panel2.Size = New System.Drawing.Size(737, 40)
         Me.Panel2.TabIndex = 102
+        '
+        'ComboBox_Objects
+        '
+        Me.ComboBox_Objects.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ComboBox_Objects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox_Objects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox_Objects.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ComboBox_Objects.FormattingEnabled = True
+        Me.ComboBox_Objects.Location = New System.Drawing.Point(176, 10)
+        Me.ComboBox_Objects.Name = "ComboBox_Objects"
+        Me.ComboBox_Objects.Size = New System.Drawing.Size(160, 21)
+        Me.ComboBox_Objects.TabIndex = 61
         '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.DodgerBlue
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
         Me.Button1.FlatAppearance.BorderSize = 0
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.Location = New System.Drawing.Point(0, 0)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(32, 32)
+        Me.Button1.Size = New System.Drawing.Size(40, 40)
         Me.Button1.TabIndex = 96
         Me.Button1.Text = "☰"
         Me.Button1.UseVisualStyleBackColor = False
-        '
-        'Label_AssetCount
-        '
-        Me.Label_AssetCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Label_AssetCount.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_AssetCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_AssetCount.Location = New System.Drawing.Point(0, 0)
-        Me.Label_AssetCount.Name = "Label_AssetCount"
-        Me.Label_AssetCount.Size = New System.Drawing.Size(737, 32)
-        Me.Label_AssetCount.TabIndex = 101
-        Me.Label_AssetCount.Text = "0 Desktop Objects"
-        Me.Label_AssetCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'CheckBox_TopMost
         '
@@ -136,21 +135,6 @@ Partial Class Form_DesktopObjects
         Me.CheckBox_SnapToBar.TabIndex = 56
         Me.CheckBox_SnapToBar.Text = "Snap To Bar"
         Me.CheckBox_SnapToBar.UseVisualStyleBackColor = True
-        '
-        'Button_AllDesktopObjects
-        '
-        Me.Button_AllDesktopObjects.BackColor = System.Drawing.Color.Tomato
-        Me.Button_AllDesktopObjects.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Button_AllDesktopObjects.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Button_AllDesktopObjects.FlatAppearance.BorderSize = 0
-        Me.Button_AllDesktopObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button_AllDesktopObjects.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_AllDesktopObjects.Location = New System.Drawing.Point(641, 0)
-        Me.Button_AllDesktopObjects.Name = "Button_AllDesktopObjects"
-        Me.Button_AllDesktopObjects.Size = New System.Drawing.Size(96, 26)
-        Me.Button_AllDesktopObjects.TabIndex = 57
-        Me.Button_AllDesktopObjects.Text = "Close All"
-        Me.Button_AllDesktopObjects.UseVisualStyleBackColor = False
         '
         'ComboBox_Display
         '
@@ -219,47 +203,15 @@ Partial Class Form_DesktopObjects
         Me.ExtraLarge_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
         Me.ExtraLarge_ToolStripMenuItem.Text = "Extra Large"
         '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.Label8)
-        Me.Panel1.Controls.Add(Me.ComboBox_Objects)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(737, 40)
-        Me.Panel1.TabIndex = 60
-        '
-        'Label8
-        '
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(0, 8)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(80, 24)
-        Me.Label8.TabIndex = 60
-        Me.Label8.Text = "Objects"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'ComboBox_Objects
-        '
-        Me.ComboBox_Objects.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ComboBox_Objects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox_Objects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ComboBox_Objects.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ComboBox_Objects.FormattingEnabled = True
-        Me.ComboBox_Objects.Location = New System.Drawing.Point(88, 8)
-        Me.ComboBox_Objects.Name = "ComboBox_Objects"
-        Me.ComboBox_Objects.Size = New System.Drawing.Size(160, 21)
-        Me.ComboBox_Objects.TabIndex = 61
-        '
         'Panel3
         '
-        Me.Panel3.Controls.Add(Me.FlowLayoutPanel1)
         Me.Panel3.Controls.Add(Me.Panel5)
+        Me.Panel3.Controls.Add(Me.FlowLayoutPanel1)
         Me.Panel3.Controls.Add(Me.Panel2)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(0, 40)
+        Me.Panel3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(737, 449)
+        Me.Panel3.Size = New System.Drawing.Size(737, 489)
         Me.Panel3.TabIndex = 61
         '
         'Panel5
@@ -272,9 +224,9 @@ Partial Class Form_DesktopObjects
         Me.Panel5.Controls.Add(Me.CheckBox_SnapToBar)
         Me.Panel5.Controls.Add(Me.CheckBox_TopMost)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel5.Location = New System.Drawing.Point(496, 32)
+        Me.Panel5.Location = New System.Drawing.Point(496, 40)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(241, 417)
+        Me.Panel5.Size = New System.Drawing.Size(241, 449)
         Me.Panel5.TabIndex = 103
         '
         'NumericUpDown_ObjectScale
@@ -298,7 +250,33 @@ Partial Class Form_DesktopObjects
         Me.Panel4.Location = New System.Drawing.Point(0, 489)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(737, 26)
-        Me.Panel4.TabIndex = 62
+        Me.Panel4.TabIndex = 63
+        '
+        'Button_AllDesktopObjects
+        '
+        Me.Button_AllDesktopObjects.BackColor = System.Drawing.Color.Tomato
+        Me.Button_AllDesktopObjects.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Button_AllDesktopObjects.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Button_AllDesktopObjects.FlatAppearance.BorderSize = 0
+        Me.Button_AllDesktopObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button_AllDesktopObjects.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button_AllDesktopObjects.Location = New System.Drawing.Point(0, 0)
+        Me.Button_AllDesktopObjects.Name = "Button_AllDesktopObjects"
+        Me.Button_AllDesktopObjects.Size = New System.Drawing.Size(96, 26)
+        Me.Button_AllDesktopObjects.TabIndex = 57
+        Me.Button_AllDesktopObjects.Text = "Close All"
+        Me.Button_AllDesktopObjects.UseVisualStyleBackColor = False
+        '
+        'Label8
+        '
+        Me.Label8.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(40, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(128, 40)
+        Me.Label8.TabIndex = 97
+        Me.Label8.Text = "Desktop Objects"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Form_DesktopObjects
         '
@@ -308,7 +286,6 @@ Partial Class Form_DesktopObjects
         Me.ClientSize = New System.Drawing.Size(737, 515)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel4)
-        Me.Controls.Add(Me.Panel1)
         Me.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form_DesktopObjects"
@@ -316,7 +293,6 @@ Partial Class Form_DesktopObjects
         Me.Text = "Desktop Objects"
         Me.Panel2.ResumeLayout(False)
         Me.ContextMenuStrip2.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
         CType(Me.NumericUpDown_ObjectScale, System.ComponentModel.ISupportInitialize).EndInit()
@@ -327,24 +303,22 @@ Partial Class Form_DesktopObjects
     Friend WithEvents CheckBox_TopMost As CheckBox
     Private WithEvents Label9 As Label
     Friend WithEvents CheckBox_SnapToBar As CheckBox
-    Friend WithEvents Button_AllDesktopObjects As Button
     Friend WithEvents ComboBox_Display As ComboBox
     Private WithEvents Label1 As Label
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Button1 As Button
-    Friend WithEvents Label_AssetCount As Label
     Friend WithEvents ContextMenuStrip2 As ContextMenuStrip
     Friend WithEvents Small_ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Medium_ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MediumLarge_ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Large_ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExtraLarge_ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents Panel4 As Panel
-    Friend WithEvents Label8 As Label
     Friend WithEvents ComboBox_Objects As ComboBox
     Friend WithEvents NumericUpDown_ObjectScale As NumericUpDown
     Friend WithEvents Panel5 As Panel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Button_AllDesktopObjects As Button
+    Friend WithEvents Label8 As Label
 End Class

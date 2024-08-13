@@ -56,7 +56,7 @@ Public Class Form_Pets
                     GroundPetsCount += 1
                 End If
             Next
-            Label_AssetCount.Text = GroundPetsCount & " Pets"
+            'Label_AssetCount.Text = GroundPetsCount & " Pets"
             'Label_Status.Text = "Load Completed."
             If GroundPetsToolStripMenuItem.BackColor = Color.RoyalBlue Then
                 FlowLayoutPanel1.Visible = True
@@ -81,7 +81,7 @@ Public Class Form_Pets
                     FlyingPetsCount += 1
                 End If
             Next
-            Label_AssetCount.Text = FlyingPetsCount & " Pets"
+            'Label_AssetCount.Text = FlyingPetsCount & " Pets"
             'Label_Status.Text = "Load Completed."
             If FlyingPetsToolStripMenuItem.BackColor = Color.RoyalBlue Then
                 FlowLayoutPanel2.Visible = True
@@ -119,7 +119,7 @@ Public Class Form_Pets
         FlowLayoutPanel2.Visible = False
         ComboBox_GroundArtist.Visible = True
         ComboBox_FlyingArtist.Visible = False
-        Label_AssetCount.Text = GroundPetsCount & " Pets"
+        'Label_AssetCount.Text = GroundPetsCount & " Pets"
         ResetToolStripMenuItemBackGroundColors()
         GroundPetsToolStripMenuItem.BackColor = Color.RoyalBlue
     End Sub
@@ -129,7 +129,7 @@ Public Class Form_Pets
         FlowLayoutPanel2.Visible = True
         ComboBox_GroundArtist.Visible = False
         ComboBox_FlyingArtist.Visible = True
-        Label_AssetCount.Text = FlyingPetsCount & " Pets"
+        'Label_AssetCount.Text = FlyingPetsCount & " Pets"
         ResetToolStripMenuItemBackGroundColors()
         FlyingPetsToolStripMenuItem.BackColor = Color.RoyalBlue
     End Sub

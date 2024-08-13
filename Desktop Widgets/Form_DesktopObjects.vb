@@ -42,15 +42,15 @@ Public Class Form_DesktopObjects
         If Directory.Exists(filepath) Then
             FlowLayoutPanel1.Visible = False
             FlowLayoutPanel1.Controls.Clear()
-            Label_AssetCount.Text = "0 Desktop Objects"
-            Label_AssetCount.Update()
+            'Label_AssetCount.Text = "0 Desktop Objects"
+            'Label_AssetCount.Update()
             Dim FilesToCheck As New ArrayList()
             FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.png", SearchOption.AllDirectories))
             FilesToCheck.AddRange(Directory.GetFiles(filepath, "*.gif", SearchOption.AllDirectories))
             For Each item As String In FilesToCheck
                 CreateNewPanel(item, Path.GetFileNameWithoutExtension(item))
             Next
-            Label_AssetCount.Text = FilesToCheck.Count.ToString & " Desktop Objects"
+            'Label_AssetCount.Text = FilesToCheck.Count.ToString & " Desktop Objects"
             FlowLayoutPanel1.Visible = True
         End If
     End Sub

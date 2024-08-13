@@ -46,7 +46,6 @@ Partial Class Form_Pets
         Me.NumericUpDown_ObjectScale = New System.Windows.Forms.NumericUpDown()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label_AssetCount = New System.Windows.Forms.Label()
         Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.Small_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Medium_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -153,11 +152,11 @@ Partial Class Form_Pets
         Me.Button_CloseSelected.FlatAppearance.BorderSize = 0
         Me.Button_CloseSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_CloseSelected.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_CloseSelected.Location = New System.Drawing.Point(112, 0)
+        Me.Button_CloseSelected.Location = New System.Drawing.Point(120, 0)
         Me.Button_CloseSelected.Name = "Button_CloseSelected"
-        Me.Button_CloseSelected.Size = New System.Drawing.Size(77, 26)
+        Me.Button_CloseSelected.Size = New System.Drawing.Size(96, 26)
         Me.Button_CloseSelected.TabIndex = 71
-        Me.Button_CloseSelected.Text = "Close"
+        Me.Button_CloseSelected.Text = "Close All"
         Me.Button_CloseSelected.UseVisualStyleBackColor = False
         '
         'ComboBox1
@@ -172,7 +171,7 @@ Partial Class Form_Pets
         Me.ComboBox1.Items.AddRange(New Object() {"All Pets", "Ground Pets", "Flying Pets"})
         Me.ComboBox1.Location = New System.Drawing.Point(0, 0)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(112, 26)
+        Me.ComboBox1.Size = New System.Drawing.Size(120, 26)
         Me.ComboBox1.TabIndex = 69
         '
         'MenuStrip1
@@ -208,18 +207,18 @@ Partial Class Form_Pets
         '
         Me.FlowLayoutPanel1.AutoScroll = True
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 61)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 69)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(506, 405)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(506, 397)
         Me.FlowLayoutPanel1.TabIndex = 121
         '
         'FlowLayoutPanel2
         '
         Me.FlowLayoutPanel2.AutoScroll = True
         Me.FlowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(0, 61)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(0, 69)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(506, 405)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(506, 397)
         Me.FlowLayoutPanel2.TabIndex = 122
         '
         'Label2
@@ -270,12 +269,9 @@ Partial Class Form_Pets
         '
         'Panel5
         '
-        Me.Panel5.Controls.Add(Me.ComboBox_GroundArtist)
-        Me.Panel5.Controls.Add(Me.ComboBox_FlyingArtist)
-        Me.Panel5.Controls.Add(Me.Label8)
         Me.Panel5.Controls.Add(Me.MenuStrip1)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel5.Location = New System.Drawing.Point(0, 32)
+        Me.Panel5.Location = New System.Drawing.Point(0, 40)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(506, 29)
         Me.Panel5.TabIndex = 124
@@ -288,7 +284,7 @@ Partial Class Form_Pets
         Me.ComboBox_GroundArtist.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ComboBox_GroundArtist.FormattingEnabled = True
         Me.ComboBox_GroundArtist.ItemHeight = 13
-        Me.ComboBox_GroundArtist.Location = New System.Drawing.Point(280, 4)
+        Me.ComboBox_GroundArtist.Location = New System.Drawing.Point(104, 10)
         Me.ComboBox_GroundArtist.Name = "ComboBox_GroundArtist"
         Me.ComboBox_GroundArtist.Size = New System.Drawing.Size(160, 21)
         Me.ComboBox_GroundArtist.TabIndex = 121
@@ -301,7 +297,7 @@ Partial Class Form_Pets
         Me.ComboBox_FlyingArtist.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ComboBox_FlyingArtist.FormattingEnabled = True
         Me.ComboBox_FlyingArtist.ItemHeight = 13
-        Me.ComboBox_FlyingArtist.Location = New System.Drawing.Point(280, 4)
+        Me.ComboBox_FlyingArtist.Location = New System.Drawing.Point(104, 10)
         Me.ComboBox_FlyingArtist.Name = "ComboBox_FlyingArtist"
         Me.ComboBox_FlyingArtist.Size = New System.Drawing.Size(160, 21)
         Me.ComboBox_FlyingArtist.TabIndex = 122
@@ -311,11 +307,11 @@ Partial Class Form_Pets
         '
         Me.Label8.Dock = System.Windows.Forms.DockStyle.Left
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(216, 0)
+        Me.Label8.Location = New System.Drawing.Point(40, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(56, 29)
+        Me.Label8.Size = New System.Drawing.Size(56, 40)
         Me.Label8.TabIndex = 120
-        Me.Label8.Text = "Artist:"
+        Me.Label8.Text = "Pets"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Panel4
@@ -328,9 +324,9 @@ Partial Class Form_Pets
         Me.Panel4.Controls.Add(Me.NumericUpDown_ObjectScale)
         Me.Panel4.Controls.Add(Me.Label9)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel4.Location = New System.Drawing.Point(506, 32)
+        Me.Panel4.Location = New System.Drawing.Point(506, 40)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(244, 434)
+        Me.Panel4.Size = New System.Drawing.Size(244, 426)
         Me.Panel4.TabIndex = 123
         '
         'NumericUpDown_ObjectScale
@@ -349,40 +345,31 @@ Partial Class Form_Pets
         'Panel6
         '
         Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Panel6.Controls.Add(Me.ComboBox_FlyingArtist)
+        Me.Panel6.Controls.Add(Me.ComboBox_GroundArtist)
+        Me.Panel6.Controls.Add(Me.Label8)
         Me.Panel6.Controls.Add(Me.Button1)
-        Me.Panel6.Controls.Add(Me.Label_AssetCount)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel6.Location = New System.Drawing.Point(0, 0)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(750, 32)
+        Me.Panel6.Size = New System.Drawing.Size(750, 40)
         Me.Panel6.TabIndex = 122
         '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.DodgerBlue
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
         Me.Button1.FlatAppearance.BorderSize = 0
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.Location = New System.Drawing.Point(0, 0)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(32, 32)
+        Me.Button1.Size = New System.Drawing.Size(40, 40)
         Me.Button1.TabIndex = 96
         Me.Button1.Text = "☰"
         Me.Button1.UseVisualStyleBackColor = False
-        '
-        'Label_AssetCount
-        '
-        Me.Label_AssetCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Label_AssetCount.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_AssetCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_AssetCount.Location = New System.Drawing.Point(0, 0)
-        Me.Label_AssetCount.Name = "Label_AssetCount"
-        Me.Label_AssetCount.Size = New System.Drawing.Size(750, 32)
-        Me.Label_AssetCount.TabIndex = 101
-        Me.Label_AssetCount.Text = "0 Pets"
-        Me.Label_AssetCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ContextMenuStrip2
         '
@@ -779,7 +766,6 @@ Partial Class Form_Pets
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents Panel6 As Panel
     Friend WithEvents Button1 As Button
-    Friend WithEvents Label_AssetCount As Label
     Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
     Friend WithEvents NumericUpDown_ObjectScale As NumericUpDown
     Friend WithEvents Panel4 As Panel

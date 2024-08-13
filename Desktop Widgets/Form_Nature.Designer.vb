@@ -59,7 +59,6 @@ Partial Class Form_Nature
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label_AssetCount = New System.Windows.Forms.Label()
         Me.ContextMenuStrip3 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.Small_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Medium_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -314,12 +313,13 @@ Partial Class Form_Nature
         '
         'Label8
         '
+        Me.Label8.Dock = System.Windows.Forms.DockStyle.Left
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(0, 8)
+        Me.Label8.Location = New System.Drawing.Point(40, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(80, 24)
+        Me.Label8.Size = New System.Drawing.Size(120, 40)
         Me.Label8.TabIndex = 43
-        Me.Label8.Text = "Theme"
+        Me.Label8.Text = "Nature Objects"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'ComboBox_Theme
@@ -330,7 +330,7 @@ Partial Class Form_Nature
         Me.ComboBox_Theme.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ComboBox_Theme.FormattingEnabled = True
         Me.ComboBox_Theme.ItemHeight = 13
-        Me.ComboBox_Theme.Location = New System.Drawing.Point(88, 8)
+        Me.ComboBox_Theme.Location = New System.Drawing.Point(168, 10)
         Me.ComboBox_Theme.Name = "ComboBox_Theme"
         Me.ComboBox_Theme.Size = New System.Drawing.Size(160, 21)
         Me.ComboBox_Theme.TabIndex = 44
@@ -338,13 +338,14 @@ Partial Class Form_Nature
         'Button_CloseAll
         '
         Me.Button_CloseAll.BackColor = System.Drawing.Color.Tomato
+        Me.Button_CloseAll.Dock = System.Windows.Forms.DockStyle.Left
         Me.Button_CloseAll.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
         Me.Button_CloseAll.FlatAppearance.BorderSize = 0
         Me.Button_CloseAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_CloseAll.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_CloseAll.Location = New System.Drawing.Point(24, 400)
+        Me.Button_CloseAll.Location = New System.Drawing.Point(0, 0)
         Me.Button_CloseAll.Name = "Button_CloseAll"
-        Me.Button_CloseAll.Size = New System.Drawing.Size(120, 32)
+        Me.Button_CloseAll.Size = New System.Drawing.Size(96, 26)
         Me.Button_CloseAll.TabIndex = 45
         Me.Button_CloseAll.Text = "Close All"
         Me.Button_CloseAll.UseVisualStyleBackColor = False
@@ -394,12 +395,12 @@ Partial Class Form_Nature
         '
         'Panel3
         '
-        Me.Panel3.Controls.Add(Me.Label8)
-        Me.Panel3.Controls.Add(Me.ComboBox_Theme)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel3.Location = New System.Drawing.Point(0, 0)
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Panel3.Controls.Add(Me.Button_CloseAll)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel3.Location = New System.Drawing.Point(0, 551)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(840, 40)
+        Me.Panel3.Size = New System.Drawing.Size(840, 26)
         Me.Panel3.TabIndex = 62
         '
         'Panel4
@@ -419,11 +420,10 @@ Partial Class Form_Nature
         Me.Panel4.Controls.Add(Me.Button_Randomize)
         Me.Panel4.Controls.Add(Me.Panel1)
         Me.Panel4.Controls.Add(Me.Label9)
-        Me.Panel4.Controls.Add(Me.Button_CloseAll)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel4.Location = New System.Drawing.Point(544, 32)
+        Me.Panel4.Location = New System.Drawing.Point(544, 40)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(296, 505)
+        Me.Panel4.Size = New System.Drawing.Size(296, 511)
         Me.Panel4.TabIndex = 63
         '
         'NumericUpDown_ObjectScale
@@ -445,29 +445,30 @@ Partial Class Form_Nature
         Me.Panel5.Controls.Add(Me.Panel4)
         Me.Panel5.Controls.Add(Me.Panel6)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(0, 40)
+        Me.Panel5.Location = New System.Drawing.Point(0, 0)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(840, 537)
+        Me.Panel5.Size = New System.Drawing.Size(840, 551)
         Me.Panel5.TabIndex = 64
         '
         'FlowLayoutPanel1
         '
         Me.FlowLayoutPanel1.AutoScroll = True
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 32)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 40)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(544, 505)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(544, 511)
         Me.FlowLayoutPanel1.TabIndex = 2
         '
         'Panel6
         '
         Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Panel6.Controls.Add(Me.Label8)
+        Me.Panel6.Controls.Add(Me.ComboBox_Theme)
         Me.Panel6.Controls.Add(Me.Button1)
-        Me.Panel6.Controls.Add(Me.Label_AssetCount)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel6.Location = New System.Drawing.Point(0, 0)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(840, 32)
+        Me.Panel6.Size = New System.Drawing.Size(840, 40)
         Me.Panel6.TabIndex = 103
         '
         'Button1
@@ -481,22 +482,10 @@ Partial Class Form_Nature
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.Location = New System.Drawing.Point(0, 0)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(32, 32)
+        Me.Button1.Size = New System.Drawing.Size(40, 40)
         Me.Button1.TabIndex = 96
         Me.Button1.Text = "☰"
         Me.Button1.UseVisualStyleBackColor = False
-        '
-        'Label_AssetCount
-        '
-        Me.Label_AssetCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
-        Me.Label_AssetCount.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_AssetCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_AssetCount.Location = New System.Drawing.Point(0, 0)
-        Me.Label_AssetCount.Name = "Label_AssetCount"
-        Me.Label_AssetCount.Size = New System.Drawing.Size(840, 32)
-        Me.Label_AssetCount.TabIndex = 101
-        Me.Label_AssetCount.Text = "0 Nature Objects"
-        Me.Label_AssetCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ContextMenuStrip3
         '
@@ -611,7 +600,6 @@ Partial Class Form_Nature
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents Panel6 As Panel
     Friend WithEvents Button1 As Button
-    Friend WithEvents Label_AssetCount As Label
     Friend WithEvents ContextMenuStrip3 As ContextMenuStrip
     Friend WithEvents Small_ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Medium_ToolStripMenuItem As ToolStripMenuItem

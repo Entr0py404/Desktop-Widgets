@@ -103,7 +103,7 @@ Partial Class Form_Menu
         Me.ComboBox1.Items.AddRange(New Object() {"All Pets", "Ground Pets", "Flying Pets", "Nature Objects", "Desktop Objects"})
         Me.ComboBox1.Location = New System.Drawing.Point(0, 0)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(136, 26)
+        Me.ComboBox1.Size = New System.Drawing.Size(144, 26)
         Me.ComboBox1.TabIndex = 66
         '
         'Button_CloseSelected
@@ -114,11 +114,11 @@ Partial Class Form_Menu
         Me.Button_CloseSelected.FlatAppearance.BorderSize = 0
         Me.Button_CloseSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_CloseSelected.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_CloseSelected.Location = New System.Drawing.Point(136, 0)
+        Me.Button_CloseSelected.Location = New System.Drawing.Point(144, 0)
         Me.Button_CloseSelected.Name = "Button_CloseSelected"
-        Me.Button_CloseSelected.Size = New System.Drawing.Size(80, 26)
+        Me.Button_CloseSelected.Size = New System.Drawing.Size(96, 26)
         Me.Button_CloseSelected.TabIndex = 68
-        Me.Button_CloseSelected.Text = "Close"
+        Me.Button_CloseSelected.Text = "Close All"
         Me.Button_CloseSelected.UseVisualStyleBackColor = False
         '
         'NotifyIcon1
@@ -211,7 +211,7 @@ Partial Class Form_Menu
         '
         Me.CheckBox1.Dock = System.Windows.Forms.DockStyle.Left
         Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(216, 0)
+        Me.CheckBox1.Location = New System.Drawing.Point(240, 0)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.CheckBox1.Size = New System.Drawing.Size(120, 26)
