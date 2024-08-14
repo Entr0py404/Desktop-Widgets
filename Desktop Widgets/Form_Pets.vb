@@ -14,15 +14,19 @@ Public Class Form_Pets
         LoadGroundPets("Pets\Ground\" & ComboBox_GroundPetObjects.Text)
 
         ComboBox_Display.BeginUpdate()
-        For Each displays In Screen.AllScreens
-            ComboBox_Display.Items.Add(displays.DeviceName.Replace("\\.\", ""))
+        For Each Display As Display In Display.GetDisplays()
+            If Display.IsGDIPrimary Then
+                ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
+                ComboBox_Display.SelectedIndex = ComboBox_Display.Items.Count - 1
+            Else
+                ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName)
+            End If
         Next
 
         If ComboBox_Display.Items.Count >= 2 Then
-            ComboBox_Display.Items.Add("ALL")
+            ComboBox_Display.Items.Add("All")
         End If
         ComboBox_Display.EndUpdate()
-        ComboBox_Display.SelectedIndex = 0
     End Sub
     ' LoadPetsDirs()
     Private Sub LoadPetsDirs(Pet_Path As String, Artist_ComboBox As ComboBox)
@@ -126,15 +130,20 @@ Public Class Form_Pets
     End Sub
     ' DisplaySettingsChanged
     Public Sub DisplaySettingsChanged(ByVal sender As Object, ByVal e As EventArgs)
-        If Not ComboBox_Display.Items.Count = Screen.AllScreens.Count Then
+        If Not ComboBox_Display.Items.Count = Screen.AllScreens.Count Then ' Fix this because of All item!
             ComboBox_Display.Items.Clear()
             ComboBox_Display.BeginUpdate()
-            For Each Displays In Screen.AllScreens
-                ComboBox_Display.Items.Add(Displays.DeviceName.Replace("\\.\", ""))
+            For Each Display As Display In Display.GetDisplays()
+                If Display.IsGDIPrimary Then
+                    ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
+                    ComboBox_Display.SelectedIndex = ComboBox_Display.Items.Count - 1
+                Else
+                    ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName)
+                End If
             Next
 
             If ComboBox_Display.Items.Count >= 2 Then
-                ComboBox_Display.Items.Add("ALL")
+                ComboBox_Display.Items.Add("All")
             End If
             ComboBox_Display.EndUpdate()
         End If

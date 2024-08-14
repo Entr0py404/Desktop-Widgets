@@ -1,7 +1,6 @@
 ﻿
 Public Class Form_Nature
     Dim randNum As New Random
-    Dim MYDisplay As Display
     Dim AssetPanel_Size As Integer = 98
 
     Dim Flowers_Min As Integer = 6
@@ -25,14 +24,11 @@ Public Class Form_Nature
             If Display.IsGDIPrimary Then
                 ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
                 ComboBox_Display.SelectedIndex = ComboBox_Display.Items.Count - 1
-                'Console.WriteLine(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
             Else
                 ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName)
-                'Console.WriteLine(Display.ToPathDisplayTarget.FriendlyName)
             End If
         Next
         ComboBox_Display.EndUpdate()
-        'Console.WriteLine()
 
         If Not Directory.Exists(Application.StartupPath & "\Nature\All") Then
             Directory.CreateDirectory(Application.StartupPath & "\Nature\All")
@@ -236,7 +232,7 @@ Public Class Form_Nature
                 Form_Menu.IDCounter_NatureObject += 1
                 Form_Menu.FormList_NatureObject.Add(Form_Menu.IDCounter_NatureObject.ToString, NatureObject)
                 NatureObject.UniqueSessionID = Form_Menu.IDCounter_NatureObject.ToString
-                Form_Menu.FormList_NatureObject(Form_Menu.IDCounter_NatureObject.ToString).Show() 'NatureObject.Show()
+                Form_Menu.FormList_NatureObject(Form_Menu.IDCounter_NatureObject.ToString).Show() ' NatureObject.Show()
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
             End Try

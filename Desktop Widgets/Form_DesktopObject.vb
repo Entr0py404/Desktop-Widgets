@@ -1,5 +1,4 @@
-﻿'Imports System.ComponentModel
-
+﻿
 Public Class Form_DesktopObject
     Public UniqueSessionID As String
     Public ObjectImage As Image
@@ -8,11 +7,10 @@ Public Class Form_DesktopObject
     Dim StaticImage As Bitmap
     Dim FormLoadLock As Boolean = True
     Dim MYScreen As Screen
-    Dim MYDisplay As Display
     Dim Rand As New Random
     Dim BlockEvent_DisplayComboBox As Boolean = False
 
-    'Form_DesktopObject - Load
+    ' Form_DesktopObject - Load
     Private Sub Form_DesktopObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FrameDimension = New Imaging.FrameDimension(PixelBox1.Image.FrameDimensionsList()(0))
 
@@ -43,9 +41,11 @@ Public Class Form_DesktopObject
         ScaleToolStripComboBox.SelectedIndex = CInt(Form_DesktopObjects.NumericUpDown_ObjectScale.Value) - 1
         AllScaleToolStripComboBox.SelectedIndex = CInt(Form_DesktopObjects.NumericUpDown_ObjectScale.Value) - 1
 
+        Me.Location = New Point(Rand.Next(MYScreen.WorkingArea.Left, MYScreen.WorkingArea.Right - Me.Width), MYScreen.WorkingArea.Bottom - Me.Height)
+
         FormLoadLock = False
     End Sub
-    'ScaleObject()
+    ' ScaleObject()
     Public Sub ScaleObject(val As Integer)
         Me.Width = ObjectImage.Width * val
         Me.Height = ObjectImage.Height * val
@@ -54,7 +54,7 @@ Public Class Form_DesktopObject
             Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
         End If
     End Sub
-    'PixelBox1 - MouseDown
+    ' PixelBox1 - MouseDown
     Private Sub PixelBox_Pet_MouseDown(sender As Object, e As MouseEventArgs) Handles PixelBox1.MouseDown
         If e.Button = Windows.Forms.MouseButtons.Left Then
             Dragging = True
@@ -65,10 +65,9 @@ Public Class Form_DesktopObject
             Me.DefWndProc(msg)
 
             BlockEvent_DisplayComboBox = True
-            Dim TempScreen As Screen = MYScreen
             For Each Displays As Display In Display.GetDisplays()
                 If Me.Location.X >= Displays.GetScreen.Bounds.Left And Me.Location.X <= Displays.GetScreen.Bounds.Right Then
-                    TempScreen = Displays.GetScreen
+                    MYScreen = Displays.GetScreen
                     If Displays.IsGDIPrimary Then
                         DisplayToolStripComboBox.Text = Displays.ToPathDisplayTarget.FriendlyName & " (Primary)"
                     Else
@@ -77,7 +76,6 @@ Public Class Form_DesktopObject
                 End If
             Next
             BlockEvent_DisplayComboBox = False
-            MYScreen = TempScreen
 
             If SnapToBarToolStripMenuItem.Checked Then
                 Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
@@ -86,27 +84,27 @@ Public Class Form_DesktopObject
             Dragging = False
         End If
     End Sub
-    'ScaleToolStripComboBox - SelectedIndexChanged
+    ' ScaleToolStripComboBox - SelectedIndexChanged
     Private Sub ScaleToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ScaleToolStripComboBox.SelectedIndexChanged
         If Not ScaleToolStripComboBox.SelectedIndex = -1 Then
             ScaleObject(ScaleToolStripComboBox.SelectedIndex + 1)
         End If
     End Sub
-    'CloseToolStripMenuItem - Click
+    ' CloseToolStripMenuItem - Click
     Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
         Me.Close()
     End Sub
-    'AlwaysOnTopToolStripMenuItem - Click
+    ' AlwaysOnTopToolStripMenuItem - Click
     Private Sub AlwaysOnTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlwaysOnTopToolStripMenuItem.Click
         Me.TopMost = AlwaysOnTopToolStripMenuItem.Checked
     End Sub
-    'SnapToBarToolStripMenuItem - Click
+    ' SnapToBarToolStripMenuItem - Click
     Private Sub SnapToBarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SnapToBarToolStripMenuItem.Click
         If SnapToBarToolStripMenuItem.Checked Then
             Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
         End If
     End Sub
-    'PauseAnimationToolStripMenuItem - Click
+    ' PauseAnimationToolStripMenuItem - Click
     Private Sub PauseAnimationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StopAnimationToolStripMenuItem.Click
         If StopAnimationToolStripMenuItem.Text = "Stop animation" Then
             StopAnimationToolStripMenuItem.Text = "Resume animation"
@@ -118,18 +116,18 @@ Public Class Form_DesktopObject
             PixelBox1.Invalidate()
         End If
     End Sub
-    'Form_DesktopObject - Closing
+    ' Form_DesktopObject - Closing
     Private Sub Form_DesktopObject_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Me.Closing
         Form_Menu.FormList_DesktopObject.Remove(UniqueSessionID)
     End Sub
-    'AllAlwaysOnTopToolStripMenuItem - Click
+    ' AllAlwaysOnTopToolStripMenuItem - Click
     Private Sub AllAlwaysOnTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AllAlwaysOnTopToolStripMenuItem.Click
         For Each item In Form_Menu.FormList_DesktopObject.Keys
             Form_Menu.FormList_DesktopObject(item).AlwaysOnTopToolStripMenuItem.Checked = AllAlwaysOnTopToolStripMenuItem.Checked
             Form_Menu.FormList_DesktopObject(item).TopMost = AllAlwaysOnTopToolStripMenuItem.Checked
         Next
     End Sub
-    'AllScaleToolStripComboBox - SelectedIndexChanged
+    ' AllScaleToolStripComboBox - SelectedIndexChanged
     Private Sub AllScaleToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AllScaleToolStripComboBox.SelectedIndexChanged
         If Not AllScaleToolStripComboBox.SelectedIndex = -1 And FormLoadLock = False Then
             For Each item In Form_Menu.FormList_DesktopObject.Keys
@@ -138,13 +136,12 @@ Public Class Form_DesktopObject
             Next
         End If
     End Sub
-    'DisplayToolStripComboBox - SelectedIndexChanged
+    ' DisplayToolStripComboBox - SelectedIndexChanged
     Private Sub DisplayToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayToolStripComboBox.SelectedIndexChanged
         If BlockEvent_DisplayComboBox = False Then
             If Not DisplayToolStripComboBox.SelectedIndex = -1 And FormLoadLock = False Then
-                Dim MyDisplay As WindowsDisplayAPI.Display = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex)
-                MYScreen = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
-                Me.Location = New Point(Rand.Next(MyDisplay.GetScreen.WorkingArea.Left, MyDisplay.GetScreen.WorkingArea.Right - Me.Width), MyDisplay.GetScreen.WorkingArea.Bottom - Me.Height)
+                MYScreen = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex).GetScreen
+                Me.Location = New Point(Rand.Next(MYScreen.WorkingArea.Left, MYScreen.WorkingArea.Right - Me.Width), MYScreen.WorkingArea.Bottom - Me.Height)
             End If
         End If
     End Sub

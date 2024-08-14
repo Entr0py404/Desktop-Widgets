@@ -59,7 +59,7 @@ Partial Class Form_DesktopObjects
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(737, 449)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(496, 449)
         Me.FlowLayoutPanel1.TabIndex = 1
         '
         'Panel_Top
@@ -216,8 +216,8 @@ Partial Class Form_DesktopObjects
         '
         'Panel_Main
         '
-        Me.Panel_Main.Controls.Add(Me.Panel_Side)
         Me.Panel_Main.Controls.Add(Me.FlowLayoutPanel1)
+        Me.Panel_Main.Controls.Add(Me.Panel_Side)
         Me.Panel_Main.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel_Main.Location = New System.Drawing.Point(0, 40)
         Me.Panel_Main.Name = "Panel_Main"

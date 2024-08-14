@@ -1,8 +1,7 @@
 ﻿
-
 Public Class Form_FlyingPet
     Dim R As Integer = 0
-    Dim Display As Screen = Screen.PrimaryScreen
+    Dim MYScreen As Screen
     Dim BlockEvent_DisplayComboBox As Boolean = False
     Dim Rand As New Random
     Dim FormLoadLock As Boolean = True
@@ -33,7 +32,7 @@ Public Class Form_FlyingPet
     Public Animation_IdlingAlt_Left As Image
     Public Animation_IdlingAlt_Right As Image
 
-    'Behavior settings
+    ' Behavior settings
     Dim DefaultScale As Integer = 1
     Dim FollowCursor_StoppingDistance_Px As Integer = 6
 
@@ -132,15 +131,20 @@ Public Class Form_FlyingPet
         End If
 
         DisplayToolStripComboBox.BeginUpdate()
-        For Each Display In Screen.AllScreens
-            DisplayToolStripComboBox.Items.Add(Display.DeviceName.Replace("\\.\", ""))
+        For Each Display As Display In Display.GetDisplays()
+            If Display.IsGDIPrimary Then
+                DisplayToolStripComboBox.Items.Add(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
+                DisplayToolStripComboBox.SelectedIndex = DisplayToolStripComboBox.Items.Count - 1
+            Else
+                DisplayToolStripComboBox.Items.Add(Display.ToPathDisplayTarget.FriendlyName)
+            End If
         Next
 
         If DisplayToolStripComboBox.Items.Count >= 2 Then
-            DisplayToolStripComboBox.Items.Add("ALL")
+            DisplayToolStripComboBox.Items.Add("All")
         End If
-
         DisplayToolStripComboBox.EndUpdate()
+
         DisplayToolStripComboBox.SelectedIndex = Form_Pets.ComboBox_Display.SelectedIndex
 
         FollowCursorToolStripMenuItem.Checked = Form_Pets.CheckBox_FollowCursor.Checked
@@ -326,7 +330,7 @@ Public Class Form_FlyingPet
                 If FollowCursor = False Then
                     If MoveLeft = True Then
                         'If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
-                        Me.Location = New Point(Me.Location.X - 1, Display.WorkingArea.Bottom - Me.Height)
+                        Me.Location = New Point(Me.Location.X - 1, MYScreen.WorkingArea.Bottom - Me.Height)
 
                         If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
                             PixelBox_Pet.Image = Animation_Walking_Left
@@ -336,7 +340,7 @@ Public Class Form_FlyingPet
                         'End If
                     Else
                         'If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
-                        Me.Location = New Point(Me.Location.X + 1, Display.WorkingArea.Bottom - Me.Height)
+                        Me.Location = New Point(Me.Location.X + 1, MYScreen.WorkingArea.Bottom - Me.Height)
 
                         If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
                             PixelBox_Pet.Image = Animation_Walking_Right
@@ -347,17 +351,17 @@ Public Class Form_FlyingPet
                     End If
                 Else
 
-                    If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
+                    If Me.Location.Y = MYScreen.WorkingArea.Bottom - Me.Height Then
                         If Me.Location.X > MousePosition.X + FollowCursor_StoppingDistance_Px Then
                             MoveLeft = False
-                            Me.Location = New Point(Me.Location.X - 1, Display.WorkingArea.Bottom - Me.Height)
+                            Me.Location = New Point(Me.Location.X - 1, MYScreen.WorkingArea.Bottom - Me.Height)
                             If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
                                 PixelBox_Pet.Image = Animation_Walking_Left
                                 Console.WriteLine("Animation_Walking_Left")
                             End If
                         ElseIf Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StoppingDistance_Px Then
                             MoveLeft = True
-                            Me.Location = New Point(Me.Location.X + 1, Display.WorkingArea.Bottom - Me.Height)
+                            Me.Location = New Point(Me.Location.X + 1, MYScreen.WorkingArea.Bottom - Me.Height)
                             If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
                                 PixelBox_Pet.Image = Animation_Walking_Right
                                 Console.WriteLine("Animation_Walking_Right")
@@ -475,41 +479,41 @@ Public Class Form_FlyingPet
         If Dragging = False And FormLoadLock = False Then
 
             'RIGHT & Left
-            If Me.Location.X > Display.WorkingArea.Right - Me.Width / 2 Then
+            If Me.Location.X > MYScreen.WorkingArea.Right - Me.Width / 2 Then
                 If Rand.Next(0, 100 + 1) <= ScreenWarpingDecision Then
-                    If Not DisplayToolStripComboBox.SelectedItem.ToString = "ALL" Then
-                        Me.Location = New Point(Display.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'WARP
+                    If Not DisplayToolStripComboBox.SelectedItem.ToString = "All" Then
+                        Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'WARP
                     Else
 
-                        Dim TempDisplay_LOW As Screen = Display
-                        Dim TempDisplay_Right As Screen = Display
+                        Dim TempDisplay_LOW As Screen = MYScreen
+                        Dim TempDisplay_Right As Screen = MYScreen
                         Dim HasScreenOnRight As Boolean = False
                         Dim location As Double = Me.Location.X + Me.Width / 2
 
                         'SET TO SCREEN WITH LOWEST X
-                        For Each Displays As Screen In Screen.AllScreens
+                        For Each Displays As Display In Display.GetDisplays()
 
-                            If Not Displays.Bounds = Display.Bounds Then
-                                If location >= Displays.Bounds.Left And location <= Displays.Bounds.Right Then
-                                    TempDisplay_Right = Displays
+                            If Not Displays.GetScreen.Bounds = MYScreen.Bounds Then
+                                If location >= Displays.GetScreen.Bounds.Left And location <= Displays.GetScreen.Bounds.Right Then
+                                    TempDisplay_Right = Displays.GetScreen
                                     HasScreenOnRight = True
                                 End If
                             End If
 
-                            If Displays.Bounds.X < Display.Bounds.X Then
-                                TempDisplay_LOW = Displays
+                            If Displays.GetScreen.Bounds.X < MYScreen.Bounds.X Then
+                                TempDisplay_LOW = Displays.GetScreen
                             End If
 
                         Next
 
                         If HasScreenOnRight Then
-                            Display = TempDisplay_Right
-                            Me.Location = New Point(Display.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'Travel
+                            MYScreen = TempDisplay_Right
+                            Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'Travel
                             Console.WriteLine("HasScreenOnRight")
                             Console.WriteLine("Travel")
                         Else
-                            Display = TempDisplay_LOW
-                            Me.Location = New Point(Display.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'WARP
+                            MYScreen = TempDisplay_LOW
+                            Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'WARP
                             Console.WriteLine("NOScreenOnRight")
                             Console.WriteLine("WARP")
                         End If
@@ -519,42 +523,42 @@ Public Class Form_FlyingPet
                     MoveLeft = True 'TURNAROUND
                 End If
                 Console.WriteLine("OVER RIGHT")
-            ElseIf Me.Location.X < Display.WorkingArea.Left - Me.Width / 2 Then 'LEFT
+            ElseIf Me.Location.X < MYScreen.WorkingArea.Left - Me.Width / 2 Then 'LEFT
                 If Rand.Next(0, 100 + 1) <= ScreenWarpingDecision Then
-                    If Not DisplayToolStripComboBox.SelectedItem.ToString = "ALL" Then
-                        Me.Location = New Point(Display.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'WARP
+                    If Not DisplayToolStripComboBox.SelectedItem.ToString = "All" Then
+                        Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'WARP
                     Else
 
-                        Dim TempDisplay_HIGH As Screen = Display
-                        Dim TempDisplay_Left As Screen = Display
+                        Dim TempDisplay_HIGH As Screen = MYScreen
+                        Dim TempDisplay_Left As Screen = MYScreen
                         Dim HasScreenOnLeft As Boolean = False
                         Dim location As Double = Me.Location.X + Me.Width / 2
 
                         'SET TO SCREEN WITH HIGHEST X
-                        For Each Displays As Screen In Screen.AllScreens
+                        For Each Displays As Display In Display.GetDisplays()
 
-                            If Not Displays.Bounds = Display.Bounds Then
-                                If location >= Displays.Bounds.Left And location <= Displays.Bounds.Right Then
-                                    TempDisplay_Left = Displays
+                            If Not Displays.GetScreen.Bounds = MYScreen.Bounds Then
+                                If location >= Displays.GetScreen.Bounds.Left And location <= Displays.GetScreen.Bounds.Right Then
+                                    TempDisplay_Left = Displays.GetScreen
                                     HasScreenOnLeft = True
                                 End If
                             End If
 
-                            If Displays.Bounds.X > Display.Bounds.X Then
-                                TempDisplay_HIGH = Displays
+                            If Displays.GetScreen.Bounds.X > MYScreen.Bounds.X Then
+                                TempDisplay_HIGH = Displays.GetScreen
                             End If
 
                         Next
 
                         If HasScreenOnLeft Then
-                            Display = TempDisplay_Left
-                            Me.Location = New Point(Display.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'Travel
+                            MYScreen = TempDisplay_Left
+                            Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'Travel
                             Console.WriteLine("HasScreenOnLeft")
                             Console.WriteLine("Travel")
 
                         Else
-                            Display = TempDisplay_HIGH
-                            Me.Location = New Point(Display.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'WARP
+                            MYScreen = TempDisplay_HIGH
+                            Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'WARP
                             Console.WriteLine("NOScreenOnLeft")
                             Console.WriteLine("WARP")
                         End If
@@ -569,12 +573,8 @@ Public Class Form_FlyingPet
 
 
 
-
-
-
-
             'OVER DOWN No Wrap
-            If Me.Location.Y > Display.WorkingArea.Height - Me.Height Then
+            If Me.Location.Y > MYScreen.WorkingArea.Height - Me.Height Then
 
                 If HasAnimation_Walking = True Or HasAnimation_Idling = True Then
                     If Rand.Next(0, 100 + 1) <= LandingDecision Then
@@ -583,7 +583,7 @@ Public Class Form_FlyingPet
                         Timer_ChangeModesDecision.Enabled = True
                         Timer_Flying.Enabled = False
 
-                        Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
+                        Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
 
                         If HasAnimation_Idling = True Then
                             Timer_IdleDecision.Enabled = True
@@ -688,27 +688,29 @@ Public Class Form_FlyingPet
             Dragging = True
             PixelBox_Pet.Capture = False
             Const WM_NCLBUTTONDOWN As Integer = &HA1S
-            'Const WM_NCRBUTTONDOWN As Integer = &HA4S
             Const HTCAPTION As Integer = 2
             Dim msg As Message = Message.Create(Me.Handle, WM_NCLBUTTONDOWN, New IntPtr(HTCAPTION), IntPtr.Zero)
             Me.DefWndProc(msg)
             Dragging = False
 
-            Dim TempDisplay As Screen = Display
-            For Each Displays As Screen In Screen.AllScreens
-                If Me.Location.X >= Displays.Bounds.Left And Me.Location.X <= Displays.Bounds.Right Then
-                    TempDisplay = Displays
+            BlockEvent_DisplayComboBox = True
+            For Each Displays As Display In Display.GetDisplays()
+                If Me.Location.X >= Displays.GetScreen.Bounds.Left And Me.Location.X <= Displays.GetScreen.Bounds.Right Then
+                    MYScreen = Displays.GetScreen
+                    Console.WriteLine("PixelBox_Pet - MouseDown, MYScreen = Displays.GetScreen")
+
+                    If Not DisplayToolStripComboBox.Text = "All" Then
+                        If Displays.IsGDIPrimary Then
+                            DisplayToolStripComboBox.Text = Displays.ToPathDisplayTarget.FriendlyName & " (Primary)"
+                        Else
+                            DisplayToolStripComboBox.Text = Displays.ToPathDisplayTarget.FriendlyName
+                        End If
+                    End If
+
                 End If
+
             Next
-
-            Display = TempDisplay
-
-            If Not DisplayToolStripComboBox.Text = "ALL" Then
-                BlockEvent_DisplayComboBox = True
-                DisplayToolStripComboBox.Text = Display.DeviceName.Replace("\\.\", "")
-                BlockEvent_DisplayComboBox = False
-            End If
-
+            BlockEvent_DisplayComboBox = False
 
             If Ground_Mode = True Then
                 Flying_Mode = True
@@ -721,7 +723,6 @@ Public Class Form_FlyingPet
                 Console.WriteLine("Flying_Mode")
             End If
 
-            Console.WriteLine("PixelBox_Pet_MouseDown")
         End If
     End Sub
 
@@ -765,53 +766,44 @@ Public Class Form_FlyingPet
     ' DisplayToolStripComboBox - SelectedIndexChanged
     Private Sub DisplayToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayToolStripComboBox.SelectedIndexChanged
         If BlockEvent_DisplayComboBox = False Then
-            If Not DisplayToolStripComboBox.SelectedIndex = -1 And Not DisplayToolStripComboBox.SelectedItem.ToString = "ALL" Then
-                Display = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
-                Me.Location = New Point(Rand.Next(Display.WorkingArea.Left, Display.WorkingArea.Right - Me.Width), Rand.Next(Display.WorkingArea.Top, Display.WorkingArea.Bottom - Me.Height))
-                Console.WriteLine("DisplayToolStripComboBox - SelectedIndexChanged")
+            If Not DisplayToolStripComboBox.SelectedIndex = -1 And Not DisplayToolStripComboBox.SelectedItem.ToString = "All" Then
+                MYScreen = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex).GetScreen
+                Me.Location = New Point(Rand.Next(MYScreen.WorkingArea.Left, MYScreen.WorkingArea.Right - Me.Width), Rand.Next(MYScreen.WorkingArea.Top, MYScreen.WorkingArea.Bottom - Me.Height))
+                'Console.WriteLine("DisplayToolStripComboBox - SelectedIndexChanged")
             End If
         End If
     End Sub
 
     'DisplaySettingsChanged
     Public Sub DisplaySettingsChanged(ByVal sender As Object, ByVal e As EventArgs)
-        Console.WriteLine("HERE!: DisplaySettingsChanging()")
-        'Console.WriteLine("HERE!: " & DisplayToolStripComboBox.Items.Count)
-        'Console.WriteLine("HERE!: " & Screen.AllScreens.Count)
         Dim OldSelectedIndex As Integer = 0
         If Not DisplayToolStripComboBox.SelectedIndex = -1 Then
             OldSelectedIndex = DisplayToolStripComboBox.SelectedIndex
         End If
 
-        If Not DisplayToolStripComboBox.Items.Count = Screen.AllScreens.Count Then
+        If Not DisplayToolStripComboBox.Items.Count = Screen.AllScreens.Count Then ' Fix this because of All item!
             DisplayToolStripComboBox.Items.Clear()
             DisplayToolStripComboBox.BeginUpdate()
-            For Each Displays In Screen.AllScreens
-                DisplayToolStripComboBox.Items.Add(Displays.DeviceName.Replace("\\.\", ""))
-            Next
 
             If DisplayToolStripComboBox.Items.Count >= 2 Then
-                DisplayToolStripComboBox.Items.Add("ALL")
+                DisplayToolStripComboBox.Items.Add("All")
             End If
             DisplayToolStripComboBox.EndUpdate()
 
             If DisplayToolStripComboBox.Items.Count > 0 Then
                 If DisplayToolStripComboBox.Items.Count >= OldSelectedIndex Then
                     DisplayToolStripComboBox.SelectedIndex = OldSelectedIndex
-                    Display = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
-                    Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
-                    'Console.WriteLine("HERE! 1")
+                    MYScreen = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex).GetScreen
+                    Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
                 Else
                     DisplayToolStripComboBox.SelectedIndex = 0
-                    Display = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
-                    Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
-                    'Console.WriteLine("HERE! 2")
+                    MYScreen = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex).GetScreen
+                    Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
                 End If
             End If
         Else
-            Display = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
-            Me.Location = New Point(Me.Location.X, Display.WorkingArea.Bottom - Me.Height)
-            'Console.WriteLine("HERE! 3")
+            MYScreen = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex).GetScreen
+            Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
         End If
     End Sub
 End Class

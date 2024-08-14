@@ -10,14 +10,11 @@ Public Class Form_DesktopObjects
             If Display.IsGDIPrimary Then
                 ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
                 ComboBox_Display.SelectedIndex = ComboBox_Display.Items.Count - 1
-                'Console.WriteLine(Display.ToPathDisplayTarget.FriendlyName & " (Primary)")
             Else
                 ComboBox_Display.Items.Add(Display.ToPathDisplayTarget.FriendlyName)
-                'Console.WriteLine(Display.ToPathDisplayTarget.FriendlyName)
             End If
         Next
         ComboBox_Display.EndUpdate()
-        'Console.WriteLine()
 
         If Directory.Exists(Application.StartupPath & "\Objects\") Then
             LoadDesktopObjects(Application.StartupPath & "\Objects\")

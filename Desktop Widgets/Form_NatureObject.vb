@@ -4,8 +4,7 @@ Public Class Form_NatureObject
     Public ObjectImage As Image
     Public isMainGrass As Boolean = False
     Dim FormLoadLock As Boolean = True
-    Public MYScreen As Screen
-    Public MYDisplay As Display
+    Dim MYScreen As Screen
     Dim Rand As New Random
     Dim BlockEvent_DisplayComboBox As Boolean = False
     Public DefaultScale As Integer = 1
@@ -28,20 +27,6 @@ Public Class Form_NatureObject
         Next
         DisplayToolStripComboBox.EndUpdate()
         DisplayToolStripComboBox.SelectedIndex = Form_Nature.ComboBox_Display.SelectedIndex
-        'DisplayToolStripComboBox.SelectedItem = Form_Nature.ComboBox_Display.SelectedItem
-
-        'MYScreen = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
-        'MyDisplay = MYDisplay_Test.GetScreen().AllScreens(Form_Nature.ComboBox_Display.SelectedIndex)
-
-        'For Each target In PathDisplayTarget.GetDisplayTargets()
-        'DisplayToolStripComboBox.Items.Add(target.FriendlyName & " - " & target.ToDisplayDevice.DisplayName.Replace("\\.\", ""))
-        'Next
-
-        'For Each Display In Screen.AllScreens
-        'DisplayToolStripComboBox.Items.Add(Display.DeviceName.Replace("\\.\", ""))
-        'Next
-
-        'DisplayToolStripComboBox.SelectedIndex = Form_Nature.ComboBox_Display.SelectedIndex
 
         If isMainGrass = False Then
             ScaleToolStripComboBox.SelectedIndex = CInt(Form_Nature.NumericUpDown_ObjectScale.Value) - 1
@@ -49,11 +34,10 @@ Public Class Form_NatureObject
         Else
             'Me.Width = Screen.PrimaryScreen.WorkingArea.Width
             'Me.Height = ObjectImage.Height
-            'Me.Location = New Point(Display.WorkingArea.Left, Display.WorkingArea.Bottom - Me.Height)
+            'Me.Location = New Point(MYScreen.WorkingArea.Left, MYScreen.WorkingArea.Bottom - Me.Height)
         End If
 
-        Dim MyDisplay As WindowsDisplayAPI.Display = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex)
-        Me.Location = New Point(Rand.Next(MyDisplay.GetScreen.WorkingArea.Left, MyDisplay.GetScreen.WorkingArea.Right - Me.Width), MyDisplay.GetScreen.WorkingArea.Bottom - Me.Height)
+        Me.Location = New Point(Rand.Next(MYScreen.WorkingArea.Left, MYScreen.WorkingArea.Right - Me.Width), MYScreen.WorkingArea.Bottom - Me.Height)
 
         FormLoadLock = False
     End Sub
@@ -75,10 +59,9 @@ Public Class Form_NatureObject
                 Me.DefWndProc(msg)
 
                 BlockEvent_DisplayComboBox = True
-                Dim TempScreen As Screen = MYScreen
                 For Each Displays As Display In Display.GetDisplays()
                     If Me.Location.X >= Displays.GetScreen.Bounds.Left And Me.Location.X <= Displays.GetScreen.Bounds.Right Then
-                        TempScreen = Displays.GetScreen
+                        MYScreen = Displays.GetScreen
                         If Displays.IsGDIPrimary Then
                             DisplayToolStripComboBox.Text = Displays.ToPathDisplayTarget.FriendlyName & " (Primary)"
                         Else
@@ -87,7 +70,6 @@ Public Class Form_NatureObject
                     End If
                 Next
                 BlockEvent_DisplayComboBox = False
-                MYScreen = TempScreen
 
                 Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
             End If
@@ -130,9 +112,8 @@ Public Class Form_NatureObject
     Private Sub DisplayToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayToolStripComboBox.SelectedIndexChanged
         If BlockEvent_DisplayComboBox = False Then
             If Not DisplayToolStripComboBox.SelectedIndex = -1 And FormLoadLock = False Then
-                Dim MyDisplay As WindowsDisplayAPI.Display = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex)
-                MYScreen = Screen.AllScreens(DisplayToolStripComboBox.SelectedIndex)
-                Me.Location = New Point(Rand.Next(MyDisplay.GetScreen.WorkingArea.Left, MyDisplay.GetScreen.WorkingArea.Right - Me.Width), MyDisplay.GetScreen.WorkingArea.Bottom - Me.Height)
+                MYScreen = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex).GetScreen
+                Me.Location = New Point(Rand.Next(MYScreen.WorkingArea.Left, MYScreen.WorkingArea.Right - Me.Width), MYScreen.WorkingArea.Bottom - Me.Height)
             End If
         End If
     End Sub
