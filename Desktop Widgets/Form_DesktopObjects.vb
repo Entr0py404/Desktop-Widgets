@@ -1,6 +1,7 @@
 ﻿
 Public Class Form_DesktopObjects
     Dim AssetPanel_Size As Integer = 98
+
     ' Form_DesktopObjects - Load
     Private Sub Form_DesktopObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip2.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
@@ -34,6 +35,7 @@ Public Class Form_DesktopObjects
         ComboBox_DesktopObjects.EndUpdate()
         ComboBox_DesktopObjects.SelectedIndex = 0
     End Sub
+
     ' LoadDesktopObjects()
     Private Sub LoadDesktopObjects(filepath As String)
         If Directory.Exists(filepath) Then
@@ -48,6 +50,7 @@ Public Class Form_DesktopObjects
             FlowLayoutPanel1.Visible = True
         End If
     End Sub
+
     ' Button_AllDesktopObjects - Click
     Private Sub Button_AllDesktopObjects_Click(sender As Object, e As EventArgs) Handles Button_AllDesktopObjects.Click
         Dim FormListArray As Array = Form_Menu.FormList_DesktopObject.Keys.ToArray
@@ -56,12 +59,14 @@ Public Class Form_DesktopObjects
         Next
         Form_Menu.FormList_DesktopObject.Clear()
     End Sub
+
     ' ReloadToolStripMenuItem - Click
     Private Sub ReloadToolStripMenuItem_Click(sender As Object, e As EventArgs)
         If Directory.Exists(Application.StartupPath & "\Objects\") Then
             LoadDesktopObjects(Application.StartupPath & "\Objects\")
         End If
     End Sub
+
     ' AssetPanel1 - Click
     Private Sub PixelBox1_MouseClick(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Left Then
@@ -81,6 +86,7 @@ Public Class Form_DesktopObjects
             End Try
         End If
     End Sub
+
     ' SafeImageFromFile()
     Public Shared Function SafeImageFromFile(path As String) As Image
         Dim bytes = File.ReadAllBytes(path)
@@ -89,6 +95,7 @@ Public Class Form_DesktopObjects
             Return img
         End Using
     End Function
+
     ' CreateNewPanel
     Private Sub CreateNewPanel(imagePath As String, assetObjectText As String)
         ' Panel
@@ -125,10 +132,12 @@ Public Class Form_DesktopObjects
 
         AddHandler AssetPixelBox.MouseClick, AddressOf PixelBox1_MouseClick
     End Sub
+
     ' Button1 - Click
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ContextMenuStrip2.Show(Button1, 4, 4)
     End Sub
+
     ' ResizePanels (sizeInt)
     Private Sub ResizePanels(sizeInt As Integer)
         AssetPanel_Size = sizeInt
@@ -142,36 +151,42 @@ Public Class Form_DesktopObjects
         FlowLayoutPanel1.Visible = True
         FlowLayoutPanel1.ResumeLayout()
     End Sub
+
     ' Small_ToolStripMenuItem - Click
     Private Sub Small_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Small_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Small_ToolStripMenuItem.Checked = True
         ResizePanels(98)
     End Sub
+
     ' Medium_ToolStripMenuItem - Click
     Private Sub Medium_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Medium_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Medium_ToolStripMenuItem.Checked = True
         ResizePanels(128)
     End Sub
+
     ' MediumLarge_ToolStripMenuItem - Click
     Private Sub MediumLarge_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MediumLarge_ToolStripMenuItem.Click
         UnCheckAllSizes()
         MediumLarge_ToolStripMenuItem.Checked = True
         ResizePanels(150)
     End Sub
+
     ' Large_ToolStripMenuItem - Click
     Private Sub Large_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Large_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Large_ToolStripMenuItem.Checked = True
         ResizePanels(182)
     End Sub
+
     ' ExtraLarge_ToolStripMenuItem - Click
     Private Sub ExtraLarge_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExtraLarge_ToolStripMenuItem.Click
         UnCheckAllSizes()
         ExtraLarge_ToolStripMenuItem.Checked = True
         ResizePanels(229)
     End Sub
+
     ' UnCheckAllSizes
     Private Sub UnCheckAllSizes()
         Small_ToolStripMenuItem.Checked = False
@@ -180,6 +195,7 @@ Public Class Form_DesktopObjects
         Large_ToolStripMenuItem.Checked = False
         ExtraLarge_ToolStripMenuItem.Checked = False
     End Sub
+
     ' ComboBox_DesktopObjects - SelectedIndexChanged
     Private Sub ComboBox_DesktopObjects_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_DesktopObjects.SelectedIndexChanged
         If Not ComboBox_DesktopObjects.SelectedIndex = -1 Then

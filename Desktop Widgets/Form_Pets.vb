@@ -3,6 +3,7 @@ Public Class Form_Pets
     Dim FlyingPetsCount As Integer = 0
     Dim GroundPetsCount As Integer = 0
     Dim AssetPanel_Size As Integer = 98
+
     ' Form_Pets - Load
     Private Sub Form_Pets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.SelectedIndex = 0
@@ -28,6 +29,7 @@ Public Class Form_Pets
         End If
         ComboBox_Display.EndUpdate()
     End Sub
+
     ' LoadPetsDirs()
     Private Sub LoadPetsDirs(Pet_Path As String, Artist_ComboBox As ComboBox)
         Artist_ComboBox.Items.Clear()
@@ -41,6 +43,7 @@ Public Class Form_Pets
         Artist_ComboBox.EndUpdate()
         Artist_ComboBox.SelectedIndex = 0
     End Sub
+
     ' LoadGroundPets()
     Private Sub LoadGroundPets(Pet_Path As String)
         If Directory.Exists(Pet_Path) Then
@@ -60,6 +63,7 @@ Public Class Form_Pets
             End If
         End If
     End Sub
+
     ' LoadFlyingPets()
     Private Sub LoadFlyingPets(Pet_Path As String)
         If Directory.Exists(Pet_Path) Then
@@ -80,6 +84,7 @@ Public Class Form_Pets
             End If
         End If
     End Sub
+
     ' Button_CloseSelected - Click
     Private Sub Button_CloseSelected_Click(sender As Object, e As EventArgs) Handles Button_CloseSelected.Click
         If ComboBox1.SelectedItem.ToString = "All Pets" Then
@@ -91,6 +96,7 @@ Public Class Form_Pets
             CloseAllWindowsByName("Form_FlyingPet")
         End If
     End Sub
+
     ' CloseAllWindowsbyName()
     Private Sub CloseAllWindowsByName(WindowName As String)
         Dim FormOpenCount As Integer = 0
@@ -105,6 +111,7 @@ Public Class Form_Pets
             My.Application.OpenForms.Item(WindowName).Close()
         Next
     End Sub
+
     ' GroundPetsToolStripMenuItem - Click
     Private Sub GroundPetsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GroundPetsToolStripMenuItem.Click
         FlowLayoutPanel1.Visible = True
@@ -114,6 +121,7 @@ Public Class Form_Pets
         ResetToolStripMenuItemBackGroundColors()
         GroundPetsToolStripMenuItem.BackColor = Color.RoyalBlue
     End Sub
+
     ' FlyingPetsToolStripMenuItem - Click
     Private Sub FlyingPetsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FlyingPetsToolStripMenuItem.Click
         FlowLayoutPanel1.Visible = False
@@ -123,11 +131,13 @@ Public Class Form_Pets
         ResetToolStripMenuItemBackGroundColors()
         FlyingPetsToolStripMenuItem.BackColor = Color.RoyalBlue
     End Sub
+
     ' ResetToolStripMenuItemBackGroundColors()
     Private Sub ResetToolStripMenuItemBackGroundColors()
         GroundPetsToolStripMenuItem.BackColor = Color.FromArgb(28, 30, 34)
         FlyingPetsToolStripMenuItem.BackColor = Color.FromArgb(28, 30, 34)
     End Sub
+
     ' DisplaySettingsChanged
     Public Sub DisplaySettingsChanged(ByVal sender As Object, ByVal e As EventArgs)
         If Not ComboBox_Display.Items.Count = Screen.AllScreens.Count Then ' Fix this because of All item!
@@ -148,6 +158,7 @@ Public Class Form_Pets
             ComboBox_Display.EndUpdate()
         End If
     End Sub
+
     ' AssetPanel1 - Click
     Private Sub PixelBox1_MouseClick(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Left Then
@@ -163,6 +174,7 @@ Public Class Form_Pets
             End Try
         End If
     End Sub
+
     ' AssetPanel2 - Click
     Private Sub PixelBox2_MouseClick(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Left Then
@@ -178,6 +190,7 @@ Public Class Form_Pets
             End Try
         End If
     End Sub
+
     ' SafeImageFromFile()
     Public Shared Function SafeImageFromFile(path As String) As Image
         Dim bytes = File.ReadAllBytes(path)
@@ -186,6 +199,7 @@ Public Class Form_Pets
             Return img
         End Using
     End Function
+
     ' CreateNewPanel
     Private Sub CreateNewPanel(flowLayout As FlowLayoutPanel, imagePath As String, assetObjectText As String)
         ' Panel
@@ -226,10 +240,12 @@ Public Class Form_Pets
             AddHandler AssetPixelBox.MouseClick, AddressOf PixelBox2_MouseClick
         End If
     End Sub
+
     ' Button1 - Click
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ContextMenuStrip2.Show(Button1, 4, 4)
     End Sub
+
     ' ResizePanels (sizeInt)
     Private Sub ResizePanels(sizeInt As Integer)
         'My.Settings.AssetPannelSize = sizeInt
@@ -258,36 +274,42 @@ Public Class Form_Pets
             FlowLayoutPanel2.Visible = True
         End If
     End Sub
+
     ' Small_ToolStripMenuItem - Click
     Private Sub Small_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Small_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Small_ToolStripMenuItem.Checked = True
         ResizePanels(98)
     End Sub
+
     ' Medium_ToolStripMenuItem - Click
     Private Sub Medium_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Medium_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Medium_ToolStripMenuItem.Checked = True
         ResizePanels(128)
     End Sub
+
     ' MediumLarge_ToolStripMenuItem - Click
     Private Sub MediumLarge_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MediumLarge_ToolStripMenuItem.Click
         UnCheckAllSizes()
         MediumLarge_ToolStripMenuItem.Checked = True
         ResizePanels(150)
     End Sub
+
     ' Large_ToolStripMenuItem - Click
     Private Sub Large_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Large_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Large_ToolStripMenuItem.Checked = True
         ResizePanels(182)
     End Sub
+
     ' ExtraLarge_ToolStripMenuItem - Click
     Private Sub ExtraLarge_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExtraLarge_ToolStripMenuItem.Click
         UnCheckAllSizes()
         ExtraLarge_ToolStripMenuItem.Checked = True
         ResizePanels(229)
     End Sub
+
     ' UnCheckAllSizes
     Private Sub UnCheckAllSizes()
         Small_ToolStripMenuItem.Checked = False
@@ -296,6 +318,7 @@ Public Class Form_Pets
         Large_ToolStripMenuItem.Checked = False
         ExtraLarge_ToolStripMenuItem.Checked = False
     End Sub
+
     ' ComboBox_GroundPetObjects - SelectedIndexChanged
     Private Sub ComboBox_GroundPetObjects_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_GroundPetObjects.SelectedIndexChanged
         If Not ComboBox_GroundPetObjects.SelectedItem.ToString = "All" Then
@@ -304,6 +327,7 @@ Public Class Form_Pets
             LoadGroundPets("Pets\Ground\")
         End If
     End Sub
+
     ' ComboBox_FlyingPetObjects - SelectedIndexChanged
     Private Sub ComboBox_FlyingPetObjects_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_FlyingPetObjects.SelectedIndexChanged
         If Not ComboBox_FlyingPetObjects.SelectedItem.ToString = "All" Then

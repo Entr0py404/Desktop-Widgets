@@ -8,6 +8,7 @@ Public Class Form_NatureObject
     Dim Rand As New Random
     Dim BlockEvent_DisplayComboBox As Boolean = False
     Public DefaultScale As Integer = 1
+
     ' Form_NatureObject - Load
     Private Sub Form_NatureObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
@@ -41,6 +42,7 @@ Public Class Form_NatureObject
 
         FormLoadLock = False
     End Sub
+
     ' ScaleObject()
     Public Sub ScaleObject(val As Integer)
         val = val + DefaultScale - 1
@@ -48,6 +50,7 @@ Public Class Form_NatureObject
         Me.Height = ObjectImage.Height * val
         Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
     End Sub
+
     ' PixelBox1 - MouseDown
     Private Sub PixelBox1_MouseDown(sender As Object, e As MouseEventArgs) Handles PixelBox1.MouseDown
         If isMainGrass = False Then
@@ -75,24 +78,29 @@ Public Class Form_NatureObject
             End If
         End If
     End Sub
+
     ' ScaleToolStripComboBox - SelectedIndexChanged
     Private Sub ScaleToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ScaleToolStripComboBox.SelectedIndexChanged
         If Not ScaleToolStripComboBox.SelectedIndex = -1 Then
             ScaleObject(ScaleToolStripComboBox.SelectedIndex + 1)
         End If
     End Sub
+
     ' CloseToolStripMenuItem - Click
     Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
         Me.Close()
     End Sub
+
     ' AlwaysOnTopToolStripMenuItem - Click
     Private Sub AlwaysOnTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlwaysOnTopToolStripMenuItem.Click
         Me.TopMost = AlwaysOnTopToolStripMenuItem.Checked
     End Sub
+
     ' Form_NatureObject - Closing
     Private Sub Form_NatureObject_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Me.Closing
         Form_Menu.FormList_NatureObject.Remove(UniqueSessionID)
     End Sub
+
     ' AllAlwaysOnTopToolStripMenuItem - Click
     Private Sub AllAlwaysOnTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AllAlwaysOnTopToolStripMenuItem.Click
         For Each item In Form_Menu.FormList_NatureObject.Keys
@@ -100,6 +108,7 @@ Public Class Form_NatureObject
             Form_Menu.FormList_NatureObject(item).TopMost = AllAlwaysOnTopToolStripMenuItem.Checked
         Next
     End Sub
+
     ' AllScaleToolStripComboBox - SelectedIndexChanged
     Private Sub AllScaleToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AllScaleToolStripComboBox.SelectedIndexChanged
         If Not AllScaleToolStripComboBox.SelectedIndex = -1 And FormLoadLock = False Then
@@ -108,6 +117,7 @@ Public Class Form_NatureObject
             Next
         End If
     End Sub
+
     ' DisplayToolStripComboBox - SelectedIndexChanged
     Private Sub DisplayToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayToolStripComboBox.SelectedIndexChanged
         If BlockEvent_DisplayComboBox = False Then

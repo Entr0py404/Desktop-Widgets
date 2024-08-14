@@ -45,6 +45,7 @@ Public Class Form_DesktopObject
 
         FormLoadLock = False
     End Sub
+
     ' ScaleObject()
     Public Sub ScaleObject(val As Integer)
         Me.Width = ObjectImage.Width * val
@@ -54,6 +55,7 @@ Public Class Form_DesktopObject
             Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
         End If
     End Sub
+
     ' PixelBox1 - MouseDown
     Private Sub PixelBox_Pet_MouseDown(sender As Object, e As MouseEventArgs) Handles PixelBox1.MouseDown
         If e.Button = Windows.Forms.MouseButtons.Left Then
@@ -84,26 +86,31 @@ Public Class Form_DesktopObject
             Dragging = False
         End If
     End Sub
+
     ' ScaleToolStripComboBox - SelectedIndexChanged
     Private Sub ScaleToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ScaleToolStripComboBox.SelectedIndexChanged
         If Not ScaleToolStripComboBox.SelectedIndex = -1 Then
             ScaleObject(ScaleToolStripComboBox.SelectedIndex + 1)
         End If
     End Sub
+
     ' CloseToolStripMenuItem - Click
     Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
         Me.Close()
     End Sub
+
     ' AlwaysOnTopToolStripMenuItem - Click
     Private Sub AlwaysOnTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlwaysOnTopToolStripMenuItem.Click
         Me.TopMost = AlwaysOnTopToolStripMenuItem.Checked
     End Sub
+
     ' SnapToBarToolStripMenuItem - Click
     Private Sub SnapToBarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SnapToBarToolStripMenuItem.Click
         If SnapToBarToolStripMenuItem.Checked Then
             Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
         End If
     End Sub
+
     ' PauseAnimationToolStripMenuItem - Click
     Private Sub PauseAnimationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StopAnimationToolStripMenuItem.Click
         If StopAnimationToolStripMenuItem.Text = "Stop animation" Then
@@ -116,10 +123,12 @@ Public Class Form_DesktopObject
             PixelBox1.Invalidate()
         End If
     End Sub
+
     ' Form_DesktopObject - Closing
     Private Sub Form_DesktopObject_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Me.Closing
         Form_Menu.FormList_DesktopObject.Remove(UniqueSessionID)
     End Sub
+
     ' AllAlwaysOnTopToolStripMenuItem - Click
     Private Sub AllAlwaysOnTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AllAlwaysOnTopToolStripMenuItem.Click
         For Each item In Form_Menu.FormList_DesktopObject.Keys
@@ -127,6 +136,7 @@ Public Class Form_DesktopObject
             Form_Menu.FormList_DesktopObject(item).TopMost = AllAlwaysOnTopToolStripMenuItem.Checked
         Next
     End Sub
+
     ' AllScaleToolStripComboBox - SelectedIndexChanged
     Private Sub AllScaleToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AllScaleToolStripComboBox.SelectedIndexChanged
         If Not AllScaleToolStripComboBox.SelectedIndex = -1 And FormLoadLock = False Then
@@ -136,6 +146,7 @@ Public Class Form_DesktopObject
             Next
         End If
     End Sub
+
     ' DisplayToolStripComboBox - SelectedIndexChanged
     Private Sub DisplayToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayToolStripComboBox.SelectedIndexChanged
         If BlockEvent_DisplayComboBox = False Then

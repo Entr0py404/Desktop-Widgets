@@ -15,6 +15,7 @@ Public Class Form_Nature
     Dim Rocks_Max As Integer = 5
     Dim Grass_Max As Integer = 10
     Dim DefaultScale As Integer = 1
+
     ' Form_Nature - Load
     Private Sub Form_Nature_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip3.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
@@ -46,6 +47,7 @@ Public Class Form_Nature
 
         Button_Randomize.PerformClick()
     End Sub
+
     ' Button_Randomize - Click
     Private Sub Button_Randomize_Click(sender As Object, e As EventArgs) Handles Button_Randomize.Click
         ' Maximum
@@ -73,6 +75,7 @@ Public Class Form_Nature
         NumericUpDown_Rocks_Min.Maximum = NumericUpDown_Rocks_Max.Value
         NumericUpDown_Grass_Min.Maximum = NumericUpDown_Grass_Max.Value
     End Sub
+
     ' Button_Generate - Click
     Private Sub Button_Generate_Click(sender As Object, e As EventArgs) Handles Button_Generate.Click
         Dim NatureObjectPath As String = Application.StartupPath & "\Nature\" & ComboBox_NatureObjects.SelectedItem.ToString
@@ -104,6 +107,7 @@ Public Class Form_Nature
 
         Button_Generate.Enabled = False
     End Sub
+
     ' GenerateNature()
     Private Sub GenerateNature(NatureFolder As String, randMin As Integer, randMax As Integer)
         If Directory.Exists(Application.StartupPath & "\Nature\" & ComboBox_NatureObjects.SelectedItem.ToString & "\" & NatureFolder) Then
@@ -127,6 +131,7 @@ Public Class Form_Nature
             Next
         End If
     End Sub
+
     ' Button_CloseAll - Click
     Private Sub Button_CloseAll_Click(sender As Object, e As EventArgs) Handles Button_CloseAll.Click
         Dim FormListArray As Array = Form_Menu.FormList_NatureObject.Keys.ToArray
@@ -136,6 +141,7 @@ Public Class Form_Nature
         Form_Menu.FormList_NatureObject.Clear()
         Button_Generate.Enabled = True
     End Sub
+
     ' ComboBox_NatureObjects - SelectedIndexChanged
     Private Sub ComboBox_NatureObjects_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_NatureObjects.SelectedIndexChanged
         If Not ComboBox_NatureObjects.SelectedIndex = -1 Then
@@ -205,6 +211,7 @@ Public Class Form_Nature
             End If
         End If
     End Sub
+
     ' LoadNatureObjects()
     Private Sub LoadNatureObjects(filepath As String)
         If Directory.Exists(filepath) Then
@@ -219,6 +226,7 @@ Public Class Form_Nature
             FlowLayoutPanel1.Visible = True
         End If
     End Sub
+
     ' AssetPanel1 - Click
     Private Sub PixelBox1_MouseClick(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Left Then
@@ -238,6 +246,7 @@ Public Class Form_Nature
             End Try
         End If
     End Sub
+
     ' SafeImageFromFile()
     Public Shared Function SafeImageFromFile(path As String) As Image
         Dim bytes = File.ReadAllBytes(path)
@@ -246,6 +255,7 @@ Public Class Form_Nature
             Return img
         End Using
     End Function
+
     ' CreateNewPanel
     Private Sub CreateNewPanel(imagePath As String, assetObjectText As String)
         ' Panel
@@ -282,10 +292,12 @@ Public Class Form_Nature
 
         AddHandler AssetPixelBox.MouseClick, AddressOf PixelBox1_MouseClick
     End Sub
+
     ' Button1 - Click
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ContextMenuStrip3.Show(Button1, 4, 4)
     End Sub
+
     ' ResizePanels (sizeInt)
     Private Sub ResizePanels(sizeInt As Integer)
         AssetPanel_Size = sizeInt
@@ -299,36 +311,42 @@ Public Class Form_Nature
         FlowLayoutPanel1.Visible = True
         FlowLayoutPanel1.ResumeLayout()
     End Sub
+
     ' Small_ToolStripMenuItem - Click
     Private Sub Small_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Small_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Small_ToolStripMenuItem.Checked = True
         ResizePanels(98)
     End Sub
+
     ' Medium_ToolStripMenuItem - Click
     Private Sub Medium_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Medium_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Medium_ToolStripMenuItem.Checked = True
         ResizePanels(128)
     End Sub
+
     ' MediumLarge_ToolStripMenuItem - Click
     Private Sub MediumLarge_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MediumLarge_ToolStripMenuItem.Click
         UnCheckAllSizes()
         MediumLarge_ToolStripMenuItem.Checked = True
         ResizePanels(150)
     End Sub
+
     ' Large_ToolStripMenuItem - Click
     Private Sub Large_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Large_ToolStripMenuItem.Click
         UnCheckAllSizes()
         Large_ToolStripMenuItem.Checked = True
         ResizePanels(182)
     End Sub
+
     ' ExtraLarge_ToolStripMenuItem - Click
     Private Sub ExtraLarge_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExtraLarge_ToolStripMenuItem.Click
         UnCheckAllSizes()
         ExtraLarge_ToolStripMenuItem.Checked = True
         ResizePanels(229)
     End Sub
+
     ' UnCheckAllSizes
     Private Sub UnCheckAllSizes()
         Small_ToolStripMenuItem.Checked = False
@@ -337,22 +355,27 @@ Public Class Form_Nature
         Large_ToolStripMenuItem.Checked = False
         ExtraLarge_ToolStripMenuItem.Checked = False
     End Sub
+
     ' NumericUpDown_Flowers_Max - ValueChanged
     Private Sub NumericUpDown_Flowers_Max_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown_Flowers_Max.ValueChanged
         NumericUpDown_Flowers_Min.Maximum = NumericUpDown_Flowers_Max.Value
     End Sub
+
     ' NumericUpDown_Bushes_Max - ValueChanged
     Private Sub NumericUpDown_Bushes_Max_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown_Bushes_Max.ValueChanged
         NumericUpDown_Bushes_Min.Maximum = NumericUpDown_Bushes_Max.Value
     End Sub
+
     ' NumericUpDown_Trees_Max_ValueChanged
     Private Sub NumericUpDown_Trees_Max_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown_Trees_Max.ValueChanged
         NumericUpDown_Trees_Min.Maximum = NumericUpDown_Trees_Max.Value
     End Sub
+
     ' NumericUpDown_Rocks_Max - ValueChanged
     Private Sub NumericUpDown_Rocks_Max_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown_Rocks_Max.ValueChanged
         NumericUpDown_Rocks_Min.Maximum = NumericUpDown_Rocks_Max.Value
     End Sub
+
     ' NumericUpDown_Grass_Max - ValueChanged
     Private Sub NumericUpDown_Grass_Max_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown_Grass_Max.ValueChanged
         NumericUpDown_Grass_Min.Maximum = NumericUpDown_Grass_Max.Value

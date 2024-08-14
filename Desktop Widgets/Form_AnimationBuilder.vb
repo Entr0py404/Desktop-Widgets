@@ -3,12 +3,14 @@
 Public Class Form_AnimationBuilder
     ReadOnly SupportedIamgeFormats() As String = {".png", ".bmp", ".jpeg", ".jpg", ".tiff", ".tif"}
     Dim Flipped As Boolean = False
+
     ' Form_AnimationBuilder - Load
     Private Sub Form_AnimationBuilder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
         NumericUpDown_Delay.Controls.RemoveAt(0)
         ComboBox1.SelectedIndex = 3
     End Sub
+
     ' Panel_Main - DragDrop
     Private Sub Panel_Main_DragDrop(sender As Object, e As DragEventArgs) Handles Panel_Main.DragDrop
         Label_Animation_Frame_Count.Text = "Animation Frame Count: "
@@ -28,6 +30,7 @@ Public Class Form_AnimationBuilder
             End Try
         End If
     End Sub
+
     ' Panel_Image - DragEnter
     Private Sub Panel_Image_DragEnter(sender As Object, e As DragEventArgs) Handles Panel_Main.DragEnter
         Dim files() As String = CType(e.Data.GetData(DataFormats.FileDrop), String())
@@ -37,6 +40,7 @@ Public Class Form_AnimationBuilder
             e.Effect = DragDropEffects.None
         End If
     End Sub
+
     ' CreateAnimatedGifs()
     Private Sub CreateAnimatedGifs()
         Dim MyMemoryStream1 As New MemoryStream
@@ -63,12 +67,14 @@ Public Class Form_AnimationBuilder
         End If
 
     End Sub
+
     ' NumericUpDown_Delay - ValueChanged
     Private Sub NumericUpDown_Delay_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown_Delay.ValueChanged
         If ListBox_Images.Items.Count > 0 Then
             CreateAnimatedGifs()
         End If
     End Sub
+
     ' LoadDirs
     Private Sub LoadDirs(DirPath As String)
         ComboBox_Artist.Items.Clear()
@@ -81,6 +87,7 @@ Public Class Form_AnimationBuilder
         ComboBox_Artist.Items.Add("All")
         ComboBox_Artist.EndUpdate()
     End Sub
+
     ' LoadDirs
     Private Sub LoadFiles(DirPath As String)
         ComboBox_Name.Items.Clear()
@@ -90,6 +97,7 @@ Public Class Form_AnimationBuilder
         Next
         ComboBox_Name.EndUpdate()
     End Sub
+
     ' RadioButton_TypeGroundPet - CheckedChanged
     Private Sub RadioButton_PetTypeGround_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton_TypeGroundPet.CheckedChanged
         If RadioButton_TypeGroundPet.Checked Then
@@ -114,6 +122,7 @@ Public Class Form_AnimationBuilder
             LoadDirs(Application.StartupPath & "\Pets\Ground")
         End If
     End Sub
+
     ' RadioButton_TypeFlyingPet - CheckedChanged
     Private Sub RadioButton_TypeFlyingPet_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton_TypeFlyingPet.CheckedChanged
         If RadioButton_TypeFlyingPet.Checked Then
@@ -137,6 +146,7 @@ Public Class Form_AnimationBuilder
             LoadDirs(Application.StartupPath & "\Pets\Flying")
         End If
     End Sub
+
     ' RadioButton_TypeObject - CheckedChanged
     Private Sub RadioButton_TypeObject_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton_TypeObject.CheckedChanged
         If RadioButton_TypeObject.Checked Then
@@ -153,6 +163,7 @@ Public Class Form_AnimationBuilder
             LoadDirs(Application.StartupPath & "\Objects")
         End If
     End Sub
+
     ' RadioButton_TypeNature - CheckedChanged
     Private Sub RadioButton_TypeNature_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton_TypeNature.CheckedChanged
         If RadioButton_TypeNature.Checked Then
@@ -169,22 +180,26 @@ Public Class Form_AnimationBuilder
             LoadDirs(Application.StartupPath & "\Nature")
         End If
     End Sub
+
     ' NumericUpDown_Delay - KeyDown
     Private Sub NumericUpDown_Delay_KeyDown(sender As Object, e As KeyEventArgs) Handles NumericUpDown_Delay.KeyDown
         If e.KeyCode = Keys.Enter Then
             e.SuppressKeyPress = True
         End If
     End Sub
+
     ' Clear (ToolStripMenuItem) - Click
     Private Sub ClearToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearToolStripMenuItem.Click
         ClearAllUIObjects()
     End Sub
+
     ' ClearAllUIObjects()
     Public Sub ClearAllUIObjects()
         PixelBox_Left.Image = Nothing
         PixelBox_Right.Image = Nothing
         ListBox_Images.Items.Clear()
     End Sub
+
     ' Button_Save - Click
     Private Sub Button_Save_Click(sender As Object, e As EventArgs) Handles Button_Save.Click
         If ListBox_Images.Items.Count > 0 Then
@@ -251,6 +266,7 @@ Public Class Form_AnimationBuilder
 
         End If
     End Sub
+
     ' NumericUpDown_FPS - ValueChanged
     Private Sub NumericUpDown_FPS_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown_FPS.ValueChanged
         If NumericUpDown_FPS.Focused Then
@@ -258,6 +274,7 @@ Public Class Form_AnimationBuilder
             'Console.WriteLine(Int(1 / NumericUpDown_FPS.Value * 1000))
         End If
     End Sub
+
     ' ComboBox1 - SelectedIndexChanged
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         If Not ComboBox1.SelectedIndex = -1 Then
@@ -266,6 +283,7 @@ Public Class Form_AnimationBuilder
             'Console.WriteLine(CDec(ComboBox1.SelectedValue.ToString))
         End If
     End Sub
+
     ' Button_Flip_Click
     Private Sub Button_Flip_Click(sender As Object, e As EventArgs) Handles Button_Flip.Click
         If ListBox_Images.Items.Count > 0 Then
@@ -277,6 +295,7 @@ Public Class Form_AnimationBuilder
             CreateAnimatedGifs()
         End If
     End Sub
+
     ' ComboBox_Artist - SelectedIndexChanged
     Private Sub ComboBox_Artist_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_Artist.SelectedIndexChanged
         Dim PetDirFullPath As String = ""
@@ -315,6 +334,7 @@ Public Class Form_AnimationBuilder
         End If
 
     End Sub
+
     ' ComboBox_Animation - SelectedIndexChanged
     Private Sub ComboBox_Animation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox_Animation.SelectedIndexChanged
         If RadioButton_TypeNature.Checked Then
@@ -330,6 +350,7 @@ Public Class Form_AnimationBuilder
             End If
         End If
     End Sub
+
     ' CheckBox_NonDirectional - CheckedChanged
     Private Sub CheckBox_NonDirectional_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox_NonDirectional.CheckedChanged
         If CheckBox_NonDirectional.Checked Then

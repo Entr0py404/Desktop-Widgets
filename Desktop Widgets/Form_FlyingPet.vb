@@ -161,7 +161,7 @@ Public Class Form_FlyingPet
             Dim INI As New MadMilkman.Ini.IniFile()
             INI.Load(Application.StartupPath & "\" & PetDir & "\Behavior.ini")
 
-            '[Settings]
+            ' [Settings]
             If INI.Sections("Settings") IsNot Nothing Then
                 If INI.Sections("Settings").Keys("DefaultScale") IsNot Nothing Then
                     DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
@@ -175,7 +175,7 @@ Public Class Form_FlyingPet
                 End If
             End If
 
-            '[Decisions]
+            ' [Decisions]
             If INI.Sections("Decisions") IsNot Nothing Then
                 If INI.Sections("Decisions").Keys("IdleDecision") IsNot Nothing Then
                     IdleDecision = CInt(INI.Sections("Decisions").Keys("IdleDecision").Value)
@@ -198,7 +198,7 @@ Public Class Form_FlyingPet
                 End If
             End If
 
-            '[Timers_Tick]
+            ' [Timers_Tick]
             If INI.Sections("Timers_Tick") IsNot Nothing Then
                 If INI.Sections("Timers_Tick").Keys("Flying_Movement_Tick") IsNot Nothing Then
                     Flying_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Flying_Movement_Tick").Value)
@@ -211,7 +211,7 @@ Public Class Form_FlyingPet
                 End If
             End If
 
-            '[Timers_Randomization]
+            ' [Timers_Randomization]
             If INI.Sections("Timers_Randomization") IsNot Nothing Then
 
                 If INI.Sections("Timers_Randomization").Keys("TurningDecision_Min") IsNot Nothing Then
@@ -327,28 +327,22 @@ Public Class Form_FlyingPet
     Private Sub Timer_Walking_Tick(sender As Object, e As EventArgs) Handles Timer_Walking.Tick
         If Not ContextMenuStrip1.Visible Then
             If Dragging = False Then
+
                 If FollowCursor = False Then
                     If MoveLeft = True Then
-                        'If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
                         Me.Location = New Point(Me.Location.X - 1, MYScreen.WorkingArea.Bottom - Me.Height)
-
                         If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
                             PixelBox_Pet.Image = Animation_Walking_Left
                             Console.WriteLine("Animation_Walking_Left")
                         End If
-
-                        'End If
                     Else
-                        'If Me.Location.Y = Display.WorkingArea.Bottom - Me.Height Then
                         Me.Location = New Point(Me.Location.X + 1, MYScreen.WorkingArea.Bottom - Me.Height)
-
                         If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
                             PixelBox_Pet.Image = Animation_Walking_Right
                             Console.WriteLine("Animation_Walking_Right")
-                            'End If
-
                         End If
                     End If
+
                 Else
 
                     If Me.Location.Y = MYScreen.WorkingArea.Bottom - Me.Height Then
@@ -376,7 +370,6 @@ Public Class Form_FlyingPet
                         End If
                     End If
 
-
                 End If
             End If
         End If
@@ -385,7 +378,7 @@ Public Class Form_FlyingPet
 
     ' Timer_TurningDecision - Tick
     Private Sub Timer_TurningDecision_Tick(sender As Object, e As EventArgs) Handles Timer_TurningDecision.Tick
-        'Left & Right
+        ' Left & Right
         R = CInt(Rnd(1))
         If R >= 1 Then
             MoveLeft = True
@@ -394,7 +387,7 @@ Public Class Form_FlyingPet
         End If
 
         R = CInt(Rnd(1))
-        'Up & Down
+        ' Up & Down
         If R >= 1 Then
             MoveUp = True
         Else
@@ -478,11 +471,11 @@ Public Class Form_FlyingPet
     Private Sub Form1_LocationChanged(sender As Object, e As EventArgs) Handles MyBase.LocationChanged
         If Dragging = False And FormLoadLock = False Then
 
-            'RIGHT & Left
+            ' RIGHT & Left
             If Me.Location.X > MYScreen.WorkingArea.Right - Me.Width / 2 Then
                 If Rand.Next(0, 100 + 1) <= ScreenWarpingDecision Then
                     If Not DisplayToolStripComboBox.SelectedItem.ToString = "All" Then
-                        Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'WARP
+                        Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) ' WARP
                     Else
 
                         Dim TempDisplay_LOW As Screen = MYScreen
@@ -490,7 +483,7 @@ Public Class Form_FlyingPet
                         Dim HasScreenOnRight As Boolean = False
                         Dim location As Double = Me.Location.X + Me.Width / 2
 
-                        'SET TO SCREEN WITH LOWEST X
+                        ' SET TO SCREEN WITH LOWEST X
                         For Each Displays As Display In Display.GetDisplays()
 
                             If Not Displays.GetScreen.Bounds = MYScreen.Bounds Then
@@ -508,25 +501,25 @@ Public Class Form_FlyingPet
 
                         If HasScreenOnRight Then
                             MYScreen = TempDisplay_Right
-                            Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'Travel
+                            Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) ' Travel
                             Console.WriteLine("HasScreenOnRight")
                             Console.WriteLine("Travel")
                         Else
                             MYScreen = TempDisplay_LOW
-                            Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'WARP
+                            Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) ' WARP
                             Console.WriteLine("NOScreenOnRight")
                             Console.WriteLine("WARP")
                         End If
 
                     End If
                 Else
-                    MoveLeft = True 'TURNAROUND
+                    MoveLeft = True ' TURNAROUND
                 End If
                 Console.WriteLine("OVER RIGHT")
-            ElseIf Me.Location.X < MYScreen.WorkingArea.Left - Me.Width / 2 Then 'LEFT
+            ElseIf Me.Location.X < MYScreen.WorkingArea.Left - Me.Width / 2 Then ' LEFT
                 If Rand.Next(0, 100 + 1) <= ScreenWarpingDecision Then
                     If Not DisplayToolStripComboBox.SelectedItem.ToString = "All" Then
-                        Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'WARP
+                        Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) ' WARP
                     Else
 
                         Dim TempDisplay_HIGH As Screen = MYScreen
@@ -534,7 +527,7 @@ Public Class Form_FlyingPet
                         Dim HasScreenOnLeft As Boolean = False
                         Dim location As Double = Me.Location.X + Me.Width / 2
 
-                        'SET TO SCREEN WITH HIGHEST X
+                        ' SET TO SCREEN WITH HIGHEST X
                         For Each Displays As Display In Display.GetDisplays()
 
                             If Not Displays.GetScreen.Bounds = MYScreen.Bounds Then
@@ -552,20 +545,20 @@ Public Class Form_FlyingPet
 
                         If HasScreenOnLeft Then
                             MYScreen = TempDisplay_Left
-                            Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'Travel
+                            Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) ' Travel
                             Console.WriteLine("HasScreenOnLeft")
                             Console.WriteLine("Travel")
 
                         Else
                             MYScreen = TempDisplay_HIGH
-                            Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'WARP
+                            Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) ' WARP
                             Console.WriteLine("NOScreenOnLeft")
                             Console.WriteLine("WARP")
                         End If
 
                     End If
                 Else
-                    MoveLeft = False 'TURNAROUND
+                    MoveLeft = False ' TURNAROUND
                 End If
                 Console.WriteLine("OVER LEFT")
             End If
@@ -573,7 +566,7 @@ Public Class Form_FlyingPet
 
 
 
-            'OVER DOWN No Wrap
+            ' OVER DOWN No Wrap
             If Me.Location.Y > MYScreen.WorkingArea.Height - Me.Height Then
 
                 If HasAnimation_Walking = True Or HasAnimation_Idling = True Then
@@ -583,7 +576,7 @@ Public Class Form_FlyingPet
                         Timer_ChangeModesDecision.Enabled = True
                         Timer_Flying.Enabled = False
 
-                        Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
+
 
                         If HasAnimation_Idling = True Then
                             Timer_IdleDecision.Enabled = True
@@ -633,6 +626,8 @@ Public Class Form_FlyingPet
 
                         End If
 
+                        Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
+
                     Else
                         MoveUp = True
                         Me.Location = New Point(Location.X, Location.Y - 1)
@@ -646,7 +641,7 @@ Public Class Form_FlyingPet
                 Console.WriteLine("OVER DOWN")
             End If
 
-            'OVER UP No Wrap
+            ' OVER UP No Wrap
             If Me.Location.Y < -Me.Height / 2 Then
                 MoveUp = False
                 Me.Location = New Point(Location.X, Location.Y + 1)
@@ -676,10 +671,12 @@ Public Class Form_FlyingPet
     ' ScalePet()
     Public Sub ScalePet(val As Integer)
         val = val + DefaultScale - 1
-        'Dim oldLocation As Point = Me.Location
         Me.Width = Animation_Flying_Left.Width * val
         Me.Height = Animation_Flying_Left.Height * val
-        'Me.Location = oldLocation
+
+        If Ground_Mode = True Then
+            Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
+        End If
     End Sub
 
     ' PixelBox_Pet - MouseDown
@@ -794,16 +791,16 @@ Public Class Form_FlyingPet
                 If DisplayToolStripComboBox.Items.Count >= OldSelectedIndex Then
                     DisplayToolStripComboBox.SelectedIndex = OldSelectedIndex
                     MYScreen = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex).GetScreen
-                    Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
+                    Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height) ' Fix this also need check for Ground_Mode
                 Else
                     DisplayToolStripComboBox.SelectedIndex = 0
                     MYScreen = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex).GetScreen
-                    Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
+                    Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height) ' Fix this also need check for Ground_Mode
                 End If
             End If
         Else
             MYScreen = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex).GetScreen
-            Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
+            Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height) ' Fix this also need check for Ground_Mode
         End If
     End Sub
 End Class

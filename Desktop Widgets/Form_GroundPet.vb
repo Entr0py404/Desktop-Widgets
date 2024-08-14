@@ -57,7 +57,7 @@ Public Class Form_GroundPet
 
     ' Form_GroundPet - Load
     Private Sub Form_GroundPet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Walking
+        ' Walking
         If File.Exists(PetDir & "\Walking Left.gif") Then
             Animation_Walking_Left = New Bitmap(PetDir & "\Walking Left.gif")
         End If
@@ -65,7 +65,7 @@ Public Class Form_GroundPet
             Animation_Walking_Right = New Bitmap(PetDir & "\Walking Right.gif")
         End If
 
-        'Idling
+        ' Idling
         If File.Exists(PetDir & "\Idling Left.gif") Then
             Animation_Idling_Left = Image.FromFile(PetDir & "\Idling Left.gif")
         End If
@@ -74,7 +74,7 @@ Public Class Form_GroundPet
             PixelBox_Pet.Image = Animation_Idling_Right
         End If
 
-        'Idling Alt
+        ' Idling Alt
         If File.Exists(PetDir & "\Idling Alt Left.gif") Then
             Animation_IdlingAlt_Left = New Bitmap(PetDir & "\Idling Alt Left.gif")
         End If
@@ -83,7 +83,7 @@ Public Class Form_GroundPet
             HasAnimation_IdlingAlt = True
         End If
 
-        'Sleeping
+        ' Sleeping
         If File.Exists(PetDir & "\Sleeping Left.gif") Then
             Animation_Sleeping_Left = New Bitmap(PetDir & "\Sleeping Left.gif")
         End If
@@ -92,7 +92,7 @@ Public Class Form_GroundPet
             HasAnimation_Sleeping = True
         End If
 
-        'Dragging
+        ' Dragging
         If File.Exists(PetDir & "\Dragging.gif") Then
             Animation_Dragging = New Bitmap(PetDir & "\Dragging.gif")
             HasAnimation_Dragging = True
@@ -108,7 +108,7 @@ Public Class Form_GroundPet
             Animation_Dragging_Right = New Bitmap(PetDir & "\Idling Right.gif")
         End If
 
-        'Falling
+        ' Falling
         If File.Exists(PetDir & "\Falling Left.gif") Then
             Animation_Falling_Left = New Bitmap(PetDir & "\Falling Left.gif")
         Else
@@ -455,7 +455,7 @@ Public Class Form_GroundPet
     Private Sub Form1_LocationChanged(sender As Object, e As EventArgs) Handles Me.LocationChanged
         If FormLoadLock = False Then
             If Dragging = False Then
-                'RIGHT & Left
+                ' RIGHT & Left
                 If Me.Location.X > MYScreen.WorkingArea.Right - Me.Width / 2 Then
                     If Rand.Next(0, 100 + 1) <= ScreenWarpingDecision Then
                         If Not DisplayToolStripComboBox.SelectedItem.ToString = "All" Then
@@ -467,7 +467,7 @@ Public Class Form_GroundPet
                             Dim HasScreenOnRight As Boolean = False
                             Dim location As Double = Me.Location.X + Me.Width / 2
 
-                            'SET TO SCREEN WITH LOWEST X
+                            ' SET TO SCREEN WITH LOWEST X
                             For Each Displays As Display In Display.GetDisplays()
 
                                 If Not Displays.GetScreen.Bounds = MYScreen.Bounds Then
@@ -485,25 +485,25 @@ Public Class Form_GroundPet
 
                             If HasScreenOnRight Then
                                 MYScreen = TempDisplay_Right
-                                Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), MYScreen.WorkingArea.Bottom - Me.Height) 'Travel
+                                Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), MYScreen.WorkingArea.Bottom - Me.Height) ' Travel
                                 Console.WriteLine("HasScreenOnRight")
                                 Console.WriteLine("Travel")
                             Else
                                 MYScreen = TempDisplay_LOW
-                                Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), MYScreen.WorkingArea.Bottom - Me.Height) 'WARP
+                                Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), MYScreen.WorkingArea.Bottom - Me.Height) ' WARP
                                 Console.WriteLine("NOScreenOnRight")
                                 Console.WriteLine("WARP")
                             End If
 
                         End If
                     Else
-                        TurnLeft = True 'TURNAROUND
+                        TurnLeft = True ' TURNAROUND
                     End If
                     Console.WriteLine("OVER RIGHT")
-                ElseIf Me.Location.X < MYScreen.WorkingArea.Left - Me.Width / 2 Then 'LEFT
+                ElseIf Me.Location.X < MYScreen.WorkingArea.Left - Me.Width / 2 Then ' LEFT
                     If Rand.Next(0, 100 + 1) <= ScreenWarpingDecision Then
                         If Not DisplayToolStripComboBox.SelectedItem.ToString = "All" Then
-                            Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) 'WARP
+                            Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) ' WARP
                         Else
 
                             Dim TempDisplay_HIGH As Screen = MYScreen
@@ -511,7 +511,7 @@ Public Class Form_GroundPet
                             Dim HasScreenOnLeft As Boolean = False
                             Dim location As Double = Me.Location.X + Me.Width / 2
 
-                            'SET TO SCREEN WITH HIGHEST X
+                            ' SET TO SCREEN WITH HIGHEST X
                             For Each Displays As Display In Display.GetDisplays()
 
                                 If Not Displays.GetScreen.Bounds = MYScreen.Bounds Then
@@ -529,20 +529,20 @@ Public Class Form_GroundPet
 
                             If HasScreenOnLeft Then
                                 MYScreen = TempDisplay_Left
-                                Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), MYScreen.WorkingArea.Bottom - Me.Height) 'Travel
+                                Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), MYScreen.WorkingArea.Bottom - Me.Height) ' Travel
                                 Console.WriteLine("HasScreenOnLeft")
                                 Console.WriteLine("Travel")
 
                             Else
                                 MYScreen = TempDisplay_HIGH
-                                Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), MYScreen.WorkingArea.Bottom - Me.Height) 'WARP
+                                Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), MYScreen.WorkingArea.Bottom - Me.Height) ' WARP
                                 Console.WriteLine("NOScreenOnLeft")
                                 Console.WriteLine("WARP")
                             End If
 
                         End If
                     Else
-                        TurnLeft = False 'TURNAROUND
+                        TurnLeft = False ' TURNAROUND
                     End If
                     Console.WriteLine("OVER LEFT")
                 End If
@@ -571,7 +571,6 @@ Public Class Form_GroundPet
 
     ' ScalePet()
     Public Sub ScalePet(val As Integer)
-        'Console.WriteLine("ScalePet")
         val = val + DefaultScale - 1
         Me.Width = Animation_Walking_Left.Width * val
         Me.Height = Animation_Walking_Left.Height * val
@@ -703,6 +702,13 @@ Public Class Form_GroundPet
         End If
     End Sub
 
+    ' Timer_Sleeping - Tick
+    Private Sub Timer_Sleeping_Tick(sender As Object, e As EventArgs) Handles Timer_Sleeping.Tick
+        Timer_IdleDecision.Enabled = True
+        Timer_Sleeping.Enabled = False
+        Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
+    End Sub
+
     ' DisplaySettingsChanged
     Public Sub DisplaySettingsChanged(ByVal sender As Object, ByVal e As EventArgs)
         Dim OldSelectedIndex As Integer = 0
@@ -734,12 +740,5 @@ Public Class Form_GroundPet
             MYScreen = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex).GetScreen
             Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
         End If
-    End Sub
-
-    ' Timer_Sleeping - Tick
-    Private Sub Timer_Sleeping_Tick(sender As Object, e As EventArgs) Handles Timer_Sleeping.Tick
-        Timer_IdleDecision.Enabled = True
-        Timer_Sleeping.Enabled = False
-        Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
     End Sub
 End Class
