@@ -180,6 +180,11 @@ Public Class Form_GroundPet
                     If INI.Sections("Settings").Keys("Falling_Movement_Px") IsNot Nothing Then
                         Falling_Movement_Px = CInt(INI.Sections("Settings").Keys("Falling_Movement_Px").Value)
                     End If
+
+                    If INI.Sections("Settings").Keys("Opacity") IsNot Nothing Then
+                        Me.Opacity = CDbl(INI.Sections("Settings").Keys("Opacity").Value)
+                        Console.WriteLine("Opacity in ini used")
+                    End If
                 End If
 
                 ' [Decisions]
@@ -610,6 +615,12 @@ Public Class Form_GroundPet
             If Me.Location.Y > MYScreen.WorkingArea.Height - Me.Height Then
                 Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
                 Console.WriteLine("OVER DOWN")
+            End If
+
+            If Timer_Sleeping.Enabled = True Then
+                Timer_Sleeping.Enabled = False
+                Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
+                Timer_IdleDecision.Enabled = True
             End If
 
             Dragging = False

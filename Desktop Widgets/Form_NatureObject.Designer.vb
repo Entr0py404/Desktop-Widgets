@@ -29,6 +29,7 @@ Partial Class Form_NatureObject
         Me.AllAlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AllScaleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AllScaleToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisplayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisplayToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
@@ -37,7 +38,7 @@ Partial Class Form_NatureObject
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PixelBox1 = New Desktop_Widgets.PixelBox()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.FlipHorizontallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PixelBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -46,11 +47,11 @@ Partial Class Form_NatureObject
         '
         Me.ContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AllNatureObjectsToolStripMenuItem, Me.ToolStripSeparator1, Me.AlwaysOnTopToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.ScaleToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AllNatureObjectsToolStripMenuItem, Me.ToolStripSeparator1, Me.AlwaysOnTopToolStripMenuItem, Me.FlipHorizontallyToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.ScaleToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.ShowCheckMargin = True
         Me.ContextMenuStrip1.ShowImageMargin = False
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(195, 158)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(195, 182)
         '
         'AllNatureObjectsToolStripMenuItem
         '
@@ -87,6 +88,11 @@ Partial Class Form_NatureObject
         Me.AllScaleToolStripComboBox.Items.AddRange(New Object() {"1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x"})
         Me.AllScaleToolStripComboBox.Name = "AllScaleToolStripComboBox"
         Me.AllScaleToolStripComboBox.Size = New System.Drawing.Size(121, 28)
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(191, 6)
         '
         'AlwaysOnTopToolStripMenuItem
         '
@@ -157,10 +163,12 @@ Partial Class Form_NatureObject
         Me.PixelBox1.TabIndex = 3
         Me.PixelBox1.TabStop = False
         '
-        'ToolStripSeparator1
+        'FlipHorizontallyToolStripMenuItem
         '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(191, 6)
+        Me.FlipHorizontallyToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.FlipHorizontallyToolStripMenuItem.Name = "FlipHorizontallyToolStripMenuItem"
+        Me.FlipHorizontallyToolStripMenuItem.Size = New System.Drawing.Size(194, 24)
+        Me.FlipHorizontallyToolStripMenuItem.Text = "Flip horizontally"
         '
         'Form_NatureObject
         '
@@ -199,4 +207,5 @@ Partial Class Form_NatureObject
     Friend WithEvents DisplayToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DisplayToolStripComboBox As ToolStripComboBox
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents FlipHorizontallyToolStripMenuItem As ToolStripMenuItem
 End Class

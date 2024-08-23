@@ -61,12 +61,9 @@ Partial Class Form_AnimationBuilder
         Me.Label_Artist = New System.Windows.Forms.Label()
         Me.ComboBox_Artist = New System.Windows.Forms.ComboBox()
         Me.Panel_Animation = New System.Windows.Forms.Panel()
-        Me.NumericUpDown_FPS = New System.Windows.Forms.NumericUpDown()
         Me.Panel_Side = New System.Windows.Forms.Panel()
         Me.CheckBox_NonDirectional = New System.Windows.Forms.CheckBox()
         Me.Panel_Delay = New System.Windows.Forms.Panel()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Label_FPS = New System.Windows.Forms.Label()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.Panel_Main.SuspendLayout()
         Me.Panel_Left.SuspendLayout()
@@ -78,7 +75,6 @@ Partial Class Form_AnimationBuilder
         CType(Me.PixelBox_Right, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel_Artist.SuspendLayout()
         Me.Panel_Animation.SuspendLayout()
-        CType(Me.NumericUpDown_FPS, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel_Side.SuspendLayout()
         Me.Panel_Delay.SuspendLayout()
         Me.SuspendLayout()
@@ -90,7 +86,7 @@ Partial Class Form_AnimationBuilder
         Me.Button_Save.FlatAppearance.BorderSize = 0
         Me.Button_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_Save.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_Save.Location = New System.Drawing.Point(72, 400)
+        Me.Button_Save.Location = New System.Drawing.Point(72, 368)
         Me.Button_Save.Name = "Button_Save"
         Me.Button_Save.Size = New System.Drawing.Size(144, 32)
         Me.Button_Save.TabIndex = 74
@@ -221,18 +217,19 @@ Partial Class Form_AnimationBuilder
         Me.NumericUpDown_Delay.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_Delay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.NumericUpDown_Delay.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.NumericUpDown_Delay.Location = New System.Drawing.Point(72, 40)
+        Me.NumericUpDown_Delay.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.NumericUpDown_Delay.Location = New System.Drawing.Point(72, 8)
         Me.NumericUpDown_Delay.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.NumericUpDown_Delay.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_Delay.Name = "NumericUpDown_Delay"
         Me.NumericUpDown_Delay.Size = New System.Drawing.Size(56, 20)
         Me.NumericUpDown_Delay.TabIndex = 81
-        Me.NumericUpDown_Delay.Value = New Decimal(New Integer() {41, 0, 0, 0})
+        Me.NumericUpDown_Delay.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'Label_Delay
         '
         Me.Label_Delay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_Delay.Location = New System.Drawing.Point(0, 40)
+        Me.Label_Delay.Location = New System.Drawing.Point(0, 8)
         Me.Label_Delay.Name = "Label_Delay"
         Me.Label_Delay.Size = New System.Drawing.Size(64, 20)
         Me.Label_Delay.TabIndex = 82
@@ -437,9 +434,9 @@ Partial Class Form_AnimationBuilder
         'Label_Milliseconds
         '
         Me.Label_Milliseconds.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_Milliseconds.Location = New System.Drawing.Point(112, 40)
+        Me.Label_Milliseconds.Location = New System.Drawing.Point(136, 8)
         Me.Label_Milliseconds.Name = "Label_Milliseconds"
-        Me.Label_Milliseconds.Size = New System.Drawing.Size(96, 20)
+        Me.Label_Milliseconds.Size = New System.Drawing.Size(88, 20)
         Me.Label_Milliseconds.TabIndex = 92
         Me.Label_Milliseconds.Text = " Milliseconds"
         Me.Label_Milliseconds.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -485,19 +482,6 @@ Partial Class Form_AnimationBuilder
         Me.Panel_Animation.Size = New System.Drawing.Size(208, 40)
         Me.Panel_Animation.TabIndex = 99
         '
-        'NumericUpDown_FPS
-        '
-        Me.NumericUpDown_FPS.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.NumericUpDown_FPS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.NumericUpDown_FPS.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.NumericUpDown_FPS.Location = New System.Drawing.Point(72, 8)
-        Me.NumericUpDown_FPS.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
-        Me.NumericUpDown_FPS.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.NumericUpDown_FPS.Name = "NumericUpDown_FPS"
-        Me.NumericUpDown_FPS.Size = New System.Drawing.Size(56, 20)
-        Me.NumericUpDown_FPS.TabIndex = 94
-        Me.NumericUpDown_FPS.Value = New Decimal(New Integer() {24, 0, 0, 0})
-        '
         'Panel_Side
         '
         Me.Panel_Side.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
@@ -522,7 +506,7 @@ Partial Class Form_AnimationBuilder
         '
         Me.CheckBox_NonDirectional.AutoSize = True
         Me.CheckBox_NonDirectional.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.CheckBox_NonDirectional.Location = New System.Drawing.Point(304, 328)
+        Me.CheckBox_NonDirectional.Location = New System.Drawing.Point(304, 320)
         Me.CheckBox_NonDirectional.Name = "CheckBox_NonDirectional"
         Me.CheckBox_NonDirectional.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.CheckBox_NonDirectional.Size = New System.Drawing.Size(114, 17)
@@ -533,39 +517,13 @@ Partial Class Form_AnimationBuilder
         '
         'Panel_Delay
         '
-        Me.Panel_Delay.Controls.Add(Me.ComboBox1)
-        Me.Panel_Delay.Controls.Add(Me.NumericUpDown_FPS)
         Me.Panel_Delay.Controls.Add(Me.Label_Milliseconds)
-        Me.Panel_Delay.Controls.Add(Me.Label_FPS)
         Me.Panel_Delay.Controls.Add(Me.NumericUpDown_Delay)
         Me.Panel_Delay.Controls.Add(Me.Label_Delay)
         Me.Panel_Delay.Location = New System.Drawing.Point(0, 312)
         Me.Panel_Delay.Name = "Panel_Delay"
-        Me.Panel_Delay.Size = New System.Drawing.Size(224, 72)
+        Me.Panel_Delay.Size = New System.Drawing.Size(224, 40)
         Me.Panel_Delay.TabIndex = 101
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ComboBox1.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"8", "12", "16", "24", "30", "50"})
-        Me.ComboBox1.Location = New System.Drawing.Point(136, 8)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(48, 21)
-        Me.ComboBox1.TabIndex = 102
-        '
-        'Label_FPS
-        '
-        Me.Label_FPS.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_FPS.Location = New System.Drawing.Point(8, 8)
-        Me.Label_FPS.Name = "Label_FPS"
-        Me.Label_FPS.Size = New System.Drawing.Size(56, 21)
-        Me.Label_FPS.TabIndex = 87
-        Me.Label_FPS.Text = "FPS:"
-        Me.Label_FPS.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Form_AnimationBuilder
         '
@@ -593,7 +551,6 @@ Partial Class Form_AnimationBuilder
         CType(Me.PixelBox_Right, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel_Artist.ResumeLayout(False)
         Me.Panel_Animation.ResumeLayout(False)
-        CType(Me.NumericUpDown_FPS, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel_Side.ResumeLayout(False)
         Me.Panel_Side.PerformLayout()
         Me.Panel_Delay.ResumeLayout(False)
@@ -633,13 +590,10 @@ Partial Class Form_AnimationBuilder
     Friend WithEvents ClearToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RadioButton_TypeNature As RadioButton
     Friend WithEvents RadioButton_TypeObject As RadioButton
-    Friend WithEvents NumericUpDown_FPS As NumericUpDown
     Friend WithEvents Label_Animation_Frame_Count As Label
     Friend WithEvents ComboBox_Name As ComboBox
     Friend WithEvents Panel_Side As Panel
     Friend WithEvents Panel_Delay As Panel
-    Friend WithEvents Label_FPS As Label
-    Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Button_Flip As Button
     Friend WithEvents Label_Artist As Label
     Friend WithEvents ComboBox_Artist As ComboBox

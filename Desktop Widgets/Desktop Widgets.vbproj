@@ -119,6 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Form_DesktopShortcut.Designer.vb">
+      <DependentUpon>Form_DesktopShortcut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_DesktopShortcut.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_Phrase.Designer.vb">
       <DependentUpon>Form_Phrase.vb</DependentUpon>
     </Compile>
@@ -208,6 +214,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form_DesktopShortcut.resx">
+      <DependentUpon>Form_DesktopShortcut.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_Phrase.resx">
       <DependentUpon>Form_Phrase.vb</DependentUpon>
     </EmbeddedResource>

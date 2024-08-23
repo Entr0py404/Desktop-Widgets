@@ -33,12 +33,9 @@ Partial Class Form_Pets
         Me.GroundPetsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FlyingPetsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Label_Display = New System.Windows.Forms.Label()
         Me.ComboBox_Display = New System.Windows.Forms.ComboBox()
         Me.Panel_Bottom = New System.Windows.Forms.Panel()
-        Me.Panel_Main = New System.Windows.Forms.Panel()
-        Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel_Side = New System.Windows.Forms.Panel()
         Me.NumericUpDown_ObjectScale = New System.Windows.Forms.NumericUpDown()
         Me.Panel_Top = New System.Windows.Forms.Panel()
@@ -102,14 +99,17 @@ Partial Class Form_Pets
         Me.SearchToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Panel_Main = New System.Windows.Forms.Panel()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel_Bottom.SuspendLayout()
-        Me.Panel_Main.SuspendLayout()
-        Me.Panel5.SuspendLayout()
         Me.Panel_Side.SuspendLayout()
         CType(Me.NumericUpDown_ObjectScale, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel_Top.SuspendLayout()
         Me.ContextMenuStrip2.SuspendLayout()
+        Me.Panel5.SuspendLayout()
+        Me.Panel_Main.SuspendLayout()
         Me.SuspendLayout()
         '
         'CheckBox_FollowCursor
@@ -185,7 +185,7 @@ Partial Class Form_Pets
         Me.MenuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(506, 30)
+        Me.MenuStrip1.Size = New System.Drawing.Size(537, 30)
         Me.MenuStrip1.TabIndex = 119
         '
         'GroundPetsToolStripMenuItem
@@ -209,17 +209,8 @@ Partial Class Form_Pets
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 30)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(506, 396)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(537, 396)
         Me.FlowLayoutPanel1.TabIndex = 121
-        '
-        'FlowLayoutPanel2
-        '
-        Me.FlowLayoutPanel2.AutoScroll = True
-        Me.FlowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(0, 30)
-        Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(506, 396)
-        Me.FlowLayoutPanel2.TabIndex = 122
         '
         'Label_Display
         '
@@ -251,29 +242,8 @@ Partial Class Form_Pets
         Me.Panel_Bottom.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel_Bottom.Location = New System.Drawing.Point(0, 466)
         Me.Panel_Bottom.Name = "Panel_Bottom"
-        Me.Panel_Bottom.Size = New System.Drawing.Size(750, 26)
+        Me.Panel_Bottom.Size = New System.Drawing.Size(781, 26)
         Me.Panel_Bottom.TabIndex = 123
-        '
-        'Panel_Main
-        '
-        Me.Panel_Main.Controls.Add(Me.FlowLayoutPanel1)
-        Me.Panel_Main.Controls.Add(Me.FlowLayoutPanel2)
-        Me.Panel_Main.Controls.Add(Me.Panel5)
-        Me.Panel_Main.Controls.Add(Me.Panel_Side)
-        Me.Panel_Main.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel_Main.Location = New System.Drawing.Point(0, 40)
-        Me.Panel_Main.Name = "Panel_Main"
-        Me.Panel_Main.Size = New System.Drawing.Size(750, 426)
-        Me.Panel_Main.TabIndex = 125
-        '
-        'Panel5
-        '
-        Me.Panel5.Controls.Add(Me.MenuStrip1)
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel5.Location = New System.Drawing.Point(0, 0)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(506, 30)
-        Me.Panel5.TabIndex = 124
         '
         'Panel_Side
         '
@@ -285,7 +255,7 @@ Partial Class Form_Pets
         Me.Panel_Side.Controls.Add(Me.NumericUpDown_ObjectScale)
         Me.Panel_Side.Controls.Add(Me.Label_Scale)
         Me.Panel_Side.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel_Side.Location = New System.Drawing.Point(506, 0)
+        Me.Panel_Side.Location = New System.Drawing.Point(537, 0)
         Me.Panel_Side.Name = "Panel_Side"
         Me.Panel_Side.Size = New System.Drawing.Size(244, 426)
         Me.Panel_Side.TabIndex = 123
@@ -313,7 +283,7 @@ Partial Class Form_Pets
         Me.Panel_Top.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel_Top.Location = New System.Drawing.Point(0, 0)
         Me.Panel_Top.Name = "Panel_Top"
-        Me.Panel_Top.Size = New System.Drawing.Size(750, 40)
+        Me.Panel_Top.Size = New System.Drawing.Size(781, 40)
         Me.Panel_Top.TabIndex = 122
         '
         'ComboBox_FlyingPetObjects
@@ -719,12 +689,42 @@ Partial Class Form_Pets
         Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(122, 22)
         Me.AboutToolStripMenuItem1.Text = "&About..."
         '
+        'FlowLayoutPanel2
+        '
+        Me.FlowLayoutPanel2.AutoScroll = True
+        Me.FlowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(0, 30)
+        Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(537, 396)
+        Me.FlowLayoutPanel2.TabIndex = 122
+        '
+        'Panel5
+        '
+        Me.Panel5.Controls.Add(Me.MenuStrip1)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel5.Location = New System.Drawing.Point(0, 0)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(537, 30)
+        Me.Panel5.TabIndex = 124
+        '
+        'Panel_Main
+        '
+        Me.Panel_Main.Controls.Add(Me.FlowLayoutPanel1)
+        Me.Panel_Main.Controls.Add(Me.FlowLayoutPanel2)
+        Me.Panel_Main.Controls.Add(Me.Panel5)
+        Me.Panel_Main.Controls.Add(Me.Panel_Side)
+        Me.Panel_Main.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel_Main.Location = New System.Drawing.Point(0, 40)
+        Me.Panel_Main.Name = "Panel_Main"
+        Me.Panel_Main.Size = New System.Drawing.Size(781, 426)
+        Me.Panel_Main.TabIndex = 125
+        '
         'Form_Pets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(750, 492)
+        Me.ClientSize = New System.Drawing.Size(781, 492)
         Me.Controls.Add(Me.Panel_Main)
         Me.Controls.Add(Me.Panel_Bottom)
         Me.Controls.Add(Me.Panel_Top)
@@ -736,12 +736,12 @@ Partial Class Form_Pets
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.Panel_Bottom.ResumeLayout(False)
-        Me.Panel_Main.ResumeLayout(False)
-        Me.Panel5.ResumeLayout(False)
         Me.Panel_Side.ResumeLayout(False)
         CType(Me.NumericUpDown_ObjectScale, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel_Top.ResumeLayout(False)
         Me.ContextMenuStrip2.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel_Main.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -756,7 +756,6 @@ Partial Class Form_Pets
     Private WithEvents Label_Display As Label
     Friend WithEvents ComboBox_Display As ComboBox
     Friend WithEvents Panel_Bottom As Panel
-    Friend WithEvents Panel_Main As Panel
     Friend WithEvents ContextMenuStrip2 As ContextMenuStrip
     Friend WithEvents Small_ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Medium_ToolStripMenuItem As ToolStripMenuItem
@@ -766,10 +765,8 @@ Partial Class Form_Pets
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents Panel_Top As Panel
     Friend WithEvents Button1 As Button
-    Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
     Friend WithEvents NumericUpDown_ObjectScale As NumericUpDown
     Friend WithEvents Panel_Side As Panel
-    Friend WithEvents Panel5 As Panel
     Friend WithEvents Label_Pets As Label
     Friend WithEvents ComboBox_GroundPetObjects As ComboBox
     Friend WithEvents NewToolStripMenuItem As ToolStripMenuItem
@@ -823,4 +820,7 @@ Partial Class Form_Pets
     Friend WithEvents toolStripSeparator11 As ToolStripSeparator
     Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ComboBox_FlyingPetObjects As ComboBox
+    Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents Panel_Main As Panel
 End Class

@@ -173,6 +173,11 @@ Public Class Form_FlyingPet
                 If INI.Sections("Settings").Keys("FollowCursor_StoppingDistance_Px") IsNot Nothing Then
                     FollowCursor_StoppingDistance_Px = CInt(INI.Sections("Settings").Keys("FollowCursor_StoppingDistance_Px").Value)
                 End If
+
+                If INI.Sections("Settings").Keys("Opacity") IsNot Nothing Then
+                    Me.Opacity = CDbl(INI.Sections("Settings").Keys("Opacity").Value)
+                    Console.WriteLine("Opacity in ini used")
+                End If
             End If
 
             ' [Decisions]

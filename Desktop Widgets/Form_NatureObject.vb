@@ -8,6 +8,7 @@ Public Class Form_NatureObject
     Dim Rand As New Random
     Dim BlockEvent_DisplayComboBox As Boolean = False
     Public DefaultScale As Integer = 1
+    Dim HorizontallyFlipped As Boolean = False
 
     ' Form_NatureObject - Load
     Private Sub Form_NatureObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -36,6 +37,18 @@ Public Class Form_NatureObject
             'Me.Width = Screen.PrimaryScreen.WorkingArea.Width
             'Me.Height = ObjectImage.Height
             'Me.Location = New Point(MYScreen.WorkingArea.Left, MYScreen.WorkingArea.Bottom - Me.Height)
+        End If
+
+        Dim FrameDimension = New Imaging.FrameDimension(PixelBox1.Image.FrameDimensionsList()(0))
+        If PixelBox1.Image.GetFrameCount(FrameDimension) > 1 Then
+            FlipHorizontallyToolStripMenuItem.Enabled = False
+        Else
+            Dim R As Integer = CInt(Rnd(1))
+            If R = 0 Then
+                PixelBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipX)
+                PixelBox1.Refresh()
+                HorizontallyFlipped = True
+                End If
         End If
 
         Me.Location = New Point(Rand.Next(MYScreen.WorkingArea.Left, MYScreen.WorkingArea.Right - Me.Width), MYScreen.WorkingArea.Bottom - Me.Height)
@@ -125,6 +138,17 @@ Public Class Form_NatureObject
                 MYScreen = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex).GetScreen
                 Me.Location = New Point(Rand.Next(MYScreen.WorkingArea.Left, MYScreen.WorkingArea.Right - Me.Width), MYScreen.WorkingArea.Bottom - Me.Height)
             End If
+        End If
+    End Sub
+
+    ' FlipHorizontallyToolStripMenuItem - Click
+    Private Sub FlipHorizontallyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FlipHorizontallyToolStripMenuItem.Click
+        PixelBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipX)
+        PixelBox1.Refresh()
+        If HorizontallyFlipped = False Then
+            HorizontallyFlipped = True
+        Else
+            HorizontallyFlipped = False
         End If
     End Sub
 End Class

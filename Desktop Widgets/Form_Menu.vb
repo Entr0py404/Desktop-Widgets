@@ -170,24 +170,6 @@ Public Class Form_Menu
         End If
     End Sub
 
-    ' Button_MotionDesktop - Click
-    Private Sub Button_MotionDesktop_Click(sender As Object, e As EventArgs) Handles Button_MotionDesktop.Click
-        If File.Exists(Application.StartupPath & "\Motion Desktop\Motion Desktop.exe") Then
-            Process.Start(Application.StartupPath & "\Motion Desktop\Motion Desktop.exe")
-        Else
-            MsgBox("The executable 'Motion Desktop.exe' is missing.", MsgBoxStyle.Information, "Desktop Widgets")
-        End If
-    End Sub
-
-    ' Button_DualBackgrounds - Click
-    Private Sub Button_DualBackgrounds_Click(sender As Object, e As EventArgs) Handles Button_DualBackgrounds.Click
-        If File.Exists(Application.StartupPath & "\Dual Backgrounds\Dual Backgrounds.exe") Then
-            Process.Start(Application.StartupPath & "\Dual Backgrounds\Dual Backgrounds.exe")
-        Else
-            MsgBox("The executable 'Dual Backgrounds.exe' is missing.", MsgBoxStyle.Information, "Desktop Widgets")
-        End If
-    End Sub
-
     ' NotifyIcon1 - MouseClick
     Private Sub NotifyIcon1_MouseClick(sender As Object, e As MouseEventArgs) Handles NotifyIcon1.MouseClick
         If e.Button = MouseButtons.Left Then

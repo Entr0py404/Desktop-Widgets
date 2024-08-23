@@ -74,7 +74,7 @@ Public Class Form_DesktopObjects
                 Dim DesktopObject = New Form_DesktopObject
                 Dim DesktopObjectFullPath As String = DirectCast(sender, PixelBox).Text.ToString
                 DesktopObject.ObjectImage = New Bitmap(DesktopObjectFullPath)
-                DesktopObject.PixelBox1.Image = DesktopObject.ObjectImage
+                DesktopObject.PixelBox_DesktopObject.Image = DesktopObject.ObjectImage
                 DesktopObject.Name = "DesktopObject"
                 DesktopObject.Text = "Desktop Object - " & Path.GetFileNameWithoutExtension(DesktopObjectFullPath)
                 Form_Menu.IDCounter_DesktopObject += 1

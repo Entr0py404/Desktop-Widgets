@@ -29,30 +29,33 @@ Partial Class Form_DesktopObject
         Me.AllAlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ScaleToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.AllScaleToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.StopAnimationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SnapToBarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetShortcutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FlipHorizontallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisplayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisplayToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.ScaleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ScaleToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PixelBox1 = New Desktop_Widgets.PixelBox()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.PixelBox_DesktopObject = New Desktop_Widgets.PixelBox()
         Me.ContextMenuStrip1.SuspendLayout()
-        CType(Me.PixelBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PixelBox_DesktopObject, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ContextMenuStrip1
         '
         Me.ContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AllDesktopObjectsToolStripMenuItem, Me.ToolStripSeparator1, Me.StopAnimationToolStripMenuItem, Me.AlwaysOnTopToolStripMenuItem, Me.SnapToBarToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.ScaleToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AllDesktopObjectsToolStripMenuItem, Me.ToolStripSeparator1, Me.StopAnimationToolStripMenuItem, Me.AlwaysOnTopToolStripMenuItem, Me.SnapToBarToolStripMenuItem, Me.SetShortcutToolStripMenuItem, Me.FlipHorizontallyToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.ScaleToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.ShowCheckMargin = True
         Me.ContextMenuStrip1.ShowImageMargin = False
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(206, 206)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(206, 254)
         '
         'AllDesktopObjectsToolStripMenuItem
         '
@@ -90,6 +93,11 @@ Partial Class Form_DesktopObject
         Me.AllScaleToolStripComboBox.Name = "AllScaleToolStripComboBox"
         Me.AllScaleToolStripComboBox.Size = New System.Drawing.Size(121, 28)
         '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(202, 6)
+        '
         'StopAnimationToolStripMenuItem
         '
         Me.StopAnimationToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
@@ -112,6 +120,21 @@ Partial Class Form_DesktopObject
         Me.SnapToBarToolStripMenuItem.Name = "SnapToBarToolStripMenuItem"
         Me.SnapToBarToolStripMenuItem.Size = New System.Drawing.Size(205, 24)
         Me.SnapToBarToolStripMenuItem.Text = "Snap to bar"
+        '
+        'SetShortcutToolStripMenuItem
+        '
+        Me.SetShortcutToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.SetShortcutToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.SetShortcutToolStripMenuItem.Name = "SetShortcutToolStripMenuItem"
+        Me.SetShortcutToolStripMenuItem.Size = New System.Drawing.Size(205, 24)
+        Me.SetShortcutToolStripMenuItem.Text = "Set shortcut"
+        '
+        'FlipHorizontallyToolStripMenuItem
+        '
+        Me.FlipHorizontallyToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.FlipHorizontallyToolStripMenuItem.Name = "FlipHorizontallyToolStripMenuItem"
+        Me.FlipHorizontallyToolStripMenuItem.Size = New System.Drawing.Size(205, 24)
+        Me.FlipHorizontallyToolStripMenuItem.Text = "Flip horizontally"
         '
         'DisplayToolStripMenuItem
         '
@@ -160,24 +183,31 @@ Partial Class Form_DesktopObject
         Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(205, 24)
         Me.CloseToolStripMenuItem.Text = "Close"
         '
-        'PixelBox1
+        'ToolTip1
         '
-        Me.PixelBox1.BackColor = System.Drawing.Color.Fuchsia
-        Me.PixelBox1.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.PixelBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PixelBox1.Location = New System.Drawing.Point(0, 0)
-        Me.PixelBox1.Name = "PixelBox1"
-        Me.PixelBox1.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half
-        Me.PixelBox1.Size = New System.Drawing.Size(233, 153)
-        Me.PixelBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PixelBox1.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None
-        Me.PixelBox1.TabIndex = 3
-        Me.PixelBox1.TabStop = False
+        Me.ToolTip1.AutomaticDelay = 1500
+        Me.ToolTip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
+        Me.ToolTip1.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ToolTip1.OwnerDraw = True
+        Me.ToolTip1.ShowAlways = True
+        Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTip1.ToolTipTitle = "Shortcut path"
+        Me.ToolTip1.UseAnimation = False
+        Me.ToolTip1.UseFading = False
         '
-        'ToolStripSeparator1
+        'PixelBox_DesktopObject
         '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(202, 6)
+        Me.PixelBox_DesktopObject.BackColor = System.Drawing.Color.Fuchsia
+        Me.PixelBox_DesktopObject.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.PixelBox_DesktopObject.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PixelBox_DesktopObject.Location = New System.Drawing.Point(0, 0)
+        Me.PixelBox_DesktopObject.Name = "PixelBox_DesktopObject"
+        Me.PixelBox_DesktopObject.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half
+        Me.PixelBox_DesktopObject.Size = New System.Drawing.Size(233, 153)
+        Me.PixelBox_DesktopObject.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PixelBox_DesktopObject.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None
+        Me.PixelBox_DesktopObject.TabIndex = 3
+        Me.PixelBox_DesktopObject.TabStop = False
         '
         'Form_DesktopObject
         '
@@ -185,7 +215,7 @@ Partial Class Form_DesktopObject
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Fuchsia
         Me.ClientSize = New System.Drawing.Size(233, 153)
-        Me.Controls.Add(Me.PixelBox1)
+        Me.Controls.Add(Me.PixelBox_DesktopObject)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -197,12 +227,12 @@ Partial Class Form_DesktopObject
         Me.TopMost = True
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         Me.ContextMenuStrip1.ResumeLayout(False)
-        CType(Me.PixelBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PixelBox_DesktopObject, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents PixelBox1 As PixelBox
+    Friend WithEvents PixelBox_DesktopObject As PixelBox
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents ScaleToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ScaleToolStripComboBox As ToolStripComboBox
@@ -218,4 +248,7 @@ Partial Class Form_DesktopObject
     Friend WithEvents DisplayToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DisplayToolStripComboBox As ToolStripComboBox
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents FlipHorizontallyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SetShortcutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

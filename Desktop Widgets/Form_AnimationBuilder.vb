@@ -7,8 +7,6 @@ Public Class Form_AnimationBuilder
     ' Form_AnimationBuilder - Load
     Private Sub Form_AnimationBuilder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
-        NumericUpDown_Delay.Controls.RemoveAt(0)
-        ComboBox1.SelectedIndex = 3
     End Sub
 
     ' Panel_Main - DragDrop
@@ -198,6 +196,7 @@ Public Class Form_AnimationBuilder
         PixelBox_Left.Image = Nothing
         PixelBox_Right.Image = Nothing
         ListBox_Images.Items.Clear()
+        Label_Animation_Frame_Count.Text = "Animation Frame Count: "
     End Sub
 
     ' Button_Save - Click
@@ -264,23 +263,6 @@ Public Class Form_AnimationBuilder
                 End If
             End If
 
-        End If
-    End Sub
-
-    ' NumericUpDown_FPS - ValueChanged
-    Private Sub NumericUpDown_FPS_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown_FPS.ValueChanged
-        If NumericUpDown_FPS.Focused Then
-            NumericUpDown_Delay.Value = Int(1 / NumericUpDown_FPS.Value * 1000)
-            'Console.WriteLine(Int(1 / NumericUpDown_FPS.Value * 1000))
-        End If
-    End Sub
-
-    ' ComboBox1 - SelectedIndexChanged
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-        If Not ComboBox1.SelectedIndex = -1 Then
-            NumericUpDown_FPS.Value = CDec(ComboBox1.SelectedItem.ToString)
-            NumericUpDown_Delay.Value = Int(1 / NumericUpDown_FPS.Value * 1000)
-            'Console.WriteLine(CDec(ComboBox1.SelectedValue.ToString))
         End If
     End Sub
 
