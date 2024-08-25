@@ -8,7 +8,6 @@ Public Class Form_GroundPet
 
     Public TurnLeft As Boolean = True
     Public FollowCursor As Boolean = False
-    Public CurrentlyAnimating As Boolean = False
     Public PetDir As String
 
     Public Animation_Dragging As Image
@@ -32,7 +31,6 @@ Public Class Form_GroundPet
     Public Animation_Sleeping_Right As Bitmap
     Public Animation_Jumping_Left As Bitmap
     Public Animation_Jumping_Right As Bitmap
-    Public CurrentAnimatedImage As Bitmap
 
     ' Behavior settings
     Dim DefaultScale As Integer = 1
@@ -157,9 +155,9 @@ Public Class Form_GroundPet
 
         'AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf DisplaySettingsChanged
 
-        Try
-            Dim iniFilePath As String = Application.StartupPath & "\" & PetDir & "\Behavior.ini"
-            If File.Exists(iniFilePath) Then
+        Dim iniFilePath As String = Application.StartupPath & "\" & PetDir & "\Behavior.ini"
+        If File.Exists(iniFilePath) Then
+            Try
                 Dim INI As New MadMilkman.Ini.IniFile()
                 INI.Load(iniFilePath)
 
@@ -212,6 +210,7 @@ Public Class Form_GroundPet
                         Walking_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Walking_Movement_Tick").Value)
                         Timer_Walking.Interval = Walking_Movement_Tick
                     End If
+
                     If INI.Sections("Timers_Tick").Keys("Falling_Movement_Tick") IsNot Nothing Then
                         Falling_Movement_Tick = CInt(INI.Sections("Timers_Tick").Keys("Falling_Movement_Tick").Value)
                         Timer_Falling.Interval = Falling_Movement_Tick
@@ -220,13 +219,14 @@ Public Class Form_GroundPet
 
                 ' [Timers_Randomization]
                 If INI.Sections("Timers_Randomization") IsNot Nothing Then
-
                     If INI.Sections("Timers_Randomization").Keys("TurningDecision_Min") IsNot Nothing Then
                         TurningDecision_Min = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Min").Value)
                     End If
+
                     If INI.Sections("Timers_Randomization").Keys("TurningDecision_Max") IsNot Nothing Then
                         TurningDecision_Max = CInt(INI.Sections("Timers_Randomization").Keys("TurningDecision_Max").Value)
                     End If
+
                     If TurningDecision_Min <> 0 AndAlso TurningDecision_Max <> 0 Then
                         Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
                     End If
@@ -246,23 +246,24 @@ Public Class Form_GroundPet
                     If INI.Sections("Timers_Randomization").Keys("Sleeping_Min") IsNot Nothing Then
                         Sleeping_Min = CInt(INI.Sections("Timers_Randomization").Keys("Sleeping_Min").Value)
                     End If
+
                     If INI.Sections("Timers_Randomization").Keys("Sleeping_Max") IsNot Nothing Then
                         Sleeping_Max = CInt(INI.Sections("Timers_Randomization").Keys("Sleeping_Max").Value)
                     End If
+
                     If Sleeping_Min <> 0 AndAlso Sleeping_Max <> 0 Then
                         Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
                     End If
-
                 End If
-            Else
-                Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
-                Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
-                Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
 
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        Else
+            Timer_TurningDecision.Interval = Rand.Next(TurningDecision_Min, TurningDecision_Max + 1)
+            Timer_IdleDecision.Interval = Rand.Next(IdleDecision_Min, IdleDecision_Max + 1)
+            Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
+        End If
 
         ScaleToolStripComboBox.SelectedIndex = CInt(Form_Pets.NumericUpDown_ObjectScale.Value) - 1
 
@@ -650,35 +651,6 @@ Public Class Form_GroundPet
     Private Sub ScaleToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ScaleToolStripComboBox.SelectedIndexChanged
         If Not ScaleToolStripComboBox.SelectedIndex = -1 Then
             ScalePet(ScaleToolStripComboBox.SelectedIndex + 1)
-        End If
-    End Sub
-
-    ' PixelBox_Pet - Paint
-    Private Sub PixelBox_Pet_Paint(sender As Object, e As PaintEventArgs) 'Handles PixelBox_Pet.Paint
-        If CurrentAnimatedImage IsNot Nothing Then
-            AnimateImage()
-            ImageAnimator.UpdateFrames()
-            If TurnLeft = False Then
-                Dim tempImage As New Bitmap(CurrentAnimatedImage)
-                tempImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
-                e.Graphics.DrawImage(tempImage, New Point(0, 0))
-                tempImage.Dispose()
-            Else
-                e.Graphics.DrawImage(CurrentAnimatedImage, New Point(0, 0))
-            End If
-        End If
-    End Sub
-
-    ' OnFrameChanged()
-    Private Sub OnFrameChanged(ByVal o As Object, ByVal e As EventArgs)
-        PixelBox_Pet.Invalidate()
-    End Sub
-
-    ' AnimateImage()
-    Sub AnimateImage()
-        If Not currentlyAnimating Then
-            ImageAnimator.Animate(CurrentAnimatedImage, New EventHandler(AddressOf Me.OnFrameChanged))
-            currentlyAnimating = True
         End If
     End Sub
 

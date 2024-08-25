@@ -154,60 +154,65 @@ Public Class Form_Nature
             End If
 
             If File.Exists(Application.StartupPath & "\Nature\" & ComboBox_NatureObjects.SelectedItem.ToString & "\Theme.ini") Then
-                Dim INI As New MadMilkman.Ini.IniFile()
-                INI.Load(Application.StartupPath & "\Nature\" & ComboBox_NatureObjects.SelectedItem.ToString & "\Theme.ini")
+                Try
+                    Dim INI As New MadMilkman.Ini.IniFile()
+                    INI.Load(Application.StartupPath & "\Nature\" & ComboBox_NatureObjects.SelectedItem.ToString & "\Theme.ini")
 
-                If INI.Sections("Settings") IsNot Nothing Then
-                    If INI.Sections("Settings").Keys("DefaultScale") IsNot Nothing Then
-                        DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
-                    End If
-                End If
-
-                If INI.Sections("Randomization_Min") IsNot Nothing Then
-                    If INI.Sections("Randomization_Min").Keys("Flowers") IsNot Nothing Then
-                        Flowers_Min = CInt(INI.Sections("Randomization_Min").Keys("Flowers").Value)
+                    If INI.Sections("Settings") IsNot Nothing Then
+                        If INI.Sections("Settings").Keys("DefaultScale") IsNot Nothing Then
+                            DefaultScale = CInt(INI.Sections("Settings").Keys("DefaultScale").Value)
+                        End If
                     End If
 
-                    If INI.Sections("Randomization_Min").Keys("Bushes") IsNot Nothing Then
-                        Bushes_Min = CInt(INI.Sections("Randomization_Min").Keys("Bushes").Value)
+                    If INI.Sections("Randomization_Min") IsNot Nothing Then
+                        If INI.Sections("Randomization_Min").Keys("Flowers") IsNot Nothing Then
+                            Flowers_Min = CInt(INI.Sections("Randomization_Min").Keys("Flowers").Value)
+                        End If
+
+                        If INI.Sections("Randomization_Min").Keys("Bushes") IsNot Nothing Then
+                            Bushes_Min = CInt(INI.Sections("Randomization_Min").Keys("Bushes").Value)
+                        End If
+
+                        If INI.Sections("Randomization_Min").Keys("Trees") IsNot Nothing Then
+                            Trees_Min = CInt(INI.Sections("Randomization_Min").Keys("Trees").Value)
+                        End If
+
+                        If INI.Sections("Randomization_Min").Keys("Rocks") IsNot Nothing Then
+                            Rocks_Min = CInt(INI.Sections("Randomization_Min").Keys("Rocks").Value)
+                        End If
+
+                        If INI.Sections("Randomization_Min").Keys("Grass") IsNot Nothing Then
+                            Grass_Min = CInt(INI.Sections("Randomization_Min").Keys("Grass").Value)
+                        End If
                     End If
 
-                    If INI.Sections("Randomization_Min").Keys("Trees") IsNot Nothing Then
-                        Trees_Min = CInt(INI.Sections("Randomization_Min").Keys("Trees").Value)
+                    If INI.Sections("Randomization_Max") IsNot Nothing Then
+                        If INI.Sections("Randomization_Max").Keys("Flowers") IsNot Nothing Then
+                            Flowers_Max = CInt(INI.Sections("Randomization_Max").Keys("Flowers").Value)
+                        End If
+
+                        If INI.Sections("Randomization_Max").Keys("Bushes") IsNot Nothing Then
+                            Bushes_Max = CInt(INI.Sections("Randomization_Max").Keys("Bushes").Value)
+                        End If
+
+                        If INI.Sections("Randomization_Max").Keys("Trees") IsNot Nothing Then
+                            Trees_Max = CInt(INI.Sections("Randomization_Max").Keys("Trees").Value)
+                        End If
+
+                        If INI.Sections("Randomization_Max").Keys("Rocks") IsNot Nothing Then
+                            Rocks_Max = CInt(INI.Sections("Randomization_Max").Keys("Rocks").Value)
+                        End If
+
+                        If INI.Sections("Randomization_Max").Keys("Grass") IsNot Nothing Then
+                            Grass_Max = CInt(INI.Sections("Randomization_Max").Keys("Grass").Value)
+                        End If
                     End If
 
-                    If INI.Sections("Randomization_Min").Keys("Rocks") IsNot Nothing Then
-                        Rocks_Min = CInt(INI.Sections("Randomization_Min").Keys("Rocks").Value)
-                    End If
+                    Button_Randomize.PerformClick()
 
-                    If INI.Sections("Randomization_Min").Keys("Grass") IsNot Nothing Then
-                        Grass_Min = CInt(INI.Sections("Randomization_Min").Keys("Grass").Value)
-                    End If
-                End If
-
-                If INI.Sections("Randomization_Max") IsNot Nothing Then
-                    If INI.Sections("Randomization_Max").Keys("Flowers") IsNot Nothing Then
-                        Flowers_Max = CInt(INI.Sections("Randomization_Max").Keys("Flowers").Value)
-                    End If
-
-                    If INI.Sections("Randomization_Max").Keys("Bushes") IsNot Nothing Then
-                        Bushes_Max = CInt(INI.Sections("Randomization_Max").Keys("Bushes").Value)
-                    End If
-
-                    If INI.Sections("Randomization_Max").Keys("Trees") IsNot Nothing Then
-                        Trees_Max = CInt(INI.Sections("Randomization_Max").Keys("Trees").Value)
-                    End If
-
-                    If INI.Sections("Randomization_Max").Keys("Rocks") IsNot Nothing Then
-                        Rocks_Max = CInt(INI.Sections("Randomization_Max").Keys("Rocks").Value)
-                    End If
-
-                    If INI.Sections("Randomization_Max").Keys("Grass") IsNot Nothing Then
-                        Grass_Max = CInt(INI.Sections("Randomization_Max").Keys("Grass").Value)
-                    End If
-                End If
-
-                Button_Randomize.PerformClick()
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
             End If
         End If
     End Sub

@@ -48,7 +48,7 @@ Public Class Form_NatureObject
                 PixelBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipX)
                 PixelBox1.Refresh()
                 HorizontallyFlipped = True
-                End If
+            End If
         End If
 
         Me.Location = New Point(Rand.Next(MYScreen.WorkingArea.Left, MYScreen.WorkingArea.Right - Me.Width), MYScreen.WorkingArea.Bottom - Me.Height)

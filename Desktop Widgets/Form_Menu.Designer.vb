@@ -68,7 +68,7 @@ Partial Class Form_Menu
         Me.Button_Nature.FlatAppearance.BorderSize = 0
         Me.Button_Nature.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_Nature.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_Nature.Location = New System.Drawing.Point(224, 72)
+        Me.Button_Nature.Location = New System.Drawing.Point(224, 120)
         Me.Button_Nature.Name = "Button_Nature"
         Me.Button_Nature.Size = New System.Drawing.Size(144, 32)
         Me.Button_Nature.TabIndex = 63
@@ -82,7 +82,7 @@ Partial Class Form_Menu
         Me.Button_DesktopObjects.FlatAppearance.BorderSize = 0
         Me.Button_DesktopObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_DesktopObjects.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_DesktopObjects.Location = New System.Drawing.Point(224, 120)
+        Me.Button_DesktopObjects.Location = New System.Drawing.Point(224, 72)
         Me.Button_DesktopObjects.Name = "Button_DesktopObjects"
         Me.Button_DesktopObjects.Size = New System.Drawing.Size(144, 32)
         Me.Button_DesktopObjects.TabIndex = 64
