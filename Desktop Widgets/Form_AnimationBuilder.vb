@@ -343,4 +343,57 @@ Public Class Form_AnimationBuilder
             Label_Left.Visible = True
         End If
     End Sub
+
+    ' 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim PetDirFullPath As String = ""
+        If RadioButton_TypeGroundPet.Checked Then
+            PetDirFullPath = Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text
+        ElseIf RadioButton_TypeFlyingPet.Checked Then
+            PetDirFullPath = Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text
+        ElseIf RadioButton_TypeObject.Checked Then
+            PetDirFullPath = Application.StartupPath & "\Objects\" & ComboBox_Artist.Text
+        ElseIf RadioButton_TypeNature.Checked Then
+            PetDirFullPath = Application.StartupPath & "\Nature\" & ComboBox_Artist.Text
+        End If
+        Try
+            If Directory.Exists(PetDirFullPath) Then
+                Process.Start(PetDirFullPath)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    ' 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If Not ComboBox_Artist.Text = "" And Not ComboBox_Name.Text = "" Then
+            Dim PetDirFullPath As String = ""
+            If RadioButton_TypeGroundPet.Checked Then
+                PetDirFullPath = Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text
+            ElseIf RadioButton_TypeFlyingPet.Checked Then
+                PetDirFullPath = Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text
+            ElseIf RadioButton_TypeObject.Checked Then
+                PetDirFullPath = Application.StartupPath & "\Objects\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text
+            ElseIf RadioButton_TypeNature.Checked Then
+                PetDirFullPath = Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text
+            End If
+            Try
+                If Directory.Exists(PetDirFullPath) Then
+                    Process.Start(PetDirFullPath)
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+            End Try
+        End If
+    End Sub
+
+    ' 
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Form_AnimationDelayInfo.Show()
+        If Form_AnimationDelayInfo.WindowState = FormWindowState.Minimized Then
+            Form_AnimationDelayInfo.WindowState = FormWindowState.Normal
+        End If
+        Form_AnimationDelayInfo.BringToFront()
+    End Sub
 End Class

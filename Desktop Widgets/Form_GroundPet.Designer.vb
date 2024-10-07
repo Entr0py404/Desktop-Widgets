@@ -39,6 +39,7 @@ Partial Class Form_GroundPet
         Me.Timer_IdleDecision = New System.Windows.Forms.Timer(Me.components)
         Me.PixelBox_Pet = New Desktop_Widgets.PixelBox()
         Me.Timer_Sleeping = New System.Windows.Forms.Timer(Me.components)
+        Me.BehaviorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PixelBox_Pet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -47,9 +48,9 @@ Partial Class Form_GroundPet
         '
         Me.ContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AlwaysOnTopToolStripMenuItem, Me.FollowCursorToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.ScaleToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AlwaysOnTopToolStripMenuItem, Me.FollowCursorToolStripMenuItem, Me.BehaviorToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.ScaleToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 152)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 176)
         '
         'AlwaysOnTopToolStripMenuItem
         '
@@ -147,6 +148,13 @@ Partial Class Form_GroundPet
         '
         Me.Timer_Sleeping.Interval = 5000
         '
+        'BehaviorToolStripMenuItem
+        '
+        Me.BehaviorToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BehaviorToolStripMenuItem.Name = "BehaviorToolStripMenuItem"
+        Me.BehaviorToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.BehaviorToolStripMenuItem.Text = "Behavior"
+        '
         'Form_GroundPet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -185,4 +193,5 @@ Partial Class Form_GroundPet
     Friend WithEvents DisplayToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DisplayToolStripComboBox As ToolStripComboBox
     Friend WithEvents Timer_Sleeping As Timer
+    Friend WithEvents BehaviorToolStripMenuItem As ToolStripMenuItem
 End Class

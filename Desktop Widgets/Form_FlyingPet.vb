@@ -52,6 +52,8 @@ Public Class Form_FlyingPet
     Dim TakeFlightDecision_Min As Integer = 3500
     Dim TakeFlightDecision_Max As Integer = 5000
 
+    Private BehaviorForm As Form_Behavior = Nothing
+
     ' Form_FlyingPet_Load
     Private Sub Form_FlyingPet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If File.Exists(PetDir & "\Flying Left.gif") Then
@@ -816,6 +818,42 @@ Public Class Form_FlyingPet
         Else
             MYScreen = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex).GetScreen
             Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height) ' Fix this also need check for Ground_Mode
+        End If
+    End Sub
+
+    ' BehaviorToolStripMenuItem - Click
+    Private Sub BehaviorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BehaviorToolStripMenuItem.Click
+        ' Check if the form is already open
+        If BehaviorForm IsNot Nothing AndAlso Not BehaviorForm.IsDisposed Then
+            ' Bring the existing form to the front
+            BehaviorForm.BringToFront()
+        Else
+            ' Create a new instance if the form is not open or was closed
+            BehaviorForm = New Form_Behavior
+
+            BehaviorForm.PetType = "Flying"
+            BehaviorForm.PetDir = PetDir
+
+            BehaviorForm.Text = "Behavior - " & Path.GetFileName(PetDir)
+
+            BehaviorForm.Label_PetName.Text = Path.GetFileName(PetDir)
+            BehaviorForm.PixelBox_PetPreview.Image = Animation_Flying_Right
+
+            BehaviorForm.Label_FallingMovement_Px.Enabled = False
+            BehaviorForm.NumericUpDown_FallingMovement_Px.Enabled = False
+
+            BehaviorForm.Label_FallingMovement_Tick.Enabled = False
+            BehaviorForm.NumericUpDown_FallingMovement_Tick.Enabled = False
+
+            BehaviorForm.Label_SleepDecision.Enabled = False
+            BehaviorForm.NumericUpDown_SleepDecision.Enabled = False
+
+            BehaviorForm.Label_SleepingDecision.Enabled = False
+            BehaviorForm.NumericUpDown_SleepingDecision_Min.Enabled = False
+            BehaviorForm.NumericUpDown_SleepingDecision_Max.Enabled = False
+
+            ' Show the form
+            BehaviorForm.Show()
         End If
     End Sub
 End Class

@@ -31,6 +31,7 @@ Partial Class Form_FlyingPet
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FollowCursorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BehaviorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisplayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisplayToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.ScaleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -65,16 +66,16 @@ Partial Class Form_FlyingPet
         '
         Me.ContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AlwaysOnTopToolStripMenuItem, Me.FollowCursorToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.ScaleToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AlwaysOnTopToolStripMenuItem, Me.FollowCursorToolStripMenuItem, Me.BehaviorToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.ScaleToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(173, 130)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 176)
         '
         'AlwaysOnTopToolStripMenuItem
         '
         Me.AlwaysOnTopToolStripMenuItem.CheckOnClick = True
         Me.AlwaysOnTopToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.AlwaysOnTopToolStripMenuItem.Name = "AlwaysOnTopToolStripMenuItem"
-        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
+        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.AlwaysOnTopToolStripMenuItem.Text = "Always on top"
         '
         'FollowCursorToolStripMenuItem
@@ -82,15 +83,22 @@ Partial Class Form_FlyingPet
         Me.FollowCursorToolStripMenuItem.CheckOnClick = True
         Me.FollowCursorToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.FollowCursorToolStripMenuItem.Name = "FollowCursorToolStripMenuItem"
-        Me.FollowCursorToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
+        Me.FollowCursorToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.FollowCursorToolStripMenuItem.Text = "Follow cursor"
+        '
+        'BehaviorToolStripMenuItem
+        '
+        Me.BehaviorToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BehaviorToolStripMenuItem.Name = "BehaviorToolStripMenuItem"
+        Me.BehaviorToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.BehaviorToolStripMenuItem.Text = "Behavior"
         '
         'DisplayToolStripMenuItem
         '
         Me.DisplayToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DisplayToolStripComboBox})
         Me.DisplayToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.DisplayToolStripMenuItem.Name = "DisplayToolStripMenuItem"
-        Me.DisplayToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
+        Me.DisplayToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.DisplayToolStripMenuItem.Text = "Display"
         '
         'DisplayToolStripComboBox
@@ -107,7 +115,7 @@ Partial Class Form_FlyingPet
         Me.ScaleToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ScaleToolStripComboBox})
         Me.ScaleToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ScaleToolStripMenuItem.Name = "ScaleToolStripMenuItem"
-        Me.ScaleToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
+        Me.ScaleToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.ScaleToolStripMenuItem.Text = "Scale"
         '
         'ScaleToolStripComboBox
@@ -123,13 +131,13 @@ Partial Class Form_FlyingPet
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(169, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
         '
         'CloseToolStripMenuItem
         '
         Me.CloseToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
-        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(172, 24)
+        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.CloseToolStripMenuItem.Text = "Close"
         '
         'Timer_ChangeModesDecision
@@ -187,4 +195,5 @@ Partial Class Form_FlyingPet
     Friend WithEvents AlwaysOnTopToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DisplayToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DisplayToolStripComboBox As ToolStripComboBox
+    Friend WithEvents BehaviorToolStripMenuItem As ToolStripMenuItem
 End Class

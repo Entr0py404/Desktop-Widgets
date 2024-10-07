@@ -53,6 +53,8 @@ Public Class Form_GroundPet
     Dim Sleeping_Max As Integer = 150000
     Dim HasAnimation_Sleeping As Boolean = False
 
+    Private BehaviorForm As Form_Behavior = Nothing
+
     ' Form_GroundPet - Load
     Private Sub Form_GroundPet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Walking
@@ -243,12 +245,12 @@ Public Class Form_GroundPet
                     End If
 
 
-                    If INI.Sections("Timers_Randomization").Keys("Sleeping_Min") IsNot Nothing Then
-                        Sleeping_Min = CInt(INI.Sections("Timers_Randomization").Keys("Sleeping_Min").Value)
+                    If INI.Sections("Timers_Randomization").Keys("SleepingDecision_Min") IsNot Nothing Then
+                        Sleeping_Min = CInt(INI.Sections("Timers_Randomization").Keys("SleepingDecision_Min").Value)
                     End If
 
-                    If INI.Sections("Timers_Randomization").Keys("Sleeping_Max") IsNot Nothing Then
-                        Sleeping_Max = CInt(INI.Sections("Timers_Randomization").Keys("Sleeping_Max").Value)
+                    If INI.Sections("Timers_Randomization").Keys("SleepingDecision_Max") IsNot Nothing Then
+                        Sleeping_Max = CInt(INI.Sections("Timers_Randomization").Keys("SleepingDecision_Max").Value)
                     End If
 
                     If Sleeping_Min <> 0 AndAlso Sleeping_Max <> 0 Then
@@ -722,6 +724,42 @@ Public Class Form_GroundPet
         Else
             MYScreen = Display.GetDisplays(DisplayToolStripComboBox.SelectedIndex).GetScreen
             Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
+        End If
+    End Sub
+
+    ' BehaviorToolStripMenuItem - Click
+    Private Sub BehaviorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BehaviorToolStripMenuItem.Click
+        ' Check if the form is already open
+        If BehaviorForm IsNot Nothing AndAlso Not BehaviorForm.IsDisposed Then
+            ' Bring the existing form to the front
+            BehaviorForm.BringToFront()
+        Else
+            ' Create a new instance if the form is not open or was closed
+            BehaviorForm = New Form_Behavior
+
+            BehaviorForm.PetType = "Ground"
+            BehaviorForm.PetDir = PetDir
+
+            BehaviorForm.Text = "Behavior - " & Path.GetFileName(PetDir)
+
+            BehaviorForm.Label_PetName.Text = Path.GetFileName(PetDir)
+            BehaviorForm.PixelBox_PetPreview.Image = Animation_Idling_Right
+
+            BehaviorForm.Label_TakeFlightDecision.Enabled = False
+            BehaviorForm.NumericUpDown_TakeFlightDecision.Enabled = False
+
+            BehaviorForm.Label_TakeFlightDecision2.Enabled = False
+            BehaviorForm.NumericUpDown_TakeFlightDecision_Min.Enabled = False
+            BehaviorForm.NumericUpDown_TakeFlightDecision_Max.Enabled = False
+
+            BehaviorForm.Label_FlyingMovement_Tick.Enabled = False
+            BehaviorForm.NumericUpDown_FlyingMovement_Tick.Enabled = False
+
+            BehaviorForm.Label_LandingDecision.Enabled = False
+            BehaviorForm.NumericUpDown_LandingDecision.Enabled = False
+
+            ' Show the form
+            BehaviorForm.Show()
         End If
     End Sub
 End Class

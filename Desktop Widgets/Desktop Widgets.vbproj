@@ -119,6 +119,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Form_AnimationDelayInfo.Designer.vb">
+      <DependentUpon>Form_AnimationDelayInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_AnimationDelayInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Behavior.Designer.vb">
+      <DependentUpon>Form_Behavior.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Behavior.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_DesktopShortcut.Designer.vb">
       <DependentUpon>Form_DesktopShortcut.vb</DependentUpon>
     </Compile>
@@ -214,6 +226,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form_AnimationDelayInfo.resx">
+      <DependentUpon>Form_AnimationDelayInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Behavior.resx">
+      <DependentUpon>Form_Behavior.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_DesktopShortcut.resx">
       <DependentUpon>Form_DesktopShortcut.vb</DependentUpon>
     </EmbeddedResource>

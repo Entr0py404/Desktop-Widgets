@@ -34,7 +34,6 @@ Partial Class Form_AnimationBuilder
         Me.Label_Animation_Frame_Count = New System.Windows.Forms.Label()
         Me.Label_DragDropHere = New System.Windows.Forms.Label()
         Me.Panel_Left = New System.Windows.Forms.Panel()
-        Me.PixelBox_Left = New Desktop_Widgets.PixelBox()
         Me.ShapeContainer3 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.NumericUpDown_Delay = New System.Windows.Forms.NumericUpDown()
         Me.Label_Delay = New System.Windows.Forms.Label()
@@ -53,7 +52,6 @@ Partial Class Form_AnimationBuilder
         Me.Button_Flip = New System.Windows.Forms.Button()
         Me.Panel_Right = New System.Windows.Forms.Panel()
         Me.Label_Right = New System.Windows.Forms.Label()
-        Me.PixelBox_Right = New Desktop_Widgets.PixelBox()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RectangleShape_Right = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.Label_Milliseconds = New System.Windows.Forms.Label()
@@ -64,19 +62,24 @@ Partial Class Form_AnimationBuilder
         Me.Panel_Side = New System.Windows.Forms.Panel()
         Me.CheckBox_NonDirectional = New System.Windows.Forms.CheckBox()
         Me.Panel_Delay = New System.Windows.Forms.Panel()
+        Me.PixelBox_Left = New Desktop_Widgets.PixelBox()
+        Me.PixelBox_Right = New Desktop_Widgets.PixelBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.Panel_Main.SuspendLayout()
         Me.Panel_Left.SuspendLayout()
-        CType(Me.PixelBox_Left, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown_Delay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel_Type.SuspendLayout()
         Me.Panel_Name.SuspendLayout()
         Me.Panel_Right.SuspendLayout()
-        CType(Me.PixelBox_Right, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel_Artist.SuspendLayout()
         Me.Panel_Animation.SuspendLayout()
         Me.Panel_Side.SuspendLayout()
         Me.Panel_Delay.SuspendLayout()
+        CType(Me.PixelBox_Left, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PixelBox_Right, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button_Save
@@ -114,7 +117,7 @@ Partial Class Form_AnimationBuilder
         Me.ListBox_Images.HorizontalScrollbar = True
         Me.ListBox_Images.Location = New System.Drawing.Point(0, 24)
         Me.ListBox_Images.Name = "ListBox_Images"
-        Me.ListBox_Images.Size = New System.Drawing.Size(477, 422)
+        Me.ListBox_Images.Size = New System.Drawing.Size(457, 422)
         Me.ListBox_Images.TabIndex = 77
         '
         'ContextMenuStrip1
@@ -155,7 +158,7 @@ Partial Class Form_AnimationBuilder
         Me.Panel_Main.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel_Main.Location = New System.Drawing.Point(0, 0)
         Me.Panel_Main.Name = "Panel_Main"
-        Me.Panel_Main.Size = New System.Drawing.Size(477, 466)
+        Me.Panel_Main.Size = New System.Drawing.Size(457, 466)
         Me.Panel_Main.TabIndex = 79
         '
         'Label_Animation_Frame_Count
@@ -165,7 +168,7 @@ Partial Class Form_AnimationBuilder
         Me.Label_Animation_Frame_Count.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_Animation_Frame_Count.Location = New System.Drawing.Point(0, 446)
         Me.Label_Animation_Frame_Count.Name = "Label_Animation_Frame_Count"
-        Me.Label_Animation_Frame_Count.Size = New System.Drawing.Size(477, 20)
+        Me.Label_Animation_Frame_Count.Size = New System.Drawing.Size(457, 20)
         Me.Label_Animation_Frame_Count.TabIndex = 101
         Me.Label_Animation_Frame_Count.Text = "Animation Frame Count: "
         Me.Label_Animation_Frame_Count.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -177,7 +180,7 @@ Partial Class Form_AnimationBuilder
         Me.Label_DragDropHere.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_DragDropHere.Location = New System.Drawing.Point(0, 0)
         Me.Label_DragDropHere.Name = "Label_DragDropHere"
-        Me.Label_DragDropHere.Size = New System.Drawing.Size(477, 24)
+        Me.Label_DragDropHere.Size = New System.Drawing.Size(457, 24)
         Me.Label_DragDropHere.TabIndex = 79
         Me.Label_DragDropHere.Text = "Drag Drop Images Here!"
         Me.Label_DragDropHere.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -191,16 +194,6 @@ Partial Class Form_AnimationBuilder
         Me.Panel_Left.Name = "Panel_Left"
         Me.Panel_Left.Size = New System.Drawing.Size(160, 176)
         Me.Panel_Left.TabIndex = 80
-        '
-        'PixelBox_Left
-        '
-        Me.PixelBox_Left.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.PixelBox_Left.Location = New System.Drawing.Point(16, 32)
-        Me.PixelBox_Left.Name = "PixelBox_Left"
-        Me.PixelBox_Left.Size = New System.Drawing.Size(128, 128)
-        Me.PixelBox_Left.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PixelBox_Left.TabIndex = 75
-        Me.PixelBox_Left.TabStop = False
         '
         'ShapeContainer3
         '
@@ -267,7 +260,7 @@ Partial Class Form_AnimationBuilder
         Me.Panel_Type.Controls.Add(Me.RadioButton_TypeGroundPet)
         Me.Panel_Type.Location = New System.Drawing.Point(0, 192)
         Me.Panel_Type.Name = "Panel_Type"
-        Me.Panel_Type.Size = New System.Drawing.Size(432, 40)
+        Me.Panel_Type.Size = New System.Drawing.Size(448, 40)
         Me.Panel_Type.TabIndex = 88
         '
         'RadioButton_TypeNature
@@ -325,7 +318,7 @@ Partial Class Form_AnimationBuilder
         'Label_Facing
         '
         Me.Label_Facing.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_Facing.Location = New System.Drawing.Point(224, 280)
+        Me.Label_Facing.Location = New System.Drawing.Point(245, 280)
         Me.Label_Facing.Name = "Label_Facing"
         Me.Label_Facing.Size = New System.Drawing.Size(72, 21)
         Me.Label_Facing.TabIndex = 89
@@ -334,11 +327,12 @@ Partial Class Form_AnimationBuilder
         '
         'Panel_Name
         '
+        Me.Panel_Name.Controls.Add(Me.Button2)
         Me.Panel_Name.Controls.Add(Me.Label_Name)
         Me.Panel_Name.Controls.Add(Me.ComboBox_Name)
         Me.Panel_Name.Location = New System.Drawing.Point(0, 272)
         Me.Panel_Name.Name = "Panel_Name"
-        Me.Panel_Name.Size = New System.Drawing.Size(224, 40)
+        Me.Panel_Name.Size = New System.Drawing.Size(239, 40)
         Me.Panel_Name.TabIndex = 90
         '
         'Label_Name
@@ -371,7 +365,7 @@ Partial Class Form_AnimationBuilder
         Me.Button_Flip.FlatAppearance.BorderSize = 0
         Me.Button_Flip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button_Flip.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_Flip.Location = New System.Drawing.Point(304, 280)
+        Me.Button_Flip.Location = New System.Drawing.Point(325, 280)
         Me.Button_Flip.Name = "Button_Flip"
         Me.Button_Flip.Size = New System.Drawing.Size(120, 24)
         Me.Button_Flip.TabIndex = 102
@@ -397,16 +391,6 @@ Partial Class Form_AnimationBuilder
         Me.Label_Right.TabIndex = 76
         Me.Label_Right.Text = "Right"
         Me.Label_Right.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'PixelBox_Right
-        '
-        Me.PixelBox_Right.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.PixelBox_Right.Location = New System.Drawing.Point(16, 32)
-        Me.PixelBox_Right.Name = "PixelBox_Right"
-        Me.PixelBox_Right.Size = New System.Drawing.Size(128, 128)
-        Me.PixelBox_Right.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PixelBox_Right.TabIndex = 75
-        Me.PixelBox_Right.TabStop = False
         '
         'ShapeContainer1
         '
@@ -444,10 +428,11 @@ Partial Class Form_AnimationBuilder
         'Panel_Artist
         '
         Me.Panel_Artist.Controls.Add(Me.Label_Artist)
+        Me.Panel_Artist.Controls.Add(Me.Button1)
         Me.Panel_Artist.Controls.Add(Me.ComboBox_Artist)
         Me.Panel_Artist.Location = New System.Drawing.Point(0, 232)
         Me.Panel_Artist.Name = "Panel_Artist"
-        Me.Panel_Artist.Size = New System.Drawing.Size(224, 40)
+        Me.Panel_Artist.Size = New System.Drawing.Size(239, 40)
         Me.Panel_Artist.TabIndex = 98
         '
         'Label_Artist
@@ -477,7 +462,7 @@ Partial Class Form_AnimationBuilder
         '
         Me.Panel_Animation.Controls.Add(Me.Label_Animation)
         Me.Panel_Animation.Controls.Add(Me.ComboBox_Animation)
-        Me.Panel_Animation.Location = New System.Drawing.Point(224, 232)
+        Me.Panel_Animation.Location = New System.Drawing.Point(240, 232)
         Me.Panel_Animation.Name = "Panel_Animation"
         Me.Panel_Animation.Size = New System.Drawing.Size(208, 40)
         Me.Panel_Animation.TabIndex = 99
@@ -485,6 +470,7 @@ Partial Class Form_AnimationBuilder
         'Panel_Side
         '
         Me.Panel_Side.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.Panel_Side.Controls.Add(Me.Button3)
         Me.Panel_Side.Controls.Add(Me.CheckBox_NonDirectional)
         Me.Panel_Side.Controls.Add(Me.Label_Facing)
         Me.Panel_Side.Controls.Add(Me.Button_Flip)
@@ -497,16 +483,16 @@ Partial Class Form_AnimationBuilder
         Me.Panel_Side.Controls.Add(Me.Panel_Artist)
         Me.Panel_Side.Controls.Add(Me.Panel_Right)
         Me.Panel_Side.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel_Side.Location = New System.Drawing.Point(477, 0)
+        Me.Panel_Side.Location = New System.Drawing.Point(457, 0)
         Me.Panel_Side.Name = "Panel_Side"
-        Me.Panel_Side.Size = New System.Drawing.Size(432, 466)
+        Me.Panel_Side.Size = New System.Drawing.Size(452, 466)
         Me.Panel_Side.TabIndex = 101
         '
         'CheckBox_NonDirectional
         '
         Me.CheckBox_NonDirectional.AutoSize = True
         Me.CheckBox_NonDirectional.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.CheckBox_NonDirectional.Location = New System.Drawing.Point(304, 320)
+        Me.CheckBox_NonDirectional.Location = New System.Drawing.Point(327, 323)
         Me.CheckBox_NonDirectional.Name = "CheckBox_NonDirectional"
         Me.CheckBox_NonDirectional.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.CheckBox_NonDirectional.Size = New System.Drawing.Size(114, 17)
@@ -525,6 +511,66 @@ Partial Class Form_AnimationBuilder
         Me.Panel_Delay.Size = New System.Drawing.Size(224, 40)
         Me.Panel_Delay.TabIndex = 101
         '
+        'PixelBox_Left
+        '
+        Me.PixelBox_Left.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.PixelBox_Left.Location = New System.Drawing.Point(16, 32)
+        Me.PixelBox_Left.Name = "PixelBox_Left"
+        Me.PixelBox_Left.Size = New System.Drawing.Size(128, 128)
+        Me.PixelBox_Left.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PixelBox_Left.TabIndex = 75
+        Me.PixelBox_Left.TabStop = False
+        '
+        'PixelBox_Right
+        '
+        Me.PixelBox_Right.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.PixelBox_Right.Location = New System.Drawing.Point(16, 32)
+        Me.PixelBox_Right.Name = "PixelBox_Right"
+        Me.PixelBox_Right.Size = New System.Drawing.Size(128, 128)
+        Me.PixelBox_Right.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PixelBox_Right.TabIndex = 75
+        Me.PixelBox_Right.TabStop = False
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(222, 8)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(12, 21)
+        Me.Button1.TabIndex = 104
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(222, 8)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(12, 21)
+        Me.Button2.TabIndex = 105
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(28, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(276, 368)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(169, 32)
+        Me.Button3.TabIndex = 104
+        Me.Button3.Text = "Animation Delay Info"
+        Me.Button3.UseVisualStyleBackColor = False
+        '
         'Form_AnimationBuilder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -542,18 +588,18 @@ Partial Class Form_AnimationBuilder
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.Panel_Main.ResumeLayout(False)
         Me.Panel_Left.ResumeLayout(False)
-        CType(Me.PixelBox_Left, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown_Delay, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel_Type.ResumeLayout(False)
         Me.Panel_Type.PerformLayout()
         Me.Panel_Name.ResumeLayout(False)
         Me.Panel_Right.ResumeLayout(False)
-        CType(Me.PixelBox_Right, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel_Artist.ResumeLayout(False)
         Me.Panel_Animation.ResumeLayout(False)
         Me.Panel_Side.ResumeLayout(False)
         Me.Panel_Side.PerformLayout()
         Me.Panel_Delay.ResumeLayout(False)
+        CType(Me.PixelBox_Left, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PixelBox_Right, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -598,4 +644,7 @@ Partial Class Form_AnimationBuilder
     Friend WithEvents Label_Artist As Label
     Friend WithEvents ComboBox_Artist As ComboBox
     Friend WithEvents CheckBox_NonDirectional As CheckBox
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button3 As Button
 End Class

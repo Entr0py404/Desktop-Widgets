@@ -102,6 +102,8 @@ Partial Class Form_Pets
         Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel_Main = New System.Windows.Forms.Panel()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.BehaviorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel_Bottom.SuspendLayout()
         Me.Panel_Side.SuspendLayout()
@@ -110,6 +112,7 @@ Partial Class Form_Pets
         Me.ContextMenuStrip2.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.Panel_Main.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'CheckBox_FollowCursor
@@ -719,6 +722,22 @@ Partial Class Form_Pets
         Me.Panel_Main.Size = New System.Drawing.Size(781, 426)
         Me.Panel_Main.TabIndex = 125
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(54, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(62, Byte), Integer))
+        Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!)
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BehaviorToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.ShowImageMargin = False
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(156, 50)
+        '
+        'BehaviorToolStripMenuItem
+        '
+        Me.BehaviorToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BehaviorToolStripMenuItem.Name = "BehaviorToolStripMenuItem"
+        Me.BehaviorToolStripMenuItem.Size = New System.Drawing.Size(155, 24)
+        Me.BehaviorToolStripMenuItem.Text = "Behavior"
+        '
         'Form_Pets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -742,6 +761,7 @@ Partial Class Form_Pets
         Me.ContextMenuStrip2.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
         Me.Panel_Main.ResumeLayout(False)
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -823,4 +843,6 @@ Partial Class Form_Pets
     Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Panel_Main As Panel
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents BehaviorToolStripMenuItem As ToolStripMenuItem
 End Class

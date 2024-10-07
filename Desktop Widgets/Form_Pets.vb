@@ -4,10 +4,12 @@ Public Class Form_Pets
     Dim GroundPetsCount As Integer = 0
     Dim AssetPanel_Size As Integer = 98
 
+    Private BehaviorForm As Form_Behavior = Nothing
     ' Form_Pets - Load
     Private Sub Form_Pets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.SelectedIndex = 0
         MenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
+        ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
         ContextMenuStrip2.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
 
         LoadPetsDirs("Pets\Ground\", ComboBox_GroundPetObjects)
@@ -230,6 +232,7 @@ Public Class Form_Pets
         ' Add AssetLabel and AssetPixelBox to AssetPanel
         AssetPanel.Controls.Add(AssetPixelBox)
         AssetPanel.Controls.Add(AssetLabel)
+        AssetPanel.ContextMenuStrip = ContextMenuStrip1
 
         ' Add AssetPanel to FlowLayoutPanel1
         flowLayout.Controls.Add(AssetPanel)
@@ -335,5 +338,81 @@ Public Class Form_Pets
         Else
             LoadFlyingPets("Pets\Flying\")
         End If
+    End Sub
+
+    ' Behavior_ToolStripMenuItem - Click
+    Private Sub BehaviorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BehaviorToolStripMenuItem.Click
+
+        ' Check if the form is already open
+        'If BehaviorForm IsNot Nothing AndAlso Not BehaviorForm.IsDisposed Then
+        ' Bring the existing form to the front
+        'BehaviorForm.BringToFront()
+        'Else
+        Dim clickedItem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
+        Dim contextMenu As ContextMenuStrip = DirectCast(clickedItem.GetCurrentParent(), ContextMenuStrip)
+        ' Get the control that owns the context menu (the Panel)
+        Dim ownerPanel As Panel = DirectCast(contextMenu.SourceControl, Panel)
+
+        'Console.WriteLine(ownerPanel.Controls(0).Text)
+        'Console.WriteLine(Path.GetDirectoryName(ownerPanel.Controls(0).Text))
+        'Console.WriteLine(ownerPanel.Controls(1).Text)
+        'Console.WriteLine(ownerPanel.Parent.Name)
+
+        If ownerPanel.Parent.Name = "FlowLayoutPanel1" Then
+            ' Create a new instance if the form is not open or was closed
+            BehaviorForm = New Form_Behavior
+
+            BehaviorForm.PetType = "Ground"
+            BehaviorForm.PetDir = Path.GetDirectoryName(ownerPanel.Controls(0).Text)
+
+            BehaviorForm.Text = "Behavior - " & ownerPanel.Controls(1).Text
+
+            BehaviorForm.Label_PetName.Text = ownerPanel.Controls(1).Text
+            BehaviorForm.PixelBox_PetPreview.Image = Image.FromFile(ownerPanel.Controls(0).Text)
+
+            BehaviorForm.Label_TakeFlightDecision.Enabled = False
+            BehaviorForm.NumericUpDown_TakeFlightDecision.Enabled = False
+
+            BehaviorForm.Label_TakeFlightDecision2.Enabled = False
+            BehaviorForm.NumericUpDown_TakeFlightDecision_Min.Enabled = False
+            BehaviorForm.NumericUpDown_TakeFlightDecision_Max.Enabled = False
+
+            BehaviorForm.Label_FlyingMovement_Tick.Enabled = False
+            BehaviorForm.NumericUpDown_FlyingMovement_Tick.Enabled = False
+
+            BehaviorForm.Label_LandingDecision.Enabled = False
+            BehaviorForm.NumericUpDown_LandingDecision.Enabled = False
+
+            ' Show the form
+            BehaviorForm.Show()
+        Else
+            ' Create a new instance if the form is not open or was closed
+            BehaviorForm = New Form_Behavior
+
+            BehaviorForm.PetType = "Flying"
+            BehaviorForm.PetDir = Path.GetDirectoryName(ownerPanel.Controls(0).Text)
+
+            BehaviorForm.Text = "Behavior - " & ownerPanel.Controls(1).Text
+
+            BehaviorForm.Label_PetName.Text = ownerPanel.Controls(1).Text
+            BehaviorForm.PixelBox_PetPreview.Image = Image.FromFile(ownerPanel.Controls(0).Text)
+
+            BehaviorForm.Label_FallingMovement_Px.Enabled = False
+            BehaviorForm.NumericUpDown_FallingMovement_Px.Enabled = False
+
+            BehaviorForm.Label_FallingMovement_Tick.Enabled = False
+            BehaviorForm.NumericUpDown_FallingMovement_Tick.Enabled = False
+
+            BehaviorForm.Label_SleepDecision.Enabled = False
+            BehaviorForm.NumericUpDown_SleepDecision.Enabled = False
+
+            BehaviorForm.Label_SleepingDecision.Enabled = False
+            BehaviorForm.NumericUpDown_SleepingDecision_Min.Enabled = False
+            BehaviorForm.NumericUpDown_SleepingDecision_Max.Enabled = False
+
+            ' Show the form
+            BehaviorForm.Show()
+        End If
+        'End If
     End Sub
 End Class
