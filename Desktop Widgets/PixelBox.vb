@@ -8,8 +8,8 @@ Public Class PixelBox
     Public Property InterpolationMode As InterpolationMode = InterpolationMode.NearestNeighbor
 
     <Category("Behavior")>
-    <DefaultValue(PixelOffsetMode.Default)>
-    Public Property PixelOffsetMode As PixelOffsetMode = PixelOffsetMode.Default
+    <DefaultValue(PixelOffsetMode.Half)>
+    Public Property PixelOffsetMode As PixelOffsetMode = PixelOffsetMode.Half
 
     <Category("Behavior")>
     <DefaultValue(SmoothingMode.Default)>

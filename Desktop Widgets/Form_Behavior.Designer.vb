@@ -22,12 +22,15 @@ Partial Class Form_Behavior
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Behavior))
         Me.Panel_PetPreview = New System.Windows.Forms.Panel()
         Me.ShapeContainer2 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RectangleShape_PetPreview = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.Label_PetName = New System.Windows.Forms.Label()
         Me.NumericUpDown_DefaultScale = New System.Windows.Forms.NumericUpDown()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ResetToDefaultToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label_DefaultScale = New System.Windows.Forms.Label()
         Me.NumericUpDown_FollowCursorStoppingDistance_Px = New System.Windows.Forms.NumericUpDown()
         Me.Label_FollowCursorStoppingDistance_Px = New System.Windows.Forms.Label()
@@ -75,6 +78,7 @@ Partial Class Form_Behavior
         Me.PixelBox_PetPreview = New Desktop_Widgets.PixelBox()
         Me.Panel_PetPreview.SuspendLayout()
         CType(Me.NumericUpDown_DefaultScale, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.NumericUpDown_FollowCursorStoppingDistance_Px, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown_Opacity, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown_FallingMovement_Px, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -148,6 +152,7 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_DefaultScale.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_DefaultScale.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_DefaultScale.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_DefaultScale.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.NumericUpDown_DefaultScale.Location = New System.Drawing.Point(207, 19)
         Me.NumericUpDown_DefaultScale.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
@@ -156,6 +161,22 @@ Partial Class Form_Behavior
         Me.NumericUpDown_DefaultScale.Size = New System.Drawing.Size(56, 20)
         Me.NumericUpDown_DefaultScale.TabIndex = 81
         Me.NumericUpDown_DefaultScale.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.ContextMenuStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!)
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ResetToDefaultToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.ShowImageMargin = False
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(159, 28)
+        '
+        'ResetToDefaultToolStripMenuItem
+        '
+        Me.ResetToDefaultToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.ResetToDefaultToolStripMenuItem.Name = "ResetToDefaultToolStripMenuItem"
+        Me.ResetToDefaultToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
+        Me.ResetToDefaultToolStripMenuItem.Text = "Reset to default"
         '
         'Label_DefaultScale
         '
@@ -171,6 +192,7 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_FollowCursorStoppingDistance_Px.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_FollowCursorStoppingDistance_Px.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_FollowCursorStoppingDistance_Px.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_FollowCursorStoppingDistance_Px.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.NumericUpDown_FollowCursorStoppingDistance_Px.Location = New System.Drawing.Point(207, 71)
         Me.NumericUpDown_FollowCursorStoppingDistance_Px.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
@@ -195,6 +217,7 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_Opacity.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_Opacity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_Opacity.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_Opacity.DecimalPlaces = 1
         Me.NumericUpDown_Opacity.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.NumericUpDown_Opacity.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
@@ -220,6 +243,7 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_FallingMovement_Px.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_FallingMovement_Px.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_FallingMovement_Px.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_FallingMovement_Px.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.NumericUpDown_FallingMovement_Px.Location = New System.Drawing.Point(207, 97)
         Me.NumericUpDown_FallingMovement_Px.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
@@ -243,18 +267,19 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_ScreenWarpingDecision.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_ScreenWarpingDecision.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_ScreenWarpingDecision.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_ScreenWarpingDecision.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.NumericUpDown_ScreenWarpingDecision.Location = New System.Drawing.Point(207, 71)
+        Me.NumericUpDown_ScreenWarpingDecision.Location = New System.Drawing.Point(203, 71)
         Me.NumericUpDown_ScreenWarpingDecision.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_ScreenWarpingDecision.Name = "NumericUpDown_ScreenWarpingDecision"
-        Me.NumericUpDown_ScreenWarpingDecision.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_ScreenWarpingDecision.Size = New System.Drawing.Size(60, 20)
         Me.NumericUpDown_ScreenWarpingDecision.TabIndex = 87
         Me.NumericUpDown_ScreenWarpingDecision.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'Label_ScreenWarpingDecision
         '
         Me.Label_ScreenWarpingDecision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_ScreenWarpingDecision.Location = New System.Drawing.Point(46, 71)
+        Me.Label_ScreenWarpingDecision.Location = New System.Drawing.Point(42, 71)
         Me.Label_ScreenWarpingDecision.Name = "Label_ScreenWarpingDecision"
         Me.Label_ScreenWarpingDecision.Size = New System.Drawing.Size(155, 20)
         Me.Label_ScreenWarpingDecision.TabIndex = 88
@@ -265,18 +290,19 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_IdleAltDecision.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_IdleAltDecision.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_IdleAltDecision.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_IdleAltDecision.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.NumericUpDown_IdleAltDecision.Location = New System.Drawing.Point(207, 45)
+        Me.NumericUpDown_IdleAltDecision.Location = New System.Drawing.Point(203, 45)
         Me.NumericUpDown_IdleAltDecision.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_IdleAltDecision.Name = "NumericUpDown_IdleAltDecision"
-        Me.NumericUpDown_IdleAltDecision.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_IdleAltDecision.Size = New System.Drawing.Size(60, 20)
         Me.NumericUpDown_IdleAltDecision.TabIndex = 85
         Me.NumericUpDown_IdleAltDecision.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'Label_IdleAltDecision
         '
         Me.Label_IdleAltDecision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_IdleAltDecision.Location = New System.Drawing.Point(97, 45)
+        Me.Label_IdleAltDecision.Location = New System.Drawing.Point(93, 45)
         Me.Label_IdleAltDecision.Name = "Label_IdleAltDecision"
         Me.Label_IdleAltDecision.Size = New System.Drawing.Size(104, 20)
         Me.Label_IdleAltDecision.TabIndex = 86
@@ -287,18 +313,19 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_IdleDecision.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_IdleDecision.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_IdleDecision.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_IdleDecision.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.NumericUpDown_IdleDecision.Location = New System.Drawing.Point(207, 19)
+        Me.NumericUpDown_IdleDecision.Location = New System.Drawing.Point(203, 19)
         Me.NumericUpDown_IdleDecision.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_IdleDecision.Name = "NumericUpDown_IdleDecision"
-        Me.NumericUpDown_IdleDecision.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_IdleDecision.Size = New System.Drawing.Size(60, 20)
         Me.NumericUpDown_IdleDecision.TabIndex = 83
         Me.NumericUpDown_IdleDecision.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'Label_IdleDecision
         '
         Me.Label_IdleDecision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_IdleDecision.Location = New System.Drawing.Point(116, 19)
+        Me.Label_IdleDecision.Location = New System.Drawing.Point(112, 19)
         Me.Label_IdleDecision.Name = "Label_IdleDecision"
         Me.Label_IdleDecision.Size = New System.Drawing.Size(85, 20)
         Me.Label_IdleDecision.TabIndex = 84
@@ -309,18 +336,19 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_SleepDecision.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_SleepDecision.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_SleepDecision.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_SleepDecision.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.NumericUpDown_SleepDecision.Location = New System.Drawing.Point(207, 97)
+        Me.NumericUpDown_SleepDecision.Location = New System.Drawing.Point(203, 97)
         Me.NumericUpDown_SleepDecision.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_SleepDecision.Name = "NumericUpDown_SleepDecision"
-        Me.NumericUpDown_SleepDecision.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_SleepDecision.Size = New System.Drawing.Size(60, 20)
         Me.NumericUpDown_SleepDecision.TabIndex = 81
         Me.NumericUpDown_SleepDecision.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'Label_SleepDecision
         '
         Me.Label_SleepDecision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_SleepDecision.Location = New System.Drawing.Point(105, 97)
+        Me.Label_SleepDecision.Location = New System.Drawing.Point(101, 97)
         Me.Label_SleepDecision.Name = "Label_SleepDecision"
         Me.Label_SleepDecision.Size = New System.Drawing.Size(96, 20)
         Me.Label_SleepDecision.TabIndex = 82
@@ -331,6 +359,7 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_FallingMovement_Tick.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_FallingMovement_Tick.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_FallingMovement_Tick.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_FallingMovement_Tick.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.NumericUpDown_FallingMovement_Tick.Location = New System.Drawing.Point(207, 71)
         Me.NumericUpDown_FallingMovement_Tick.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
@@ -354,6 +383,7 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_FlyingMovement_Tick.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_FlyingMovement_Tick.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_FlyingMovement_Tick.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_FlyingMovement_Tick.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.NumericUpDown_FlyingMovement_Tick.Location = New System.Drawing.Point(207, 45)
         Me.NumericUpDown_FlyingMovement_Tick.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
@@ -377,6 +407,7 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_WalkingMovement_Tick.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_WalkingMovement_Tick.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_WalkingMovement_Tick.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_WalkingMovement_Tick.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.NumericUpDown_WalkingMovement_Tick.Location = New System.Drawing.Point(207, 19)
         Me.NumericUpDown_WalkingMovement_Tick.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
@@ -400,12 +431,13 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_SleepingDecision_Min.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_SleepingDecision_Min.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_SleepingDecision_Min.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_SleepingDecision_Min.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.NumericUpDown_SleepingDecision_Min.Location = New System.Drawing.Point(145, 117)
         Me.NumericUpDown_SleepingDecision_Min.Maximum = New Decimal(New Integer() {900000000, 0, 0, 0})
         Me.NumericUpDown_SleepingDecision_Min.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_SleepingDecision_Min.Name = "NumericUpDown_SleepingDecision_Min"
-        Me.NumericUpDown_SleepingDecision_Min.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_SleepingDecision_Min.Size = New System.Drawing.Size(80, 20)
         Me.NumericUpDown_SleepingDecision_Min.TabIndex = 87
         Me.NumericUpDown_SleepingDecision_Min.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
@@ -423,12 +455,13 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_TakeFlightDecision_Min.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_TakeFlightDecision_Min.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_TakeFlightDecision_Min.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_TakeFlightDecision_Min.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.NumericUpDown_TakeFlightDecision_Min.Location = New System.Drawing.Point(145, 91)
         Me.NumericUpDown_TakeFlightDecision_Min.Maximum = New Decimal(New Integer() {900000000, 0, 0, 0})
         Me.NumericUpDown_TakeFlightDecision_Min.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_TakeFlightDecision_Min.Name = "NumericUpDown_TakeFlightDecision_Min"
-        Me.NumericUpDown_TakeFlightDecision_Min.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_TakeFlightDecision_Min.Size = New System.Drawing.Size(80, 20)
         Me.NumericUpDown_TakeFlightDecision_Min.TabIndex = 85
         Me.NumericUpDown_TakeFlightDecision_Min.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
@@ -446,12 +479,13 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_IdleDecision_Min.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_IdleDecision_Min.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_IdleDecision_Min.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_IdleDecision_Min.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.NumericUpDown_IdleDecision_Min.Location = New System.Drawing.Point(145, 65)
         Me.NumericUpDown_IdleDecision_Min.Maximum = New Decimal(New Integer() {900000000, 0, 0, 0})
         Me.NumericUpDown_IdleDecision_Min.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_IdleDecision_Min.Name = "NumericUpDown_IdleDecision_Min"
-        Me.NumericUpDown_IdleDecision_Min.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_IdleDecision_Min.Size = New System.Drawing.Size(80, 20)
         Me.NumericUpDown_IdleDecision_Min.TabIndex = 83
         Me.NumericUpDown_IdleDecision_Min.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
@@ -469,12 +503,13 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_TurningDecision_Min.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_TurningDecision_Min.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_TurningDecision_Min.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_TurningDecision_Min.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.NumericUpDown_TurningDecision_Min.Location = New System.Drawing.Point(145, 39)
         Me.NumericUpDown_TurningDecision_Min.Maximum = New Decimal(New Integer() {900000000, 0, 0, 0})
         Me.NumericUpDown_TurningDecision_Min.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_TurningDecision_Min.Name = "NumericUpDown_TurningDecision_Min"
-        Me.NumericUpDown_TurningDecision_Min.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_TurningDecision_Min.Size = New System.Drawing.Size(80, 20)
         Me.NumericUpDown_TurningDecision_Min.TabIndex = 81
         Me.NumericUpDown_TurningDecision_Min.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
@@ -492,18 +527,19 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_TakeFlightDecision.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_TakeFlightDecision.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_TakeFlightDecision.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_TakeFlightDecision.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.NumericUpDown_TakeFlightDecision.Location = New System.Drawing.Point(207, 123)
+        Me.NumericUpDown_TakeFlightDecision.Location = New System.Drawing.Point(203, 123)
         Me.NumericUpDown_TakeFlightDecision.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_TakeFlightDecision.Name = "NumericUpDown_TakeFlightDecision"
-        Me.NumericUpDown_TakeFlightDecision.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_TakeFlightDecision.Size = New System.Drawing.Size(60, 20)
         Me.NumericUpDown_TakeFlightDecision.TabIndex = 89
         Me.NumericUpDown_TakeFlightDecision.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'Label_TakeFlightDecision
         '
         Me.Label_TakeFlightDecision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_TakeFlightDecision.Location = New System.Drawing.Point(73, 123)
+        Me.Label_TakeFlightDecision.Location = New System.Drawing.Point(69, 123)
         Me.Label_TakeFlightDecision.Name = "Label_TakeFlightDecision"
         Me.Label_TakeFlightDecision.Size = New System.Drawing.Size(128, 20)
         Me.Label_TakeFlightDecision.TabIndex = 90
@@ -514,18 +550,19 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_LandingDecision.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_LandingDecision.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_LandingDecision.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_LandingDecision.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.NumericUpDown_LandingDecision.Location = New System.Drawing.Point(207, 149)
+        Me.NumericUpDown_LandingDecision.Location = New System.Drawing.Point(203, 149)
         Me.NumericUpDown_LandingDecision.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_LandingDecision.Name = "NumericUpDown_LandingDecision"
-        Me.NumericUpDown_LandingDecision.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_LandingDecision.Size = New System.Drawing.Size(60, 20)
         Me.NumericUpDown_LandingDecision.TabIndex = 91
         Me.NumericUpDown_LandingDecision.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'Label_LandingDecision
         '
         Me.Label_LandingDecision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_LandingDecision.Location = New System.Drawing.Point(90, 149)
+        Me.Label_LandingDecision.Location = New System.Drawing.Point(86, 149)
         Me.Label_LandingDecision.Name = "Label_LandingDecision"
         Me.Label_LandingDecision.Size = New System.Drawing.Size(109, 20)
         Me.Label_LandingDecision.TabIndex = 92
@@ -584,9 +621,9 @@ Partial Class Form_Behavior
         Me.GroupBox_Timers.Controls.Add(Me.Label_FlyingMovement_Tick)
         Me.GroupBox_Timers.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox_Timers.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.GroupBox_Timers.Location = New System.Drawing.Point(449, 37)
+        Me.GroupBox_Timers.Location = New System.Drawing.Point(173, 352)
         Me.GroupBox_Timers.Name = "GroupBox_Timers"
-        Me.GroupBox_Timers.Size = New System.Drawing.Size(270, 127)
+        Me.GroupBox_Timers.Size = New System.Drawing.Size(270, 99)
         Me.GroupBox_Timers.TabIndex = 108
         Me.GroupBox_Timers.TabStop = False
         Me.GroupBox_Timers.Text = "Timers"
@@ -609,9 +646,9 @@ Partial Class Form_Behavior
         Me.GroupBox_TimersRandomization.Controls.Add(Me.Label_TakeFlightDecision2)
         Me.GroupBox_TimersRandomization.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox_TimersRandomization.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.GroupBox_TimersRandomization.Location = New System.Drawing.Point(449, 170)
+        Me.GroupBox_TimersRandomization.Location = New System.Drawing.Point(120, 457)
         Me.GroupBox_TimersRandomization.Name = "GroupBox_TimersRandomization"
-        Me.GroupBox_TimersRandomization.Size = New System.Drawing.Size(270, 176)
+        Me.GroupBox_TimersRandomization.Size = New System.Drawing.Size(323, 146)
         Me.GroupBox_TimersRandomization.TabIndex = 109
         Me.GroupBox_TimersRandomization.TabStop = False
         Me.GroupBox_TimersRandomization.Text = "Timers Randomization"
@@ -619,7 +656,7 @@ Partial Class Form_Behavior
         'Label_TimersRandomization_Max
         '
         Me.Label_TimersRandomization_Max.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_TimersRandomization_Max.Location = New System.Drawing.Point(207, 20)
+        Me.Label_TimersRandomization_Max.Location = New System.Drawing.Point(235, 20)
         Me.Label_TimersRandomization_Max.Name = "Label_TimersRandomization_Max"
         Me.Label_TimersRandomization_Max.Size = New System.Drawing.Size(56, 16)
         Me.Label_TimersRandomization_Max.TabIndex = 111
@@ -630,12 +667,13 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_TurningDecision_Max.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_TurningDecision_Max.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_TurningDecision_Max.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_TurningDecision_Max.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.NumericUpDown_TurningDecision_Max.Location = New System.Drawing.Point(207, 39)
+        Me.NumericUpDown_TurningDecision_Max.Location = New System.Drawing.Point(235, 39)
         Me.NumericUpDown_TurningDecision_Max.Maximum = New Decimal(New Integer() {900000000, 0, 0, 0})
         Me.NumericUpDown_TurningDecision_Max.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_TurningDecision_Max.Name = "NumericUpDown_TurningDecision_Max"
-        Me.NumericUpDown_TurningDecision_Max.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_TurningDecision_Max.Size = New System.Drawing.Size(80, 20)
         Me.NumericUpDown_TurningDecision_Max.TabIndex = 81
         Me.NumericUpDown_TurningDecision_Max.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
@@ -643,12 +681,13 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_SleepingDecision_Max.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_SleepingDecision_Max.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_SleepingDecision_Max.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_SleepingDecision_Max.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.NumericUpDown_SleepingDecision_Max.Location = New System.Drawing.Point(207, 117)
+        Me.NumericUpDown_SleepingDecision_Max.Location = New System.Drawing.Point(235, 117)
         Me.NumericUpDown_SleepingDecision_Max.Maximum = New Decimal(New Integer() {900000000, 0, 0, 0})
         Me.NumericUpDown_SleepingDecision_Max.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_SleepingDecision_Max.Name = "NumericUpDown_SleepingDecision_Max"
-        Me.NumericUpDown_SleepingDecision_Max.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_SleepingDecision_Max.Size = New System.Drawing.Size(80, 20)
         Me.NumericUpDown_SleepingDecision_Max.TabIndex = 87
         Me.NumericUpDown_SleepingDecision_Max.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
@@ -666,12 +705,13 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_TakeFlightDecision_Max.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_TakeFlightDecision_Max.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_TakeFlightDecision_Max.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_TakeFlightDecision_Max.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.NumericUpDown_TakeFlightDecision_Max.Location = New System.Drawing.Point(207, 91)
+        Me.NumericUpDown_TakeFlightDecision_Max.Location = New System.Drawing.Point(235, 91)
         Me.NumericUpDown_TakeFlightDecision_Max.Maximum = New Decimal(New Integer() {900000000, 0, 0, 0})
         Me.NumericUpDown_TakeFlightDecision_Max.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_TakeFlightDecision_Max.Name = "NumericUpDown_TakeFlightDecision_Max"
-        Me.NumericUpDown_TakeFlightDecision_Max.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_TakeFlightDecision_Max.Size = New System.Drawing.Size(80, 20)
         Me.NumericUpDown_TakeFlightDecision_Max.TabIndex = 85
         Me.NumericUpDown_TakeFlightDecision_Max.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
@@ -679,12 +719,13 @@ Partial Class Form_Behavior
         '
         Me.NumericUpDown_IdleDecision_Max.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.NumericUpDown_IdleDecision_Max.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NumericUpDown_IdleDecision_Max.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NumericUpDown_IdleDecision_Max.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.NumericUpDown_IdleDecision_Max.Location = New System.Drawing.Point(207, 65)
+        Me.NumericUpDown_IdleDecision_Max.Location = New System.Drawing.Point(235, 65)
         Me.NumericUpDown_IdleDecision_Max.Maximum = New Decimal(New Integer() {900000000, 0, 0, 0})
         Me.NumericUpDown_IdleDecision_Max.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_IdleDecision_Max.Name = "NumericUpDown_IdleDecision_Max"
-        Me.NumericUpDown_IdleDecision_Max.Size = New System.Drawing.Size(56, 20)
+        Me.NumericUpDown_IdleDecision_Max.Size = New System.Drawing.Size(80, 20)
         Me.NumericUpDown_IdleDecision_Max.TabIndex = 83
         Me.NumericUpDown_IdleDecision_Max.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
@@ -718,7 +759,7 @@ Partial Class Form_Behavior
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(54, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(733, 361)
+        Me.ClientSize = New System.Drawing.Size(452, 610)
         Me.Controls.Add(Me.Button_Save)
         Me.Controls.Add(Me.GroupBox_TimersRandomization)
         Me.Controls.Add(Me.GroupBox_Timers)
@@ -735,6 +776,7 @@ Partial Class Form_Behavior
         Me.Text = "Behavior"
         Me.Panel_PetPreview.ResumeLayout(False)
         CType(Me.NumericUpDown_DefaultScale, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         CType(Me.NumericUpDown_FollowCursorStoppingDistance_Px, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown_Opacity, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown_FallingMovement_Px, System.ComponentModel.ISupportInitialize).EndInit()
@@ -814,4 +856,6 @@ Partial Class Form_Behavior
     Friend WithEvents Label_TimersRandomization_Min As Label
     Friend WithEvents Label_TimersRandomization_Max As Label
     Friend WithEvents Button_Save As Button
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents ResetToDefaultToolStripMenuItem As ToolStripMenuItem
 End Class

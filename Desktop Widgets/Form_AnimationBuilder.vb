@@ -1,4 +1,5 @@
-﻿Imports AnimatedGif
+﻿Imports System.Text
+Imports AnimatedGif
 
 Public Class Form_AnimationBuilder
     ReadOnly SupportedIamgeFormats() As String = {".png", ".bmp", ".jpeg", ".jpg", ".tiff", ".tif"}
@@ -7,6 +8,10 @@ Public Class Form_AnimationBuilder
     ' Form_AnimationBuilder - Load
     Private Sub Form_AnimationBuilder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ContextMenuStrip1.Renderer = New ToolStripProfessionalRenderer(New ColorTable())
+
+        Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory)
+        Console.WriteLine(Application.StartupPath)
+        'Optimization Tools
     End Sub
 
     ' Panel_Main - DragDrop
@@ -118,6 +123,7 @@ Public Class Form_AnimationBuilder
             Label_Artist.Text = "Artist:"
             Label_Animation.Text = "Animation:"
             LoadDirs(Application.StartupPath & "\Pets\Ground")
+            Button_OptimizePNGs.Enabled = False
         End If
     End Sub
 
@@ -142,6 +148,7 @@ Public Class Form_AnimationBuilder
             Label_Artist.Text = "Artist:"
             Label_Animation.Text = "Animation:"
             LoadDirs(Application.StartupPath & "\Pets\Flying")
+            Button_OptimizePNGs.Enabled = False
         End If
     End Sub
 
@@ -159,6 +166,7 @@ Public Class Form_AnimationBuilder
             Label_Artist.Text = "Objects:"
             Label_Animation.Text = "Animation:"
             LoadDirs(Application.StartupPath & "\Objects")
+            Button_OptimizePNGs.Enabled = True
         End If
     End Sub
 
@@ -176,6 +184,7 @@ Public Class Form_AnimationBuilder
             Label_Artist.Text = "Theme:"
             Label_Animation.Text = "Type:"
             LoadDirs(Application.StartupPath & "\Nature")
+            Button_OptimizePNGs.Enabled = True
         End If
     End Sub
 
@@ -388,12 +397,122 @@ Public Class Form_AnimationBuilder
         End If
     End Sub
 
-    ' 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Form_AnimationDelayInfo.Show()
-        If Form_AnimationDelayInfo.WindowState = FormWindowState.Minimized Then
-            Form_AnimationDelayInfo.WindowState = FormWindowState.Normal
+    ' Button_AnimationInfo - Click
+    Private Sub Button_AnimationInfo_Click(sender As Object, e As EventArgs) Handles Button_AnimationInfo.Click
+        Dim AnimationInfoForm = New Form_AnimationInfo
+        AnimationInfoForm.Show()
+        If AnimationInfoForm.WindowState = FormWindowState.Minimized Then
+            AnimationInfoForm.WindowState = FormWindowState.Normal
         End If
-        Form_AnimationDelayInfo.BringToFront()
+        AnimationInfoForm.BringToFront()
+    End Sub
+
+    ' Button_OptimizeGIFs - Click
+    Private Sub Button_OptimizeGIFs_Click(sender As Object, e As EventArgs) Handles Button_OptimizeGIFs.Click
+        If Not ComboBox_Artist.SelectedIndex = -1 AndAlso RadioButton_TypeObject.Checked Then
+            RunoptimizationScript("GIFs", Application.StartupPath & "\Objects\" & ComboBox_Artist.Text)
+        ElseIf Not ComboBox_Artist.SelectedIndex = -1 AndAlso Not ComboBox_Artist.SelectedIndex = -1 Then
+            If RadioButton_TypeGroundPet.Checked Then
+                RunoptimizationScript("GIFs", Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
+            ElseIf RadioButton_TypeFlyingPet.Checked Then
+                RunoptimizationScript("GIFs", Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
+            ElseIf RadioButton_TypeNature.Checked Then
+                RunoptimizationScript("GIFs", Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
+            End If
+        End If
+    End Sub
+
+    ' Button_OptimizePNGs - Click
+    Private Sub Button_OptimizePNGs_Click(sender As Object, e As EventArgs) Handles Button_OptimizePNGs.Click
+        If Not ComboBox_Artist.SelectedIndex = -1 AndAlso RadioButton_TypeObject.Checked Then
+            RunoptimizationScript("PNGs", Application.StartupPath & "\Objects\" & ComboBox_Artist.Text)
+        ElseIf Not ComboBox_Artist.SelectedIndex = -1 AndAlso Not ComboBox_Artist.SelectedIndex = -1 AndAlso RadioButton_TypeNature.Checked Then
+            RunoptimizationScript("PNGs", Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Animation.Text)
+        End If
+    End Sub
+
+    ' OptimizeAllGifsInFolder
+    Public Sub OptimizeAllGifsInFolder(folderPath As String)
+        ' Get the path to gifsicle.exe (next to executable)
+        Dim gifsiclePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "gifsicle.exe")
+
+        ' Validate gifsicle exists
+        If Not File.Exists(gifsiclePath) Then
+            MsgBox("gifsicle.exe not found next to executable!", MsgBoxStyle.Critical, "Desktop Widgets")
+            Return
+        End If
+
+        ' Get all GIF files
+        Dim gifFiles = Directory.GetFiles(folderPath, "*.gif")
+        If gifFiles.Length = 0 Then
+            MsgBox("No GIF files found in directory.", MsgBoxStyle.Information, "Desktop Widgets")
+            Return
+        End If
+
+        ' Build command arguments for ALL files
+        Dim arguments As New StringBuilder("-b --optimize=1")
+        For Each file In gifFiles
+            arguments.Append($" ""{file}""") ' Quote paths with spaces
+        Next
+
+        Try
+            Using process As New Process()
+                process.StartInfo.FileName = gifsiclePath
+                process.StartInfo.Arguments = arguments.ToString()
+                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+                process.StartInfo.CreateNoWindow = True
+                process.StartInfo.UseShellExecute = False
+                process.StartInfo.RedirectStandardOutput = True
+                process.StartInfo.RedirectStandardError = True
+
+                ' Start process
+                process.Start()
+
+                ' Capture output (important to prevent hangs)
+                Dim output = process.StandardOutput.ReadToEnd()
+                Dim errors = process.StandardError.ReadToEnd()
+
+                process.WaitForExit()
+
+                ' Report results
+                If process.ExitCode = 0 Then
+                    MsgBox("Successfully optimized GIF files", MsgBoxStyle.Information, "Desktop Widgets")
+                Else
+                    MsgBox($"Error (code {process.ExitCode}): {errors}", MsgBoxStyle.Critical, "Desktop Widgets")
+                End If
+            End Using
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Desktop Widgets")
+        End Try
+    End Sub
+
+    ' RunoptimizationScript
+    Public Sub RunoptimizationScript(ImageType As String, folderPath As String)
+        Try
+            ' Create a new ProcessStartInfo instance
+            Dim processStartInfo As New ProcessStartInfo()
+
+            ' Set the file name to the batch file
+            If ImageType = "GIFs" Then
+                processStartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory & "Optimization Tools\" & "GIFs.bat"
+            ElseIf ImageType = "PNGs" Then
+                processStartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory & "Optimization Tools\" & "PNGs.bat"
+            End If
+
+            ' Set the argument to the file path
+            processStartInfo.Arguments = """" & folderPath & """"
+
+            ' Configure the process to open normally
+            processStartInfo.UseShellExecute = True ' Use the shell to execute the process
+            processStartInfo.CreateNoWindow = True ' Show the command prompt window
+            processStartInfo.WindowStyle = ProcessWindowStyle.Normal ' Set the window style to normal
+
+            ' Create and start the process
+            Dim process As New Process()
+            process.StartInfo = processStartInfo
+            process.Start()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Desktop Widgets")
+        End Try
     End Sub
 End Class

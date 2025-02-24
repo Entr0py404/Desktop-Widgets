@@ -1,4 +1,4 @@
-﻿Public Class Form_AnimationDelayInfo
+﻿Public Class Form_AnimationInfo
     Dim GIF_FrameDimension As Imaging.FrameDimension
     Dim GIF_FrameCount As Integer = 1
     ' Form1 - DragDrop
@@ -13,6 +13,8 @@
                 GIF_FrameCount = PixelBox1.Image.GetFrameCount(GIF_FrameDimension)
                 Label_FramesCount.Text = "Frames: " & GIF_FrameCount
                 Label_Delay.Text = "Delay: " & GetFirstFrameDelay(files(0))
+                Label_AnimationInfo.Text = ""
+                GetGifInfo(files(0))
             Catch ex As Exception
                 MessageBox.Show(ex.Message)
             End Try
@@ -44,4 +46,29 @@
             End If
         End Using
     End Function
+
+    Private Sub GetGifInfo(inputGif As String)
+        ' Create a new ProcessStartInfo object
+        Dim processStartInfo As New ProcessStartInfo()
+        processStartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory & "Optimization Tools\gifsicle.exe"
+        processStartInfo.Arguments = $"""{inputGif}"" --info" ' Use quotes for paths with spaces
+        processStartInfo.RedirectStandardOutput = True ' Redirect standard output
+        processStartInfo.UseShellExecute = False ' Required to redirect output
+        processStartInfo.CreateNoWindow = True ' Prevent a new window from opening
+
+        ' Create and start the process
+        Dim process As New Process()
+        process.StartInfo = processStartInfo
+        process.Start()
+
+        ' Read the standard output
+        Dim output As String = process.StandardOutput.ReadToEnd()
+
+        ' Wait for the process to exit
+        process.WaitForExit()
+
+        ' Display the output
+        Console.WriteLine(output)
+        Label_AnimationInfo.Text = output
+    End Sub
 End Class

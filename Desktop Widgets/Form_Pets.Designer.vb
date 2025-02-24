@@ -351,41 +351,43 @@ Partial Class Form_Pets
         Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
         Me.ContextMenuStrip2.ShowCheckMargin = True
         Me.ContextMenuStrip2.ShowImageMargin = False
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(175, 124)
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(181, 146)
         '
         'Small_ToolStripMenuItem
         '
+        Me.Small_ToolStripMenuItem.Checked = True
+        Me.Small_ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.Small_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Small_ToolStripMenuItem.Name = "Small_ToolStripMenuItem"
-        Me.Small_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.Small_ToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.Small_ToolStripMenuItem.Text = "Small"
         '
         'Medium_ToolStripMenuItem
         '
         Me.Medium_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Medium_ToolStripMenuItem.Name = "Medium_ToolStripMenuItem"
-        Me.Medium_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.Medium_ToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.Medium_ToolStripMenuItem.Text = "Medium"
         '
         'MediumLarge_ToolStripMenuItem
         '
         Me.MediumLarge_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.MediumLarge_ToolStripMenuItem.Name = "MediumLarge_ToolStripMenuItem"
-        Me.MediumLarge_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.MediumLarge_ToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.MediumLarge_ToolStripMenuItem.Text = "Medium Large"
         '
         'Large_ToolStripMenuItem
         '
         Me.Large_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Large_ToolStripMenuItem.Name = "Large_ToolStripMenuItem"
-        Me.Large_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.Large_ToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.Large_ToolStripMenuItem.Text = "Large"
         '
         'ExtraLarge_ToolStripMenuItem
         '
         Me.ExtraLarge_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ExtraLarge_ToolStripMenuItem.Name = "ExtraLarge_ToolStripMenuItem"
-        Me.ExtraLarge_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.ExtraLarge_ToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.ExtraLarge_ToolStripMenuItem.Text = "Extra Large"
         '
         'NewToolStripMenuItem
@@ -729,13 +731,13 @@ Partial Class Form_Pets
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BehaviorToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.ShowImageMargin = False
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(156, 50)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(112, 28)
         '
         'BehaviorToolStripMenuItem
         '
         Me.BehaviorToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BehaviorToolStripMenuItem.Name = "BehaviorToolStripMenuItem"
-        Me.BehaviorToolStripMenuItem.Size = New System.Drawing.Size(155, 24)
+        Me.BehaviorToolStripMenuItem.Size = New System.Drawing.Size(111, 24)
         Me.BehaviorToolStripMenuItem.Text = "Behavior"
         '
         'Form_Pets

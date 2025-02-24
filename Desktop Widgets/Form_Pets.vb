@@ -1,7 +1,5 @@
 ﻿
 Public Class Form_Pets
-    Dim FlyingPetsCount As Integer = 0
-    Dim GroundPetsCount As Integer = 0
     Dim AssetPanel_Size As Integer = 98
 
     Private BehaviorForm As Form_Behavior = Nothing
@@ -14,7 +12,7 @@ Public Class Form_Pets
 
         LoadPetsDirs("Pets\Ground\", ComboBox_GroundPetObjects)
         LoadPetsDirs("Pets\Flying\", ComboBox_FlyingPetObjects)
-        LoadGroundPets("Pets\Ground\" & ComboBox_GroundPetObjects.Text)
+        'LoadGroundPets("Pets\Ground\" & ComboBox_GroundPetObjects.Text)
 
         ComboBox_Display.BeginUpdate()
         For Each Display As Display In Display.GetDisplays()
@@ -50,16 +48,33 @@ Public Class Form_Pets
     Private Sub LoadGroundPets(Pet_Path As String)
         If Directory.Exists(Pet_Path) Then
             FlowLayoutPanel1.Visible = False
+
+            For Each ctrl As Control In FlowLayoutPanel1.Controls
+                If TypeOf ctrl Is Panel Then
+                    Dim assetPanel As Panel = DirectCast(ctrl, Panel)
+                    Dim pixelBox As PixelBox = DirectCast(assetPanel.Controls("PixelBox1"), PixelBox)
+                    If pixelBox IsNot Nothing Then
+                        RemoveHandler pixelBox.MouseClick, AddressOf PixelBox1_MouseClick
+                        If pixelBox.Image IsNot Nothing Then
+                            pixelBox.Image.Dispose()
+                            pixelBox.Image = Nothing
+                        End If
+                        pixelBox.Dispose()
+                    End If
+                End If
+                ctrl.Dispose()
+            Next
+
             FlowLayoutPanel1.Controls.Clear()
-            GroundPetsCount = 0
             Dim FilesToCheck As New ArrayList()
             FilesToCheck.AddRange(Directory.GetFiles(Pet_Path, "*.gif", SearchOption.AllDirectories))
             For Each Item As String In FilesToCheck
                 If Path.GetFileName(Item) = "Idling Right.gif" Then
                     CreateNewPanel(FlowLayoutPanel1, Item, Path.GetFileName(Path.GetDirectoryName(Item)))
-                    GroundPetsCount += 1
                 End If
             Next
+            FilesToCheck.Clear()
+
             If GroundPetsToolStripMenuItem.BackColor = Color.RoyalBlue Then
                 FlowLayoutPanel1.Visible = True
             End If
@@ -70,16 +85,33 @@ Public Class Form_Pets
     Private Sub LoadFlyingPets(Pet_Path As String)
         If Directory.Exists(Pet_Path) Then
             FlowLayoutPanel2.Visible = False
+
+            For Each ctrl As Control In FlowLayoutPanel2.Controls
+                If TypeOf ctrl Is Panel Then
+                    Dim assetPanel As Panel = DirectCast(ctrl, Panel)
+                    Dim pixelBox As PixelBox = DirectCast(assetPanel.Controls("PixelBox1"), PixelBox)
+                    If pixelBox IsNot Nothing Then
+                        RemoveHandler pixelBox.MouseClick, AddressOf PixelBox2_MouseClick
+                        If pixelBox.Image IsNot Nothing Then
+                            pixelBox.Image.Dispose()
+                            pixelBox.Image = Nothing
+                            Console.WriteLine("Dispose")
+                        End If
+                        pixelBox.Dispose()
+                    End If
+                End If
+                    ctrl.Dispose()
+            Next
+
             FlowLayoutPanel2.Controls.Clear()
-            FlyingPetsCount = 0
             Dim FilesToCheck As New ArrayList()
             FilesToCheck.AddRange(Directory.GetFiles(Pet_Path, "*.gif", SearchOption.AllDirectories))
             For Each Item As String In FilesToCheck
                 If Path.GetFileName(Item) = "Flying Right.gif" Then
                     CreateNewPanel(FlowLayoutPanel2, Item, Path.GetFileName(Path.GetDirectoryName(Item)))
-                    FlyingPetsCount += 1
                 End If
             Next
+            FilesToCheck.Clear()
 
             If FlyingPetsToolStripMenuItem.BackColor = Color.RoyalBlue Then
                 FlowLayoutPanel2.Visible = True
@@ -111,6 +143,10 @@ Public Class Form_Pets
 
         For i = 0 To FormOpenCount - 1
             My.Application.OpenForms.Item(WindowName).Close()
+
+            'Dim formToClose = My.Application.OpenForms.Item(WindowName)
+            'formToClose.Close()
+            'formToClose.Dispose()
         Next
     End Sub
 
@@ -195,11 +231,12 @@ Public Class Form_Pets
 
     ' SafeImageFromFile()
     Public Shared Function SafeImageFromFile(path As String) As Image
-        Dim bytes = File.ReadAllBytes(path)
-        Using ms As New MemoryStream(bytes)
-            Dim img = Image.FromStream(ms) 'Bitmap.FromStream(ms) '
-            Return img
-        End Using
+        ' Load the image into a Bitmap
+        Dim imageBitmap As Bitmap
+        Using tempImage As New Bitmap(path)
+            imageBitmap = New Bitmap(tempImage) ' Create a copy of the image
+        End Using ' The file is released here
+        Return imageBitmap
     End Function
 
     ' CreateNewPanel
@@ -223,7 +260,7 @@ Public Class Form_Pets
         ' PixelBox
         Dim AssetPixelBox = New PixelBox
         AssetPixelBox.Dock = DockStyle.Fill
-        AssetPixelBox.Image = Image.FromFile(imagePath) 'SafeImageFromFile(imagePath)
+        AssetPixelBox.Load(imagePath) 'SafeImageFromFile(imagePath) 'Image.FromFile(imagePath)
         AssetPixelBox.SizeMode = PictureBoxSizeMode.Zoom
         AssetPixelBox.Name = "PixelBox1"
         AssetPixelBox.Cursor = Cursors.Hand
