@@ -30,4 +30,16 @@ Public Class PixelBox
             Console.WriteLine(ex.Message)
         End Try
     End Sub
+
+    ' Disposes of the Image and other disposable fields.
+    Protected Overrides Sub Dispose(disposing As Boolean)
+        If disposing Then
+            ' Dispose of the Image if it exists.
+            If Me.Image IsNot Nothing Then
+                Me.Image.Dispose()
+                Me.Image = Nothing
+            End If
+        End If
+        MyBase.Dispose(disposing)
+    End Sub
 End Class

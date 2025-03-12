@@ -1,4 +1,5 @@
-﻿
+﻿Imports System.Drawing.Imaging
+
 Public Class Form_GroundPet
     Dim Rand As New Random
     Dim Dragging As Boolean = False
@@ -6,121 +7,150 @@ Public Class Form_GroundPet
     Dim MYScreen As Screen
     Dim BlockEvent_DisplayComboBox As Boolean = False
 
-    Public TurnLeft As Boolean = True
+    Public TurnLeft As Boolean = False
     Public FollowCursor As Boolean = False
     Public PetDir As String
 
-    Public Animation_Dragging As Image
     Public HasAnimation_Dragging As Boolean = False
-    Public Animation_Dragging_Left As Bitmap
-    Public Animation_Dragging_Right As Bitmap
-    Public Animation_Falling_Left As Bitmap
-    Public Animation_Falling_Right As Bitmap
-    Public Animation_Walking_Left As Image
-    Public Animation_Walking_Right As Image
-    Public Animation_Idling_Left As Image
-    Public Animation_Idling_Right As Image
-    Public Animation_IdlingAlt_Left As Bitmap
-    Public Animation_IdlingAlt_Right As Bitmap
     Public HasAnimation_IdlingAlt As Boolean = False
-    Public Animation_Action_Left As Bitmap
-    Public Animation_Action_Right As Bitmap
-    Public Animation_ActionAlt_Left As Bitmap
-    Public Animation_ActionAlt_Right As Bitmap
-    Public Animation_Sleeping_Left As Bitmap
-    Public Animation_Sleeping_Right As Bitmap
-    Public Animation_Jumping_Left As Bitmap
-    Public Animation_Jumping_Right As Bitmap
+    Public HasAnimation_Sleeping As Boolean = False
+    Public HasAnimation_Falling As Boolean = False
+    Public HasAnimation_Land As Boolean = False
+    Public HasAnimation_Pose As Boolean = False
+    Public HasAnimation_Pose2 As Boolean = False
+    Public HasAnimation_Pose3 As Boolean = False
+    Public HasAnimation_Pose4 As Boolean = False
+    Public HasAnimation_Pose5 As Boolean = False
+    Dim Poses As New List(Of String)
 
     ' Behavior settings
-    Dim DefaultScale As Integer = 1
-    Dim FollowCursor_StoppingDistance_Px As Integer = 6
-    Dim Falling_Movement_Px As Integer = 5
+    Dim DefaultScale As Integer = 1 '1x
+    Dim FollowCursor_StoppingDistance_Px As Integer = 6 '6px
+    Dim Falling_Movement_Px As Integer = 5 '5px
 
-    Dim IdleDecision As Integer = 45
-    Dim IdleAltDecision As Integer = 35
-    Dim ScreenWarpingDecision As Integer = 60
+    Dim IdleDecision As Integer = 45 '45%
+    Dim IdleAltDecision As Integer = 35 '35%
+    Dim ScreenWarpingDecision As Integer = 60 '60%
+    Dim PoseDecision As Integer = 35 '35%
 
     Dim Walking_Movement_Tick As Integer = 1
     Dim Falling_Movement_Tick As Integer = 1
-    Dim TurningDecision_Min As Integer = 2500
-    Dim TurningDecision_Max As Integer = 3500
-    Dim IdleDecision_Min As Integer = 2500
-    Dim IdleDecision_Max As Integer = 3500
+    Dim TurningDecision_Min As Integer = 2500 '2.5 seconds
+    Dim TurningDecision_Max As Integer = 3500 '3.5 seconds
+    Dim IdleDecision_Min As Integer = 2500 '2.5 seconds
+    Dim IdleDecision_Max As Integer = 3500 '3.5 seconds
 
-    Dim SleepDecision As Integer = 5
-    Dim Sleeping_Min As Integer = 90000
-    Dim Sleeping_Max As Integer = 150000
-    Dim HasAnimation_Sleeping As Boolean = False
+    Dim SleepDecision As Integer = 15 '15%
+    Dim Sleeping_Min As Integer = 90000 '1.5 minutes
+    Dim Sleeping_Max As Integer = 150000 '2.5 minutes
 
     Private BehaviorForm As Form_Behavior = Nothing
+
+    ' Dictionary to hold different animations.
+    Private Animations As New Dictionary(Of String, AnimationSystem)()
+    ' The currently active animation.
+    Private CurrentAnimation As AnimationSystem
 
     ' Form_GroundPet - Load
     Private Sub Form_GroundPet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Walking
-        If File.Exists(PetDir & "\Walking Left.gif") Then
-            Animation_Walking_Left = New Bitmap(PetDir & "\Walking Left.gif")
-        End If
-        If File.Exists(PetDir & "\Walking Right.gif") Then
-            Animation_Walking_Right = New Bitmap(PetDir & "\Walking Right.gif")
+        If File.Exists(PetDir & "\Walking.gif") Then
+            Animations.Add("Walking", New AnimationSystem(PetDir & "\Walking.gif", "Walking", True, Me))
         End If
 
         ' Idling
-        If File.Exists(PetDir & "\Idling Left.gif") Then
-            Animation_Idling_Left = Image.FromFile(PetDir & "\Idling Left.gif")
-        End If
-        If File.Exists(PetDir & "\Idling Right.gif") Then
-            Animation_Idling_Right = Image.FromFile(PetDir & "\Idling Right.gif")
-            PixelBox_Pet.Image = Animation_Idling_Right
+        If File.Exists(PetDir & "\Idling.gif") Then
+            Animations.Add("Idling", New AnimationSystem(PetDir & "\Idling.gif", "Idling", True, Me))
         End If
 
         ' Idling Alt
-        If File.Exists(PetDir & "\Idling Alt Left.gif") Then
-            Animation_IdlingAlt_Left = New Bitmap(PetDir & "\Idling Alt Left.gif")
-        End If
-        If File.Exists(PetDir & "\Idling Alt Right.gif") Then
-            Animation_IdlingAlt_Right = New Bitmap(PetDir & "\Idling Alt Right.gif")
+        If File.Exists(PetDir & "\Idling Alt.gif") Then
+            Animations.Add("Idling Alt", New AnimationSystem(PetDir & "\Idling Alt.gif", "Idling Alt", True, Me))
             HasAnimation_IdlingAlt = True
         End If
 
         ' Sleeping
-        If File.Exists(PetDir & "\Sleeping Left.gif") Then
-            Animation_Sleeping_Left = New Bitmap(PetDir & "\Sleeping Left.gif")
-        End If
-        If File.Exists(PetDir & "\Sleeping Right.gif") Then
-            Animation_Sleeping_Right = New Bitmap(PetDir & "\Sleeping Right.gif")
+        If File.Exists(PetDir & "\Sleeping.gif") Then
+            Animations.Add("Sleeping", New AnimationSystem(PetDir & "\Sleeping.gif", "Sleeping", True, Me))
             HasAnimation_Sleeping = True
         End If
 
         ' Dragging
         If File.Exists(PetDir & "\Dragging.gif") Then
-            Animation_Dragging = New Bitmap(PetDir & "\Dragging.gif")
+            Animations.Add("Dragging", New AnimationSystem(PetDir & "\Dragging.gif", "Dragging", True, Me))
             HasAnimation_Dragging = True
-        End If
-        If File.Exists(PetDir & "\Dragging Left.gif") Then
-            Animation_Dragging_Left = New Bitmap(PetDir & "\Dragging Left.gif")
-        Else
-            Animation_Dragging_Left = New Bitmap(PetDir & "\Idling Left.gif")
-        End If
-        If File.Exists(PetDir & "\Dragging Right.gif") Then
-            Animation_Dragging_Right = New Bitmap(PetDir & "\Dragging Right.gif")
-        Else
-            Animation_Dragging_Right = New Bitmap(PetDir & "\Idling Right.gif")
+        ElseIf File.Exists(PetDir & "\Dragging.png") Then
+            Animations.Add("Dragging", New AnimationSystem(PetDir & "\Dragging.png", "Dragging", True, Me))
+            HasAnimation_Dragging = True
         End If
 
         ' Falling
-        If File.Exists(PetDir & "\Falling Left.gif") Then
-            Animation_Falling_Left = New Bitmap(PetDir & "\Falling Left.gif")
-        Else
-            Animation_Falling_Left = New Bitmap(PetDir & "\Idling Left.gif")
-        End If
-        If File.Exists(PetDir & "\Falling Right.gif") Then
-            Animation_Falling_Right = New Bitmap(PetDir & "\Falling Right.gif")
-        Else
-            Animation_Falling_Right = New Bitmap(PetDir & "\Idling Right.gif")
+        If File.Exists(PetDir & "\Falling.gif") Then
+            Animations.Add("Falling", New AnimationSystem(PetDir & "\Falling.gif", "Falling", True, Me))
+            HasAnimation_Falling = True
+        ElseIf File.Exists(PetDir & "\Falling.png") Then
+            Animations.Add("Falling", New AnimationSystem(PetDir & "\Falling.png", "Falling", True, Me))
+            HasAnimation_Falling = True
         End If
 
+        ' Land
+        If File.Exists(PetDir & "\Land.gif") Then
+            Animations.Add("Land", New AnimationSystem(PetDir & "\Land.gif", "Land", False, Me))
+            HasAnimation_Land = True
+        End If
+
+        ' Pose
+        If File.Exists(PetDir & "\Pose.gif") Then
+            Animations.Add("Pose", New AnimationSystem(PetDir & "\Pose.gif", "Pose", False, Me))
+            HasAnimation_Pose = True
+        End If
+
+        ' Pose2
+        If File.Exists(PetDir & "\Pose2.gif") Then
+            Animations.Add("Pose2", New AnimationSystem(PetDir & "\Pose2.gif", "Pose2", False, Me))
+            HasAnimation_Pose2 = True
+        End If
+
+        ' Pose3
+        If File.Exists(PetDir & "\Pose3.gif") Then
+            Animations.Add("Pose3", New AnimationSystem(PetDir & "\Pose3.gif", "Pose3", False, Me))
+            HasAnimation_Pose3 = True
+        End If
+
+        ' Pose4
+        If File.Exists(PetDir & "\Pose4.gif") Then
+            Animations.Add("Pose4", New AnimationSystem(PetDir & "\Pose4.gif", "Pose4", False, Me))
+            HasAnimation_Pose4 = True
+        End If
+
+        ' Pose5
+        If File.Exists(PetDir & "\Pose5.gif") Then
+            Animations.Add("Pose5", New AnimationSystem(PetDir & "\Pose5.gif", "Pose5", False, Me))
+            HasAnimation_Pose5 = True
+        End If
+
+        If HasAnimation_Pose Then
+            Poses.Add("Pose")
+        End If
+        If HasAnimation_Pose2 Then
+            Poses.Add("Pose2")
+        End If
+        If HasAnimation_Pose3 Then
+            Poses.Add("Pose3")
+        End If
+        If HasAnimation_Pose4 Then
+            Poses.Add("Pose4")
+        End If
+        If HasAnimation_Pose5 Then
+            Poses.Add("Pose5")
+        End If
+
+        ' Set the initial animation.
+        SetAnimation("Idling")
+
+        ' Set the form title.
         Me.Text = "Pet - " & Path.GetFileName(PetDir)
+
 
         Dim R As Integer = CInt(Rnd(1))
         If R = 0 Then
@@ -129,6 +159,8 @@ Public Class Form_GroundPet
             TurnLeft = False
         End If
 
+
+        ' Add the available displays to the DisplayToolStripComboBox.
         DisplayToolStripComboBox.BeginUpdate()
         For Each Display As Display In Display.GetDisplays()
             If Display.IsGDIPrimary Then
@@ -138,7 +170,7 @@ Public Class Form_GroundPet
                 DisplayToolStripComboBox.Items.Add(Display.ToPathDisplayTarget.FriendlyName)
             End If
         Next
-
+        ' Add All item
         If DisplayToolStripComboBox.Items.Count >= 2 Then
             DisplayToolStripComboBox.Items.Add("All")
         End If
@@ -269,102 +301,131 @@ Public Class Form_GroundPet
 
         ScaleToolStripComboBox.SelectedIndex = CInt(Form_Pets.NumericUpDown_ObjectScale.Value) - 1
 
+        Console.WriteLine("Form_GroundPet is loading, Animations count: " & Animations.Count)
         FormLoadLock = False
 
-        'Console.WriteLine("Form_GroundPet_Load")
+    End Sub
+
+    ' Timer tick event to update the PictureBox image with the current frame.
+    Public Sub Timer_Animation_Tick(sender As Object, e As EventArgs) Handles Timer_Animation.Tick
+        'Console.WriteLine("Timer_Animation.Tick")
+        If CurrentAnimation IsNot Nothing Then
+            ' Update the PictureBox image based on the current animation's frame.
+            PixelBox_Pet.Image = CurrentAnimation.GetCurrentFrameImage(TurnLeft)
+
+            ' Advance to the next frame.
+            CurrentAnimation.AdvanceFrame(Timer_Animation)
+        Else
+            Console.WriteLine("Timer_Animation_Tick: CurrentAnimation is Nothing")
+        End If
+    End Sub
+
+    ' Method to switch animations. This resets the frame index, updates the Timer interval,
+    ' and stops the Timer if the animation contains only one frame.
+    Public Sub SetAnimation(name As String)
+        Console.WriteLine("SetAnimation: " & name)
+
+        If Animations Is Nothing Then
+            Console.WriteLine("ERROR: Animations is Nothing BEFORE setting animation!")
+            Exit Sub
+        End If
+        If Animations.Count = 0 Then
+            Console.WriteLine("ERROR: Animations is EMPTY BEFORE setting animation!")
+            Exit Sub
+        End If
+
+        If Animations.ContainsKey(name) Then
+            CurrentAnimation = Animations(name)
+            CurrentAnimation.Reset()
+            Timer_Animation.Interval = CurrentAnimation.FrameDelay
+            Timer_Animation.Start()
+            PixelBox_Pet.Image = CurrentAnimation.GetCurrentFrameImage(TurnLeft)
+        Else
+            Console.WriteLine("ERROR: Animation not found: " & name)
+        End If
+
+        ' Check again AFTER setting the animation
+        If Animations Is Nothing Then
+            Console.WriteLine("ERROR: Animations is Nothing AFTER setting animation!")
+        ElseIf Animations.Count = 0 Then
+            Console.WriteLine("ERROR: Animations is EMPTY AFTER setting animation!")
+        End If
     End Sub
 
     ' Timer_Walking - Tick
     Private Sub Timer_Walking_Tick(sender As Object, e As EventArgs) Handles Timer_Walking.Tick
-
         If Not ContextMenuStrip1.Visible Then
             If FollowCursor = False Then
                 If TurnLeft = True Then
                     If Me.Location.Y = MYScreen.WorkingArea.Bottom - Me.Height Then
                         Me.Location = New Point(Me.Location.X - 1, MYScreen.WorkingArea.Bottom - Me.Height)
-
-                        If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
-                            PixelBox_Pet.Image = Animation_Walking_Left
-                            'Console.WriteLine("Animation_Walking_Left")
+                        If Not CurrentAnimation.Name = "Walking" Then
+                            SetAnimation("Walking")
                         End If
-
                     End If
                 Else
                     If Me.Location.Y = MYScreen.WorkingArea.Bottom - Me.Height Then
                         Me.Location = New Point(Me.Location.X + 1, MYScreen.WorkingArea.Bottom - Me.Height)
-
-                        If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
-                            PixelBox_Pet.Image = Animation_Walking_Right
-                            'Console.WriteLine("Animation_Walking_Right")
+                        If Not CurrentAnimation.Name = "Walking" Then
+                            SetAnimation("Walking")
                         End If
-
                     End If
                 End If
+
             Else
 
                 If Me.Location.Y = MYScreen.WorkingArea.Bottom - Me.Height Then
+
                     If Me.Location.X > MousePosition.X + FollowCursor_StoppingDistance_Px Then
-                        TurnLeft = False
+                        TurnLeft = True
                         Me.Location = New Point(Me.Location.X - 1, MYScreen.WorkingArea.Bottom - Me.Height)
-                        If PixelBox_Pet.Image IsNot Animation_Walking_Left Then
-                            PixelBox_Pet.Image = Animation_Walking_Left
-                            'Console.WriteLine("Animation_Walking_Left")
+                        If Not CurrentAnimation.Name = "Walking" Then
+                            SetAnimation("Walking")
                         End If
                     ElseIf Me.Location.X < MousePosition.X - Me.Width - FollowCursor_StoppingDistance_Px Then
-                        TurnLeft = True
+                        TurnLeft = False
                         Me.Location = New Point(Me.Location.X + 1, MYScreen.WorkingArea.Bottom - Me.Height)
-                        If PixelBox_Pet.Image IsNot Animation_Walking_Right Then
-                            PixelBox_Pet.Image = Animation_Walking_Right
-                            'Console.WriteLine("Animation_Walking_Right")
+                        If Not CurrentAnimation.Name = "Walking" Then
+                            SetAnimation("Walking")
                         End If
                     Else
-
-                        If PixelBox_Pet.Image IsNot Animation_Idling_Left Or PixelBox_Pet.Image IsNot Animation_Idling_Right Then
-                            If TurnLeft = True Then
-                                PixelBox_Pet.Image = Animation_Idling_Left
-                                'Console.WriteLine("Animation_Idling_Left")
-                            Else
-                                PixelBox_Pet.Image = Animation_Idling_Right
-                                'Console.WriteLine("Animation_Idling_Right")
-                            End If
+                        If Not CurrentAnimation.Name = "Idling" Then
+                            SetAnimation("Idling")
                         End If
                     End If
-
                 End If
+
             End If
         End If
     End Sub
 
     ' Timer_Falling - Tick
     Private Sub Timer_Falling_Tick(sender As Object, e As EventArgs) Handles Timer_Falling.Tick
-        'Dim Display_Test As Screen
         If Dragging = False Then
             If Me.Location.Y < MYScreen.WorkingArea.Bottom - Me.Height Then
                 If Me.Location.Y + Falling_Movement_Px >= MYScreen.WorkingArea.Bottom - Me.Height Then
                     Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
 
-                    If TurnLeft = True Then
-                        If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
-                            PixelBox_Pet.Image = Animation_Idling_Left
-                            'Console.WriteLine("Animation_Idling_Left")
+                    If HasAnimation_Land Then
+                        If Not CurrentAnimation.Name = "Land" Then
+                            SetAnimation("Land")
                         End If
                     Else
-                        If PixelBox_Pet.Image IsNot Animation_Idling_Right Then
-                            PixelBox_Pet.Image = Animation_Idling_Right
-                            'Console.WriteLine("Animation_Idling_Right")
-                        End If
+                        Timer_IdleDecision.Start()
+                        Timer_TurningDecision.Start()
+                        SetAnimation("Idling")
                     End If
+
                 Else
                     Me.Location = New Point(Me.Location.X, Me.Location.Y + Falling_Movement_Px)
-                    If TurnLeft = True Then
-                        If PixelBox_Pet.Image IsNot Animation_Falling_Left Then
-                            PixelBox_Pet.Image = Animation_Falling_Left
-                            'Console.WriteLine("Animation_Falling_Left")
+
+                    If HasAnimation_Falling Then
+                        If Not CurrentAnimation.Name = "Falling" Then
+                            SetAnimation("Falling")
                         End If
                     Else
-                        If PixelBox_Pet.Image IsNot Animation_Falling_Right Then
-                            PixelBox_Pet.Image = Animation_Falling_Right
-                            'Console.WriteLine("Animation_Falling_Right")
+                        If Not CurrentAnimation.Name = "Idling" Then
+                            SetAnimation("Idling")
                         End If
                     End If
 
@@ -391,64 +452,40 @@ Public Class Form_GroundPet
             If Rand.Next(0, 100 + 1) <= IdleDecision Then
                 Timer_Walking.Stop()
 
-                If HasAnimation_IdlingAlt Then
-                    If Rand.Next(0, 100 + 1) <= IdleAltDecision Then
-                        If TurnLeft = True Then
-                            If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
-                                PixelBox_Pet.Image = Animation_Idling_Left
-                                'Console.WriteLine("Animation_Idling_Left")
+                If HasAnimation_Sleeping Then
+                    If CurrentAnimation.Name = "Idling" Then
+                        If Rand.Next(0, 100 + 1) <= SleepDecision Then
+                            If Not CurrentAnimation.Name = "Sleeping" Then
+                                SetAnimation("Sleeping")
+                                Timer_Sleeping.Enabled = True
+                                Timer_IdleDecision.Enabled = False
+                                Timer_TurningDecision.Enabled = False
                             End If
-                        Else
-                            If PixelBox_Pet.Image IsNot Animation_Idling_Right Then
-                                PixelBox_Pet.Image = Animation_Idling_Right
-                                'Console.WriteLine("Animation_Idling_Right")
-                            End If
-                        End If
-                    Else
-                        If TurnLeft = True Then
-                            If PixelBox_Pet.Image IsNot Animation_IdlingAlt_Left Then
-                                PixelBox_Pet.Image = Animation_IdlingAlt_Left
-                                'Console.WriteLine("Animation_IdlingAlt_Left")
-                            End If
-                        Else
-                            If PixelBox_Pet.Image IsNot Animation_IdlingAlt_Right Then
-                                PixelBox_Pet.Image = Animation_IdlingAlt_Right
-                                'Console.WriteLine("Animation_IdlingAlt_Right")
-                            End If
-                        End If
-                    End If
-                Else
-                    If TurnLeft = True Then
-                        If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
-                            PixelBox_Pet.Image = Animation_Idling_Left
-                            'Console.WriteLine("Animation_Idling_Left")
-                        End If
-                    Else
-                        If PixelBox_Pet.Image IsNot Animation_Idling_Right Then
-                            PixelBox_Pet.Image = Animation_Idling_Right
-                            'Console.WriteLine("Animation_Idling_Right")
                         End If
                     End If
                 End If
 
-
-                ' Console.WriteLine(Rand.Next(0, 100 + 1))
-
-                If HasAnimation_Sleeping Then
-                    If Rand.Next(0, 100 + 1) <= SleepDecision Then
-                        If TurnLeft = True Then
-                            If PixelBox_Pet.Image IsNot Animation_Sleeping_Left Then
-                                PixelBox_Pet.Image = Animation_Sleeping_Left
-                                'Console.WriteLine("Animation_Sleeping_Left")
-                            End If
-                        Else
-                            If PixelBox_Pet.Image IsNot Animation_Sleeping_Right Then
-                                PixelBox_Pet.Image = Animation_Sleeping_Right
-                                'Console.WriteLine("Animation_Sleeping_Right")
-                            End If
+                If HasAnimation_Pose Then
+                    If CurrentAnimation.Name = "Idling" Or CurrentAnimation.Name = "Idling Alt" Then
+                        If Rand.Next(0, 100 + 1) <= PoseDecision Then
+                            SetAnimation(Poses(Rand.Next(0, Poses.Count)))
                         End If
-                        Timer_Sleeping.Enabled = True
-                        Timer_IdleDecision.Enabled = False
+                    End If
+                End If
+
+                If HasAnimation_IdlingAlt Then
+                    If Rand.Next(0, 100 + 1) <= IdleAltDecision Then
+                        If Not CurrentAnimation.Name = "Idling Alt" AndAlso Not Poses.Contains(CurrentAnimation.Name) Then
+                            SetAnimation("Idling Alt")
+                        End If
+                    Else
+                        If Not CurrentAnimation.Name = "Idling" AndAlso Not CurrentAnimation.Name = "Sleeping" AndAlso Not Poses.Contains(CurrentAnimation.Name) Then
+                            SetAnimation("Idling")
+                        End If
+                    End If
+                Else
+                    If Not CurrentAnimation.Name = "Idling" AndAlso Not CurrentAnimation.Name = "Sleeping" AndAlso Not Poses.Contains(CurrentAnimation.Name) Then
+                        SetAnimation("Idling")
                     End If
                 End If
 
@@ -461,6 +498,8 @@ Public Class Form_GroundPet
 
     ' Screen Warping & Edge Turn Around
     Private Sub Form1_LocationChanged(sender As Object, e As EventArgs) Handles Me.LocationChanged
+        Static lastLocation As Point = Me.Location
+
         If FormLoadLock = False Then
             If Dragging = False Then
                 ' RIGHT & Left
@@ -469,7 +508,6 @@ Public Class Form_GroundPet
                         If Not DisplayToolStripComboBox.SelectedItem.ToString = "All" Then
                             Me.Location = New Point(MYScreen.WorkingArea.Left - CInt(Me.Width / 2), Me.Location.Y) 'WARP
                         Else
-
                             Dim TempDisplay_LOW As Screen = MYScreen
                             Dim TempDisplay_Right As Screen = MYScreen
                             Dim HasScreenOnRight As Boolean = False
@@ -477,7 +515,6 @@ Public Class Form_GroundPet
 
                             ' SET TO SCREEN WITH LOWEST X
                             For Each Displays As Display In Display.GetDisplays()
-
                                 If Not Displays.GetScreen.Bounds = MYScreen.Bounds Then
                                     If location >= Displays.GetScreen.Bounds.Left And location <= Displays.GetScreen.Bounds.Right Then
                                         TempDisplay_Right = Displays.GetScreen
@@ -488,7 +525,6 @@ Public Class Form_GroundPet
                                 If Displays.GetScreen.Bounds.X < MYScreen.Bounds.X Then
                                     TempDisplay_LOW = Displays.GetScreen
                                 End If
-
                             Next
 
                             If HasScreenOnRight Then
@@ -502,7 +538,6 @@ Public Class Form_GroundPet
                                 Console.WriteLine("NOScreenOnRight")
                                 Console.WriteLine("WARP")
                             End If
-
                         End If
                     Else
                         TurnLeft = True ' TURNAROUND
@@ -513,7 +548,6 @@ Public Class Form_GroundPet
                         If Not DisplayToolStripComboBox.SelectedItem.ToString = "All" Then
                             Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), Me.Location.Y) ' WARP
                         Else
-
                             Dim TempDisplay_HIGH As Screen = MYScreen
                             Dim TempDisplay_Left As Screen = MYScreen
                             Dim HasScreenOnLeft As Boolean = False
@@ -521,7 +555,6 @@ Public Class Form_GroundPet
 
                             ' SET TO SCREEN WITH HIGHEST X
                             For Each Displays As Display In Display.GetDisplays()
-
                                 If Not Displays.GetScreen.Bounds = MYScreen.Bounds Then
                                     If location >= Displays.GetScreen.Bounds.Left And location <= Displays.GetScreen.Bounds.Right Then
                                         TempDisplay_Left = Displays.GetScreen
@@ -532,7 +565,6 @@ Public Class Form_GroundPet
                                 If Displays.GetScreen.Bounds.X > MYScreen.Bounds.X Then
                                     TempDisplay_HIGH = Displays.GetScreen
                                 End If
-
                             Next
 
                             If HasScreenOnLeft Then
@@ -540,48 +572,51 @@ Public Class Form_GroundPet
                                 Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), MYScreen.WorkingArea.Bottom - Me.Height) ' Travel
                                 Console.WriteLine("HasScreenOnLeft")
                                 Console.WriteLine("Travel")
-
                             Else
                                 MYScreen = TempDisplay_HIGH
                                 Me.Location = New Point(MYScreen.WorkingArea.Right - CInt(Me.Width / 2), MYScreen.WorkingArea.Bottom - Me.Height) ' WARP
                                 Console.WriteLine("NOScreenOnLeft")
                                 Console.WriteLine("WARP")
                             End If
-
                         End If
                     Else
                         TurnLeft = False ' TURNAROUND
                     End If
                     Console.WriteLine("OVER LEFT")
                 End If
-
             Else
-                If HasAnimation_Dragging = True Then
-                    If PixelBox_Pet.Image IsNot Animation_Dragging Then
-                        PixelBox_Pet.Image = Animation_Dragging
-                    End If
-                Else
-                    If TurnLeft = True Then
-                        If PixelBox_Pet.Image IsNot Animation_Dragging_Left Then
-                            PixelBox_Pet.Image = Animation_Dragging_Left
-                        End If
-                    Else
-                        If PixelBox_Pet.Image IsNot Animation_Dragging_Right Then
-                            PixelBox_Pet.Image = Animation_Dragging_Right
-                        End If
-                    End If
+                ' Dragging Right
+                If Me.Location.X > lastLocation.X Then
+                    TurnLeft = False
+                    'Console.WriteLine("Dragging Right")
                 End If
 
-            End If
+                ' Dragging Left
+                If Me.Location.X < lastLocation.X Then
+                    TurnLeft = True
+                    'Console.WriteLine("Dragging Left")
+                End If
 
+                If HasAnimation_Dragging = True Then
+                    If Not CurrentAnimation.Name = "Dragging" Then
+                        SetAnimation("Dragging")
+                    End If
+                Else
+                    If Not CurrentAnimation.Name = "Idling" Then
+                        SetAnimation("Idling")
+                    End If
+                End If
+            End If
         End If
+
+        lastLocation = Me.Location
     End Sub
 
     ' ScalePet()
     Public Sub ScalePet(val As Integer)
         val = val + DefaultScale - 1
-        Me.Width = Animation_Walking_Left.Width * val
-        Me.Height = Animation_Walking_Left.Height * val
+        Me.Width = CurrentAnimation.Width * val
+        Me.Height = CurrentAnimation.Height * val
         Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
     End Sub
 
@@ -589,6 +624,12 @@ Public Class Form_GroundPet
     Private Sub PixelBox_Pet_MouseDown(sender As Object, e As MouseEventArgs) Handles PixelBox_Pet.MouseDown
         If e.Button = Windows.Forms.MouseButtons.Left Then
             Dragging = True
+
+            Timer_Walking.Stop()
+            Timer_IdleDecision.Stop()
+            Timer_TurningDecision.Stop()
+            Timer_Sleeping.Stop()
+
             PixelBox_Pet.Capture = False
             Const WM_NCLBUTTONDOWN As Integer = &HA1S
             Const HTCAPTION As Integer = 2
@@ -617,7 +658,20 @@ Public Class Form_GroundPet
             'OVER DOWN
             If Me.Location.Y > MYScreen.WorkingArea.Height - Me.Height Then
                 Me.Location = New Point(Me.Location.X, MYScreen.WorkingArea.Bottom - Me.Height)
-                Console.WriteLine("OVER DOWN")
+
+                If HasAnimation_Land Then
+                    If Not CurrentAnimation.Name = "Land" Then
+                        SetAnimation("Land")
+                    End If
+                Else
+                    Timer_IdleDecision.Start()
+                    Timer_TurningDecision.Start()
+                    If Not CurrentAnimation.Name = "Idling" Then
+                        SetAnimation("Idling")
+                    End If
+                End If
+
+                    Console.WriteLine("OVER DOWN")
             End If
 
             If Timer_Sleeping.Enabled = True Then
@@ -663,17 +717,15 @@ Public Class Form_GroundPet
 
     ' ContextMenuStrip1 - Opened
     Private Sub ContextMenuStrip1_Opened(sender As Object, e As EventArgs) Handles ContextMenuStrip1.Opened
-        If TurnLeft = True Then
-            If PixelBox_Pet.Image IsNot Animation_Idling_Left Then
-                PixelBox_Pet.Image = Animation_Idling_Left
-                'Console.WriteLine("Animation_Idling_Left")
-            End If
-        Else
-            If PixelBox_Pet.Image IsNot Animation_Idling_Right Then
-                PixelBox_Pet.Image = Animation_Idling_Right
-                'Console.WriteLine("Animation_Idling_Right")
-            End If
+        If Not CurrentAnimation.Name = "Idling" Then
+            SetAnimation("Idling")
         End If
+        'Timer_Walking.Start()
+        'Timer_Walking.Stop()
+        'Timer_Falling.Stop()
+        'Timer_IdleDecision.Stop()
+        'Timer_TurningDecision.Stop()
+        'Timer_Sleeping.Stop()
     End Sub
 
     ' DisplayToolStripComboBox - SelectedIndexChanged
@@ -690,6 +742,7 @@ Public Class Form_GroundPet
     ' Timer_Sleeping - Tick
     Private Sub Timer_Sleeping_Tick(sender As Object, e As EventArgs) Handles Timer_Sleeping.Tick
         Timer_IdleDecision.Enabled = True
+        Timer_TurningDecision.Enabled = True
         Timer_Sleeping.Enabled = False
         Timer_Sleeping.Interval = Rand.Next(Sleeping_Min, Sleeping_Max + 1)
     End Sub
@@ -743,7 +796,7 @@ Public Class Form_GroundPet
             BehaviorForm.Text = "Behavior - " & Path.GetFileName(PetDir)
 
             BehaviorForm.Label_PetName.Text = Path.GetFileName(PetDir)
-            BehaviorForm.PixelBox_PetPreview.Image = Animation_Idling_Right
+            BehaviorForm.PixelBox_PetPreview.Image = Image.FromFile(PetDir & "\Idling.gif") ' Replace this
 
             BehaviorForm.Label_TakeFlightDecision.Enabled = False
             BehaviorForm.NumericUpDown_TakeFlightDecision.Enabled = False
@@ -761,5 +814,138 @@ Public Class Form_GroundPet
             ' Show the form
             BehaviorForm.Show()
         End If
+    End Sub
+
+    ' AnimationFinished
+    Public Sub AnimationFinished(bla As Form_GroundPet)
+
+        ' Prevent running if Animations is missing
+        'If Animations Is Nothing Then
+        'Console.WriteLine("ERROR: Animations disappeared!")
+        'Exit Sub
+        'End If
+        ' Prevent running if CurrentAnimation is missing
+        'If CurrentAnimation Is Nothing Then
+        'Console.WriteLine("ERROR: CurrentAnimation is Nothing!")
+        'Exit Sub
+        'End If
+
+        ' If Land animation finishes, transition back to Idling
+        'If CurrentAnimation.Name = "Land" AndAlso Animations.ContainsKey("Idling") Then
+        'bla.Timer_Walking.Start()
+        bla.Timer_IdleDecision.Start()
+        bla.Timer_TurningDecision.Start()
+        bla.SetAnimation("Idling")
+
+        'Else
+        'Console.WriteLine("ERROR: 'Idling' animation is missing or Animations is gone!")
+        'End If
+    End Sub
+End Class
+
+' This class encapsulates an animation. It loads a GIF, extracts its frames,
+' creates pre-flipped copies, and exposes methods for retrieving the current frame image,
+' advancing the frame, and resetting the animation.
+Public Class AnimationSystem
+    Public Property Frames As List(Of Image)
+    Public Property FlippedFrames As List(Of Image)
+    Public Property FrameDelay As Integer = 10
+    Public Property FrameCount As Integer
+    Public Property CurrentFrame As Integer = 0
+    Public Property Looped As Boolean
+    Public Property Width As Integer = 0
+    Public Property Height As Integer = 0
+    Public Property Name As String = ""
+    Public Property MyForm As Form_GroundPet
+
+    ' Constructor that loads a GIF file and extracts its frames.
+    Public Sub New(gifPath As String, gifName As String, loopAnimation As Boolean, bla As Form_GroundPet, Optional ByVal customFrameDelay As Integer = 0)
+        Dim gifImage As Image = Image.FromFile(gifPath)
+        Dim dimension As New FrameDimension(gifImage.FrameDimensionsList(0))
+        FrameCount = gifImage.GetFrameCount(dimension)
+        Me.Looped = loopAnimation
+
+        Width = gifImage.Width
+        Height = gifImage.Height
+        Name = gifName
+        MyForm = bla
+        Frames = New List(Of Image)()
+        FlippedFrames = New List(Of Image)()
+
+        Dim frameDelays As New List(Of Integer)()
+
+        ' Retrieve and process frame delay
+        If Path.GetExtension(gifPath).ToLower() = ".gif" Then
+            Dim propItem As PropertyItem = gifImage.GetPropertyItem(&H5100)
+            Dim delays As Byte() = propItem.Value
+
+            ' Extract each frame delay (stored as 4-byte integers)
+            For i As Integer = 0 To FrameCount - 1
+                Dim delay As Integer = BitConverter.ToInt32(delays, i * 4) * 10 ' Convert to milliseconds
+                If delay <= 0 Then delay = 10 ' Prevent zero delays
+                frameDelays.Add(delay)
+            Next
+
+            ' Determine if all delays are the same
+            If frameDelays.All(Function(d) d = frameDelays(0)) Then
+                FrameDelay = frameDelays(0) ' Use the first frame's delay
+            Else
+                ' Compute the average and round to the nearest 10
+                Dim avgDelay As Integer = CInt(Math.Round(frameDelays.Average() / 10) * 10)
+                FrameDelay = Math.Max(avgDelay, 10) ' Ensure a minimum of 10ms
+            End If
+        End If
+
+        ' Override with custom delay if specified
+        If customFrameDelay > 0 Then
+            FrameDelay = customFrameDelay
+        End If
+
+        ' Extract frames and store flipped versions
+        For i As Integer = 0 To FrameCount - 1
+            gifImage.SelectActiveFrame(dimension, i)
+            Dim frame As New Bitmap(gifImage.Width, gifImage.Height)
+            Using g As Graphics = Graphics.FromImage(frame)
+                g.DrawImage(gifImage, Point.Empty)
+            End Using
+            Frames.Add(frame)
+
+            ' Create flipped version
+            Dim flippedFrame As Image = DirectCast(frame.Clone(), Image)
+            flippedFrame.RotateFlip(RotateFlipType.RotateNoneFlipX)
+            FlippedFrames.Add(flippedFrame)
+        Next
+
+        gifImage.Dispose()
+    End Sub
+
+    ' Returns the current frame image. If flip is true, returns the flipped version.
+    Public Function GetCurrentFrameImage(flip As Boolean) As Image
+        If flip Then
+            Return FlippedFrames(CurrentFrame)
+        Else
+            Return Frames(CurrentFrame)
+        End If
+    End Function
+
+    ' Advance the frame counter, wrapping around to the first frame when necessary.
+    Public Sub AdvanceFrame(bla As Timer)
+        If Looped Then
+            ' Loop back to the first frame
+            CurrentFrame = (CurrentFrame + 1) Mod FrameCount
+        Else
+            ' Advance frame without looping
+            If CurrentFrame < FrameCount - 1 Then
+                CurrentFrame += 1
+            Else
+                bla.Stop()
+                Form_GroundPet.AnimationFinished(MyForm)
+            End If
+        End If
+    End Sub
+
+    ' Reset the animation to the first frame.
+    Public Sub Reset()
+        CurrentFrame = 0
     End Sub
 End Class

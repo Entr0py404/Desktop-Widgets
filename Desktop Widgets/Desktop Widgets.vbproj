@@ -292,11 +292,19 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="DesktopWidgets.ico" />
+    <None Include="Resources\Save.png" />
+    <None Include="Resources\Info.png" />
+    <None Include="Resources\Folder.png" />
+    <None Include="Resources\Flip.png" />
+    <None Include="Resources\Copy2.png" />
+    <None Include="Resources\Trash.png" />
+    <None Include="Resources\Remove.png" />
+    <None Include="Resources\Copy.png" />
+    <None Include="Resources\Down.png" />
+    <None Include="Resources\Up.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

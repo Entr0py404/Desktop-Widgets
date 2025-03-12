@@ -1,4 +1,6 @@
-﻿Public Class Form_AnimationInfo
+﻿Imports AnimatedGif
+
+Public Class Form_AnimationInfo
     Dim GIF_FrameDimension As Imaging.FrameDimension
     Dim GIF_FrameCount As Integer = 1
     ' Form1 - DragDrop

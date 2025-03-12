@@ -1,4 +1,5 @@
-﻿Imports System.Text
+﻿Imports System.ComponentModel
+Imports System.Text
 Imports AnimatedGif
 
 Public Class Form_AnimationBuilder
@@ -20,7 +21,7 @@ Public Class Form_AnimationBuilder
         Dim files() As String = CType(e.Data.GetData(DataFormats.FileDrop), String())
         If files.Length <> 0 Then
             Try
-                ClearAllUIObjects()
+                'ClearAllUIObjects()
                 ListBox_Images.BeginUpdate()
                 For Each item As String In files
                     ListBox_Images.Items.Add(item)
@@ -47,28 +48,20 @@ Public Class Form_AnimationBuilder
     ' CreateAnimatedGifs()
     Private Sub CreateAnimatedGifs()
         Dim MyMemoryStream1 As New MemoryStream
-        Dim MyMemoryStream2 As New MemoryStream
         Dim MyAnimatedGif1 As New AnimatedGifCreator(MyMemoryStream1, CInt(NumericUpDown_Delay.Value), 0)
-        Dim MyAnimatedGif2 As New AnimatedGifCreator(MyMemoryStream2, CInt(NumericUpDown_Delay.Value), 0)
 
         For Each item As String In ListBox_Images.Items
-            MyAnimatedGif1.AddFrame(Image.FromFile(item), delay:=-1, quality:=GifQuality.Bit8)
-
-            Dim tempImage As Image
-            tempImage = Image.FromFile(item)
-            tempImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
-
-            MyAnimatedGif2.AddFrame(tempImage, delay:=-1, quality:=GifQuality.Bit8)
+            If Flipped = False Then
+                MyAnimatedGif1.AddFrame(Image.FromFile(item), delay:=-1, quality:=GifQuality.Bit8)
+            Else
+                Dim tempImage As Image
+                tempImage = Image.FromFile(item)
+                tempImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
+                MyAnimatedGif1.AddFrame(tempImage, delay:=-1, quality:=GifQuality.Bit8)
+            End If
         Next
 
-        If Flipped = True Then
-            PixelBox_Left.Image = Image.FromStream(MyMemoryStream1)
-            PixelBox_Right.Image = Image.FromStream(MyMemoryStream2)
-        Else
-            PixelBox_Right.Image = Image.FromStream(MyMemoryStream1)
-            PixelBox_Left.Image = Image.FromStream(MyMemoryStream2)
-        End If
-
+        PixelBox_Animation.Image = Image.FromStream(MyMemoryStream1)
     End Sub
 
     ' NumericUpDown_Delay - ValueChanged
@@ -91,7 +84,7 @@ Public Class Form_AnimationBuilder
         ComboBox_Artist.EndUpdate()
     End Sub
 
-    ' LoadDirs
+    ' LoadFiles
     Private Sub LoadFiles(DirPath As String)
         ComboBox_Name.Items.Clear()
         ComboBox_Name.BeginUpdate()
@@ -113,11 +106,14 @@ Public Class Form_AnimationBuilder
             ComboBox_Animation.Items.Add("Dragging")
             ComboBox_Animation.Items.Add("Falling")
             ComboBox_Animation.Items.Add("Sleeping")
+            ComboBox_Animation.Items.Add("Land")
+            ComboBox_Animation.Items.Add("Pose")
+            ComboBox_Animation.Items.Add("Pose2")
+            ComboBox_Animation.Items.Add("Pose3")
+            ComboBox_Animation.Items.Add("Pose4")
+            ComboBox_Animation.Items.Add("Pose5")
             ComboBox_Animation.EndUpdate()
             ComboBox_Animation.SelectedIndex = 0
-            CheckBox_NonDirectional.Visible = False
-            Panel_Right.Visible = True
-            Label_Left.Visible = True
             ComboBox_Name.Text = ""
             ComboBox_Name.Items.Clear()
             Label_Artist.Text = "Artist:"
@@ -140,9 +136,6 @@ Public Class Form_AnimationBuilder
             ComboBox_Animation.Items.Add("Dragging")
             ComboBox_Animation.EndUpdate()
             ComboBox_Animation.SelectedIndex = 0
-            CheckBox_NonDirectional.Visible = False
-            Panel_Right.Visible = True
-            Label_Left.Visible = True
             ComboBox_Name.Text = ""
             ComboBox_Name.Items.Clear()
             Label_Artist.Text = "Artist:"
@@ -160,9 +153,6 @@ Public Class Form_AnimationBuilder
             ComboBox_Name.Items.Clear()
             ComboBox_Artist.Items.Clear()
             ComboBox_Animation.Enabled = False
-            CheckBox_NonDirectional.Visible = False
-            Panel_Right.Visible = False
-            Label_Left.Visible = False
             Label_Artist.Text = "Objects:"
             Label_Animation.Text = "Animation:"
             LoadDirs(Application.StartupPath & "\Objects")
@@ -178,9 +168,6 @@ Public Class Form_AnimationBuilder
             ComboBox_Name.Items.Clear()
             ComboBox_Artist.Items.Clear()
             ComboBox_Animation.Enabled = True
-            CheckBox_NonDirectional.Visible = False
-            Panel_Right.Visible = False
-            Label_Left.Visible = False
             Label_Artist.Text = "Theme:"
             Label_Animation.Text = "Type:"
             LoadDirs(Application.StartupPath & "\Nature")
@@ -195,17 +182,13 @@ Public Class Form_AnimationBuilder
         End If
     End Sub
 
-    ' Clear (ToolStripMenuItem) - Click
-    Private Sub ClearToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearToolStripMenuItem.Click
-        ClearAllUIObjects()
-    End Sub
-
     ' ClearAllUIObjects()
     Public Sub ClearAllUIObjects()
-        PixelBox_Left.Image = Nothing
-        PixelBox_Right.Image = Nothing
+        PixelBox_SelectedFrame.Image = Nothing
+        PixelBox_Animation.Image = Nothing
         ListBox_Images.Items.Clear()
         Label_Animation_Frame_Count.Text = "Animation Frame Count: "
+        Flipped = False
     End Sub
 
     ' Button_Save - Click
@@ -219,15 +202,9 @@ Public Class Form_AnimationBuilder
                     End If
 
                     If RadioButton_TypeFlyingPet.Checked Or RadioButton_TypeGroundPet.Checked And ComboBox_Animation.Text = "Dragging" Then
-                        If CheckBox_NonDirectional.Checked Then
-                            PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & ".gif", Imaging.ImageFormat.Gif)
-                        Else
-                            PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Left.gif", Imaging.ImageFormat.Gif)
-                            PixelBox_Right.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif", Imaging.ImageFormat.Gif)
-                        End If
+                        PixelBox_Animation.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & ".gif", Imaging.ImageFormat.Gif)
                     Else
-                        PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Left.gif", Imaging.ImageFormat.Gif)
-                        PixelBox_Right.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif", Imaging.ImageFormat.Gif)
+                        PixelBox_Animation.Image.Save(Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & ".gif", Imaging.ImageFormat.Gif)
                     End If
 
                     ' Clear for Next
@@ -241,15 +218,9 @@ Public Class Form_AnimationBuilder
                     End If
 
                     If RadioButton_TypeFlyingPet.Checked Or RadioButton_TypeGroundPet.Checked And ComboBox_Animation.Text = "Dragging" Then
-                        If CheckBox_NonDirectional.Checked Then
-                            PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & ".gif", Imaging.ImageFormat.Gif)
-                        Else
-                            PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Left.gif", Imaging.ImageFormat.Gif)
-                            PixelBox_Right.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif", Imaging.ImageFormat.Gif)
-                        End If
+                        PixelBox_Animation.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & ".gif", Imaging.ImageFormat.Gif)
                     Else
-                        PixelBox_Left.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Left.gif", Imaging.ImageFormat.Gif)
-                        PixelBox_Right.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & " Right.gif", Imaging.ImageFormat.Gif)
+                        PixelBox_Animation.Image.Save(Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & "\" & ComboBox_Animation.SelectedItem.ToString & ".gif", Imaging.ImageFormat.Gif)
                     End If
 
                     ' Clear for Next
@@ -259,14 +230,14 @@ Public Class Form_AnimationBuilder
             ElseIf RadioButton_TypeObject.Checked Then
                 If ComboBox_Artist.Text.Length > 0 And ComboBox_Name.Text.Length > 0 Then
                     Console.WriteLine(Application.StartupPath & "\Objects\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & ".gif")
-                    PixelBox_Left.Image.Save(Application.StartupPath & "\Objects\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & ".gif", Imaging.ImageFormat.Gif)
+                    PixelBox_Animation.Image.Save(Application.StartupPath & "\Objects\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text & ".gif", Imaging.ImageFormat.Gif)
                     ' Clear for Next
                     ClearAllUIObjects()
                 End If
 
             ElseIf RadioButton_TypeNature.Checked Then
                 If ComboBox_Artist.Text.Length > 0 And ComboBox_Name.Text.Length > 0 And ComboBox_Animation.Text.Length > 0 Then
-                    PixelBox_Left.Image.Save(Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Animation.Text & "\" & ComboBox_Name.Text & ".gif", Imaging.ImageFormat.Gif)
+                    PixelBox_Animation.Image.Save(Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Animation.Text & "\" & ComboBox_Name.Text & ".gif", Imaging.ImageFormat.Gif)
                     ' Clear for Next
                     ClearAllUIObjects()
                 End If
@@ -331,43 +302,23 @@ Public Class Form_AnimationBuilder
         If RadioButton_TypeNature.Checked Then
             LoadFiles(Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Animation.Text)
         End If
-
-        CheckBox_NonDirectional.Visible = False
-        If RadioButton_TypeFlyingPet.Checked Or RadioButton_TypeGroundPet.Checked Then
-            If ComboBox_Animation.Text = "Dragging" Then
-                CheckBox_NonDirectional.Visible = True
-            Else
-                CheckBox_NonDirectional.Checked = False
-            End If
-        End If
-    End Sub
-
-    ' CheckBox_NonDirectional - CheckedChanged
-    Private Sub CheckBox_NonDirectional_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox_NonDirectional.CheckedChanged
-        If CheckBox_NonDirectional.Checked Then
-            Panel_Right.Visible = False
-            Label_Left.Visible = False
-        Else
-            Panel_Right.Visible = True
-            Label_Left.Visible = True
-        End If
     End Sub
 
     ' 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim PetDirFullPath As String = ""
+        Dim DirFullPath As String = ""
         If RadioButton_TypeGroundPet.Checked Then
-            PetDirFullPath = Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text
+            DirFullPath = Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text
         ElseIf RadioButton_TypeFlyingPet.Checked Then
-            PetDirFullPath = Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text
+            DirFullPath = Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text
         ElseIf RadioButton_TypeObject.Checked Then
-            PetDirFullPath = Application.StartupPath & "\Objects\" & ComboBox_Artist.Text
+            DirFullPath = Application.StartupPath & "\Objects\" & ComboBox_Artist.Text
         ElseIf RadioButton_TypeNature.Checked Then
-            PetDirFullPath = Application.StartupPath & "\Nature\" & ComboBox_Artist.Text
+            DirFullPath = Application.StartupPath & "\Nature\" & ComboBox_Artist.Text
         End If
         Try
-            If Directory.Exists(PetDirFullPath) Then
-                Process.Start(PetDirFullPath)
+            If Directory.Exists(DirFullPath) Then
+                Process.Start(DirFullPath)
             End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
@@ -377,19 +328,19 @@ Public Class Form_AnimationBuilder
     ' 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If Not ComboBox_Artist.Text = "" And Not ComboBox_Name.Text = "" Then
-            Dim PetDirFullPath As String = ""
+            Dim DirFullPath As String = ""
             If RadioButton_TypeGroundPet.Checked Then
-                PetDirFullPath = Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text
+                DirFullPath = Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text
             ElseIf RadioButton_TypeFlyingPet.Checked Then
-                PetDirFullPath = Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text
+                DirFullPath = Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text
             ElseIf RadioButton_TypeObject.Checked Then
-                PetDirFullPath = Application.StartupPath & "\Objects\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text
+                DirFullPath = Application.StartupPath & "\Objects\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text
             ElseIf RadioButton_TypeNature.Checked Then
-                PetDirFullPath = Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text
+                DirFullPath = Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text
             End If
             Try
-                If Directory.Exists(PetDirFullPath) Then
-                    Process.Start(PetDirFullPath)
+                If Directory.Exists(DirFullPath) Then
+                    Process.Start(DirFullPath)
                 End If
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
@@ -410,14 +361,14 @@ Public Class Form_AnimationBuilder
     ' Button_OptimizeGIFs - Click
     Private Sub Button_OptimizeGIFs_Click(sender As Object, e As EventArgs) Handles Button_OptimizeGIFs.Click
         If Not ComboBox_Artist.SelectedIndex = -1 AndAlso RadioButton_TypeObject.Checked Then
-            RunoptimizationScript("GIFs", Application.StartupPath & "\Objects\" & ComboBox_Artist.Text)
+            RunOptimizationScript("GIFs", Application.StartupPath & "\Objects\" & ComboBox_Artist.Text)
         ElseIf Not ComboBox_Artist.SelectedIndex = -1 AndAlso Not ComboBox_Artist.SelectedIndex = -1 Then
             If RadioButton_TypeGroundPet.Checked Then
-                RunoptimizationScript("GIFs", Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
+                RunOptimizationScript("GIFs", Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
             ElseIf RadioButton_TypeFlyingPet.Checked Then
-                RunoptimizationScript("GIFs", Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
+                RunOptimizationScript("GIFs", Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
             ElseIf RadioButton_TypeNature.Checked Then
-                RunoptimizationScript("GIFs", Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
+                RunOptimizationScript("GIFs", Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
             End If
         End If
     End Sub
@@ -425,9 +376,9 @@ Public Class Form_AnimationBuilder
     ' Button_OptimizePNGs - Click
     Private Sub Button_OptimizePNGs_Click(sender As Object, e As EventArgs) Handles Button_OptimizePNGs.Click
         If Not ComboBox_Artist.SelectedIndex = -1 AndAlso RadioButton_TypeObject.Checked Then
-            RunoptimizationScript("PNGs", Application.StartupPath & "\Objects\" & ComboBox_Artist.Text)
+            RunOptimizationScript("PNGs", Application.StartupPath & "\Objects\" & ComboBox_Artist.Text)
         ElseIf Not ComboBox_Artist.SelectedIndex = -1 AndAlso Not ComboBox_Artist.SelectedIndex = -1 AndAlso RadioButton_TypeNature.Checked Then
-            RunoptimizationScript("PNGs", Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Animation.Text)
+            RunOptimizationScript("PNGs", Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Animation.Text)
         End If
     End Sub
 
@@ -486,15 +437,17 @@ Public Class Form_AnimationBuilder
         End Try
     End Sub
 
-    ' RunoptimizationScript
-    Public Sub RunoptimizationScript(ImageType As String, folderPath As String)
+    ' RunOptimizationScript
+    Public Sub RunOptimizationScript(ImageType As String, folderPath As String)
         Try
             ' Create a new ProcessStartInfo instance
             Dim processStartInfo As New ProcessStartInfo()
 
             ' Set the file name to the batch file
             If ImageType = "GIFs" Then
-                processStartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory & "Optimization Tools\" & "GIFs.bat"
+                processStartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory & "Optimization Tools\" & "GIFsOP.bat"
+            ElseIf ImageType = "UnGIFs" Then
+                processStartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory & "Optimization Tools\" & "GIFsUNOP.bat"
             ElseIf ImageType = "PNGs" Then
                 processStartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory & "Optimization Tools\" & "PNGs.bat"
             End If
@@ -514,5 +467,160 @@ Public Class Form_AnimationBuilder
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Desktop Widgets")
         End Try
+    End Sub
+
+    ' Button_UnoptimizeGIFs - Click
+    Private Sub Button_UnoptimizeGIFs_Click(sender As Object, e As EventArgs) Handles Button_UnoptimizeGIFs.Click
+        If Not ComboBox_Artist.SelectedIndex = -1 AndAlso RadioButton_TypeObject.Checked Then
+            RunOptimizationScript("UnGIFs", Application.StartupPath & "\Objects\" & ComboBox_Artist.Text)
+        ElseIf Not ComboBox_Artist.SelectedIndex = -1 AndAlso Not ComboBox_Artist.SelectedIndex = -1 Then
+            If RadioButton_TypeGroundPet.Checked Then
+                RunOptimizationScript("UnGIFs", Application.StartupPath & "\Pets\Ground\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
+            ElseIf RadioButton_TypeFlyingPet.Checked Then
+                RunOptimizationScript("UnGIFs", Application.StartupPath & "\Pets\Flying\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
+            ElseIf RadioButton_TypeNature.Checked Then
+                RunOptimizationScript("UnGIFs", Application.StartupPath & "\Nature\" & ComboBox_Artist.Text & "\" & ComboBox_Name.Text)
+            End If
+        End If
+    End Sub
+
+    ' ListBox_Images - SelectedIndexChanged
+    Private Sub ListBox_Images_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox_Images.SelectedIndexChanged
+        If Not ListBox_Images.SelectedIndex = -1 Then
+            PixelBox_SelectedFrame.Image = Image.FromFile(ListBox_Images.SelectedItem.ToString)
+        Else
+            PixelBox_SelectedFrame.Image = Nothing
+        End If
+    End Sub
+
+    ' ContextMenuStrip1 - Opened
+    Private Sub ContextMenuStrip1_Opened(sender As Object, e As EventArgs) Handles ContextMenuStrip1.Opened
+        If Not ListBox_Images.SelectedIndex = -1 Then
+            SelectedFrameToolStripMenuItem.Enabled = True
+        Else
+            SelectedFrameToolStripMenuItem.Enabled = False
+        End If
+    End Sub
+
+    ' Button_MoveFrameUp - Click
+    Private Sub Button_MoveFrameUp_Click(sender As Object, e As EventArgs) Handles Button_MoveFrameUp.Click
+        If ListBox_Images.SelectedIndex > 0 Then
+
+            Dim selectedItem As Object = ListBox_Images.SelectedItem
+            Dim selectedIndex As Integer = ListBox_Images.SelectedIndex
+
+            ListBox_Images.Items.RemoveAt(selectedIndex)
+            ListBox_Images.Items.Insert(selectedIndex - 1, selectedItem)
+            ListBox_Images.SelectedIndex = selectedIndex - 1
+
+            CreateAnimatedGifs()
+        End If
+    End Sub
+
+    ' Button_MoveFrameDown - Click
+    Private Sub Button_MoveFrameDown_Click(sender As Object, e As EventArgs) Handles Button_MoveFrameDown.Click
+        If ListBox_Images.SelectedIndex < ListBox_Images.Items.Count - 1 AndAlso ListBox_Images.SelectedIndex <> -1 Then
+            Dim selectedItem As Object = ListBox_Images.SelectedItem
+            Dim selectedIndex As Integer = ListBox_Images.SelectedIndex
+
+            ListBox_Images.Items.RemoveAt(selectedIndex)
+            ListBox_Images.Items.Insert(selectedIndex + 1, selectedItem)
+            ListBox_Images.SelectedIndex = selectedIndex + 1
+
+            CreateAnimatedGifs()
+        End If
+    End Sub
+
+    ' Button_DuplicateUnderneath - Click
+    Private Sub Button_DuplicateUnderneath_Click(sender As Object, e As EventArgs) Handles Button_DuplicateUnderneath.Click
+        If Not ListBox_Images.SelectedIndex = -1 Then
+            ListBox_Images.Items.Insert(ListBox_Images.SelectedIndex + 1, ListBox_Images.SelectedItem)
+            Label_Animation_Frame_Count.Text = "Animation Frame Count: " & ListBox_Images.Items.Count
+            CreateAnimatedGifs()
+        End If
+    End Sub
+
+    ' Button_DuplicateEndOfList - Click
+    Private Sub Button_DuplicateEndOfList_Click(sender As Object, e As EventArgs) Handles Button_DuplicateEndOfList.Click
+        If Not ListBox_Images.SelectedIndex = -1 Then
+            ListBox_Images.Items.Add(ListBox_Images.SelectedItem)
+            Label_Animation_Frame_Count.Text = "Animation Frame Count: " & ListBox_Images.Items.Count
+            CreateAnimatedGifs()
+        End If
+    End Sub
+
+    ' Button_RemoveSelectedFrame - Click
+    Private Sub Button_RemoveSelectedFrame_Click(sender As Object, e As EventArgs) Handles Button_RemoveSelectedFrame.Click
+        If Not ListBox_Images.SelectedIndex = -1 Then
+            ListBox_Images.Items.RemoveAt(ListBox_Images.SelectedIndex)
+            Label_Animation_Frame_Count.Text = "Animation Frame Count: " & ListBox_Images.Items.Count
+            CreateAnimatedGifs()
+        End If
+    End Sub
+
+    ' Button_ClearFrames - Click
+    Private Sub Button_ClearFrames_Click(sender As Object, e As EventArgs) Handles Button_ClearFrames.Click
+        ClearAllUIObjects()
+    End Sub
+
+    ' RemoveToolStripMenuItem - Click
+    Private Sub RemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem.Click
+        If Not ListBox_Images.SelectedIndex = -1 Then
+            ListBox_Images.Items.RemoveAt(ListBox_Images.SelectedIndex)
+            Label_Animation_Frame_Count.Text = "Animation Frame Count: " & ListBox_Images.Items.Count
+            CreateAnimatedGifs()
+        End If
+    End Sub
+
+    ' MoveUpToolStripMenuItem - Click
+    Private Sub MoveUpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MoveUpToolStripMenuItem.Click
+        If ListBox_Images.SelectedIndex > 0 Then
+
+            Dim selectedItem As Object = ListBox_Images.SelectedItem
+            Dim selectedIndex As Integer = ListBox_Images.SelectedIndex
+
+            ListBox_Images.Items.RemoveAt(selectedIndex)
+            ListBox_Images.Items.Insert(selectedIndex - 1, selectedItem)
+            ListBox_Images.SelectedIndex = selectedIndex - 1
+
+            CreateAnimatedGifs()
+        End If
+    End Sub
+
+    ' MoveDownToolStripMenuItem - Click
+    Private Sub MoveDownToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MoveDownToolStripMenuItem.Click
+        If ListBox_Images.SelectedIndex < ListBox_Images.Items.Count - 1 AndAlso ListBox_Images.SelectedIndex <> -1 Then
+            Dim selectedItem As Object = ListBox_Images.SelectedItem
+            Dim selectedIndex As Integer = ListBox_Images.SelectedIndex
+
+            ListBox_Images.Items.RemoveAt(selectedIndex)
+            ListBox_Images.Items.Insert(selectedIndex + 1, selectedItem)
+            ListBox_Images.SelectedIndex = selectedIndex + 1
+
+            CreateAnimatedGifs()
+        End If
+    End Sub
+
+    ' UnderneathToolStripMenuItem - Click
+    Private Sub UnderneathToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnderneathToolStripMenuItem.Click
+        If Not ListBox_Images.SelectedIndex = -1 Then
+            ListBox_Images.Items.Insert(ListBox_Images.SelectedIndex + 1, ListBox_Images.SelectedItem)
+            Label_Animation_Frame_Count.Text = "Animation Frame Count: " & ListBox_Images.Items.Count
+            CreateAnimatedGifs()
+        End If
+    End Sub
+
+    ' EndOfListToolStripMenuItem - Click
+    Private Sub EndOfListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EndOfListToolStripMenuItem.Click
+        If Not ListBox_Images.SelectedIndex = -1 Then
+            ListBox_Images.Items.Add(ListBox_Images.SelectedItem)
+            Label_Animation_Frame_Count.Text = "Animation Frame Count: " & ListBox_Images.Items.Count
+            CreateAnimatedGifs()
+        End If
+    End Sub
+
+    ' Clear (ToolStripMenuItem) - Click
+    Private Sub ClearToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearToolStripMenuItem.Click
+        ClearAllUIObjects()
     End Sub
 End Class

@@ -27,6 +27,7 @@ Partial Class Form_GroundPet
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FollowCursorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BehaviorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisplayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisplayToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.ScaleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -37,9 +38,9 @@ Partial Class Form_GroundPet
         Me.Timer_Falling = New System.Windows.Forms.Timer(Me.components)
         Me.Timer_TurningDecision = New System.Windows.Forms.Timer(Me.components)
         Me.Timer_IdleDecision = New System.Windows.Forms.Timer(Me.components)
-        Me.PixelBox_Pet = New Desktop_Widgets.PixelBox()
         Me.Timer_Sleeping = New System.Windows.Forms.Timer(Me.components)
-        Me.BehaviorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Timer_Animation = New System.Windows.Forms.Timer(Me.components)
+        Me.PixelBox_Pet = New Desktop_Widgets.PixelBox()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.PixelBox_Pet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -67,6 +68,13 @@ Partial Class Form_GroundPet
         Me.FollowCursorToolStripMenuItem.Name = "FollowCursorToolStripMenuItem"
         Me.FollowCursorToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.FollowCursorToolStripMenuItem.Text = "Follow cursor"
+        '
+        'BehaviorToolStripMenuItem
+        '
+        Me.BehaviorToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BehaviorToolStripMenuItem.Name = "BehaviorToolStripMenuItem"
+        Me.BehaviorToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.BehaviorToolStripMenuItem.Text = "Behavior"
         '
         'DisplayToolStripMenuItem
         '
@@ -99,7 +107,9 @@ Partial Class Form_GroundPet
         Me.ScaleToolStripComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ScaleToolStripComboBox.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ScaleToolStripComboBox.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.ScaleToolStripComboBox.Items.AddRange(New Object() {"1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x"})
+        Me.ScaleToolStripComboBox.IntegralHeight = False
+        Me.ScaleToolStripComboBox.Items.AddRange(New Object() {"1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x", "11x", "12x", "13x", "14x", "15x", "16x", "17x", "18x", "19x", "20x"})
+        Me.ScaleToolStripComboBox.MaxDropDownItems = 5
         Me.ScaleToolStripComboBox.Name = "ScaleToolStripComboBox"
         Me.ScaleToolStripComboBox.Size = New System.Drawing.Size(121, 28)
         '
@@ -131,29 +141,25 @@ Partial Class Form_GroundPet
         '
         Me.Timer_IdleDecision.Interval = 5000
         '
+        'Timer_Sleeping
+        '
+        Me.Timer_Sleeping.Interval = 5000
+        '
+        'Timer_Animation
+        '
+        Me.Timer_Animation.Interval = 1000
+        '
         'PixelBox_Pet
         '
         Me.PixelBox_Pet.BackColor = System.Drawing.Color.Fuchsia
         Me.PixelBox_Pet.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PixelBox_Pet.Location = New System.Drawing.Point(0, 0)
         Me.PixelBox_Pet.Name = "PixelBox_Pet"
-        Me.PixelBox_Pet.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half
         Me.PixelBox_Pet.Size = New System.Drawing.Size(32, 32)
         Me.PixelBox_Pet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PixelBox_Pet.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None
         Me.PixelBox_Pet.TabIndex = 2
         Me.PixelBox_Pet.TabStop = False
-        '
-        'Timer_Sleeping
-        '
-        Me.Timer_Sleeping.Interval = 5000
-        '
-        'BehaviorToolStripMenuItem
-        '
-        Me.BehaviorToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BehaviorToolStripMenuItem.Name = "BehaviorToolStripMenuItem"
-        Me.BehaviorToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
-        Me.BehaviorToolStripMenuItem.Text = "Behavior"
         '
         'Form_GroundPet
         '
@@ -194,4 +200,5 @@ Partial Class Form_GroundPet
     Friend WithEvents DisplayToolStripComboBox As ToolStripComboBox
     Friend WithEvents Timer_Sleeping As Timer
     Friend WithEvents BehaviorToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Timer_Animation As Timer
 End Class

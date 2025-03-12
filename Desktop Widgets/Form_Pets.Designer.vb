@@ -269,7 +269,7 @@ Partial Class Form_Pets
         Me.NumericUpDown_ObjectScale.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.NumericUpDown_ObjectScale.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.NumericUpDown_ObjectScale.Location = New System.Drawing.Point(72, 56)
-        Me.NumericUpDown_ObjectScale.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.NumericUpDown_ObjectScale.Maximum = New Decimal(New Integer() {20, 0, 0, 0})
         Me.NumericUpDown_ObjectScale.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown_ObjectScale.Name = "NumericUpDown_ObjectScale"
         Me.NumericUpDown_ObjectScale.Size = New System.Drawing.Size(56, 20)
@@ -351,7 +351,7 @@ Partial Class Form_Pets
         Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
         Me.ContextMenuStrip2.ShowCheckMargin = True
         Me.ContextMenuStrip2.ShowImageMargin = False
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(181, 146)
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(175, 124)
         '
         'Small_ToolStripMenuItem
         '
@@ -359,35 +359,35 @@ Partial Class Form_Pets
         Me.Small_ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.Small_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Small_ToolStripMenuItem.Name = "Small_ToolStripMenuItem"
-        Me.Small_ToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.Small_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
         Me.Small_ToolStripMenuItem.Text = "Small"
         '
         'Medium_ToolStripMenuItem
         '
         Me.Medium_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Medium_ToolStripMenuItem.Name = "Medium_ToolStripMenuItem"
-        Me.Medium_ToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.Medium_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
         Me.Medium_ToolStripMenuItem.Text = "Medium"
         '
         'MediumLarge_ToolStripMenuItem
         '
         Me.MediumLarge_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.MediumLarge_ToolStripMenuItem.Name = "MediumLarge_ToolStripMenuItem"
-        Me.MediumLarge_ToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.MediumLarge_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
         Me.MediumLarge_ToolStripMenuItem.Text = "Medium Large"
         '
         'Large_ToolStripMenuItem
         '
         Me.Large_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Large_ToolStripMenuItem.Name = "Large_ToolStripMenuItem"
-        Me.Large_ToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.Large_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
         Me.Large_ToolStripMenuItem.Text = "Large"
         '
         'ExtraLarge_ToolStripMenuItem
         '
         Me.ExtraLarge_ToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.ExtraLarge_ToolStripMenuItem.Name = "ExtraLarge_ToolStripMenuItem"
-        Me.ExtraLarge_ToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.ExtraLarge_ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
         Me.ExtraLarge_ToolStripMenuItem.Text = "Extra Large"
         '
         'NewToolStripMenuItem
